@@ -1,0 +1,28 @@
+// 이메일
+{
+  "uid": "NK8rbUhDJbSCumwFLOPhgOQgxJ92",
+  "displayName": null,
+  "photoURL": null,
+  "email": "iamsjh1017@daum.net",
+  "emailVerified": false,
+  "isAnonymous": false,
+  "providerData": [
+    {
+      "uid": "iamsjh1017@daum.net",
+      "displayName": null,
+      "photoURL": null,
+      "email": "iamsjh1017@daum.net",
+      "providerId": "password"
+    }
+  ],
+  "apiKey": "AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4",
+  "appName": "[DEFAULT]",
+  "authDomain": "rscamper-d7c4d.firebaseapp.com",
+  "stsTokenManager": {
+    "apiKey": "AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4",
+    "refreshToken": "AGl2vTSZ8A0DQr1zKHbpZwGLj-Pa7vDmUvE0B5NoPY95RAwKPjcV_pG-8nSW3q8J8WERGVIvFvLIIeeQgESb_vyJ6VYPPm6Ye5yEfS38jxlRdvR-EocOsOTqr08DU5Vsr2HrPZfmauoOQdR6meM23iMv9OTEbHdib5bfrluxMuU0dvgOiGjqWVNcwXxp3epBdb-WyJUIHW728y9mwT8Yqe39Z9FRjLS_dQ",
+    "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQ3ZDA4YmY3MTMzMmY4YWE5MDI3ZGEzNDhlMDgwMGI2OTQxYTFmZTUifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcnNjYW1wZXItZDdjNGQiLCJhdWQiOiJyc2NhbXBlci1kN2M0ZCIsImF1dGhfdGltZSI6MTQ3NzAxMDA0OCwidXNlcl9pZCI6Ik5LOHJiVWhESmJTQ3Vtd0ZMT1BoZ09RZ3hKOTIiLCJzdWIiOiJOSzhyYlVoREpiU0N1bXdGTE9QaGdPUWd4SjkyIiwiaWF0IjoxNDc3MDEwMDQ4LCJleHAiOjE0NzcwMTM2NDgsImVtYWlsIjoiaWFtc2poMTAxN0BkYXVtLm5ldCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJpYW1zamgxMDE3QGRhdW0ubmV0IiwiaWFtc2poMTAxN0BkYXVtLm5ldCJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.oqTQw9kRGeZSoSN_aTI0hlNHF9bc35A-ga9oadJ-S5xBeWrz8FEVTyt8KdN3T7hvOp0NJtz0oCrHGMCg7KgAFmzX2YV8bnZORXOknI4P1Oj7T0lIdLjwRN-LjrrV70AV4eWMZj8QSW5Wmt7ajCFj86iNs5fvRPJUNfdGcaOQzPp1pT5dAKlr2_AWD78jV0-1qEqp4D9wwv8lt_6uCrkx_aVrJYpHpsOCbsLZpL7kq3sxwTWtELYF3d76zSGADUtxflpygcxjgTA90J00BaQvnCDveH7CqwLOswyPxqJeEo9XgZ9pQdiktTL2J9s52-Jcc2oLeYuHuZD2aC-Bwdh3JA",
+    "expirationTime": 1477013648374
+  },
+  "redirectEventId": null
+}
