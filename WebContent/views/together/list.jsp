@@ -532,7 +532,7 @@
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 포스트</a></li>";
+					html += "		<li><a http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
 					html += "<li class='dropdown-submenu'>";
 					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
 					html += "	<ul class='dropdown-menu'>";

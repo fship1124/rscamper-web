@@ -120,7 +120,7 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">together</h1>
+				<h1 class="pull-left">post</h1>
 				<ul class="pull-right breadcrumb">
 					<li class="active"><a href="http://localhost:8081">Main</a></li>
 				</ul>
