@@ -97,7 +97,10 @@
 					<ul class="nav navbar-nav" id="start">
 
 						<!-- 마이페이지 -->
+<<<<<<< HEAD
 		
+=======
+>>>>>>> d119c34d813b6d5f29b170e6d10b5b3fadfd2b37
 						<!-- 마이페이지 끝 -->
 
 						<!-- Search Block -->
@@ -127,7 +130,7 @@
 			<div class="container">
 				<h1 class="pull-left">Main Page</h1>
 				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="main.html">Main</a></li>
+					<li class="active"><a href="main.jsp">Main</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -519,9 +522,11 @@
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
+			menuCreate();
 			commentList();
 		});
 		
+<<<<<<< HEAD
 		
  		$.ajax({
 			type : "GET",
@@ -585,6 +590,9 @@
 			}
 		});			
 		
+=======
+
+>>>>>>> d119c34d813b6d5f29b170e6d10b5b3fadfd2b37
 		
 		function commentList() {
 			$.ajax({
@@ -592,7 +600,6 @@
 				method : 'GET',
 				dataType : 'json',
 				success : function(result) {
-// 					alert("success");
 					commentFn(result);
 				}
 			});
@@ -608,7 +615,6 @@
 				method : 'PUT',
 				dataType : 'json',
 				success : function(result) {
-// 					alert("success");
 					$("#inputComment").val("");					
 					commentFn(result);
 				}
@@ -644,6 +650,7 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../resources/js/firebaseInit.js"></script>
 	<script src="../resources/js/firebaseAuth.js"></script>
+	<script src="../resources/js/menu.js"></script>
 
 </body>
 </html>
