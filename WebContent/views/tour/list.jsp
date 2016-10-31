@@ -512,6 +512,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-	<script src="../resources/js/menu.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
