@@ -526,7 +526,7 @@
 			commentList();
 		});
 		
-<<<<<<< HEAD
+
 		
  		$.ajax({
 			type : "GET",
@@ -590,9 +590,7 @@
 			}
 		});			
 		
-=======
 
->>>>>>> d119c34d813b6d5f29b170e6d10b5b3fadfd2b37
 		
 		function commentList() {
 			$.ajax({
