@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -21,17 +22,18 @@
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="../../assets/css/headers/header-default.css">
 <link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
 	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -130,15 +132,14 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
+
 
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+			<table class="table" border='1'>
+				<thead></thead>
+				<tbody></tbody>
+			</table>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -473,8 +474,10 @@
 		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript"
 		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript"
@@ -489,9 +492,12 @@
 	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../../assets/js/app.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/parallax-slider.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -499,71 +505,56 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
+			contentCreate();
 		});
 		
-		
-		function menuCreate() {
+		function contentCreate() {
+			var obj = new Object();
+			obj.no = ${param.no};
+			
 			$.ajax({
-				type : "GET",
-				url : "http://localhost:8081/menu/list",
+				type : "POST",
+				url : "http://localhost:8081/together/detail",
 				dataType : 'json',
-				error : function (err) {
+				data : obj,
+				error : function(err) {
 					alert("에러");
 				},
 				success : function(result) {
-					alert("성공");
+					if (!result) {
+						alert("비밀글입니다.");
+						javascript:history.back(-1); 
+					}
 					
-					$("#start").empty();
+					var d = new Date(result.regDate);
+	 				var mon = d.getMonth() + 1;
+					
 					var html = "";
-					for(var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo == 0) {
-							html += "<li class='dropdown' id="+ data.menuNo +">";
-							html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-							html += data.title;
-							html += "	</a>";
-						}
-					}
+					html += "<th colspan='2'>";
+					html += result.title2;
+					html += "</th>";
+					html += "<th>";
+					html += d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2);
+					html += "</th>";
 					
-						html += "<li class='dropdown' id='mypage' style='display: none;'>";
-						html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-						html += "			마이페이지";
-						html += "		</a>";
-						html += "<ul class='dropdown-menu'>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 포스트</a></li>";
-						html += "<li class='dropdown-submenu'>";
-						html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-						html += "	<ul class='dropdown-menu'>";
-						html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-						html += "	</ul>";
-						html += "</li>";
-						html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-						html += "</ul>";
-						html += "</li>";
-						
-					$("#start").html($("#start").html() + html);
+					$("thead").html(html);
 					
-					for (var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo != 0) {
-							if($("#" + data.parentMenuNo).find("ul").length > 0) {
-								$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-							}
-							else{
-								$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-							}
-						}
-					}
+					html = "";
+					html += "<td colspan='3' style='height:300px;'>";
+					html += result.content;
+					html += "</td>";
+					$("tbody").html(html);
 				}
-			});		
+			});
 		}
- 		
+		
+		function prependZero(num, len) {
+			while (num.toString().length < len) {
+				num = "0" + num;
+			}
+			return num;
+		}
+
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -575,6 +566,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
