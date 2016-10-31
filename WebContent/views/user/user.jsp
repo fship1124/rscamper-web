@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="http://localhost:80/rscamper-web/views/user/userModify.jsp">aaaa</a>
 	
 </body>
 </html>
