@@ -138,13 +138,37 @@
 		<!--=== Content ===-->
 		<div class="container content-md"
 			style="border: 1px solid red; height: 450px">
-			<!-- travelog List -->
-			<div id="travelog-list" style="border: 1px solid red; height: 280px; overflow: auto;">
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br>
+			<!-- travelog register -->
+			<div id="travelog-register" style="border: 1px solid red; height: 280px; overflow: auto;">
+			
+				<!-- general form elements -->
+				<div class="box box-primary">
+					<div class="box-header">
+						<h3 class="box-title">REGISTER BOARD</h3>
+					</div>
+				<form role="form" method="post">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label> 
+							<input type="text"
+								name='title' class="form-control" placeholder="Enter Title">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Content</label>
+							<textarea class="form-control" name="content" rows="3"
+								placeholder="Enter ..."></textarea>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Writer</label> 
+							<input type="text"
+								name="writer" class="form-control" placeholder="Enter Writer">
+						</div>
+					</div>
+					
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				
 			</div>
 			
 			
@@ -586,7 +610,7 @@
 						var m = result[i];
 						var html = "";
 						html += "<div style='margin: 10px;'>";
-						html += m.boardNo;
+						html += m.categoryNo;
 						html += "<span style='margin-left: 20px;'>";
 						html += m.title;
 						html += "</span>";
