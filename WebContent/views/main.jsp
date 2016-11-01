@@ -98,9 +98,35 @@
 
 						<!-- 마이페이지 -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 =======
 >>>>>>> d119c34d813b6d5f29b170e6d10b5b3fadfd2b37
+=======
+						<li class="dropdown" id="mypage" style="display: none;"><a
+							href="javascript:void(0);" class="dropdown-toggle"
+							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:void(0);"><i class="fa fa-bell"></i>
+										알림</a></li>
+								<li><a href="javascript:void(0);"><i
+										class="fa fa-envelope-square"></i> 쪽지</a></li>
+								<li><a href="javascript:void(0);"><i
+										class="fa fa-calendar"></i> 여행일정</a></li>
+								<li><a href="href='http://localhost:8081/post/list;"><i
+										class="fa fa-pencil"></i> 포스트</a></li>
+								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
+										class="fa fa-cog"></i> 회원정보변경</a>
+									<ul class="dropdown-menu">
+										<li><a href="#"><i class="fa fa-user"></i> 프로필수정</a></li>
+										<li><a href="#"><i class="fa fa-lock"></i> 비밀번호변경</a></li>
+										<li><a href="#"><i class="fa fa-bell"></i> 알림설정</a></li>
+										<li><a href="#"><i class="fa fa-unlock"></i> 회원탈퇴</a></li>
+									</ul></li>
+								<li onclick="signout();"><a href="javascript:void(0);"><i
+										class="fa fa-unlock"></i> 로그아웃</a></li>
+							</ul></li>
+>>>>>>> jhs
 						<!-- 마이페이지 끝 -->
 
 						<!-- Search Block -->
@@ -559,7 +585,7 @@
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 포스트</a></li>";
+					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
 					html += "<li class='dropdown-submenu'>";
 					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
 					html += "	<ul class='dropdown-menu'>";
