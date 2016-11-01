@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -133,12 +136,36 @@
 		
 
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+		<div class="container content-md"
+			style="border: 1px solid red; height: 450px">
+			<!-- Post List -->
+			<div id="post-list" style="border: 1px solid red; height: 280px; overflow: auto;">
+				
+			</div>
+			
+			<!--
+			<table>
+				<tr>
+					<th>boardNo</th>
+					<th>title</th>
+					<th>userUid</th>
+					<th>regDate</th>
+					<th>viewCnt</th>
+				</tr>
+				
+			<c:forEach items="${list}" var="postVO" >
+			
+				<tr>
+					<td>${postVO.boardNo}</td>
+					<td><a href='/post/read?boardNo=${PostVO.boardNo}'>${postVO.title}</td>
+					<td>${postVO.userUid}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${postVO.regDate}" /></td>
+					<td>${postVO.viewCnt}</td>
+				</tr>
+			</c:forEach>	
+			</table>
+			-->
+			
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -498,7 +525,7 @@
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			alert("to")
+			postList();
 		});
 		
  		$.ajax({
@@ -509,7 +536,7 @@
 				alert("에러");
 			},
 			success : function(result) {
-				alert("성공");
+// 				alert("성공");
 				
 				$("#start").empty();
 				var html = "";
@@ -560,7 +587,32 @@
 					}
 				}
 			}
-		});		
+		});	
+ 		
+ 		function postList() {
+			$.ajax({
+				url : 'http://localhost:8081/post/list',
+				method : 'GET',
+				dataType : 'json',
+				success : function(result) {
+					var pList = $("#post-list");
+					console.dir(result);
+					
+					for (var i = 0; i < result.length; i++) {
+						var m = result[i];
+						var html = "";
+						html += "<div style='margin: 10px;'>";
+						html += m.categoryNo;
+						html += "<span style='margin-left: 20px;'>";
+						html += m.title;
+						html += "</span>";
+						html += "</div>"	
+						pList.append(html);
+					}
+					
+				}
+			});
+		}
 		
 	</script>
 	<!--[if lt IE 9]>

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -15,39 +18,39 @@
 <meta name="author" content="">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../../favicon.ico">
 
 <!-- Web Fonts -->
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet"
-	href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/style.css">
+	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../assets/css/footers/footer-v3.css">
+<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../assets/plugins/animate.css">
-<link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="../../assets/plugins/animate.css">
+<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
-	href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="../assets/plugins/parallax-slider/css/parallax-slider.css">
+	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet"
-	href="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet"
-	href="../assets/plugins/login-signup-modal-window/css/style.css">
+	href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../assets/css/theme-colors/default.css"
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
 	id="style_color">
-<link rel="stylesheet" href="../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="stylesheet" href="../../assets/css/custom.css">
 
 
 
@@ -62,7 +65,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../assets/img/logo1-default.png" alt="Logo">
+					src="../../assets/img/logo1-default.png" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -95,33 +98,6 @@
 				class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
 				<div class="container">
 					<ul class="nav navbar-nav" id="start">
-
-						<!-- 마이페이지 -->
-						<li class="dropdown" id="mypage" style="display: none;"><a
-							href="javascript:void(0);" class="dropdown-toggle"
-							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:void(0);"><i class="fa fa-bell"></i>
-										알림</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-envelope-square"></i> 쪽지</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-calendar"></i> 여행일정</a></li>
-								<li><a href="href='http://localhost:8081/post/list;"><i
-										class="fa fa-pencil"></i> 포스트</a></li>
-								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
-										class="fa fa-cog"></i> 회원정보변경</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"><i class="fa fa-user"></i> 프로필수정</a></li>
-										<li><a href="#"><i class="fa fa-lock"></i> 비밀번호변경</a></li>
-										<li><a href="#"><i class="fa fa-bell"></i> 알림설정</a></li>
-										<li><a href="#"><i class="fa fa-unlock"></i> 회원탈퇴</a></li>
-									</ul></li>
-								<li onclick="signout();"><a href="javascript:void(0);"><i
-										class="fa fa-unlock"></i> 로그아웃</a></li>
-							</ul></li>
-						<!-- 마이페이지 끝 -->
-
 						<!-- Search Block -->
 						<li><i class="search fa fa-search search-btn"></i>
 							<div class="search-open">
@@ -147,9 +123,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Main Page</h1>
+				<h1 class="pull-left">여행기</h1>
 				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="main.html">Main</a></li>
+					<li class="active"><a href="http://localhost:8081">Main</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -157,31 +133,39 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		<!-- Comment -->
-		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
-			<div>
-				<label for="comment">Comment:</label>
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
-					<input type="text" id="inputComment" placeholder="content" class="form-control" style="width: 1000px;">
-					<button type="button" id="commentBtn" class="btn btn-success">등록</button>
-				</div>
-			</div>
-			<!-- Comment List -->
-			<div id="comment-list" style="border: 1px solid red; height: 280px; overflow: auto;">
-				
-			</div>
-		</div>
-		<!-- End Comment -->
+		
 
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+		<div class="container content-md"
+			style="border: 1px solid red; height: 450px">
+			<!-- Post List -->
+			<div id="travelog-list" style="border: 1px solid red; height: 280px; overflow: auto;">
+				
+			</div>
+			
+			<!--
+			<table>
+				<tr>
+					<th>boardNo</th>
+					<th>title</th>
+					<th>userUid</th>
+					<th>regDate</th>
+					<th>viewCnt</th>
+				</tr>
+				
+			<c:forEach items="${list}" var="postVO" >
+			
+				<tr>
+					<td>${postVO.boardNo}</td>
+					<td><a href='/post/read?boardNo=${PostVO.boardNo}'>${postVO.title}</td>
+					<td>${postVO.userUid}</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${postVO.regDate}" /></td>
+					<td>${postVO.viewCnt}</td>
+				</tr>
+			</c:forEach>	
+			</table>
+			-->
+			
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -509,41 +493,41 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery.min.js"></script>
+		src="../../assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
+		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-	<script type="text/javascript" src="../assets/plugins/modernizr.js"></script>
-	<script src="../assets/plugins/login-signup-modal-window/js/main.js"></script>
+		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
+	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
 
 	<!-- JS Customization -->
-	<script type="text/javascript" src="../assets/js/custom.js"></script>
+	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="../../assets/js/app.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			commentList();
-		});
+			travelogList();
 		
+		});
 		
  		$.ajax({
 			type : "GET",
@@ -596,63 +580,40 @@
 					var data = result[i];
 					if(data.parentMenuNo != 0) {
 						if($("#" + data.parentMenuNo).find("ul").length > 0) {
-							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='http://localhost:8081/together/home'>"+ data.title +"</a></li>");
+							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
 						}
 						else{
-							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='#.html'>"+ data.title +"</a></li></ul>");
+							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
 						}
 					}
 				}
 			}
-		});			
-		
-		
-		function commentList() {
+		});	
+ 		
+ 		function postList() {
 			$.ajax({
-				url : 'http://localhost:8081/main/all',
+				url : 'http://localhost:8081/travelog/list',
 				method : 'GET',
 				dataType : 'json',
 				success : function(result) {
-// 					alert("success");
-					commentFn(result);
+					var tList = $("#travelog-list");
+					console.dir(result);
+					
+					for (var i = 0; i < result.length; i++) {
+						var m = result[i];
+						var html = "";
+						html += "<div style='margin: 10px;'>";
+						html += m.categoryNo;
+						html += "<span style='margin-left: 20px;'>";
+						html += m.title;
+						html += "</span>";
+						html += "</div>"	
+						pList.append(html);
+					}
+					
 				}
 			});
 		}
-		
-		
-		$("#commentBtn").click(function() {
-			var uid = firebase.auth().currentUser.uid;
-			var comment = $("#inputComment").val();
-
-			$.ajax({
-				url : 'http://localhost:8081/main/' + uid + '/' + comment,
-				method : 'PUT',
-				dataType : 'json',
-				success : function(result) {
-// 					alert("success");
-					$("#inputComment").val("");					
-					commentFn(result);
-				}
-			});
-		});
-
-		function commentFn(data) {
-			var cList = $("#comment-list");
-			console.dir(data);
-			
-			for (var i = 0; i < data.length; i++) {
-				var m = data[i];
-				var html = "";
-				html += "<div style='margin: 10px;'>";
-				html += "<img src='../assets/img/user.jpg' style='width:40px; height:40px'>";
-				html += "<span style='margin-left: 20px;'>";
-				html += m.mainContent;
-				html += "</span>";
-				html += "</div>"	
-				cList.append(html);
-			}
-		}
-		
 		
 	</script>
 	<!--[if lt IE 9]>
@@ -663,8 +624,8 @@
 
 	<!-- firebase 로그인 -->
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script src="../resources/js/firebaseInit.js"></script>
-	<script src="../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/firebaseInit.js"></script>
+	<script src="../../resources/js/firebaseAuth.js"></script>
 
 </body>
 </html>
