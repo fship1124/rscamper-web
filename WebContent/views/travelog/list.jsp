@@ -52,11 +52,16 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
 
-
+<style type="text/css" media="all">
+	@import "widgEditor/css/main.css";
+	@import "widgEditor/css/widgEditor.css";
+</style>
+<script type="text/javascript" src="widgEditor/scripts/widgEditor.js"></script> 
 
 </head>
 
 <body class="header-fixed header-fixed-space-default">
+
 
 	<div class="wrapper">
 
@@ -133,25 +138,67 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
 
 		<!--=== Content ===-->
+		
 		<div class="container content-md"
 			style="border: 1px solid red; height: 450px">
+			
+			<div>
+			<!--============= Button trigger modal =============-->
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">포스트 작성</button>
+			<br><br>
+				<!--============ Modal ============-->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">새로은 여행기 작성</h4>
+				      </div>
+				      <div class="modal-body">
+
+					  		<div id="ta1" contentEditable="true" style="overflow-x:auto; width:500px; height: 300px; border: solid; 1px; margin: 20px; line-height: 20px; background-image: ; "></div>	
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save</button>
+				      </div>
+				    </div>
+				  </div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+		
+		    <!-- 
+				<div>
+					<button type="button" id="postRegisterBtn" class="btn btn-success">포스트 작성</button>
+				</div> -->
+				
+			
 			<!-- travelog List -->
-			<div id="travelog-list" style="border: 1px solid red; height: 280px; overflow: auto;">
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br>
-			</div>
+			<table class="table" border='1'>
+				<thead>
+					<th>이미지</th>
+					<th>게시판이름</th>
+					<th>제목</th>
+					<th>날짜</th>
+				</thead>	
+				<tbody>
+				</tbody>
+			</table>
+
 			
-			
+		<div class="text-center">
+			<ul class="pagination pagination-lg"></ul>
+		</div>
 			
 		</div>
+		
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
+		
+		
 
 		<!--=== Footer v3 ===-->
 		<div id="footer-v3" class="footer-v3">
@@ -509,8 +556,34 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			travelogList();
-		
 		});
+		
+		var page;
+		
+		
+		function travelogList(e) {
+ 			console.log("in travelogList")
+ 			console.log(e);
+ 			console.dir(e);
+ 			var obj = new Object();
+ 			obj.page = e;
+ 			
+ 			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/travelog/list",
+				dataType : 'json',
+				data : obj,
+				error : function (err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.dir(result);
+					listCreate(result);
+				}
+ 			})
+ 		}
+		
+		
 		
  		$.ajax({
 			type : "GET",
@@ -520,7 +593,7 @@
 				alert("에러");
 			},
 			success : function(result) {
-// 				alert("성공");
+//  				alert("성공");
 				
 				$("#start").empty();
 				var html = "";
@@ -573,30 +646,87 @@
 			}
 		});	
  		
- 		function travelogList() {
-			$.ajax({
-				url : 'http://localhost:8081/travelog/list',
-				method : 'GET',
-				dataType : 'json',
-				success : function(result) {
-					var tList = $("#travelog-list");
-					console.dir(result);
-					
-					for (var i = 0; i < result.length; i++) {
-						var m = result[i];
-						var html = "";
-						html += "<div style='margin: 10px;'>";
-						html += m.boardNo;
-						html += "<span style='margin-left: 20px;'>";
-						html += m.title;
-						html += "</span>";
-						html += "</div>"	
-						tList.append(html);
-					}
-					
-				}
-			});
+ 		function listCreate(data) {
+ 			console.dir(data);
+ 			var p = data.page;
+ 			var pageMaker = data.pageMaker;
+ 			page = pageMaker.endPage;
+ 			var list = $("tbody");
+ 			var html = "";
+ 			for (var i = 0; i < p.length; i++) {
+ 				var v = p[i];
+ 				var d = new Date(v.regDate);
+ 				var mon = d.getMonth() + 1;
+ 				html += "<tr>";
+ 				html += "<td>" + "" + "</td>";
+ 				html += "<td>" + v.categoryName + "</td>";
+ 				html += "<td>";
+ 				html += "<a href='http://localhost:8081/travelog/" + v.boardNo + "'>";
+ 				html += v.title + "</a>";
+ 				html += "<td>" + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString() + "</td>";
+ 				html += "</tr>";
+ 			}
+ 			
+ 			list.html(html);
+ 			html = "";
+ 			
+ 			var pageination = $(".pagination");
+ 			console.dir(pageMaker.prev);
+ 			if (pageMaker.prev) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Previous'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('P') >&laquo;</span>";
+				html += "<span class='sr-only'>Previous</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+
+			for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
+				html += "<li class='page-item'>";
+				html += "<a href='#' onclick= togetherList(this.text)>" + i + "</a>";
+				html += "</li>";
+			}
+
+			if (pageMaker.next && pageMaker.endPage > 0) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Next'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('N') >&raquo;</span>";
+				html += "<span class='sr-only'>Next</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+			pageination.html(html);
 		}
+ 		
+ 		
+ 		
+ 		
+
+		function prependZero(num, len) {
+			while (num.toString().length < len) {
+				num = "0" + num;
+			}
+			return num;
+		}
+
+		function previousNextFn(val) {
+			console.log(val);
+			console.log("page : " + page);
+
+			if (val == 'N') {
+				page = page + 1;
+			} else {
+				page = page - 19;
+			}
+
+			togetherList(page);
+		}
+ 		
+/*====  	Modal     ====*/
+		$('#myModal').on('shown.bs.modal', function () {
+			  $('#myInput').focus()
+			})
+			
 		
 	</script>
 	<!--[if lt IE 9]>

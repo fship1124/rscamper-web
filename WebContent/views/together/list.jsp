@@ -507,7 +507,6 @@
 			togetherList();
 		});
 		
-<<<<<<< HEAD
 		var page;
 	
  		
@@ -529,7 +528,10 @@
 				success : function(result) {
 					console.dir(result);
 					listCreate(result);
-=======
+				}
+ 			})
+ 		}
+				
  		$.ajax({
 			type : "GET",
 			url : "http://localhost:8081/menu/list",
@@ -587,10 +589,9 @@
 							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
 						}
 					}
->>>>>>> jhs
 				}
- 			});
- 		}
+ 			}
+ 		});
  		
  		
  		function listCreate(data) {
@@ -668,6 +669,7 @@
 
 			togetherList(page);
 		}
+ 		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
