@@ -144,27 +144,23 @@
 			</div>
 			
 			<!--
-			<table>
-				<tr>
+			<!-- post List -->
+			<table calss="table" border='1'>
+				<thead>
 					<th>boardNo</th>
+					<th>categoryName</th>
 					<th>title</th>
-					<th>userUid</th>
 					<th>regDate</th>
 					<th>viewCnt</th>
-				</tr>
+				</thead>
 				
-			<c:forEach items="${list}" var="postVO" >
-			
-				<tr>
-					<td>${postVO.boardNo}</td>
-					<td><a href='/post/read?boardNo=${PostVO.boardNo}'>${postVO.title}</td>
-					<td>${postVO.userUid}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${postVO.regDate}" /></td>
-					<td>${postVO.viewCnt}</td>
-				</tr>
-			</c:forEach>	
+				<tbody>
+				</tbody>
 			</table>
-			-->
+			
+			<div class="text-center">
+				<ul class="pagination pagination-lg"></ul>
+			</div>
 			
 		</div>
 		<!--=== End Content ===-->
@@ -519,6 +515,10 @@
 	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<!-- firebase 로그인 -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+	<script src="../../resources/js/firebaseInit.js"></script>
+	<script src="../../resources/js/firebaseAuth.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -528,6 +528,34 @@
 			postList();
 		});
 		
+		var page;
+		
+		
+		function postList(e) {
+ 			console.log("in postList")
+ 			console.log(e);
+ 			console.dir(e);
+ 			var obj = new Object();
+ 			obj.page = e;
+ 			var user = firebase.auth().currentUser;
+ 			console.log("로그인정보" + user);
+		
+ 			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/post/list",
+				dataType : 'json',
+				data : {obj:"obj", user:"user"}, 
+				error : function (err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.dir(result);
+					listCreate(result);
+				}
+ 			})
+ 		}
+		
+ 			
  		$.ajax({
 			type : "GET",
 			url : "http://localhost:8081/menu/list",
@@ -589,30 +617,88 @@
 			}
 		});	
  		
- 		function postList() {
-			$.ajax({
-				url : 'http://localhost:8081/post/list',
-				method : 'GET',
-				dataType : 'json',
-				success : function(result) {
-					var pList = $("#post-list");
-					console.dir(result);
-					
-					for (var i = 0; i < result.length; i++) {
-						var m = result[i];
-						var html = "";
-						html += "<div style='margin: 10px;'>";
-						html += m.categoryNo;
-						html += "<span style='margin-left: 20px;'>";
-						html += m.title;
-						html += "</span>";
-						html += "</div>"	
-						pList.append(html);
-					}
-					
-				}
-			});
+ 		function listCreate(data) {
+ 			console.dir(data);
+ 			var p = data.page;
+ 			var pageMaker = data.pageMaker;
+ 			page = pageMaker.endPage;
+ 			var list = $("tbody");
+ 			var html = "";
+ 			for (var i = 0; i < p.length; i++) {
+ 				var v = p[i];
+ 				var d = new Date(v.regDate);
+ 				var mon = d.getMonth() + 1;
+ 				html += "<tr>";
+ 				html += "<td>" + v.boardNo + "</td>";
+ 				html += "<td>" + v.categoryName + "</td>";
+ 				html += "<td>";
+ 				html += "<a href='http://localhost:8081/post/" + v.boardNo + "'>";
+ 				html += v.title + "</a>";
+ 				html += "<td>" + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString() + "</td>";
+ 				html += "<td>" + v.viewCnt + "</td>";
+ 				html += "</tr>";
+ 			}
+ 			
+ 			
+			
+			
+ 			
+ 			list.html(html);
+ 			html = "";
+ 			
+ 			var pageination = $(".pagination");
+ 			console.dir(pageMaker.prev);
+ 			if (pageMaker.prev) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Previous'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('P') >&laquo;</span>";
+				html += "<span class='sr-only'>Previous</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+
+			for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
+				html += "<li class='page-item'>";
+				html += "<a href='#' onclick= togetherList(this.text)>" + i + "</a>";
+				html += "</li>";
+			}
+
+			if (pageMaker.next && pageMaker.endPage > 0) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Next'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('N') >&raquo;</span>";
+				html += "<span class='sr-only'>Next</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+			pageination.html(html);
 		}
+ 		
+ 		
+ 		
+ 		
+
+		function prependZero(num, len) {
+			while (num.toString().length < len) {
+				num = "0" + num;
+			}
+			return num;
+		}
+
+		function previousNextFn(val) {
+			console.log(val);
+			console.log("page : " + page);
+
+			if (val == 'N') {
+				page = page + 1;
+			} else {
+				page = page - 19;
+			}
+
+			postList(page);
+		}
+ 		
+		
 		
 	</script>
 	<!--[if lt IE 9]>
@@ -621,10 +707,7 @@
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>
     <![endif]-->
 
-	<!-- firebase 로그인 -->
-	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script src="../../resources/js/firebaseInit.js"></script>
-	<script src="../../resources/js/firebaseAuth.js"></script>
+
 
 </body>
 </html>
