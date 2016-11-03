@@ -120,10 +120,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="#">tour</a></li>
+					<li><a href="javascript:history.back()">tour</a></li>
 					<li class="active">New</li>
 				</ul>
 			</div>
