@@ -140,78 +140,116 @@
 							style="visibility: visible; opacity: 1; margin: 0px;">
 							<div class="ms-container">
 								<div class="ms-inner-controls-cont" style="max-width: 550px;">
-									<div class="ms-view ms-fade-view ms-grab-cursor"
-										style="width: 550px; height: 550px;">
+									<div class="ms-view ms-fade-view ms-grab-cursor" style="width: 550px; height: 550px;">
 										<div class="ms-slide-container">
-											<div class="ms-slide ms-sl-selected"
-												style="width: 550px; height: 550px; opacity: 1;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img class="ms-brd"
-														src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image2_1.jpg"
-														alt="lorem ipsum dolor sit"
-														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
-												</div>
-											</div>
-											<div class="ms-slide"
-												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img src="assets/img/blog/29.jpg"
-														alt="lorem ipsum dolor sit"
-														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
-												</div>
-											</div>
-											<div class="ms-slide"
-												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img src="assets/img/blog/30.jpg"
-														alt="lorem ipsum dolor sit"	style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
+												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
+													<img class="ms-brd"	src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image2_1.jpg" alt="lorem ipsum dolor sit" style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="ms-nav-next ms-ctrl-hide" style="opacity: 0;">
+								</div>
+							</div>
+
+							<div class="bx-wrapper" style="max-width: 348px;">
+								<div class="bx-viewport"
+									style="width: 100%; overflow: hidden; position: relative; height: 58px;">
+									<ul class="bxslider" style="width: 915%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+
+										<li class="on" style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/73/2366973_image2_1.JPG');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/73/2366973_image2_1.JPG"
+													alt="포천 허브아일랜드1"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/51/2044151_image2_1.png');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/51/2044151_image2_1.png"
+													alt="포천 허브아일랜드2"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/16/2363316_image2_1.JPG');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/16/2363316_image2_1.JPG"
+													alt="포천 허브아일랜드3"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/70/2366970_image2_1.JPG');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/70/2366970_image2_1.JPG"
+													alt="포천 허브아일랜드4"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/71/2366971_image2_1.jpg');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/71/2366971_image2_1.jpg"
+													alt="포천 허브아일랜드5"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/74/2366974_image2_1.jpg');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/74/2366974_image2_1.jpg"
+													alt="포천 허브아일랜드6"></span></a></li>
+
+										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
+											href="/search/searchDetail.do"
+											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/75/2366975_image2_1.jpg');return false;"><span><img
+													src="http://tong.visitkorea.or.kr/cms/resource/75/2366975_image2_1.jpg"
+													alt="포천 허브아일랜드7"></span></a></li>
+
+									</ul>
+								</div>
+								<div class="bx-controls bx-has-pager bx-has-controls-direction">
+									<div class="bx-pager bx-default-pager">
+										<div class="bx-pager-item">
+											<a href="" data-slide-index="0" class="bx-pager-link active">1</a>
+										</div>
+										<div class="bx-pager-item">
+											<a href="" data-slide-index="1" class="bx-pager-link">2</a>
+										</div>
 									</div>
-									<div class="ms-nav-prev ms-ctrl-hide" style="opacity: 0;">
+									<div class="bx-controls-direction">
+										<a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a>
 									</div>
 								</div>
 							</div>
 
-							<div class="ms-thumb-list ms-dir-h ms-align-bottom"
-								style="margin-top: 5px; position: relative; height: 170px;">
-								<div class="ms-thumbs-cont"
-									style="width: 555px; transform: translateX(0px) translateZ(0px);">
-									<div class="ms-thumb-frame ms-thumb-frame-selected"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/99/195999_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
-									<div class="ms-thumb-frame"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
-									<div class="ms-thumb-frame"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/98/195998_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
-								</div>
-							</div>
+
+
+
+							<!-- 							<div class="ms-thumb-list ms-dir-h ms-align-bottom" -->
+<!-- 								style="margin-top: 5px; position: relative; height: 170px;"> -->
+<!-- 								<div class="ms-thumbs-cont" -->
+<!-- 									style="width: 555px; transform: translateX(0px) translateZ(0px);"> -->
+<!-- 									<div class="ms-thumb-frame ms-thumb-frame-selected" -->
+<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
+<!-- 										<img class="ms-thumb" -->
+<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/99/195999_image3_1.jpg" -->
+<!-- 											alt="thumb"> -->
+<!-- 										<div class="ms-thumb-ol"></div> -->
+<!-- 									</div> -->
+<!-- 									<div class="ms-thumb-frame" -->
+<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
+<!-- 										<img class="ms-thumb" -->
+<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image3_1.jpg" -->
+<!-- 											alt="thumb"> -->
+<!-- 										<div class="ms-thumb-ol"></div> -->
+<!-- 									</div> -->
+<!-- 									<div class="ms-thumb-frame" -->
+<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
+<!-- 										<img class="ms-thumb" -->
+<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/98/195998_image3_1.jpg" -->
+<!-- 											alt="thumb"> -->
+<!-- 										<div class="ms-thumb-ol"></div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+							
+							
+							
 						</div>
 						<!-- End Master Slider -->
 						</div>
@@ -219,73 +257,38 @@
 
 				<div class="col-md-6 content1">
 					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a data-target="#home"
-							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-							aria-expanded="true">기본 정보</a></li>
-						<li role="presentation" class=""><a data-target="#profile"
-							role="tab" id="profile-tab" data-toggle="tab"
-							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
+						<li role="presentation" class="active">
+							<a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">기본 정보</a>
+						</li>
+						<li role="presentation" class="">
+							<a data-target="#profile" role="tab" id="profile-tab" data-toggle="tab"	aria-controls="profile" aria-expanded="false">이용 안내</a>
+						</li>
 						<li role="presentation" class="dropdown">
-							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 <span class="caret"></span>
+							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
+								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
-								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
+								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
+								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
 							</ul>
 						</li>
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							<p>Raw denim you probably haven't heard of them jean shorts
-								Austin. Nesciunt tofu stumptown aliqua, retro synth master
-								cleanse. Mustache cliche tempor, williamsburg carles vegan
-								helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-								synth. Cosby sweater eu banh mi, qui irure terry richardson ex
-								squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis
-								cardigan american apparel, butcher voluptate nisi qui.</p>
+							<div id="content1" class="tabCon" style="display: block;">
+								<ul class="txtCon tab1" tabindex="0"></ul>
+							</div>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa
-								nulla single-origin coffee squid. Exercitation +1 labore velit,
-								blog sartorial PBR leggings next level wes anderson artisan four
-								loko farm-to-table craft beer twee. Qui photo booth letterpress,
-								commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-								vinyl cillum PBR. Homo nostrud organic, assumenda labore
-								aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr,
-								vero magna velit sapiente labore stumptown. Vegan fanny pack
-								odio cillum wes anderson 8-bit, sustainable jean shorts beard ut
-								DIY ethical culpa terry richardson biodiesel. Art party
-								scenester stumptown, tumblr butcher vero sint qui sapiente
-								accusamus tattooed echo park.</p>
+							<div id="content2" class="tabCon" style="display: block;">
+								<ul class="txtCon tab2" tabindex="0"></ul>
+							</div>
 						</div>
-						<div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before
-								they sold out mcsweeney's organic lomo retro fanny pack lo-fi
-								farm-to-table readymade. Messenger bag gentrify pitchfork
-								tattooed craft beer, iphone skateboard locavore carles etsy
-								salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-								Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-								mi whatever gluten-free, carles pitchfork biodiesel fixie etsy
-								retro mlkshk vice blog. Scenester cred you probably haven't
-								heard of them, vinyl craft beer blog stumptown. Pitchfork
-								sustainable tofu synth chambray yr.</p>
-						</div>
-						<div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh
-								etsy art party before they sold out master cleanse gluten-free
-								squid scenester freegan cosby sweater. Fanny pack portland
-								seitan DIY, art party locavore wolf cliche high life echo park
-								Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they
-								sold out farm-to-table VHS viral locavore cosby sweater. Lomo
-								wolf viral, mustache readymade thundercats keffiyeh craft beer
-								marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park
-								vegan.</p>
-						</div>
+						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
+						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
 					</div>
 				</div>
 			</div>
-				
-				
 				
 				<div class="row content2">
 					<p></p>
@@ -651,8 +654,10 @@
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
 			apiAjax();
+// 			apiAjax2();
 		});
 
+		
 		function apiAjax() {
 			var obj = new Object();
 			obj.contentid = ${param.contentid};
@@ -666,25 +671,114 @@
 					alert("에러");
 				},
 				success : function(result) {
+					console.log("apiAjax");
 					console.log(result);
-
-					var data = JSON.parse(result);
+					
+ 					var data = JSON.parse(result);
+					console.dir(data);
+	
 					contentCreate(data);
 				}
 			});
 		}
-
+		
+		
 		function contentCreate(data) {
-			console.dir(data);
-			var item = data.response.body.items.item;
+			console.log("contentCreate");
+			var data1 = JSON.parse(data[0]);
+			var data2 = JSON.parse(data[1]);
+			var data3 = JSON.parse(data[2]);
+			var data4 = JSON.parse(data[3]);
+			
+			console.dir(data1);
+			console.dir(data2);
+			console.dir(data3);
+			console.dir(data4);
+			
+			var item1 = data1.response.body.items.item;
+			var item2 = data2.response.body.items.item;
+			var item3 = data3.response.body.items.item;
+			var item4 = data4.response.body.items.item;
+			
 			var content = $(".content");
-			var content1 = $(".content1");
+			content.find("h4").html(item1.title);
+			
+			var tab1 = $(".tab1");
+			var tab2 = $(".tab2");
+			var tab3 = $(".tab3");
+			var tab4 = $(".tab4");
 			var content2 = $(".content2");
-			var content1_right = $(".content1-right");
-			content.find("h4").html(item.title);
-			content2.find("p").html(item.overview);
-			content1_right.find("p").html(item.overview);
+			
+			var html = "";
+			html += "<li><strong>우편번호 : </strong>" + item1.zipcode + "</li>";
+			html += "<li><strong>주소 : </strong>" + item1.addr1 + " " + item1.addr2 + "</li>";
+			tab1.html(html);
+			
+			html = "";
+			html += "<li>" + item2.expguide + "</li>";
+			html += "<li>" + item2.infocenter + "</li>";
+			tab2.html(html);
+			
+			html = "";
+			html += "<li>" + item1.homepage + "</li>";
+			tab3.html(html);
+			
+			html = "";
+			html += "<li>" + item3.infoname + "</li>";
+			html += "<li>" + item3.infotext + "</li>";
+			tab4.html(html);
+			
+			imageProcess(item4);
+			
+			content2.find("p").html(item1.overview);
 		}
+		
+		
+		function imageProcess(item) {
+			alert(item.length);
+			
+			var imgTag = $(".ms-brd");
+			var slider = $(".bxslider");
+			var controls = $(".bx-controls");
+			
+			var html = "";
+			for (var i = 0; i < item.length; i++) {
+				var m = item[i];				
+				
+				if (i == 0) {
+					imgTag.attr("src", m.originimgurl);
+					html += "<li class='on' style='float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;'>";
+					html += "<a href='#' onclick='javascript:imgClick(this, '" + m.originimgurl + "');return false;'>";
+					html += "<span><img src='" + m.originimgurl + "'></span></a></li>";						
+				} else {
+					html += "<li style='float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;'>";
+					html += "<a href='#' onclick='javascript:imgClick(this, '" + m.originimgurl + "');return false;'>";
+					html += "<span><img src='" + m.originimgurl + "'></span></a></li>";					
+				}
+			}
+			slider.html(html);
+			
+			
+			var html = "";
+			html += "<div class='bx-controls bx-has-pager bx-has-controls-direction'><div class='bx-pager bx-default-pager'><div class='bx-pager-item'>";
+			html += "<a href='' data-slide-index='0' class='bx-pager-link active'>1</a></div><div class='bx-pager-item'>";
+			html += "<a href='' data-slide-index='1' class='bx-pager-link'>2</a></div></div><div class='bx-controls-direction'><a class='bx-prev' href=''>Prev</a><a class='bx-next' href=''>Next</a></div></div></div>";
+			
+			controls.html(html);
+		}
+		
+		
+		//이미지 클릭 이벤트
+		function imgClick(obj, orgImg){	
+			alert("imgClick");
+			var $mainImg = $(obj).parents('.mainImg').children('p').children('img');		
+			$(obj).parent('li').addClass('on').siblings().removeClass('on');		
+			$mainImg.attr('src',orgImg);
+			var orgalt=$(obj).children().children('img').attr('alt');
+			var big="_큰이미지";
+			$mainImg.attr('alt',orgalt+big);
+		}	
+
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
