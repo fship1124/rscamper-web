@@ -97,9 +97,6 @@
 					<ul class="nav navbar-nav" id="start">
 
 						<!-- 마이페이지 -->
-
-<<<<<<< HEAD
-=======
 						<li class="dropdown" id="mypage" style="display: none;"><a
 							href="javascript:void(0);" class="dropdown-toggle"
 							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
@@ -124,7 +121,6 @@
 										class="fa fa-unlock"></i> 로그아웃</a></li>
 							</ul></li>
 
->>>>>>> a8e10c22fe0065f07d3e0f0fed63de5505624120
 						<!-- 마이페이지 끝 -->
 
 						<!-- Search Block -->
@@ -674,10 +670,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../resources/js/firebaseInit.js"></script>
 	<script src="../resources/js/firebaseAuth.js"></script>
-<<<<<<< HEAD
-
-=======
 	<script src="../resources/js/menu.js"></script>
->>>>>>> a8e10c22fe0065f07d3e0f0fed63de5505624120
 </body>
 </html>
