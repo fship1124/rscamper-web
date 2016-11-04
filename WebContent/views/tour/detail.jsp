@@ -6,7 +6,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>메인</title>
+<title>관광지</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -61,8 +61,8 @@
 		<div class="header header-sticky">
 			<div class="container">
 				<!-- Logo -->
-				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+				<a class="logo" href="index.html"> 
+					<img src="../../assets/img/logo1-default.png" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -71,11 +71,11 @@
 					<ul class="loginbar pull-right">
 						<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 						<li class="topbar-devider"></li>
-						<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
-							href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-						<li id="logoutBtn" style="display: none;"><a
-							href="javascript:void(0);" onclick="signout();"><i
-								class="fa fa-unlock-alt"></i> Logout</a></li>
+						<li id="loginBtn" class="cd-log_reg">
+						<a class="cd-signin" href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
+						<li id="logoutBtn" style="display: none;">
+						<a href="javascript:void(0);" onclick="signout();">
+						<i class="fa fa-unlock-alt"></i> Logout</a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->
@@ -83,8 +83,8 @@
 				<!-- Toggle get grouped for better mobile display -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-responsive-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="fa fa-bars"></span>
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="fa fa-bars"></span>
 				</button>
 				<!-- End Toggle -->
 			</div>
@@ -120,25 +120,176 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">together</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">tour</a></li>
+					<li class="active">New</li>
 				</ul>
 			</div>
-			<!--/container-->
 		</div>
-		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
-
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+		<div class="container content-md content">
+			<h4></h4>
+			<div class="row">
+					<div class="col-md-6 md-margin-bottom-50">
+						<div class="ms-showcase2-template" style="position: relative;">
+						<!-- Master Slider -->
+						<div class="master-slider ms-skin-default ms-wk" id="masterslider"
+							style="visibility: visible; opacity: 1; margin: 0px;">
+							<div class="ms-container">
+								<div class="ms-inner-controls-cont" style="max-width: 550px;">
+									<div class="ms-view ms-fade-view ms-grab-cursor"
+										style="width: 550px; height: 550px;">
+										<div class="ms-slide-container">
+											<div class="ms-slide ms-sl-selected"
+												style="width: 550px; height: 550px; opacity: 1;">
+
+
+												<div class="ms-slide-bgcont"
+													style="height: 100%; opacity: 1;">
+													<img class="ms-brd"
+														src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image2_1.jpg"
+														alt="lorem ipsum dolor sit"
+														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+												</div>
+											</div>
+											<div class="ms-slide"
+												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
+
+
+												<div class="ms-slide-bgcont"
+													style="height: 100%; opacity: 1;">
+													<img src="assets/img/blog/29.jpg"
+														alt="lorem ipsum dolor sit"
+														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+												</div>
+											</div>
+											<div class="ms-slide"
+												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
+
+
+												<div class="ms-slide-bgcont"
+													style="height: 100%; opacity: 1;">
+													<img src="assets/img/blog/30.jpg"
+														alt="lorem ipsum dolor sit"	style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ms-nav-next ms-ctrl-hide" style="opacity: 0;">
+									</div>
+									<div class="ms-nav-prev ms-ctrl-hide" style="opacity: 0;">
+									</div>
+								</div>
+							</div>
+
+							<div class="ms-thumb-list ms-dir-h ms-align-bottom"
+								style="margin-top: 5px; position: relative; height: 170px;">
+								<div class="ms-thumbs-cont"
+									style="width: 555px; transform: translateX(0px) translateZ(0px);">
+									<div class="ms-thumb-frame ms-thumb-frame-selected"
+										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
+										<img class="ms-thumb"
+											src="http://tong.visitkorea.or.kr/cms/resource/99/195999_image3_1.jpg"
+											alt="thumb">
+										<div class="ms-thumb-ol"></div>
+									</div>
+									<div class="ms-thumb-frame"
+										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
+										<img class="ms-thumb"
+											src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image3_1.jpg"
+											alt="thumb">
+										<div class="ms-thumb-ol"></div>
+									</div>
+									<div class="ms-thumb-frame"
+										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
+										<img class="ms-thumb"
+											src="http://tong.visitkorea.or.kr/cms/resource/98/195998_image3_1.jpg"
+											alt="thumb">
+										<div class="ms-thumb-ol"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End Master Slider -->
+						</div>
+					</div>
+
+				<div class="col-md-6 content1">
+					<ul id="myTab" class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a data-target="#home"
+							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+							aria-expanded="true">기본 정보</a></li>
+						<li role="presentation" class=""><a data-target="#profile"
+							role="tab" id="profile-tab" data-toggle="tab"
+							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
+						<li role="presentation" class="dropdown">
+							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
+								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
+							</ul>
+						</li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+							<p>Raw denim you probably haven't heard of them jean shorts
+								Austin. Nesciunt tofu stumptown aliqua, retro synth master
+								cleanse. Mustache cliche tempor, williamsburg carles vegan
+								helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
+								synth. Cosby sweater eu banh mi, qui irure terry richardson ex
+								squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis
+								cardigan american apparel, butcher voluptate nisi qui.</p>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
+							<p>Food truck fixie locavore, accusamus mcsweeney's marfa
+								nulla single-origin coffee squid. Exercitation +1 labore velit,
+								blog sartorial PBR leggings next level wes anderson artisan four
+								loko farm-to-table craft beer twee. Qui photo booth letterpress,
+								commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
+								vinyl cillum PBR. Homo nostrud organic, assumenda labore
+								aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr,
+								vero magna velit sapiente labore stumptown. Vegan fanny pack
+								odio cillum wes anderson 8-bit, sustainable jean shorts beard ut
+								DIY ethical culpa terry richardson biodiesel. Art party
+								scenester stumptown, tumblr butcher vero sint qui sapiente
+								accusamus tattooed echo park.</p>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
+							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before
+								they sold out mcsweeney's organic lomo retro fanny pack lo-fi
+								farm-to-table readymade. Messenger bag gentrify pitchfork
+								tattooed craft beer, iphone skateboard locavore carles etsy
+								salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+								Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
+								mi whatever gluten-free, carles pitchfork biodiesel fixie etsy
+								retro mlkshk vice blog. Scenester cred you probably haven't
+								heard of them, vinyl craft beer blog stumptown. Pitchfork
+								sustainable tofu synth chambray yr.</p>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab">
+							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh
+								etsy art party before they sold out master cleanse gluten-free
+								squid scenester freegan cosby sweater. Fanny pack portland
+								seitan DIY, art party locavore wolf cliche high life echo park
+								Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they
+								sold out farm-to-table VHS viral locavore cosby sweater. Lomo
+								wolf viral, mustache readymade thundercats keffiyeh craft beer
+								marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park
+								vegan.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+				
+				
+				
+				<div class="row content2">
+					<p></p>
+				</div>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -499,118 +650,41 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
+			apiAjax();
 		});
-		
-<<<<<<< HEAD
-		
-		function menuCreate() {
+
+		function apiAjax() {
+			var obj = new Object();
+			obj.contentid = ${param.contentid};
+			obj.contenttypeid = ${param.contenttypeid};
 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/menu/list",
+				url : "http://localhost:8081/tour/api/detail",
 				dataType : 'json',
-				error : function (err) {
+				data : obj,
+				error : function(err) {
 					alert("에러");
 				},
 				success : function(result) {
-					alert("성공");
-=======
- 		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/menu/list",
-			dataType : 'json',
-			error : function (err) {
-				alert("에러");
-			},
-			success : function(result) {
-				alert("성공");
-				
-				$("#start").empty();
-				var html = "";
-				for(var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo == 0) {
-						html += "<li class='dropdown' id="+ data.menuNo +">";
-						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-						html += data.title;
-						html += "	</a>";
-					}
+					console.log(result);
+
+					var data = JSON.parse(result);
+					contentCreate(data);
 				}
-				
-				// 삽입 부분
-					html += "<li class='dropdown' id='mypage' style='display: none;'>";
-					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-					html += "			마이페이지";
-					html += "		</a>";
-					html += "<ul class='dropdown-menu'>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
-					html += "<li class='dropdown-submenu'>";
-					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-					html += "	</ul>";
-					html += "</li>";
-					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-					html += "</ul>";
-					html += "</li>";
->>>>>>> jhs
-					
-					$("#start").empty();
-					var html = "";
-					for(var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo == 0) {
-							html += "<li class='dropdown' id="+ data.menuNo +">";
-							html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-							html += data.title;
-							html += "	</a>";
-						}
-					}
-					
-						html += "<li class='dropdown' id='mypage' style='display: none;'>";
-						html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-						html += "			마이페이지";
-						html += "		</a>";
-						html += "<ul class='dropdown-menu'>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 포스트</a></li>";
-						html += "<li class='dropdown-submenu'>";
-						html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-						html += "	<ul class='dropdown-menu'>";
-						html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-						html += "	</ul>";
-						html += "</li>";
-						html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-						html += "</ul>";
-						html += "</li>";
-						
-					$("#start").html($("#start").html() + html);
-					
-					for (var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo != 0) {
-							if($("#" + data.parentMenuNo).find("ul").length > 0) {
-								$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-							}
-							else{
-								$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-							}
-						}
-					}
-				}
-			});		
+			});
 		}
- 		
+
+		function contentCreate(data) {
+			console.dir(data);
+			var item = data.response.body.items.item;
+			var content = $(".content");
+			var content1 = $(".content1");
+			var content2 = $(".content2");
+			var content1_right = $(".content1-right");
+			content.find("h4").html(item.title);
+			content2.find("p").html(item.overview);
+			content1_right.find("p").html(item.overview);
+		}
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -622,6 +696,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>

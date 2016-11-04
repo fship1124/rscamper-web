@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -49,11 +52,16 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
 
-
+<style type="text/css" media="all">
+	@import "widgEditor/css/main.css";
+	@import "widgEditor/css/widgEditor.css";
+</style>
+<script type="text/javascript" src="widgEditor/scripts/widgEditor.js"></script> 
 
 </head>
 
 <body class="header-fixed header-fixed-space-default">
+
 
 	<div class="wrapper">
 
@@ -120,7 +128,7 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">together</h1>
+				<h1 class="pull-left">여행기</h1>
 				<ul class="pull-right breadcrumb">
 					<li class="active"><a href="http://localhost:8081">Main</a></li>
 				</ul>
@@ -130,18 +138,67 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
 
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+		
+		<div class="container content-md"
+			style="border: 1px solid red; height: 450px">
+			
+			<div>
+			<!--============= Button trigger modal =============-->
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">포스트 작성</button>
+			<br><br>
+				<!--============ Modal ============-->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">새로은 여행기 작성</h4>
+				      </div>
+				      <div class="modal-body">
+
+					  		<div id="ta1" contentEditable="true" style="overflow-x:auto; width:500px; height: 300px; border: solid; 1px; margin: 20px; line-height: 20px; background-image: ; "></div>	
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary">Save</button>
+				      </div>
+				    </div>
+				  </div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+		
+		    <!-- 
+				<div>
+					<button type="button" id="postRegisterBtn" class="btn btn-success">포스트 작성</button>
+				</div> -->
+				
+			
+			<!-- travelog List -->
+			<table class="table" border='1'>
+				<thead>
+					<th>이미지</th>
+					<th>게시판이름</th>
+					<th>제목</th>
+					<th>날짜</th>
+				</thead>	
+				<tbody>
+				</tbody>
+			</table>
+
+			
+		<div class="text-center">
+			<ul class="pagination pagination-lg"></ul>
 		</div>
+			
+		</div>
+		
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
+		
+		
 
 		<!--=== Footer v3 ===-->
 		<div id="footer-v3" class="footer-v3">
@@ -498,22 +555,36 @@
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			menuCreate();
+			travelogList();
 		});
 		
-<<<<<<< HEAD
+		var page;
 		
-		function menuCreate() {
-			$.ajax({
+		
+		function travelogList(e) {
+ 			console.log("in travelogList")
+ 			console.log(e);
+ 			console.dir(e);
+ 			var obj = new Object();
+ 			obj.page = e;
+ 			
+ 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/menu/list",
+				url : "http://localhost:8081/travelog/list",
 				dataType : 'json',
+				data : obj,
 				error : function (err) {
 					alert("에러");
 				},
 				success : function(result) {
-					alert("성공");
-=======
+					console.dir(result);
+					listCreate(result);
+				}
+ 			})
+ 		}
+		
+		
+		
  		$.ajax({
 			type : "GET",
 			url : "http://localhost:8081/menu/list",
@@ -522,7 +593,7 @@
 				alert("에러");
 			},
 			success : function(result) {
-				alert("성공");
+//  				alert("성공");
 				
 				$("#start").empty();
 				var html = "";
@@ -558,59 +629,105 @@
 					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
 					html += "</ul>";
 					html += "</li>";
->>>>>>> jhs
 					
-					$("#start").empty();
-					var html = "";
-					for(var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo == 0) {
-							html += "<li class='dropdown' id="+ data.menuNo +">";
-							html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-							html += data.title;
-							html += "	</a>";
+				$("#start").html($("#start").html() + html);
+				
+				for (var i = 0; i < result.length; i++) {
+					var data = result[i];
+					if(data.parentMenuNo != 0) {
+						if($("#" + data.parentMenuNo).find("ul").length > 0) {
+							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
 						}
-					}
-					
-						html += "<li class='dropdown' id='mypage' style='display: none;'>";
-						html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-						html += "			마이페이지";
-						html += "		</a>";
-						html += "<ul class='dropdown-menu'>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-						html += "		<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 포스트</a></li>";
-						html += "<li class='dropdown-submenu'>";
-						html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-						html += "	<ul class='dropdown-menu'>";
-						html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-						html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-						html += "	</ul>";
-						html += "</li>";
-						html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-						html += "</ul>";
-						html += "</li>";
-						
-					$("#start").html($("#start").html() + html);
-					
-					for (var i = 0; i < result.length; i++) {
-						var data = result[i];
-						if(data.parentMenuNo != 0) {
-							if($("#" + data.parentMenuNo).find("ul").length > 0) {
-								$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-							}
-							else{
-								$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-							}
+						else{
+							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
 						}
 					}
 				}
-			});		
+			}
+		});	
+ 		
+ 		function listCreate(data) {
+ 			console.dir(data);
+ 			var p = data.page;
+ 			var pageMaker = data.pageMaker;
+ 			page = pageMaker.endPage;
+ 			var list = $("tbody");
+ 			var html = "";
+ 			for (var i = 0; i < p.length; i++) {
+ 				var v = p[i];
+ 				var d = new Date(v.regDate);
+ 				var mon = d.getMonth() + 1;
+ 				html += "<tr>";
+ 				html += "<td>" + "" + "</td>";
+ 				html += "<td>" + v.categoryName + "</td>";
+ 				html += "<td>";
+ 				html += "<a href='http://localhost:8081/travelog/" + v.boardNo + "'>";
+ 				html += v.title + "</a>";
+ 				html += "<td>" + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString() + "</td>";
+ 				html += "</tr>";
+ 			}
+ 			
+ 			list.html(html);
+ 			html = "";
+ 			
+ 			var pageination = $(".pagination");
+ 			console.dir(pageMaker.prev);
+ 			if (pageMaker.prev) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Previous'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('P') >&laquo;</span>";
+				html += "<span class='sr-only'>Previous</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+
+			for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
+				html += "<li class='page-item'>";
+				html += "<a href='#' onclick= togetherList(this.text)>" + i + "</a>";
+				html += "</li>";
+			}
+
+			if (pageMaker.next && pageMaker.endPage > 0) {
+				html += "<li class='page-item'>";
+				html += "<a class='page-link' href='#' aria-label='Next'>";
+				html += "<span aria-hidden='true' onclick=previousNextFn('N') >&raquo;</span>";
+				html += "<span class='sr-only'>Next</span>";
+				html += "</a>";
+				html += "</li>";
+			}
+			pageination.html(html);
 		}
  		
+ 		
+ 		
+ 		
+
+		function prependZero(num, len) {
+			while (num.toString().length < len) {
+				num = "0" + num;
+			}
+			return num;
+		}
+
+		function previousNextFn(val) {
+			console.log(val);
+			console.log("page : " + page);
+
+			if (val == 'N') {
+				page = page + 1;
+			} else {
+				page = page - 19;
+			}
+
+			togetherList(page);
+		}
+ 		
+/*====  	Modal     ====*/
+		$('#myModal').on('shown.bs.modal', function () {
+			  $('#myInput').focus()
+			})
+			
+		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
