@@ -519,6 +519,7 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
+	
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -527,6 +528,9 @@
 			ParallaxSlider.initParallaxSlider();
 			postList();
 		});
+		
+		var user = firebase.auth().currentUser;
+		console.log("로그인정보" + user);
 		
 		var page;
 		
@@ -537,8 +541,6 @@
  			console.dir(e);
  			var obj = new Object();
  			obj.page = e;
- 			var user = firebase.auth().currentUser;
- 			console.log("로그인정보" + user);
 		
  			$.ajax({
 				type : "GET",
@@ -699,15 +701,12 @@
 		}
  		
 		
-		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>
     <![endif]-->
-
-
 
 </body>
 </html>
