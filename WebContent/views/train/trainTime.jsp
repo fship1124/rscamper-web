@@ -492,8 +492,10 @@
 	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<!-- xdomainajax 추가 -->
 	<script type="text/javascript" src="../../assets/js/jquery.xdomainajax.js"></script>
 	<script type="text/javascript" src="../../assets/js/sendRequest-ajax.js"></script>
+	<!--  xml2json추가 -->
 	<script type="text/javascript" src="../../assets/js/xml2json.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
@@ -504,6 +506,7 @@
 			menuCreate();
 		});
 	
+		
  		
 //  	  	 $.ajax({
 //  			url : "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList",
@@ -512,30 +515,40 @@
 //  			type : "GET",
 //  			success : function(data) {
 //  				console.log(data);
- 				
 //  			}
  			
 //  		});  
- 		
-//  	 	var xhr = new XMLHttpRequest();
-//  		var url = 'http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList'; /*URL*/
-//  		var queryParams = '?' + encodeURIComponent('ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D'); /*Service Key*/
-//  		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999');  // 검색건수
-//  		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');  // 페이지 번호
-//  		xhr.open('GET', url + queryParams);
-//  		xhr.onreadystatechange = function () {
-//  		    if (this.readyState == 4) {
-//  		        alert('Status: '+this.status+' Headers: '+JSON.stringify(this.getAllResponseHeaders())+' Body: '+this.responseText);
-//  		    }
-//  		};
 
-//  		xhr.send(''); 	 
- 		
- 		 
- 		
- 		
- 	
-		
+
+//		var xmlSource = "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList&ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D&numOfRows=999&pageNo=1";
+
+		// build the yql query. Could be just a string - I think join makes easier reading
+//  		var yqlURL = [
+// 				"http://query.yahooapis.com/v1/public/yql",
+// 				"?q="
+// 						+ encodeURIComponent("select * from xml where url='"
+// 								+ xmlSource + "'"), "&format=xml&callback=?" ]
+// 				.join("");
+
+// 		// Now do the AJAX heavy lifting        
+// 		$.getJSON(yqlURL, function(data) {
+// 			xmlContent = $(data.results[0]);
+// 			console.log(data);
+// 		}); 
+
+		//  	 	var xhr = new XMLHttpRequest();
+		//  		var url = 'http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList'; /*URL*/
+		//  		var queryParams = '?' + encodeURIComponent('ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D'); /*Service Key*/
+		//  		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999');  // 검색건수
+		//  		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');  // 페이지 번호
+		//  		xhr.open('GET', url + queryParams);
+		//  		xhr.onreadystatechange = function () {
+		//  		    if (this.readyState == 4) {
+		//  		        alert('Status: '+this.status+' Headers: '+JSON.stringify(this.getAllResponseHeaders())+' Body: '+this.responseText);
+		//  		    }
+		//  		};
+
+		//  		xhr.send('');
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
