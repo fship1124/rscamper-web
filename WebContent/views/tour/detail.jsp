@@ -32,29 +32,22 @@
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
 <link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
-
-
-
+<link rel="stylesheet" href="../../resources/css/content.css">
+<link rel="stylesheet" href="../../resources/css/bxslider.css">
 </head>
 
 <body class="header-fixed header-fixed-space-default">
-
 	<div class="wrapper">
 
 		<!--=== Header ===-->
@@ -140,11 +133,12 @@
 							style="visibility: visible; opacity: 1; margin: 0px;">
 							<div class="ms-container">
 								<div class="ms-inner-controls-cont" style="max-width: 550px;">
-									<div class="ms-view ms-fade-view ms-grab-cursor" style="width: 550px; height: 550px;">
+									<div class="ms-view ms-fade-view ms-grab-cursor"
+										style="width: 550px; height: 550px;">
 										<div class="ms-slide-container">
 											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
 												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
-													<img class="ms-brd"	src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image2_1.jpg" alt="lorem ipsum dolor sit" style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+													<img class="ms-brd" src="" alt="lorem ipsum dolor sit" style="width: 550px; height: 550px; margin-left: 0px;">
 												</div>
 											</div>
 										</div>
@@ -152,107 +146,20 @@
 								</div>
 							</div>
 
-							<div class="bx-wrapper" style="max-width: 348px;">
-								<div class="bx-viewport"
-									style="width: 100%; overflow: hidden; position: relative; height: 58px;">
-									<ul class="bxslider" style="width: 915%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
-
-										<li class="on" style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/73/2366973_image2_1.JPG');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/73/2366973_image2_1.JPG"
-													alt="포천 허브아일랜드1"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/51/2044151_image2_1.png');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/51/2044151_image2_1.png"
-													alt="포천 허브아일랜드2"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/16/2363316_image2_1.JPG');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/16/2363316_image2_1.JPG"
-													alt="포천 허브아일랜드3"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/70/2366970_image2_1.JPG');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/70/2366970_image2_1.JPG"
-													alt="포천 허브아일랜드4"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/71/2366971_image2_1.jpg');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/71/2366971_image2_1.jpg"
-													alt="포천 허브아일랜드5"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/74/2366974_image2_1.jpg');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/74/2366974_image2_1.jpg"
-													alt="포천 허브아일랜드6"></span></a></li>
-
-										<li	style="float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;"><a
-											href="/search/searchDetail.do"
-											onclick="javascript:imgClick(this, 'http://tong.visitkorea.or.kr/cms/resource/75/2366975_image2_1.jpg');return false;"><span><img
-													src="http://tong.visitkorea.or.kr/cms/resource/75/2366975_image2_1.jpg"
-													alt="포천 허브아일랜드7"></span></a></li>
-
-									</ul>
+							<div class="image_container" style="margin-top: 20px;  width: 550px; height: 130px;">
+								<div style="margin: 0 auto; width: 545px; height: 130px;">
+								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
+								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
+									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative; border: 1px solid black;"></div>
 								</div>
-								<div class="bx-controls bx-has-pager bx-has-controls-direction">
-									<div class="bx-pager bx-default-pager">
-										<div class="bx-pager-item">
-											<a href="" data-slide-index="0" class="bx-pager-link active">1</a>
-										</div>
-										<div class="bx-pager-item">
-											<a href="" data-slide-index="1" class="bx-pager-link">2</a>
-										</div>
-									</div>
-									<div class="bx-controls-direction">
-										<a class="bx-prev" href="">Prev</a><a class="bx-next" href="">Next</a>
-									</div>
+								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
 								</div>
 							</div>
 
-
-
-
-							<!-- 							<div class="ms-thumb-list ms-dir-h ms-align-bottom" -->
-<!-- 								style="margin-top: 5px; position: relative; height: 170px;"> -->
-<!-- 								<div class="ms-thumbs-cont" -->
-<!-- 									style="width: 555px; transform: translateX(0px) translateZ(0px);"> -->
-<!-- 									<div class="ms-thumb-frame ms-thumb-frame-selected" -->
-<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
-<!-- 										<img class="ms-thumb" -->
-<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/99/195999_image3_1.jpg" -->
-<!-- 											alt="thumb"> -->
-<!-- 										<div class="ms-thumb-ol"></div> -->
-<!-- 									</div> -->
-<!-- 									<div class="ms-thumb-frame" -->
-<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
-<!-- 										<img class="ms-thumb" -->
-<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image3_1.jpg" -->
-<!-- 											alt="thumb"> -->
-<!-- 										<div class="ms-thumb-ol"></div> -->
-<!-- 									</div> -->
-<!-- 									<div class="ms-thumb-frame" -->
-<!-- 										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;"> -->
-<!-- 										<img class="ms-thumb" -->
-<!-- 											src="http://tong.visitkorea.or.kr/cms/resource/98/195998_image3_1.jpg" -->
-<!-- 											alt="thumb"> -->
-<!-- 										<div class="ms-thumb-ol"></div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-							
-							
-							
-							
+							<div class="bx-controls bx-has-pager bx-has-controls-direction">
+							</div>
 						</div>
-						<!-- End Master Slider -->
-						</div>
+					</div>
 					</div>
 
 				<div class="col-md-6 content1">
@@ -291,8 +198,35 @@
 			</div>
 				
 				<div class="row content2">
-					<p></p>
+<!-- 					<div style="margin: 0 auto; width: 1000px; height: 600px; border: 1px solid black"> -->
+<!-- 						<h4></h4> -->
+<!-- 						<div class="panel-collapse collapse in" id="collapse-One"> -->
+<!-- 							<div class="panel-body"> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+
+				<div class="news-v3-in">
+					<ul class="list-inline posted-info">
+						<li>By Luke Etheridge</li>
+						<li>In <a href="#">Design</a></li>
+						<li>Posted January 24, 2015</li>
+					</ul>
+					<h2>
+					</h2>
+					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
+						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
+						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
+						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
+						Nullam non metus in mi rhoncus efficitur...</p>
+					<ul class="post-shares">
+						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
+						</a></li>
+						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
+						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
+					</ul>
 				</div>
+			</div>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -619,22 +553,16 @@
 	<!--=== End Style Switcher ===-->
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
 	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
@@ -654,7 +582,6 @@
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
 			apiAjax();
-// 			apiAjax2();
 		});
 
 		
@@ -676,7 +603,6 @@
 					
  					var data = JSON.parse(result);
 					console.dir(data);
-	
 					contentCreate(data);
 				}
 			});
@@ -727,58 +653,70 @@
 			html += "<li>" + item3.infoname + "</li>";
 			html += "<li>" + item3.infotext + "</li>";
 			tab4.html(html);
+			content2.find("h2").html(item1.title);
+			content2.find("p").html(item1.overview);
+			content2.find(".panel-body").html(item1.overview);
 			
+			// 이미지 동적 생성
 			imageProcess(item4);
 			
-			content2.find("p").html(item1.overview);
 		}
 		
+		var endpage = 0;
 		
 		function imageProcess(item) {
-			alert(item.length);
-			
-			var imgTag = $(".ms-brd");
-			var slider = $(".bxslider");
-			var controls = $(".bx-controls");
-			
+			var mainImg = $(".ms-brd");
+			var panel = $(".bottom_slider_panel");
 			var html = "";
+			
+			var widthPx = item.length * 120;
+			panel.css("width", widthPx + "px");
+			
 			for (var i = 0; i < item.length; i++) {
-				var m = item[i];				
+				var m = item[i];
+				if (i == 0) { mainImg.attr("src", m.originimgurl); }
 				
-				if (i == 0) {
-					imgTag.attr("src", m.originimgurl);
-					html += "<li class='on' style='float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;'>";
-					html += "<a href='#' onclick='javascript:imgClick(this, '" + m.originimgurl + "');return false;'>";
-					html += "<span><img src='" + m.originimgurl + "'></span></a></li>";						
-				} else {
-					html += "<li style='float: left; list-style: none; position: relative; width: 81px; margin-right: 8px;'>";
-					html += "<a href='#' onclick='javascript:imgClick(this, '" + m.originimgurl + "');return false;'>";
-					html += "<span><img src='" + m.originimgurl + "'></span></a></li>";					
-				}
+				html += "<img src='" + m.originimgurl + "' class='bottom_slider_image' onclick='imageFnc(this)' style='width: 100px; height: 75px; float: left; margin: 5px 5px'>";
 			}
-			slider.html(html);
 			
+			var portion = parseInt(item.length / 4);
 			
-			var html = "";
-			html += "<div class='bx-controls bx-has-pager bx-has-controls-direction'><div class='bx-pager bx-default-pager'><div class='bx-pager-item'>";
-			html += "<a href='' data-slide-index='0' class='bx-pager-link active'>1</a></div><div class='bx-pager-item'>";
-			html += "<a href='' data-slide-index='1' class='bx-pager-link'>2</a></div></div><div class='bx-controls-direction'><a class='bx-prev' href=''>Prev</a><a class='bx-next' href=''>Next</a></div></div></div>";
+			if (item.length % 4 != 0) {
+				portion += 1;
+			}
 			
-			controls.html(html);
+			endpage = portion;
+			panel.html(html);
 		}
 		
 		
-		//이미지 클릭 이벤트
-		function imgClick(obj, orgImg){	
-			alert("imgClick");
-			var $mainImg = $(obj).parents('.mainImg').children('p').children('img');		
-			$(obj).parent('li').addClass('on').siblings().removeClass('on');		
-			$mainImg.attr('src',orgImg);
-			var orgalt=$(obj).children().children('img').attr('alt');
-			var big="_큰이미지";
-			$mainImg.attr('alt',orgalt+big);
-		}	
-
+		var locationVal = 1;
+		
+		function bottomMove(flag) {
+			var w = 0;
+			if (flag == 1) {
+				if (locationVal == 1) {
+					locationVal = 1;
+				} else {
+					locationVal -= 1;
+				}
+				w = - (locationVal - 1) * 430; 
+			} else {
+				if (locationVal == endpage) {
+					locationVal = endpage;
+				} else {
+					locationVal += 1;
+				}
+				w = - (locationVal - 1) * 430; 
+			}
+			
+			$('.bottom_slider_panel').animate({ left: w}, 'slow');
+		}
+		
+		function imageFnc(e) {
+			 $(".ms-brd").attr("src", e.src); 
+		}
+		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
