@@ -108,7 +108,7 @@
 										class="fa fa-envelope-square"></i> 쪽지</a></li>
 								<li><a href="javascript:void(0);"><i
 										class="fa fa-calendar"></i> 여행일정</a></li>
-								<li><a href='http://localhost:8081/post/home;'><i
+								<li><a href='http://192.168.0.173:8081/post/home;'><i
 										class="fa fa-pencil"></i> 포스트</a></li>
 								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
 										class="fa fa-cog"></i> 회원정보변경</a>
@@ -506,7 +506,7 @@
 		
  		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/menu/list",
+			url : "http://192.168.0.173:8081/menu/list",
 			dataType : 'json',
 			error : function (err) {
 				alert("에러");
@@ -535,11 +535,11 @@
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
 					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
+					html += "		<li><a href='http://192.168.0.173:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
 					html += "<li class='dropdown-submenu'>";
 					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
 					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='http://localhost/rscamper-web/views/user/userModify.jsp'><i class='fa fa-user'></i> 프로필수정</a></li>";
+					html += "		<li><a href='http://192.168.0.173/rscamper-web/views/user/userModify.jsp'><i class='fa fa-user'></i> 프로필수정</a></li>";
 					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
 					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
 					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
@@ -571,7 +571,7 @@
 		
 		function commentList() {
 			$.ajax({
-				url : 'http://localhost:8081/main/all',
+				url : 'http://192.168.0.173:8081/main/all',
 				method : 'GET',
 				dataType : 'json',
 				success : function(result) {
@@ -586,7 +586,7 @@
 			var comment = $("#inputComment").val();
 
 			$.ajax({
-				url : 'http://localhost:8081/main/' + uid + '/' + comment,
+				url : 'http://192.168.0.173:8081/main/' + uid + '/' + comment,
 				method : 'PUT',
 				dataType : 'json',
 				success : function(result) {
