@@ -129,9 +129,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">여행기</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">travelog</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -143,7 +143,7 @@
 		<!--=== Content ===-->
 		
 		<div class="container content-md"
-			style="border: 1px solid red; height: 520px">
+			style="border: 1px solid red; height: 700px">
 			
 			<div>
 			<!--============= Button trigger modal =============-->
@@ -163,7 +163,7 @@
 				      
 				      <form action="http://localhost:8081/travelog/register?categoryNo=1;" method="post" enctype="multipart/form-data" >
 					      <div class="modal-body">
-    							<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
+    							<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:850px; height:412px;"></textarea>
 					      </div>
 					      
 					      <div class="modal-footer">
@@ -652,7 +652,7 @@
 
 			for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
 				html += "<li class='page-item'>";
-				html += "<a href='#' onclick= togetherList(this.text)>" + i + "</a>";
+				html += "<a href='#' onclick= travelogList(this.text)>" + i + "</a>";
 				html += "</li>";
 			}
 
