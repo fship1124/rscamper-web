@@ -137,15 +137,10 @@
 
 		<!--=== Content ===-->
 		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
+			style="border: 1px solid red; ">
 			<!-- Post List -->
 			<div id="post-list" style="border: 1px solid red; height: 280px; overflow: auto;">
-				
-			</div>
-			
-			<!--
-			<!-- post List -->
-			<table calss="table" border='1'>
+			<table calss="table" border='1' style="width: 80%;" >
 				<thead>
 					<th>boardNo</th>
 					<th>categoryName</th>
@@ -156,6 +151,9 @@
 				
 				<tbody>
 				</tbody>
+				
+			</div>
+			
 			</table>
 			
 			<div class="text-center">
@@ -519,17 +517,18 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
+			menuCreate();
 			postList();
 		});
 		
 		var page;
-		
 		
 		function postList(e) {
  			console.log("in postList")
@@ -537,14 +536,15 @@
  			console.dir(e);
  			var obj = new Object();
  			obj.page = e;
- 			var user = firebase.auth().currentUser;
- 			console.log("로그인정보" + user);
+	// 		console.log(sessionStorage.getItem('uid'));
+			var uid = sessionStorage.getItem('uid');
+			console.log("uid:" + uid);
 		
  			$.ajax({
 				type : "GET",
 				url : "http://localhost:8081/post/list",
 				dataType : 'json',
-				data : {obj:"obj", user:"user"}, 
+				data : {"obj":obj, "uid":uid}, 
 				error : function (err) {
 					alert("에러");
 				},
@@ -555,67 +555,6 @@
  			})
  		}
 		
- 			
- 		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/menu/list",
-			dataType : 'json',
-			error : function (err) {
-				alert("에러");
-			},
-			success : function(result) {
-// 				alert("성공");
-				
-				$("#start").empty();
-				var html = "";
-				for(var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo == 0) {
-						html += "<li class='dropdown' id="+ data.menuNo +">";
-						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-						html += data.title;
-						html += "	</a>";
-					}
-				}
-				
-				// 삽입 부분
-					html += "<li class='dropdown' id='mypage' style='display: none;'>";
-					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-					html += "			마이페이지";
-					html += "		</a>";
-					html += "<ul class='dropdown-menu'>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
-					html += "<li class='dropdown-submenu'>";
-					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-					html += "	</ul>";
-					html += "</li>";
-					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-					html += "</ul>";
-					html += "</li>";
-					
-				$("#start").html($("#start").html() + html);
-				
-				for (var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo != 0) {
-						if($("#" + data.parentMenuNo).find("ul").length > 0) {
-							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-						}
-						else{
-							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-						}
-					}
-				}
-			}
-		});	
  		
  		function listCreate(data) {
  			console.dir(data);
@@ -675,8 +614,6 @@
 		}
  		
  		
- 		
- 		
 
 		function prependZero(num, len) {
 			while (num.toString().length < len) {
@@ -706,6 +643,7 @@
     <script src="assets/plugins/html5shiv.js"></script>
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>
     <![endif]-->
+
 
 
 
