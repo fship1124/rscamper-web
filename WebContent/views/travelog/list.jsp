@@ -71,7 +71,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+					src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
