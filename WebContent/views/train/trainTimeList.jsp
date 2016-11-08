@@ -49,8 +49,10 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
 
-
-
+<!-- modal 버튼 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="../../assets/js/jquery-3.1.1.min.js"></script>
 </head>
 
 <body class="header-fixed header-fixed-space-default">
@@ -133,13 +135,49 @@
 		
 
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+	<div class="container content-md">
+		
+					<!--  기차정보 여기부터 -->
+		<div style="overflow: hidden; float: left; width: 900px; height: 300px; padding: 17px 20px 0; border: 4px solid #0095cd; background: #ecf1f4">
+				<input type="radio" name="trainRadio" value="01"/>새마을
+				<input type="radio" name="trainRadio" value="02"/>무궁화
+				<input type="radio" name="trainRadio" value="03"/>통근열차
+				<input type="radio" name="trainRadio" value="04"/>누리로
+				<input type="radio" name="trainRadio" value="09"/>ITX-청춘
+				<input type="radio" name="trainRadio" value="08"/>ITX-새마을
+		<br>
+		 출발역:<input type="text" id="startInput" name="start"><button class="btn btn-default" id="startButton" onclick="startBtn();">조회</button><br>
+		 도착역:<input type="text" id="arriveInput" name="arrive"><button class="btn btn-default" id="arriveButton" onclick="arriveBtn();">조회</button><br>
+			   <input type="date" name="calender">
+			   <input type="button" value="조회하기" onclick="joinBtn();" />
+			
+		</div>					
+	</div>
+
+	<table>
+		<tbody></tbody>
+	</table>
+
+		<!-- Train Modal(여기모달부분) -->
+		
+		<div class="modal fade" id="trainModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">역선택</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
 		</div>
+
+
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
 
@@ -207,6 +245,8 @@
 					</div>
 				</div>
 			</div>
+
+
 			<!--/footer-->
 
 			<div class="copyright">
@@ -433,7 +473,9 @@
 	<script type="text/javascript" src="../../assets/js/sendRequest-ajax.js"></script>
 	<!--  xml2json추가 -->
 	<script type="text/javascript" src="../../assets/js/xml2json.js"></script>
-	<script type="text/javascript">
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
@@ -441,51 +483,224 @@
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
 		});
-	
 		
- 		
-//  	  	 $.ajax({
-//  			url : "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList",
-//  			data : {"ServiceKey": "XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D", "numOfRows":"999", "pageNo":"1"},		
-//  			dataType : "xml",
-//  			type : "GET",
-//  			success : function(data) {
-//  				console.log(data);
-//  			}
- 			
-//  		});  
 
+		
+ 		$.ajax({
+			type : "GET",
+			url : "http://localhost:8081/menu/list",
+			dataType : 'json',
+			error : function (err) {
+				alert("에러");
+			},
+			success : function(result) {
+// 				alert("성공");
+				
+				$("#start").empty();
+				var html = "";
+				for(var i = 0; i < result.length; i++) {
+					var data = result[i];
+					if(data.parentMenuNo == 0) {
+						html += "<li class='dropdown' id="+ data.menuNo +">";
+						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
+						html += data.title;
+						html += "	</a>";
+					}
+				}
+				
+				// 삽입 부분
+					html += "<li class='dropdown' id='mypage' style='display: none;'>";
+					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
+					html += "			마이페이지";
+					html += "		</a>";
+					html += "<ul class='dropdown-menu'>";
+					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
+					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
+					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
+					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
+					html += "<li class='dropdown-submenu'>";
+					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
+					html += "	<ul class='dropdown-menu'>";
+					html += "		<li><a href='http://localhost/rscamper-web/views/user/userModify.jsp'><i class='fa fa-user'></i> 프로필수정</a></li>";
+					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
+					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
+					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
+					html += "	</ul>";
+					html += "</li>";
+					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
+					html += "</ul>";
+					html += "</li>";
+					
+				$("#start").html($("#start").html() + html);
+				
+				for (var i = 0; i < result.length; i++) {
+					var data = result[i];
+					console.log(data.url);
+					if(data.parentMenuNo != 0) {
+						if($("#" + data.parentMenuNo).find("ul").length > 0) {
+							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='"+ data.URL +"'>"+ data.title +"</a></li>");
+						}
+						else{
+							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href="+ data.URL +">"+ data.title +"</a></li></ul>");
+						}
+					}
+				}
+			}
+		});			
+		
 
-//		var xmlSource = "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList&ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D&numOfRows=999&pageNo=1";
+		
 
-		// build the yql query. Could be just a string - I think join makes easier reading
-//  		var yqlURL = [
-// 				"http://query.yahooapis.com/v1/public/yql",
-// 				"?q="
-// 						+ encodeURIComponent("select * from xml where url='"
-// 								+ xmlSource + "'"), "&format=xml&callback=?" ]
-// 				.join("");
+	function joinBtn() {
+		var trainGradeCodeIsTrue = false;
+		var trainGradeCode = document.getElementsByName('trainRadio');
+		var trainGradeCodeVal = "00";
+		for (var i = 0; i < trainGradeCode.length; i++) {
+			var t = trainGradeCode[i];
 
-// 		// Now do the AJAX heavy lifting        
-// 		$.getJSON(yqlURL, function(data) {
-// 			xmlContent = $(data.results[0]);
-// 			console.log(data);
-// 		}); 
+			if (t.checked == true) {
+				console.log("ttttt");
+				console.dir(t);
+				trainGradeCodeIsTrue = true;
+				alert(t.defaultValue);
+				trainGradeCodeVal = t.defaultValue; 
+			}
+		}
 
-		//  	 	var xhr = new XMLHttpRequest();
-		//  		var url = 'http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList'; /*URL*/
-		//  		var queryParams = '?' + encodeURIComponent('ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D'); /*Service Key*/
-		//  		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999');  // 검색건수
-		//  		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');  // 페이지 번호
-		//  		xhr.open('GET', url + queryParams);
-		//  		xhr.onreadystatechange = function () {
-		//  		    if (this.readyState == 4) {
-		//  		        alert('Status: '+this.status+' Headers: '+JSON.stringify(this.getAllResponseHeaders())+' Body: '+this.responseText);
-		//  		    }
-		//  		};
+		if (trainGradeCodeIsTrue == true) {
 
-		//  		xhr.send('');
-	</script>
+			var depPlaceId = $("input[name=start]").val();
+			var arrPlaceId = $("input[name=arrive]").val();
+			var depPlandTime = $("input[name=calender]").val();
+
+			console.log(trainGradeCode);
+			var obj = new Object();
+			obj.trainGradeCode = trainGradeCodeVal;
+			obj.trainStartId = depPlaceId;
+			obj.trainArriveId = arrPlaceId;
+			obj.regDate = depPlandTime;
+			console.log(obj);
+			console.dir(obj);
+			$.ajax({
+				url : "http://localhost:8081/trainTime/time",
+				type : "GET",
+				dataType : 'json',
+				data : obj,
+				err : function() {
+					console.log(err);
+				},
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						//console.log(data);
+						var result = data[i];
+						
+					}
+				}
+			});
+		} else {
+			alert("체크 요망");
+		}
+	}
+
+	// 역별조회 ajax
+
+	$
+			.ajax({
+				url : "http://localhost:8081/trainTime/trainTimeList",
+				dataType : "json",
+				type : "GET",
+				success : function(result) {
+					var html = "";
+
+					// 주요역
+					html += "<table>";
+					for (var i = 0; i < result.length; i++) {
+						var data = result[i];
+						//					console.log(data);
+						if (data.stationVital > 0) {
+							if (i % 5 == 0) {
+								html += "<tr>";
+								//							console.log(data.stationTitle);
+							}
+							html += "<td><a href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle + "</a></td>";
+
+							//							html += "<td>" + data.stationTitle + "</td>";
+							if (i % 5 == 4) {
+								html += "</tr>";
+							}
+						}
+					}
+					html += "</table>";
+					$(".modal-body").html(html);
+
+					html = "<div id='sort'>";
+					html = "<ul style='overflow: hidden; height:25px; padding:8px 0 0 5px; margin-bottom: 20px; border: 1px solid tomato; list-style: none;'>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>가</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>나</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>다</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>라</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>마</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>바</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>사</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>아</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>자</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>차</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>카</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>타</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>파</a></li>";
+					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>하</a></li>";
+					html += "</ul>";
+					html += "</div>";
+
+					// 철도역
+					html += "<table>";
+					for (var j = 0; j < result.length; j++) {
+						var data = result[j];
+						if (data.stationVital == 0) {
+							//						console.log(data.stationTitle); 들어왓고
+							if ((j - 1) % 5 == 0) {
+								html += "<tr>";
+							}
+							html += "<td><a href='#1' onClick='stationFn(this)'>"
+									+ data.stationTitle + "</a></td>";
+
+							if (j % 5 == 0) {
+								html += "</tr>";
+							}
+						}
+					}
+					html += "</table>";
+					$(".modal-footer").html(html);
+				},
+				err : function() {
+					alert("오류");
+				}
+			});
+
+	//    ------ input창에 text넣기 -------
+
+	var result = true;
+
+	function startBtn() {
+		$('#trainModal').modal('show');
+	};
+	function arriveBtn() {
+		$('#trainModal').modal('show');
+		result = false;
+	};
+
+	function stationFn(e) {
+		//			alert(e.text);
+		if (result) {
+			$('#startInput').val(e.text);
+		} else {
+			$('#arriveInput').val(e.text);
+		}
+		$("#trainModal").modal('hide');
+
+	}
+</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
