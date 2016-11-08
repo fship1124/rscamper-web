@@ -1,7 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -29,12 +26,14 @@
 <link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="../../assets/css/headers/header-default.css">
 <link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
 	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -65,7 +64,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+					src="../../assets/img/logo1.png" alt="Logo" style="width:50px; height:50px;">
 				</a>
 				<!-- End Logo -->
 
@@ -76,9 +75,9 @@
 						<li class="topbar-devider"></li>
 						<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
 							href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-						<li id="logoutBtn" style="display: none;"><a
-							href="javascript:void(0);" onclick="signout();"><i
-								class="fa fa-unlock-alt"></i> Logout</a></li>
+						<li id="logoutBtn" style="display: none;">
+						<a href="javascript:void(0);" onclick="signout();">
+						<i class="fa fa-unlock-alt"></i> Logout</a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->
@@ -123,9 +122,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">여행기</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">benefit</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -133,45 +132,74 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
 
 		<!--=== Content ===-->
-		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
-			<!-- travelog register -->
-			<div id="travelog-register" style="border: 1px solid red; height: 280px; overflow: auto;">
-			
-				<!-- general form elements -->
-				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">REGISTER BOARD</h3>
-					</div>
-				<form role="form" method="post">
-					<div class="box-body">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
-							<input type="text"
-								name='title' class="form-control" placeholder="Enter Title">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3"
-								placeholder="Enter ..."></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
-							<input type="text"
-								name="writer" class="form-control" placeholder="Enter Writer">
-						</div>
-					</div>
-					
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				
+		<div class="container content-md">
+			<div class="row">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a data-target="#home"
+						id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+						aria-expanded="true">전체 지역</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">서울</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">강원</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">충북</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">충남</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">전북</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">전남</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">광주</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">경북</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">대구</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">부산</a></li>
+				</ul>
 			</div>
+			<div class="row">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a data-target="#home"
+						id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+						aria-expanded="true">전체 정보</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">숙박 정보</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">맛집 정보</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">관광 정보</a></li>
+					<li role="presentation" class=""><a data-target="#profile"
+						role="tab" id="profile-tab" data-toggle="tab"
+						aria-controls="profile" aria-expanded="false">기타 정보</a></li>
+				</ul>
+			</div>
+
 			
 			
+			
+			<div class="title-v1" id="list"></div>
+			
+			<div class="text-center">
+			<ul class="pagination pagination-lg"></ul>
+		</div>
 			
 		</div>
 		<!--=== End Content ===-->
@@ -388,9 +416,9 @@
 					</p>
 
 					<p class="fieldset">
-						<input type="checkbox" id="accept-terms"> <label
-							for="accept-terms"> 본 사이트의 약관에 동의합니다. <a
-							href="page_terms.html">약관보기</a></label>
+						<input type="checkbox" id="accept-terms"> 
+						<label for="accept-terms"> 본 사이트의 약관에 동의합니다. 
+						<a href="page_terms.html">약관보기</a></label>
 					</p>
 
 					<p class="fieldset">
@@ -433,6 +461,7 @@
 	</div>
 	<!-- cd-user-modal -->
 
+
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
 		src="../../assets/plugins/jquery/jquery.min.js"></script>
@@ -442,8 +471,10 @@
 		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript"
 		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript"
@@ -458,106 +489,98 @@
 	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../../assets/js/app.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/parallax-slider.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			travelogList();
-		
+			menuCreate();
+			benefitList();
 		});
 		
- 		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/menu/list",
-			dataType : 'json',
-			error : function (err) {
-				alert("에러");
-			},
-			success : function(result) {
-// 				alert("성공");
-				
-				$("#start").empty();
-				var html = "";
-				for(var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo == 0) {
-						html += "<li class='dropdown' id="+ data.menuNo +">";
-						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-						html += data.title;
-						html += "	</a>";
-					}
-				}
-				
-				// 삽입 부분
-					html += "<li class='dropdown' id='mypage' style='display: none;'>";
-					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-					html += "			마이페이지";
-					html += "		</a>";
-					html += "<ul class='dropdown-menu'>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
-					html += "<li class='dropdown-submenu'>";
-					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-					html += "	</ul>";
-					html += "</li>";
-					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-					html += "</ul>";
-					html += "</li>";
-					
-				$("#start").html($("#start").html() + html);
-				
-				for (var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo != 0) {
-						if($("#" + data.parentMenuNo).find("ul").length > 0) {
-							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-						}
-						else{
-							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-						}
-					}
-				}
-			}
-		});	
- 		
- 		function travelogList() {
-			$.ajax({
-				url : 'http://localhost:8081/travelog/list',
-				method : 'GET',
+		
+		function benefitList(e) {
+			console.log("in benefitList")
+ 			console.log(e);
+ 			console.dir(e);
+ 			
+ 			var obj = new Object();
+ 			obj.page = e;
+ 			
+ 			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/benefit/list",
 				dataType : 'json',
+				data : obj,
+				error : function (err) {
+					alert("에러");
+				},
 				success : function(result) {
-					var tList = $("#travelog-list");
 					console.dir(result);
-					
-					for (var i = 0; i < result.length; i++) {
-						var m = result[i];
-						var html = "";
-						html += "<div style='margin: 10px;'>";
-						html += m.categoryNo;
-						html += "<span style='margin-left: 20px;'>";
-						html += m.title;
-						html += "</span>";
-						html += "</div>"	
-						tList.append(html);
-					}
-					
+					listPrint(result);
 				}
-			});
+ 			})
+		}
+
+		
+		
+		function listPrint(data) {
+			console.log("in listPrint");
+			console.dir(data);
+			
+			var item = data.page;
+			var pageMaker = data.pageMaker;
+ 			page = pageMaker.endPage;
+			console.log("item.length : " + item.length);
+			console.log("page : " + page);
+						
+			var list = $("#list");
+			var html = "";
+			for (var i = 0; i < item.length; i++) {
+				var v = item[i];
+				if (i % 4 == 0) {
+					console.log(i);
+					html += "<ul class='list-unstyled row'>";
+				}
+			
+				html += "<li class='col-sm-3 col-xs-6 md-margin-bottom-30'>";
+				html += "<div class='team-img'>";
+				html += "<a href='#' onclick='goDetail(this)' data-value='" + v.benefitNo + "'>";
+				html += "<img class='img-responsive' src='" + v.imageUrl + "' alt=''  style='width:263px; height:174px'>";
+				html += "</a>";
+				html += "</div>";
+				html += "<dl>";
+				html += "<dt>" + v.title + "</dt>";
+				html += "<dd>";
+				html += "<span>" + v.sapceText + "</span>";
+				html += "</dd>";
+				html += "</li>";
+				html += "</dl>";
+				
+				if (i % 4 == 3) { html += "</ul>";}
+			}
+			
+			list.html(html);
 		}
 		
+		
+		function goDetail(e) {
+			console.log(e.getAttribute("data-value"));
+			
+			var benefitno = e.getAttribute("data-value");
+						
+			var url = "http://localhost:80/rscamper-web/views/benefit/detail.jsp?benefitno=" + benefitno;
+			$(e).attr('href', url);
+		}
 	</script>
+
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
@@ -568,6 +591,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>

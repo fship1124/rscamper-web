@@ -10,6 +10,7 @@
 
 <!-- Meta -->
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -21,8 +22,8 @@
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
@@ -32,29 +33,23 @@
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
 <link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
-
-
-
+<link rel="stylesheet" href="../../resources/css/content.css">
+<link rel="stylesheet" href="../../resources/css/bxslider.css">
+<link rel="stylesheet" href="../../resources/css/common.css">
 </head>
 
 <body class="header-fixed header-fixed-space-default">
-
 	<div class="wrapper">
 
 		<!--=== Header ===-->
@@ -62,7 +57,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> 
-					<img src="../../assets/img/logo1-default.png" alt="Logo">
+					<img src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -143,78 +138,30 @@
 									<div class="ms-view ms-fade-view ms-grab-cursor"
 										style="width: 550px; height: 550px;">
 										<div class="ms-slide-container">
-											<div class="ms-slide ms-sl-selected"
-												style="width: 550px; height: 550px; opacity: 1;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img class="ms-brd"
-														src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image2_1.jpg"
-														alt="lorem ipsum dolor sit"
-														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
-												</div>
-											</div>
-											<div class="ms-slide"
-												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img src="assets/img/blog/29.jpg"
-														alt="lorem ipsum dolor sit"
-														style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
-												</div>
-											</div>
-											<div class="ms-slide"
-												style="width: 550px; height: 550px; opacity: 0; visibility: hidden;">
-
-
-												<div class="ms-slide-bgcont"
-													style="height: 100%; opacity: 1;">
-													<img src="assets/img/blog/30.jpg"
-														alt="lorem ipsum dolor sit"	style="width: 550px; height: 560px; margin-top: -5px; margin-left: 0px;">
+											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
+												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
+													<img class="ms-brd" src="" alt="lorem ipsum dolor sit" style="width: 550px; height: 550px; margin-left: 0px;">
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="ms-nav-next ms-ctrl-hide" style="opacity: 0;">
-									</div>
-									<div class="ms-nav-prev ms-ctrl-hide" style="opacity: 0;">
-									</div>
 								</div>
 							</div>
 
-							<div class="ms-thumb-list ms-dir-h ms-align-bottom"
-								style="margin-top: 5px; position: relative; height: 170px;">
-								<div class="ms-thumbs-cont"
-									style="width: 555px; transform: translateX(0px) translateZ(0px);">
-									<div class="ms-thumb-frame ms-thumb-frame-selected"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/99/195999_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
-									<div class="ms-thumb-frame"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/05/196005_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
-									<div class="ms-thumb-frame"
-										style="float: left; list-style: none; position: relative; width: 180px; height: 170px; margin-right: 5px;">
-										<img class="ms-thumb"
-											src="http://tong.visitkorea.or.kr/cms/resource/98/195998_image3_1.jpg"
-											alt="thumb">
-										<div class="ms-thumb-ol"></div>
-									</div>
+							<div class="image_container" style="margin-top: 20px;  width: 550px; height: 130px;">
+								<div style="margin: 0 auto; width: 545px; height: 130px;">
+								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
+								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
+									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative; border: 1px solid black;"></div>
+								</div>
+								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
 								</div>
 							</div>
+
+							<div class="bx-controls bx-has-pager bx-has-controls-direction">
+							</div>
 						</div>
-						<!-- End Master Slider -->
-						</div>
+					</div>
 					</div>
 
 				<div class="col-md-6 content1">
@@ -226,70 +173,57 @@
 							role="tab" id="profile-tab" data-toggle="tab"
 							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
 						<li role="presentation" class="dropdown">
-							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 <span class="caret"></span>
+							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
+								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li>
-								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">@mdo</a></li>
+								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
+								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
 							</ul>
 						</li>
 					</ul>
+					
+					
+	
+
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							<p>Raw denim you probably haven't heard of them jean shorts
-								Austin. Nesciunt tofu stumptown aliqua, retro synth master
-								cleanse. Mustache cliche tempor, williamsburg carles vegan
-								helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-								synth. Cosby sweater eu banh mi, qui irure terry richardson ex
-								squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis
-								cardigan american apparel, butcher voluptate nisi qui.</p>
+							<div id="content1" class="tabCon" style="display: block;">
+								<ul class="txtCon tab1" tabindex="0"></ul>
+							</div>
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
-							<p>Food truck fixie locavore, accusamus mcsweeney's marfa
-								nulla single-origin coffee squid. Exercitation +1 labore velit,
-								blog sartorial PBR leggings next level wes anderson artisan four
-								loko farm-to-table craft beer twee. Qui photo booth letterpress,
-								commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-								vinyl cillum PBR. Homo nostrud organic, assumenda labore
-								aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr,
-								vero magna velit sapiente labore stumptown. Vegan fanny pack
-								odio cillum wes anderson 8-bit, sustainable jean shorts beard ut
-								DIY ethical culpa terry richardson biodiesel. Art party
-								scenester stumptown, tumblr butcher vero sint qui sapiente
-								accusamus tattooed echo park.</p>
+							<div id="content2" class="tabCon" style="display: block;">
+								<ul class="txtCon tab2" tabindex="0"></ul>
+							</div>
 						</div>
-						<div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab">
-							<p>Etsy mixtape wayfarers, ethical wes anderson tofu before
-								they sold out mcsweeney's organic lomo retro fanny pack lo-fi
-								farm-to-table readymade. Messenger bag gentrify pitchfork
-								tattooed craft beer, iphone skateboard locavore carles etsy
-								salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-								Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-								mi whatever gluten-free, carles pitchfork biodiesel fixie etsy
-								retro mlkshk vice blog. Scenester cred you probably haven't
-								heard of them, vinyl craft beer blog stumptown. Pitchfork
-								sustainable tofu synth chambray yr.</p>
-						</div>
-						<div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab">
-							<p>Trust fund seitan letterpress, keytar raw denim keffiyeh
-								etsy art party before they sold out master cleanse gluten-free
-								squid scenester freegan cosby sweater. Fanny pack portland
-								seitan DIY, art party locavore wolf cliche high life echo park
-								Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they
-								sold out farm-to-table VHS viral locavore cosby sweater. Lomo
-								wolf viral, mustache readymade thundercats keffiyeh craft beer
-								marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park
-								vegan.</p>
-						</div>
+						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
+						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
 					</div>
 				</div>
 			</div>
-				
-				
-				
-				<div class="row content2">
-					<p></p>
+
+			<div class="row content2">
+				<div class="news-v3-in">
+					<ul class="list-inline posted-info">
+						<li>By Luke Etheridge</li>
+						<li>In <a href="#">Design</a></li>
+						<li>Posted January 24, 2015</li>
+					</ul>
+					<h2></h2>
+					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
+						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
+						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
+						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
+						Nullam non metus in mi rhoncus efficitur...</p>
+					<ul class="post-shares">
+						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
+						</a></li>
+						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
+						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
+					</ul>
 				</div>
+			</div>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -550,88 +484,18 @@
 	</div>
 	<!-- cd-user-modal -->
 
-	<!--=== Style Switcher ===-->
-	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
-	<div class="style-switcher animated fadeInRight">
-		<div class="style-swticher-header">
-			<div class="style-switcher-heading">Style Switcher</div>
-			<div class="theme-close">
-				<i class="icon-close"></i>
-			</div>
-		</div>
-
-		<div class="style-swticher-body">
-			<!-- Theme Colors -->
-			<div class="style-switcher-heading">Theme Colors</div>
-			<ul class="list-unstyled">
-				<li class="theme-default theme-active" data-style="default"
-					data-header="light"></li>
-				<li class="theme-blue" data-style="blue" data-header="light"></li>
-				<li class="theme-orange" data-style="orange" data-header="light"></li>
-				<li class="theme-red" data-style="red" data-header="light"></li>
-				<li class="theme-light" data-style="light" data-header="light"></li>
-				<li class="theme-purple last" data-style="purple"
-					data-header="light"></li>
-				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
-				<li class="theme-brown" data-style="brown" data-header="light"></li>
-				<li class="theme-dark-blue" data-style="dark-blue"
-					data-header="light"></li>
-				<li class="theme-light-green" data-style="light-green"
-					data-header="light"></li>
-				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
-				<li class="theme-teal last" data-style="teal" data-header="light"></li>
-			</ul>
-
-			<!-- Theme Skins -->
-			<div class="style-switcher-heading">Theme Skins</div>
-			<div class="row no-col-space margin-bottom-20 skins-section">
-				<div class="col-xs-6">
-					<button data-skins="default"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
-				</div>
-				<div class="col-xs-6">
-					<button data-skins="dark"
-						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
-				</div>
-			</div>
-
-			<hr>
-
-			<!-- Layout Styles -->
-			<div class="style-switcher-heading">Layout Styles</div>
-			<div class="row no-col-space margin-bottom-20">
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
-				</div>
-			</div>
-		</div>
-		<!--/style-switcher-->
-
-	</div>
-	<!--=== End Style Switcher ===-->
-
+	
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
 	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
@@ -653,6 +517,7 @@
 			apiAjax();
 		});
 
+		
 		function apiAjax() {
 			var obj = new Object();
 			obj.contentid = ${param.contentid};
@@ -666,25 +531,125 @@
 					alert("에러");
 				},
 				success : function(result) {
+					console.log("apiAjax");
 					console.log(result);
-
-					var data = JSON.parse(result);
+					
+ 					var data = JSON.parse(result);
+					console.dir(data);
 					contentCreate(data);
 				}
 			});
 		}
-
+		
+		
 		function contentCreate(data) {
-			console.dir(data);
-			var item = data.response.body.items.item;
+			console.log("contentCreate");
+			var data1 = JSON.parse(data[0]);
+			var data2 = JSON.parse(data[1]);
+			var data3 = JSON.parse(data[2]);
+			var data4 = JSON.parse(data[3]);
+			
+			console.dir(data1);
+			console.dir(data2);
+			console.dir(data3);
+			console.dir(data4);
+			
+			var item1 = data1.response.body.items.item;
+			var item2 = data2.response.body.items.item;
+			var item3 = data3.response.body.items.item;
+			var item4 = data4.response.body.items.item;
+			
 			var content = $(".content");
-			var content1 = $(".content1");
+			content.find("h4").html(item1.title);
+			
+			var tab1 = $(".tab1");
+			var tab2 = $(".tab2");
+			var tab3 = $(".tab3");
+			var tab4 = $(".tab4");
 			var content2 = $(".content2");
-			var content1_right = $(".content1-right");
-			content.find("h4").html(item.title);
-			content2.find("p").html(item.overview);
-			content1_right.find("p").html(item.overview);
+			
+			var html = "";
+			html += "<li><strong>우편번호 : </strong>" + item1.zipcode + "</li>";
+			html += "<li><strong>주소 : </strong>" + item1.addr1 + " " + item1.addr2 + "</li>";
+			tab1.html(html);
+			
+			html = "";
+			html += "<li>" + item2.expguide + "</li>";
+			html += "<li>" + item2.infocenter + "</li>";
+			tab2.html(html);
+			
+			html = "";
+			html += "<li>" + item1.homepage + "</li>";
+			tab3.html(html);
+			
+			html = "";
+			html += "<li>" + item3.infoname + "</li>";
+			html += "<li>" + item3.infotext + "</li>";
+			tab4.html(html);
+			content2.find("h2").html(item1.title);
+			content2.find("p").html(item1.overview);
+			content2.find(".panel-body").html(item1.overview);
+			
+			// 이미지 동적 생성
+			imageProcess(item4);
+			
 		}
+		
+		var endpage = 0;
+		
+		function imageProcess(item) {
+			var mainImg = $(".ms-brd");
+			var panel = $(".bottom_slider_panel");
+			var html = "";
+			
+			var widthPx = item.length * 120;
+			panel.css("width", widthPx + "px");
+			
+			for (var i = 0; i < item.length; i++) {
+				var m = item[i];
+				if (i == 0) { mainImg.attr("src", m.originimgurl); }
+				
+				html += "<img src='" + m.originimgurl + "' class='bottom_slider_image' onclick='imageFnc(this)' style='width: 100px; height: 75px; float: left; margin: 5px 5px'>";
+			}
+			
+			var portion = parseInt(item.length / 4);
+			
+			if (item.length % 4 != 0) {
+				portion += 1;
+			}
+			
+			endpage = portion;
+			panel.html(html);
+		}
+		
+		
+		var locationVal = 1;
+		
+		function bottomMove(flag) {
+			var w = 0;
+			if (flag == 1) {
+				if (locationVal == 1) {
+					locationVal = 1;
+				} else {
+					locationVal -= 1;
+				}
+				w = - (locationVal - 1) * 430; 
+			} else {
+				if (locationVal == endpage) {
+					locationVal = endpage;
+				} else {
+					locationVal += 1;
+				}
+				w = - (locationVal - 1) * 430; 
+			}
+			
+			$('.bottom_slider_panel').animate({ left: w}, 'slow');
+		}
+		
+		function imageFnc(e) {
+			 $(".ms-brd").attr("src", e.src); 
+		}
+		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

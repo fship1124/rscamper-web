@@ -51,6 +51,7 @@
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
+<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <style type="text/css" media="all">
 	@import "widgEditor/css/main.css";
@@ -142,28 +143,35 @@
 		<!--=== Content ===-->
 		
 		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
+			style="border: 1px solid red; height: 520px">
 			
 			<div>
 			<!--============= Button trigger modal =============-->
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">포스트 작성</button>
-			<br><br>
+			<div align="right" >
+			<button  type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target=".bs-example-modal-lg"  >포스트 작성</button>
+			</div>
+			<br>
 				<!--============ Modal ============-->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
+				<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-lg">
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">새로은 여행기 작성</h4>
+<!-- 				        <h4 class="modal-title" id="myModalLabel">새로운 여행기 작성</h4> -->
+					                제목 : <input type="text" name="title" style="width:800px; height:30px; " />
 				      </div>
-				      <div class="modal-body">
-
-					  		<div id="ta1" contentEditable="true" style="overflow-x:auto; width:500px; height: 300px; border: solid; 1px; margin: 20px; line-height: 20px; background-image: ; "></div>	
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save</button>
-				      </div>
+				      
+				      <form action="http://localhost:8081/travelog/register?categoryNo=1;" method="post" enctype="multipart/form-data" >
+					      <div class="modal-body">
+    							<textarea name="smarteditor" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;"></textarea>
+					      </div>
+					      
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        <button type="submit" class="btn btn-primary">Save</button>
+					      </div>
+				      </form>
+				      
 				    </div>
 				  </div><!-- /.modal-content -->
 				</div><!-- /.modal-dialog -->
@@ -456,70 +464,6 @@
 	</div>
 	<!-- cd-user-modal -->
 
-	<!--=== Style Switcher ===-->
-	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
-	<div class="style-switcher animated fadeInRight">
-		<div class="style-swticher-header">
-			<div class="style-switcher-heading">Style Switcher</div>
-			<div class="theme-close">
-				<i class="icon-close"></i>
-			</div>
-		</div>
-
-		<div class="style-swticher-body">
-			<!-- Theme Colors -->
-			<div class="style-switcher-heading">Theme Colors</div>
-			<ul class="list-unstyled">
-				<li class="theme-default theme-active" data-style="default"
-					data-header="light"></li>
-				<li class="theme-blue" data-style="blue" data-header="light"></li>
-				<li class="theme-orange" data-style="orange" data-header="light"></li>
-				<li class="theme-red" data-style="red" data-header="light"></li>
-				<li class="theme-light" data-style="light" data-header="light"></li>
-				<li class="theme-purple last" data-style="purple"
-					data-header="light"></li>
-				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
-				<li class="theme-brown" data-style="brown" data-header="light"></li>
-				<li class="theme-dark-blue" data-style="dark-blue"
-					data-header="light"></li>
-				<li class="theme-light-green" data-style="light-green"
-					data-header="light"></li>
-				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
-				<li class="theme-teal last" data-style="teal" data-header="light"></li>
-			</ul>
-
-			<!-- Theme Skins -->
-			<div class="style-switcher-heading">Theme Skins</div>
-			<div class="row no-col-space margin-bottom-20 skins-section">
-				<div class="col-xs-6">
-					<button data-skins="default"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
-				</div>
-				<div class="col-xs-6">
-					<button data-skins="dark"
-						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
-				</div>
-			</div>
-
-			<hr>
-
-			<!-- Layout Styles -->
-			<div class="style-switcher-heading">Layout Styles</div>
-			<div class="row no-col-space margin-bottom-20">
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
-				</div>
-			</div>
-		</div>
-		<!--/style-switcher-->
-
-	</div>
-	<!--=== End Style Switcher ===-->
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
@@ -549,17 +493,43 @@
 	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
+			menuCreate();
 			travelogList();
+			
+			var editor_object = [];
+		     
+		    nhn.husky.EZCreator.createInIFrame({
+		        oAppRef: editor_object,
+		        elPlaceHolder: "smarteditor",
+		        sSkinURI: "../../resources/se/SmartEditor2Skin.html", 
+		        htParams : {
+		            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseToolbar : true,             
+		            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseVerticalResizer : true,     
+		            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseModeChanger : true, 
+		        }
+		    });
+		});
+		
+		
+		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		 oAppRef: oEditors,
+		 elPlaceHolder: "ir1",
+		 sSkinURI: "../../resources/se/SmartEditor2Skin.html",
+		 fCreator: "createSEditorInIFrame"
 		});
 		
 		var page;
-		
 		
 		function travelogList(e) {
  			console.log("in travelogList")
@@ -582,7 +552,6 @@
 				}
  			})
  		}
-		
 		
 		
  		$.ajax({
@@ -723,7 +692,10 @@
 		}
  		
 /*====  	Modal     ====*/
-		$('#myModal').on('shown.bs.modal', function () {
+// 		$('#myModal').on('shown.bs.modal', function () {
+// 			  $('#myInput').focus()
+// 			})
+		$('.bs-example-modal-lg').on('shown.bs.modal', function () {
 			  $('#myInput').focus()
 			})
 			
@@ -739,6 +711,7 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 
 </body>
 </html>

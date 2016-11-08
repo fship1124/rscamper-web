@@ -1,7 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -24,17 +22,18 @@
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="../../assets/css/headers/header-default.css">
 <link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
 	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -123,9 +122,10 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">여행기</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">together</a></li>
+					<li class="active">New</li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -133,46 +133,15 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
+
 
 		<!--=== Content ===-->
-		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
-			<!-- travelog register -->
-			<div id="travelog-register" style="border: 1px solid red; height: 280px; overflow: auto;">
+		<div class="container content-md">
 			
-				<!-- general form elements -->
-				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">REGISTER BOARD</h3>
-					</div>
-				<form role="form" method="post">
-					<div class="box-body">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
-							<input type="text"
-								name='title' class="form-control" placeholder="Enter Title">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3"
-								placeholder="Enter ..."></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
-							<input type="text"
-								name="writer" class="form-control" placeholder="Enter Writer">
-						</div>
-					</div>
-					
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				
-			</div>
-			
-			
-			
+			<table class="table" >
+				<thead></thead>
+				<tbody></tbody>
+			</table>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -433,6 +402,71 @@
 	</div>
 	<!-- cd-user-modal -->
 
+	<!--=== Style Switcher ===-->
+	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
+	<div class="style-switcher animated fadeInRight">
+		<div class="style-swticher-header">
+			<div class="style-switcher-heading">Style Switcher</div>
+			<div class="theme-close">
+				<i class="icon-close"></i>
+			</div>
+		</div>
+
+		<div class="style-swticher-body">
+			<!-- Theme Colors -->
+			<div class="style-switcher-heading">Theme Colors</div>
+			<ul class="list-unstyled">
+				<li class="theme-default theme-active" data-style="default"
+					data-header="light"></li>
+				<li class="theme-blue" data-style="blue" data-header="light"></li>
+				<li class="theme-orange" data-style="orange" data-header="light"></li>
+				<li class="theme-red" data-style="red" data-header="light"></li>
+				<li class="theme-light" data-style="light" data-header="light"></li>
+				<li class="theme-purple last" data-style="purple"
+					data-header="light"></li>
+				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
+				<li class="theme-brown" data-style="brown" data-header="light"></li>
+				<li class="theme-dark-blue" data-style="dark-blue"
+					data-header="light"></li>
+				<li class="theme-light-green" data-style="light-green"
+					data-header="light"></li>
+				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
+				<li class="theme-teal last" data-style="teal" data-header="light"></li>
+			</ul>
+
+			<!-- Theme Skins -->
+			<div class="style-switcher-heading">Theme Skins</div>
+			<div class="row no-col-space margin-bottom-20 skins-section">
+				<div class="col-xs-6">
+					<button data-skins="default"
+						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
+				</div>
+				<div class="col-xs-6">
+					<button data-skins="dark"
+						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
+				</div>
+			</div>
+
+			<hr>
+
+			<!-- Layout Styles -->
+			<div class="style-switcher-heading">Layout Styles</div>
+			<div class="row no-col-space margin-bottom-20">
+				<div class="col-xs-6">
+					<a href="javascript:void(0);"
+						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
+				</div>
+				<div class="col-xs-6">
+					<a href="javascript:void(0);"
+						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
+				</div>
+			</div>
+		</div>
+		<!--/style-switcher-->
+
+	</div>
+	<!--=== End Style Switcher ===-->
+
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
 		src="../../assets/plugins/jquery/jquery.min.js"></script>
@@ -442,8 +476,10 @@
 		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="../../assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript"
 		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript"
@@ -458,105 +494,67 @@
 	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="../../assets/js/app.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript"
+		src="../../assets/js/plugins/parallax-slider.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			travelogList();
-		
+			menuCreate();
+			contentCreate();
 		});
 		
- 		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/menu/list",
-			dataType : 'json',
-			error : function (err) {
-				alert("에러");
-			},
-			success : function(result) {
-// 				alert("성공");
-				
-				$("#start").empty();
-				var html = "";
-				for(var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo == 0) {
-						html += "<li class='dropdown' id="+ data.menuNo +">";
-						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-						html += data.title;
-						html += "	</a>";
-					}
-				}
-				
-				// 삽입 부분
-					html += "<li class='dropdown' id='mypage' style='display: none;'>";
-					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-					html += "			마이페이지";
-					html += "		</a>";
-					html += "<ul class='dropdown-menu'>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
-					html += "<li class='dropdown-submenu'>";
-					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-					html += "	</ul>";
-					html += "</li>";
-					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-					html += "</ul>";
-					html += "</li>";
-					
-				$("#start").html($("#start").html() + html);
-				
-				for (var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo != 0) {
-						if($("#" + data.parentMenuNo).find("ul").length > 0) {
-							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-						}
-						else{
-							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-						}
-					}
-				}
-			}
-		});	
- 		
- 		function travelogList() {
+		function contentCreate() {
+			var obj = new Object();
+			obj.no = ${param.no};
+			
 			$.ajax({
-				url : 'http://localhost:8081/travelog/list',
-				method : 'GET',
+				type : "POST",
+				url : "http://localhost:8081/travelog/detail",
 				dataType : 'json',
+				data : obj,
+				error : function(err) {
+					alert("에러");
+				},
 				success : function(result) {
-					var tList = $("#travelog-list");
-					console.dir(result);
+					var d = new Date(result.regDate);
+	 				var mon = d.getMonth() + 1;
 					
-					for (var i = 0; i < result.length; i++) {
-						var m = result[i];
-						var html = "";
-						html += "<div style='margin: 10px;'>";
-						html += m.categoryNo;
-						html += "<span style='margin-left: 20px;'>";
-						html += m.title;
-						html += "</span>";
-						html += "</div>"	
-						tList.append(html);
-					}
+					var html = "";
+					html += "<td>";
+					html += result.displayName;
+					html += "</td>";
+					html += "<td>";
+					html += result.categoryName;
+					html += "</td>";
+					html += "<td>";
+					html += d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString();
+					html += "</td>";
 					
+					$("thead").html(html);
+					
+					html = "";
+					html += "<td colspan='3' style='height:300px;'>";
+					html += result.content;
+					html += "</td>";
+					$("tbody").html(html);
 				}
 			});
 		}
 		
+		function prependZero(num, len) {
+			while (num.toString().length < len) {
+				num = "0" + num;
+			}
+			return num;
+		}
+
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -568,6 +566,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
