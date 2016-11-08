@@ -562,7 +562,6 @@
 				console.log("ttttt");
 				console.dir(t);
 				trainGradeCodeIsTrue = true;
-				alert(t.defaultValue);
 				trainGradeCodeVal = t.defaultValue; 
 			}
 		}
