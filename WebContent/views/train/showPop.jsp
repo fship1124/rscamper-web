@@ -88,6 +88,12 @@
 			var url = "http://localhost:80/rscamper-web/views/train/test.jsp?stationValue=" + e.text;
 			$(e).attr('href', url);
 		}
+		
+		function stationFn(a) {
+			var url2 = "http://localhost:80/rscamper-web/views/train/test.jsp?stationValueS=" +a.text;
+			$(a).attr('href', url2);
+		}
+		
 	</script>
 
 </body>
