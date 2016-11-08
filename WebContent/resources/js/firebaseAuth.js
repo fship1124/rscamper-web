@@ -157,7 +157,7 @@ function signinProvider(providerName) {
 function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-        	
+        	sessionStorage.setItem('uid', user.uid);
             // 로그인 상태 처리
             var displayName = user.displayName;
             var email = user.email;
@@ -166,7 +166,7 @@ function initApp() {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid;
             var providerData = user.providerData[0];
-            console.log(JSON.stringify(user, null, '  '));
+//            console.log(JSON.stringify(user, null, '  '));
 
             //  로그인 모달창 닫기
             $('.cd-user-modal').removeClass('is-visible');
