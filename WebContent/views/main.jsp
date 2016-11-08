@@ -97,11 +97,7 @@
 					<ul class="nav navbar-nav" id="start">
 
 						<!-- 마이페이지 -->
-<<<<<<< HEAD
-=======
 
-
->>>>>>> hs_web
 						<li class="dropdown" id="mypage" style="display: none;"><a
 							href="javascript:void(0);" class="dropdown-toggle"
 							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
@@ -126,10 +122,7 @@
 										class="fa fa-unlock"></i> 로그아웃</a></li>
 							</ul></li>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> hs_web
 						<!-- 마이페이지 끝 -->
 
 						<!-- Search Block -->
