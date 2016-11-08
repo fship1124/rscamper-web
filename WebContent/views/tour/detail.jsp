@@ -10,6 +10,7 @@
 
 <!-- Meta -->
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -21,8 +22,8 @@
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
@@ -45,6 +46,7 @@
 <link rel="stylesheet" href="../../assets/css/custom.css">
 <link rel="stylesheet" href="../../resources/css/content.css">
 <link rel="stylesheet" href="../../resources/css/bxslider.css">
+<link rel="stylesheet" href="../../resources/css/common.css">
 </head>
 
 <body class="header-fixed header-fixed-space-default">
@@ -55,7 +57,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> 
-					<img src="../../assets/img/logo1-default.png" alt="Logo">
+					<img src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -164,12 +166,12 @@
 
 				<div class="col-md-6 content1">
 					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active">
-							<a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">기본 정보</a>
-						</li>
-						<li role="presentation" class="">
-							<a data-target="#profile" role="tab" id="profile-tab" data-toggle="tab"	aria-controls="profile" aria-expanded="false">이용 안내</a>
-						</li>
+						<li role="presentation" class="active"><a data-target="#home"
+							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+							aria-expanded="true">기본 정보</a></li>
+						<li role="presentation" class=""><a data-target="#profile"
+							role="tab" id="profile-tab" data-toggle="tab"
+							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
 						<li role="presentation" class="dropdown">
 							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
 								<span class="caret"></span>
@@ -180,6 +182,10 @@
 							</ul>
 						</li>
 					</ul>
+					
+					
+	
+
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 							<div id="content1" class="tabCon" style="display: block;">
@@ -196,24 +202,15 @@
 					</div>
 				</div>
 			</div>
-				
-				<div class="row content2">
-<!-- 					<div style="margin: 0 auto; width: 1000px; height: 600px; border: 1px solid black"> -->
-<!-- 						<h4></h4> -->
-<!-- 						<div class="panel-collapse collapse in" id="collapse-One"> -->
-<!-- 							<div class="panel-body"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 
+			<div class="row content2">
 				<div class="news-v3-in">
 					<ul class="list-inline posted-info">
 						<li>By Luke Etheridge</li>
 						<li>In <a href="#">Design</a></li>
 						<li>Posted January 24, 2015</li>
 					</ul>
-					<h2>
-					</h2>
+					<h2></h2>
 					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
 						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
 						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
@@ -487,71 +484,7 @@
 	</div>
 	<!-- cd-user-modal -->
 
-	<!--=== Style Switcher ===-->
-	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
-	<div class="style-switcher animated fadeInRight">
-		<div class="style-swticher-header">
-			<div class="style-switcher-heading">Style Switcher</div>
-			<div class="theme-close">
-				<i class="icon-close"></i>
-			</div>
-		</div>
-
-		<div class="style-swticher-body">
-			<!-- Theme Colors -->
-			<div class="style-switcher-heading">Theme Colors</div>
-			<ul class="list-unstyled">
-				<li class="theme-default theme-active" data-style="default"
-					data-header="light"></li>
-				<li class="theme-blue" data-style="blue" data-header="light"></li>
-				<li class="theme-orange" data-style="orange" data-header="light"></li>
-				<li class="theme-red" data-style="red" data-header="light"></li>
-				<li class="theme-light" data-style="light" data-header="light"></li>
-				<li class="theme-purple last" data-style="purple"
-					data-header="light"></li>
-				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
-				<li class="theme-brown" data-style="brown" data-header="light"></li>
-				<li class="theme-dark-blue" data-style="dark-blue"
-					data-header="light"></li>
-				<li class="theme-light-green" data-style="light-green"
-					data-header="light"></li>
-				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
-				<li class="theme-teal last" data-style="teal" data-header="light"></li>
-			</ul>
-
-			<!-- Theme Skins -->
-			<div class="style-switcher-heading">Theme Skins</div>
-			<div class="row no-col-space margin-bottom-20 skins-section">
-				<div class="col-xs-6">
-					<button data-skins="default"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
-				</div>
-				<div class="col-xs-6">
-					<button data-skins="dark"
-						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
-				</div>
-			</div>
-
-			<hr>
-
-			<!-- Layout Styles -->
-			<div class="style-switcher-heading">Layout Styles</div>
-			<div class="row no-col-space margin-bottom-20">
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
-				</div>
-			</div>
-		</div>
-		<!--/style-switcher-->
-
-	</div>
-	<!--=== End Style Switcher ===-->
-
+	
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>

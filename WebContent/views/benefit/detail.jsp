@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -9,7 +6,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>메인</title>
+<title>관광지</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -35,37 +32,31 @@
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
 <link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
-
-
-
+<link rel="stylesheet" href="../../resources/css/content.css">
+<link rel="stylesheet" href="../../resources/css/bxslider.css">
+<link rel="stylesheet" href="../../resources/css/common.css">
 </head>
 
 <body class="header-fixed header-fixed-space-default">
-
 	<div class="wrapper">
 
 		<!--=== Header ===-->
 		<div class="header header-sticky">
 			<div class="container">
 				<!-- Logo -->
-				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+				<a class="logo" href="index.html"> 
+					<img src="../../assets/img/logo1.png" alt="Logo" style="width:50px; height:50px;">
 				</a>
 				<!-- End Logo -->
 
@@ -74,11 +65,11 @@
 					<ul class="loginbar pull-right">
 						<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 						<li class="topbar-devider"></li>
-						<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
-							href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-						<li id="logoutBtn" style="display: none;"><a
-							href="javascript:void(0);" onclick="signout();"><i
-								class="fa fa-unlock-alt"></i> Logout</a></li>
+						<li id="loginBtn" class="cd-log_reg">
+						<a class="cd-signin" href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
+						<li id="logoutBtn" style="display: none;">
+						<a href="javascript:void(0);" onclick="signout();">
+						<i class="fa fa-unlock-alt"></i> Logout</a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->
@@ -86,8 +77,8 @@
 				<!-- Toggle get grouped for better mobile display -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-responsive-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="fa fa-bars"></span>
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="fa fa-bars"></span>
 				</button>
 				<!-- End Toggle -->
 			</div>
@@ -123,56 +114,22 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">여행기</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">benefit</a></li>
+					<li class="active">New</li>
 				</ul>
 			</div>
-			<!--/container-->
 		</div>
-		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
-
 		<!--=== Content ===-->
-		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
-			<!-- travelog register -->
-			<div id="travelog-register" style="border: 1px solid red; height: 280px; overflow: auto;">
+		<div class="container content-md content">
 			
-				<!-- general form elements -->
-				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">REGISTER BOARD</h3>
-					</div>
-				<form role="form" method="post">
-					<div class="box-body">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Title</label> 
-							<input type="text"
-								name='title' class="form-control" placeholder="Enter Title">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3"
-								placeholder="Enter ..."></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Writer</label> 
-							<input type="text"
-								name="writer" class="form-control" placeholder="Enter Writer">
-						</div>
-					</div>
 					
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				
-			</div>
 			
 			
-			
+
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -434,22 +391,16 @@
 	<!-- cd-user-modal -->
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
 	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
@@ -467,96 +418,34 @@
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
-			travelogList();
-		
+			menuCreate();
+			contentCreate();
 		});
 		
- 		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/menu/list",
-			dataType : 'json',
-			error : function (err) {
-				alert("에러");
-			},
-			success : function(result) {
-// 				alert("성공");
-				
-				$("#start").empty();
-				var html = "";
-				for(var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo == 0) {
-						html += "<li class='dropdown' id="+ data.menuNo +">";
-						html += 	"<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown'>";
-						html += data.title;
-						html += "	</a>";
-					}
-				}
-				
-				// 삽입 부분
-					html += "<li class='dropdown' id='mypage' style='display: none;'>";
-					html += "		<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>";
-					html += "			마이페이지";
-					html += "		</a>";
-					html += "<ul class='dropdown-menu'>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지</a></li>";
-					html += "		<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 여행일정</a></li>";
-					html += "		<li><a href='http://localhost:8081/post/home;'><i class='fa fa-pencil'></i> 포스트</a></li>";
-					html += "<li class='dropdown-submenu'>";
-					html += "	<a href='javascript:void(0);''><i class='fa fa-cog'></i> 회원정보변경</a>";
-					html += "	<ul class='dropdown-menu'>";
-					html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-					html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
-					html += "	</ul>";
-					html += "</li>";
-					html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
-					html += "</ul>";
-					html += "</li>";
-					
-				$("#start").html($("#start").html() + html);
-				
-				for (var i = 0; i < result.length; i++) {
-					var data = result[i];
-					if(data.parentMenuNo != 0) {
-						if($("#" + data.parentMenuNo).find("ul").length > 0) {
-							$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
-						}
-						else{
-							$("#" + data.parentMenuNo).html($("#" + data.parentMenuNo).html() + "<ul class='dropdown-menu' id=ul-" + data.parentMenuNo + "><li><a href='" + data.url + "'>"+ data.title +"</a></li></ul>");
-						}
-					}
-				}
-			}
-		});	
- 		
- 		function travelogList() {
+		function contentCreate() {
+			var obj = new Object();
+			obj.benefitno = ${param.benefitno};
+			
 			$.ajax({
-				url : 'http://localhost:8081/travelog/list',
-				method : 'GET',
+				type : "GET",
+				url : "http://localhost:8081/benefit/detail",
 				dataType : 'json',
+				data : obj,
+				error : function(err) {
+					alert("에러");
+				},
 				success : function(result) {
-					var tList = $("#travelog-list");
+					console.log(result);
 					console.dir(result);
 					
-					for (var i = 0; i < result.length; i++) {
-						var m = result[i];
-						var html = "";
-						html += "<div style='margin: 10px;'>";
-						html += m.categoryNo;
-						html += "<span style='margin-left: 20px;'>";
-						html += m.title;
-						html += "</span>";
-						html += "</div>"	
-						tList.append(html);
-					}
+					var content = $(".content");
+					
+					content.html(result.content);
+					
 					
 				}
 			});
 		}
-		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -568,6 +457,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
-
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
