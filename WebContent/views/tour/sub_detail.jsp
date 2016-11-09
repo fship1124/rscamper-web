@@ -5,40 +5,12 @@
 <head>
 <meta charset="UTF-8">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="../../favicon.ico">
 
-<!-- Web Fonts -->
-<!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
-
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="../../assets/css/headers/header-default.css">
 <link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
-
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
-
-<!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
-<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
-
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../../assets/css/custom.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 <title>Insert title here</title>
 </head>
@@ -474,12 +446,12 @@
 		<!-- cd-user-modal-container -->
 	</div>
 	<!-- cd-user-modal -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<!-- JS Global Compulsory -->
-<!-- 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
