@@ -62,7 +62,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../assets/img/logo1-default.png" alt="Logo">
+					src="../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -97,6 +97,7 @@
 					<ul class="nav navbar-nav" id="start">
 
 						<!-- 마이페이지 -->
+
 						<li class="dropdown" id="mypage" style="display: none;"><a
 							href="javascript:void(0);" class="dropdown-toggle"
 							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
@@ -107,7 +108,7 @@
 										class="fa fa-envelope-square"></i> 쪽지</a></li>
 								<li><a href="javascript:void(0);"><i
 										class="fa fa-calendar"></i> 여행일정</a></li>
-								<li><a href="href='http://localhost:8081/post/list;"><i
+								<li><a href='http://localhost:8081/post/home;'><i
 										class="fa fa-pencil"></i> 포스트</a></li>
 								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
 										class="fa fa-cog"></i> 회원정보변경</a>
@@ -120,6 +121,7 @@
 								<li onclick="signout();"><a href="javascript:void(0);"><i
 										class="fa fa-unlock"></i> 로그아웃</a></li>
 							</ul></li>
+
 
 						<!-- 마이페이지 끝 -->
 
@@ -159,8 +161,7 @@
 		<!--=== End Breadcrumbs ===-->
 
 		<!-- Comment -->
-		<div class="container content-md"
-			style="border: 1px solid red; height: 450px">
+		<div class="container content-md" style="height: 450px; background: #F6F6F6">
 			<div>
 				<label for="comment">Comment:</label>
 				<div class="input-group margin-bottom-20">
@@ -170,19 +171,37 @@
 				</div>
 			</div>
 			<!-- Comment List -->
-			<div id="comment-list" style="border: 1px solid red; height: 280px; overflow: auto;">
-				
-			</div>
+			<div id="comment-list" style="height: 280px; overflow: auto;"></div>
 		</div>
 		<!-- End Comment -->
 
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
+                	추천 콘텐츠
+            </div>
+			<div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
+            </div>
+            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
+            <span>추천 콘텐츠</span> 더보기 +</a>
+		
+			<br><br>
+			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
+                	여행 꿀팁
+            </div>
+            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
+            </div>
+            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
+            <span>여행 꿀팁</span> 더보기 +</a>
+			<br><br>
+			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
+                	커뮤니티
+            </div>
+            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
+            </div>
+            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
+            <span>커뮤니티</span> 더보기 +</a>
+
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -443,70 +462,6 @@
 	</div>
 	<!-- cd-user-modal -->
 
-	<!--=== Style Switcher ===-->
-	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
-	<div class="style-switcher animated fadeInRight">
-		<div class="style-swticher-header">
-			<div class="style-switcher-heading">Style Switcher</div>
-			<div class="theme-close">
-				<i class="icon-close"></i>
-			</div>
-		</div>
-
-		<div class="style-swticher-body">
-			<!-- Theme Colors -->
-			<div class="style-switcher-heading">Theme Colors</div>
-			<ul class="list-unstyled">
-				<li class="theme-default theme-active" data-style="default"
-					data-header="light"></li>
-				<li class="theme-blue" data-style="blue" data-header="light"></li>
-				<li class="theme-orange" data-style="orange" data-header="light"></li>
-				<li class="theme-red" data-style="red" data-header="light"></li>
-				<li class="theme-light" data-style="light" data-header="light"></li>
-				<li class="theme-purple last" data-style="purple"
-					data-header="light"></li>
-				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
-				<li class="theme-brown" data-style="brown" data-header="light"></li>
-				<li class="theme-dark-blue" data-style="dark-blue"
-					data-header="light"></li>
-				<li class="theme-light-green" data-style="light-green"
-					data-header="light"></li>
-				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
-				<li class="theme-teal last" data-style="teal" data-header="light"></li>
-			</ul>
-
-			<!-- Theme Skins -->
-			<div class="style-switcher-heading">Theme Skins</div>
-			<div class="row no-col-space margin-bottom-20 skins-section">
-				<div class="col-xs-6">
-					<button data-skins="default"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
-				</div>
-				<div class="col-xs-6">
-					<button data-skins="dark"
-						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
-				</div>
-			</div>
-
-			<hr>
-
-			<!-- Layout Styles -->
-			<div class="style-switcher-heading">Layout Styles</div>
-			<div class="row no-col-space margin-bottom-20">
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
-				</div>
-			</div>
-		</div>
-		<!--/style-switcher-->
-
-	</div>
-	<!--=== End Style Switcher ===-->
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
@@ -542,6 +497,7 @@
 			OwlCarousel.initOwlCarousel();
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
+			menuCreate();
 			commentList();
 		});
 

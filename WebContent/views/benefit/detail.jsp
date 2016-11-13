@@ -6,7 +6,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-<title>메인</title>
+<title>관광지</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -32,37 +32,31 @@
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="../../assets/plugins/animate.css">
 <link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="../../assets/css/custom.css">
-
-
-
+<link rel="stylesheet" href="../../resources/css/content.css">
+<link rel="stylesheet" href="../../resources/css/bxslider.css">
+<link rel="stylesheet" href="../../resources/css/common.css">
 </head>
 
 <body class="header-fixed header-fixed-space-default">
-
 	<div class="wrapper">
 
 		<!--=== Header ===-->
 		<div class="header header-sticky">
 			<div class="container">
 				<!-- Logo -->
-				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+				<a class="logo" href="index.html"> 
+					<img src="../../assets/img/logo1.png" alt="Logo" style="width:50px; height:50px;">
 				</a>
 				<!-- End Logo -->
 
@@ -71,11 +65,11 @@
 					<ul class="loginbar pull-right">
 						<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 						<li class="topbar-devider"></li>
-						<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
-							href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-						<li id="logoutBtn" style="display: none;"><a
-							href="javascript:void(0);" onclick="signout();"><i
-								class="fa fa-unlock-alt"></i> Logout</a></li>
+						<li id="loginBtn" class="cd-log_reg">
+						<a class="cd-signin" href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
+						<li id="logoutBtn" style="display: none;">
+						<a href="javascript:void(0);" onclick="signout();">
+						<i class="fa fa-unlock-alt"></i> Logout</a></li>
 					</ul>
 				</div>
 				<!-- End Topbar -->
@@ -83,8 +77,8 @@
 				<!-- Toggle get grouped for better mobile display -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-responsive-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="fa fa-bars"></span>
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="fa fa-bars"></span>
 				</button>
 				<!-- End Toggle -->
 			</div>
@@ -120,25 +114,22 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">시간표</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">benefit</a></li>
+					<li class="active">New</li>
 				</ul>
 			</div>
-			<!--/container-->
 		</div>
-		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		
-
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+		<div class="container content-md content">
+			
+					
+			
+			
+
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -399,88 +390,17 @@
 	</div>
 	<!-- cd-user-modal -->
 
-	<!--=== Style Switcher ===-->
-	<i class="style-switcher-btn fa fa-cogs hidden-xs"></i>
-	<div class="style-switcher animated fadeInRight">
-		<div class="style-swticher-header">
-			<div class="style-switcher-heading">Style Switcher</div>
-			<div class="theme-close">
-				<i class="icon-close"></i>
-			</div>
-		</div>
-
-		<div class="style-swticher-body">
-			<!-- Theme Colors -->
-			<div class="style-switcher-heading">Theme Colors</div>
-			<ul class="list-unstyled">
-				<li class="theme-default theme-active" data-style="default"
-					data-header="light"></li>
-				<li class="theme-blue" data-style="blue" data-header="light"></li>
-				<li class="theme-orange" data-style="orange" data-header="light"></li>
-				<li class="theme-red" data-style="red" data-header="light"></li>
-				<li class="theme-light" data-style="light" data-header="light"></li>
-				<li class="theme-purple last" data-style="purple"
-					data-header="light"></li>
-				<li class="theme-aqua" data-style="aqua" data-header="light"></li>
-				<li class="theme-brown" data-style="brown" data-header="light"></li>
-				<li class="theme-dark-blue" data-style="dark-blue"
-					data-header="light"></li>
-				<li class="theme-light-green" data-style="light-green"
-					data-header="light"></li>
-				<li class="theme-dark-red" data-style="dark-red" data-header="light"></li>
-				<li class="theme-teal last" data-style="teal" data-header="light"></li>
-			</ul>
-
-			<!-- Theme Skins -->
-			<div class="style-switcher-heading">Theme Skins</div>
-			<div class="row no-col-space margin-bottom-20 skins-section">
-				<div class="col-xs-6">
-					<button data-skins="default"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn handle-skins-btn">Light</button>
-				</div>
-				<div class="col-xs-6">
-					<button data-skins="dark"
-						class="btn-u btn-u-xs btn-u-dark btn-block skins-btn">Dark</button>
-				</div>
-			</div>
-
-			<hr>
-
-			<!-- Layout Styles -->
-			<div class="style-switcher-heading">Layout Styles</div>
-			<div class="row no-col-space margin-bottom-20">
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block active-switcher-btn wide-layout-btn">Wide</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="javascript:void(0);"
-						class="btn-u btn-u-xs btn-u-dark btn-block boxed-layout-btn">Boxed</a>
-				</div>
-			</div>
-		</div>
-		<!--/style-switcher-->
-
-	</div>
-	<!--=== End Style Switcher ===-->
-
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript"
-		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
 	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
@@ -492,11 +412,6 @@
 	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
-	<!-- xdomainajax 추가 -->
-	<script type="text/javascript" src="../../assets/js/jquery.xdomainajax.js"></script>
-	<script type="text/javascript" src="../../assets/js/sendRequest-ajax.js"></script>
-	<!--  xml2json추가 -->
-	<script type="text/javascript" src="../../assets/js/xml2json.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -504,51 +419,33 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
+			contentCreate();
 		});
-	
 		
- 		
-//  	  	 $.ajax({
-//  			url : "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList",
-//  			data : {"ServiceKey": "XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D", "numOfRows":"999", "pageNo":"1"},		
-//  			dataType : "xml",
-//  			type : "GET",
-//  			success : function(data) {
-//  				console.log(data);
-//  			}
- 			
-//  		});  
-
-
-//		var xmlSource = "http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList&ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D&numOfRows=999&pageNo=1";
-
-		// build the yql query. Could be just a string - I think join makes easier reading
-//  		var yqlURL = [
-// 				"http://query.yahooapis.com/v1/public/yql",
-// 				"?q="
-// 						+ encodeURIComponent("select * from xml where url='"
-// 								+ xmlSource + "'"), "&format=xml&callback=?" ]
-// 				.join("");
-
-// 		// Now do the AJAX heavy lifting        
-// 		$.getJSON(yqlURL, function(data) {
-// 			xmlContent = $(data.results[0]);
-// 			console.log(data);
-// 		}); 
-
-		//  	 	var xhr = new XMLHttpRequest();
-		//  		var url = 'http://openapi.tago.go.kr/openapi/service/TrainInfoService/getCtyCodeList'; /*URL*/
-		//  		var queryParams = '?' + encodeURIComponent('ServiceKey=XPIlh8%2Bq3M1vpyrwOfH512edOBZMsZD0%2F3xZvjEd42mwMNJqeouD9L6xCPpzyF70KYm078jOK%2FePGlyoXTbCDw%3D%3D'); /*Service Key*/
-		//  		queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('999');  // 검색건수
-		//  		queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1');  // 페이지 번호
-		//  		xhr.open('GET', url + queryParams);
-		//  		xhr.onreadystatechange = function () {
-		//  		    if (this.readyState == 4) {
-		//  		        alert('Status: '+this.status+' Headers: '+JSON.stringify(this.getAllResponseHeaders())+' Body: '+this.responseText);
-		//  		    }
-		//  		};
-
-		//  		xhr.send('');
+		function contentCreate() {
+			var obj = new Object();
+			obj.benefitno = ${param.benefitno};
+			
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/benefit/detail",
+				dataType : 'json',
+				data : obj,
+				error : function(err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.log(result);
+					console.dir(result);
+					
+					var content = $(".content");
+					
+					content.html(result.content);
+					
+					
+				}
+			});
+		}
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

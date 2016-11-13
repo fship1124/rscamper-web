@@ -64,7 +64,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1-default.png" alt="Logo">
+					src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -1002,7 +1002,6 @@
 			console.log(e.getAttribute("data-value1"));
 			console.log(e.getAttribute("data-value2"));
 			
-			alert("aa");
 			var url = "http://localhost:80/rscamper-web/views/tour/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 			$(e).attr('href', url);
 		}
