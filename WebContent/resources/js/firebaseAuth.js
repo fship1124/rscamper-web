@@ -92,7 +92,7 @@ function sendPasswordReset() {
 
 // TODO: 회원탈퇴
 function resignAccount() {
-    // 1. 로그아웃처
+    // 1. 로그아웃처리
     // 2. 회원탈퇴 DB처리
     // 3. firebase 회원탈퇴처리
 };
