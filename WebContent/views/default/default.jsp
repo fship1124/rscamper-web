@@ -50,7 +50,7 @@
 	<div class="wrapper">
 
 		<!-- 헤더 include -->
-		<%@include file="../../resources/include/header.jsp"%>
+		<%@include file="/resources/include/header.jsp"%>
 
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
@@ -73,12 +73,12 @@
 		</div>
 
 		<!-- 푸터 include -->
-		<%@include file="../../resources/include/footer.jsp"%>
+		<%@include file="/resources/include/footer.jsp"%>
 
 	</div>
 	
 	<!-- 로그인 모달 include -->
-	<%@include file="../../resources/include/userModal.jsp"%>
+	<%@include file="/resources/include/userModal.jsp"%>
 	
 
 	<!-- JS Global Compulsory -->
@@ -101,9 +101,9 @@
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
 
 	<!--[if lt IE 9]>
-	<script src="assets/plugins/respond.js"></script>
-	<script src="assets/plugins/html5shiv.js"></script>
-	<script src="assets/plugins/placeholder-IE-fixes.js"></script>
+	<script src="../../assets/plugins/respond.js"></script>
+	<script src="../../assets/plugins/html5shiv.js"></script>
+	<script src="../../assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 
 	<!-- 파이어베이스 -->
