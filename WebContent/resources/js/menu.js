@@ -40,7 +40,7 @@ function menuCreate() {
 				html += "		<li onclick='resignAccount()'><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
 				html += "	</ul>";
 				html += "</li>";
-				html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
+				html += "<li onclick='logout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
 				html += "</ul>";
 				html += "</li>";
 				

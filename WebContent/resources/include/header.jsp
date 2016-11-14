@@ -3,9 +3,7 @@
 <div class="header header-sticky">
 	<div class="container">
 		<!-- Logo -->
-		<a class="logo" href="index.html"> <img
-			src="../../assets/img/logo1-default.png" alt="Logo">
-		</a>
+		<a class="logo" href="/rscamper-web/views/main.jsp"> <img src="/rscamper-web/resources/img/logo1.png" style="width:40px; height: 40px;" alt="Logo"> </a>
 		<!-- End Logo -->
 
 		<!-- Topbar -->
@@ -16,7 +14,7 @@
 				<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
 					href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
 				<li id="logoutBtn" style="display: none;"><a
-					href="javascript:void(0);" onclick="signout();"><i
+					href="javascript:void(0);" onclick="logout();"><i
 						class="fa fa-unlock-alt"></i> Logout</a></li>
 			</ul>
 		</div>

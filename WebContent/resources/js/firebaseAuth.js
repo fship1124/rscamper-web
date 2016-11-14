@@ -1,15 +1,22 @@
 // 메인페이지로 이동
 function redirectToMain() {
-	location.href = "/rscamper-web/";
+	location.href = "/rscamper-web/views/main.jsp";
 }
 
-// 로그아웃
+// 로그아웃 - 물음
+function logout() {
+	if(confirm("로그아웃 하시겠습니까?")) {
+		signout();
+	}
+}
+
+// 로그아웃 - 실행
 function signout() {
     firebase.auth().signOut();
     // 세션에 유저정보 삭제
     sessionStorageService.remove('user');
     // 로그아웃하면 메인페이지로 이동;
-    
+    redirectToMain();
 };
 
 // 이메일 로그인
@@ -39,6 +46,7 @@ function signinEmail() {
 	            }
 	            alert("로그인 되었습니다.");
 	            // 로그인하면 메인 페이지로 이동
+	            redirectToMain();
 	            
 	        })
 	        .catch(function(error) {
@@ -77,7 +85,6 @@ function signinProvider(providerName) {
 	            if (result.credential.secret) {
 	                secret = result.credential.secret;
 	            }
-	            
 	            // 외부로그인 정보 DB에 넣기
 	            $.ajax({
 	            	type: "POST",
@@ -98,7 +105,7 @@ function signinProvider(providerName) {
 						alert(err);
 					},
 					success : function(result) {
-						
+						redirectToMain();
 					}
 	            });
 	        })
@@ -285,17 +292,15 @@ function initApp() {
         			if (result.displayName) {
         				$('#mypageTitle').html(result.displayName);
         			}
+        			// 로그인 모달창 닫기
+                    $('.cd-user-modal').removeClass('is-visible');
+
+                    // UI 로그인상태로 변경
+                    $('#loginBtn').css('display', 'none');
+                    $('#logoutBtn').css('display', 'inline');
+                    $('#mypage').css('display', 'block');
         		}
         	});
-        	
-        	  // 로그인 모달창 닫기
-            $('.cd-user-modal').removeClass('is-visible');
-
-            // UI 로그인상태로 변경
-            $('#loginBtn').css('display', 'none');
-            $('#logoutBtn').css('display', 'inline');
-            $('#mypage').css('display', 'block');
-
         } else {
             // UI 로그아웃상태로 변경
             $('#loginBtn').css('display', 'inline');

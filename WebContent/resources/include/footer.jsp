@@ -6,7 +6,7 @@
 			<div class="row">
 				<!-- About -->
 				<div class="col-sm-3 md-margin-bottom-40">
-					<a href="index.html"><img id="logo-footer" class="footer-logo" src="../../assets/img/logo2-default.png" alt=""></a>
+					<a href="/rscamper-web/views/main.jsp"><img id="logo-footer" class="footer-logo" src="/rscamper-web/resources/img/logo2-default.png" alt="Logo"></a>
 					<p>About Unify dolor sit amet, consectetur adipiscing elit.
 						Maecenas eget nisl id libero tincidunt sodales.</p>
 				</div>
