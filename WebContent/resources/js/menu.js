@@ -37,12 +37,23 @@ function menuCreate() {
 				html += "		<li><a href='#'><i class='fa fa-user'></i> 프로필수정</a></li>";
 				html += "		<li><a href='#'><i class='fa fa-lock'></i> 비밀번호변경</a></li>";
 				html += "		<li><a href='#'><i class='fa fa-bell'></i> 알림설정</a></li>";
-				html += "		<li><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
+				html += "		<li onclick='resignAccount()'><a href='#'><i class='fa fa-unlock'></i> 회원탈퇴</a></li>";
 				html += "	</ul>";
 				html += "</li>";
 				html += "<li onclick='signout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
 				html += "</ul>";
 				html += "</li>";
+				
+				// 검색창 일단 보류
+//				html += "<li><i class='search fa fa-search search-btn'></i>";
+//				html +=	"<div class='search-open'>";
+//				html +=	"	<div class='input-group animated fadeInDown'>";
+//				html +=	"		<input type='text' class='form-control' placeholder='Search'>";
+//				html +=	"		<span class='input-group-btn'>";
+//				html +=	"			<button class='btn-u' type='button'>Go</button>";
+//				html +=	"		</span>";
+//				html +=	"	</div>";
+//				html += "</div></li>";
 				
 			$("#start").html($("#start").html() + html);
 			
@@ -50,7 +61,6 @@ function menuCreate() {
 				var data = result[i];
 				if(data.parentMenuNo != 0) {
 					if($("#" + data.parentMenuNo).find("ul").length > 0) {
-//						console.dir(data);
 						$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
 					}
 					else{

@@ -37,18 +37,6 @@
 		class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
 		<div class="container">
 			<ul class="nav navbar-nav" id="start">
-				
-				<!-- Search Block -->
-				<li><i class="search fa fa-search search-btn"></i>
-					<div class="search-open">
-						<div class="input-group animated fadeInDown">
-							<input type="text" class="form-control" placeholder="Search">
-							<span class="input-group-btn">
-								<button class="btn-u" type="button">Go</button>
-							</span>
-						</div>
-					</div></li>
-				<!-- End Search Block -->
 
 			</ul>
 		</div>

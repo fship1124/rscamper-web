@@ -55,10 +55,9 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">default</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
-					<li><a href="#">Default</a></li>
+				<ul class="pull-left breadcrumb">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li class="active"><a href="#">Default Page</a></li>
 				</ul>
 			</div>
 		</div>
@@ -115,6 +114,8 @@
 	
 	<!-- INIT APP -->
 	<script type="text/javascript" src="../../resources/js/initApp.js"></script>
+	
+	
 	
 	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
 	

@@ -24,7 +24,7 @@ function signinEmail() {
 	            if (!result.emailVerified) {
 	            	if(confirm("이메일 인증이 필요합니다. 인증메일을 다시 받으시겠습니까?") == true) {
 	            		firebase.auth().currentUser.sendEmailVerification().then(function () {
-	                        alert("인증메일 재발송 : 계정 활성화를 위해 이메일 인증을 해주시기 바랍니다.");
+	                        alert("인증메일 재발송 완료 : 계정 활성화를 위해 이메일 인증을 해주시기 바랍니다.");
 	                        signout();
 	                    });
 	            	} else {
@@ -47,7 +47,6 @@ function signinEmail() {
 
 // 소셜 로그인
 function signinProvider(providerName) {
-//    console.dir(firebase);
     if (!firebase.auth().currentUser) {
         switch(providerName) {
             case "google":
@@ -133,7 +132,7 @@ function signupEmail() {
             	dataType : 'json',
                 data: {
                    userUid: user.uid,
-                   displayName: user.displayName,
+                   displayName: displayName,
                    email: user.email,
                    photoUrl: user.photoURL,
                    providerName: user.providerData[0].providerId,
@@ -211,6 +210,9 @@ function initApp() {
         		success : function(result) {
         			// 세션에 유저정보 등록
         			sessionStorageService.setObject('user', result);
+        			if (result.displayName) {
+        				$('#mypageTitle').html(result.displayName);
+        			}
         		}
         	});
         	
@@ -246,11 +248,11 @@ function resignAccount() {
 			user.delete().then(function() {
 				// DB회원정보 삭제
 				$.ajax({
-					type: "GET",
+					type: "DELETE",
 					url: myConfig.serverUrl + "/user/delete/oneUser?userUid=" + user.uid,
 					dataType : 'json',
 		            error : function(err) {
-		            	alert(err);
+		            	alert("에러발생");
 					},
 					success : function(result) {
 						alert("회원탈퇴 성공");
@@ -265,22 +267,34 @@ function resignAccount() {
 };
 
 // 회원정보 수정
-function updateAccount() {
-	
+function updateAccount (userData, successCB) {
+console.log(userData);
+$http({
+  url: MyConfig.backEndURL + "/user/update/oneUser",
+  method: "POST",
+  data: $.param({
+    userUid: userData.uid,
+    displayName: userData.displayName,
+    birthday: userData.birthday,
+    introduce: userData.introduce,
+    phoneNumber: userData.phoneNumber,
+    websiteUrl: userData.websiteUrl,
+    locationNo: userData.locationNo
+  }),
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+  }
+}).success(successCB);
+
 }
 
-//TODO: 로그인 폼 유효성 검사
-function validSignin() {
- // 1. email유효성검사
- // 2. 비밀번호 유효성검사
-};
-
-//TODO: 회원가입 폼 유효성 검사
-function validSignup() {
- // 1. email유효성검사
- // 2. 비밀번호 유효성검사
- // 3. displayName 유효성 검사
-};
+// 로케이션 리스트 가져오는 메소드
+function getLocationList (successCB) {
+  $http({
+    url: MyConfig.backEndURL + "/user/select/locations",
+    method: "GET",
+  }).success(successCB);
+}
 
 window.onload = function() {
     initApp();

@@ -4,7 +4,7 @@ var myConfig = {
 	serverUrl: "http://14.32.66.104:8081"		
 };
 
-// 세션 스토리지
+// 세션 스토리지 서비스
 var sessionStorageService = {
 	set: function (key, value) {
 		sessionStorage.setItem(key, value);
