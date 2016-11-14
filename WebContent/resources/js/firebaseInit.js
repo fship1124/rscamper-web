@@ -6,4 +6,6 @@ var config = {
     storageBucket: "rscamper-d7c4d.appspot.com",
     messagingSenderId: "1040094960695"
 };
+
+// 파이어베이스 시작
 firebase.initializeApp(config);

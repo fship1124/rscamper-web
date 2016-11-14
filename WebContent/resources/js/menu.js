@@ -2,13 +2,13 @@
 function menuCreate() {
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8081/menu/list",
+		url : myConfig.serverUrl + "/menu/list",
 		dataType : 'json',
 		error : function (err) {
 			alert("에러");
 		},
 		success : function(result) {
-			console.dir(result);
+//			console.dir(result);
 			
 			$("#start").empty();
 			var html = "";
@@ -46,13 +46,11 @@ function menuCreate() {
 				
 			$("#start").html($("#start").html() + html);
 			
-			
-			
 			for (var i = 0; i < result.length; i++) {
 				var data = result[i];
 				if(data.parentMenuNo != 0) {
 					if($("#" + data.parentMenuNo).find("ul").length > 0) {
-						console.dir(data);
+//						console.dir(data);
 						$("#ul-" + data.parentMenuNo).html($("#ul-" + data.parentMenuNo).html() + "<li><a href='" + data.url + "'>"+ data.title +"</a></li>");
 					}
 					else{
