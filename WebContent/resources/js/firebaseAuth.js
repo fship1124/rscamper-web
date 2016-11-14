@@ -1,9 +1,15 @@
+// 메인페이지로 이동
+function redirectToMain() {
+	location.href = "/rscamper-web/";
+}
+
 // 로그아웃
 function signout() {
     firebase.auth().signOut();
-
     // 세션에 유저정보 삭제
     sessionStorageService.remove('user');
+    // 로그아웃하면 메인페이지로 이동;
+    
 };
 
 // 이메일 로그인
@@ -19,7 +25,6 @@ function signinEmail() {
         // 파이어베이스 이메일 로그인 메소드
         firebase.auth().signInWithEmailAndPassword(email, password)
 	        .then(function (result) {
-	        	
 	        	// 이메일 인증 확인
 	            if (!result.emailVerified) {
 	            	if(confirm("이메일 인증이 필요합니다. 인증메일을 다시 받으시겠습니까?") == true) {
@@ -33,6 +38,8 @@ function signinEmail() {
 	            	return;
 	            }
 	            alert("로그인 되었습니다.");
+	            // 로그인하면 메인 페이지로 이동
+	            
 	        })
 	        .catch(function(error) {
 	            if (error.code === 'auth/wrong-password') {
@@ -113,7 +120,6 @@ function signinProvider(providerName) {
     }
 };
 
-
 // 이메일 회원가입
 function signupEmail() {
     var displayName = document.getElementById('signup-username').value;
@@ -176,7 +182,7 @@ function sendEmailVerification() {
     firebase.auth().currentUser.sendEmailVerification().then(function() {
         alert('인증메일이 발송되었습니다.!');
     });
-}
+};
 
 // 비번 재생성 메일 보내는 함수
 function sendPasswordReset() {
@@ -194,9 +200,75 @@ function sendPasswordReset() {
         }
         console.log(error);
     });
-}
+};
 
-// 로그인과 로그아웃 상태 감지
+//회원탈퇴
+function resignAccount() {
+	var user = firebase.auth().currentUser
+	if (user) {
+		if(prompt("회원을 탈퇴하시려면 [회원탈퇴] 라고 입력해주세요") == "회원탈퇴") {
+			user.delete().then(function() {
+				// DB회원정보 삭제
+				$.ajax({
+					type: "DELETE",
+					url: myConfig.serverUrl + "/user/delete/oneUser?userUid=" + user.uid,
+					dataType : 'json',
+		            error : function(err) {
+		            	alert("에러발생");
+					},
+					success : function(result) {
+						alert("회원탈퇴 성공");
+					}
+				})
+			})
+			signout();
+		} else {
+			alert("회원탈퇴 취소");
+		}
+	}
+};
+
+// 회원정보 수정
+function updateAccount (userData) {
+	console.log(userData);
+	$.ajax({
+		  type: "POST",
+		  url: MyConfig.backEndURL + "/user/update/oneUser",
+		  dataType : 'json',
+		  data: {
+		    userUid: userData.uid,
+		    displayName: userData.displayName,
+		    birthday: userData.birthday,
+		    introduce: userData.introduce,
+		    phoneNumber: userData.phoneNumber,
+		    websiteUrl: userData.websiteUrl,
+		    locationNo: userData.locationNo
+		  },
+		  error : function(err) {
+		  	alert("에러발생");
+		  },
+		  success : function(result) {
+			alert("프로필 수정 완료");
+		  }
+	})
+};
+
+// 로케이션 리스트 가져오는 메소드
+function getLocationList () {
+  $.ajax({
+	  type: "GET",
+	  url: MyConfig.backEndURL + "/user/select/locations",
+	  dataType: "json",
+	  error : function (err) {
+		  
+	  },
+	  success : function (result) {
+		  
+	  }
+  })
+};
+
+//로그인과 로그아웃 상태 감지
 function initApp() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -237,65 +309,9 @@ function initApp() {
     $('#signin-email-btn').on('click', signinEmail);
     $('#signup-email-btn').on('click', signupEmail);
     $('#reset-password-btn').on('click', sendPasswordReset);
-}
-
-
-//회원탈퇴
-function resignAccount() {
-	var user = firebase.auth().currentUser
-	if (user) {
-		if(prompt("회원을 탈퇴하시려면 [회원탈퇴] 라고 입력해주세요") == "회원탈퇴") {
-			user.delete().then(function() {
-				// DB회원정보 삭제
-				$.ajax({
-					type: "DELETE",
-					url: myConfig.serverUrl + "/user/delete/oneUser?userUid=" + user.uid,
-					dataType : 'json',
-		            error : function(err) {
-		            	alert("에러발생");
-					},
-					success : function(result) {
-						alert("회원탈퇴 성공");
-					}
-				})
-			})
-			signout();
-		} else {
-			alert("회원탈퇴 취소");
-		}
-	}
 };
 
-// 회원정보 수정
-function updateAccount (userData, successCB) {
-console.log(userData);
-$http({
-  url: MyConfig.backEndURL + "/user/update/oneUser",
-  method: "POST",
-  data: $.param({
-    userUid: userData.uid,
-    displayName: userData.displayName,
-    birthday: userData.birthday,
-    introduce: userData.introduce,
-    phoneNumber: userData.phoneNumber,
-    websiteUrl: userData.websiteUrl,
-    locationNo: userData.locationNo
-  }),
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-  }
-}).success(successCB);
-
-}
-
-// 로케이션 리스트 가져오는 메소드
-function getLocationList (successCB) {
-  $http({
-    url: MyConfig.backEndURL + "/user/select/locations",
-    method: "GET",
-  }).success(successCB);
-}
-
+// 시작
 window.onload = function() {
     initApp();
 };
