@@ -79,7 +79,6 @@
 	
 	<!-- 로그인 모달 include -->
 	<%@include file="/resources/include/userModal.jsp"%>
-	
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
@@ -114,6 +113,10 @@
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="../../resources/js/menu.js"></script>
 	
+	<!-- INIT APP -->
+	<script type="text/javascript" src="../../resources/js/initApp.js"></script>
+	
+	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="default.js"></script>
