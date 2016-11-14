@@ -15,39 +15,39 @@
 <meta name="author" content="">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../../favicon.ico">
 
 <!-- Web Fonts -->
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet"
-	href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/style.css">
+	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../assets/css/footers/footer-v3.css">
+<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../assets/plugins/animate.css">
-<link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="../../assets/plugins/animate.css">
+<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
-	href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="../assets/plugins/parallax-slider/css/parallax-slider.css">
+	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet"
-	href="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet"
-	href="../assets/plugins/login-signup-modal-window/css/style.css">
+	href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../assets/css/theme-colors/default.css"
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
 	id="style_color">
-<link rel="stylesheet" href="../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="stylesheet" href="../../assets/css/custom.css">
 
 
 
@@ -62,7 +62,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
+					src="../../assets/img/logo1-default.png" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -95,36 +95,6 @@
 				class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
 				<div class="container">
 					<ul class="nav navbar-nav" id="start">
-
-						<!-- 마이페이지 -->
-
-						<li class="dropdown" id="mypage" style="display: none;"><a
-							href="javascript:void(0);" class="dropdown-toggle"
-							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:void(0);"><i class="fa fa-bell"></i>
-										알림</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-envelope-square"></i> 쪽지</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-calendar"></i> 여행일정</a></li>
-								<li><a href='http://localhost:8081/post/home;'><i
-										class="fa fa-pencil"></i> 포스트</a></li>
-								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
-										class="fa fa-cog"></i> 회원정보변경</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"><i class="fa fa-user"></i> 프로필수정</a></li>
-										<li><a href="#"><i class="fa fa-lock"></i> 비밀번호변경</a></li>
-										<li><a href="#"><i class="fa fa-bell"></i> 알림설정</a></li>
-										<li><a href="#"><i class="fa fa-unlock"></i> 회원탈퇴</a></li>
-									</ul></li>
-								<li onclick="signout();"><a href="javascript:void(0);"><i
-										class="fa fa-unlock"></i> 로그아웃</a></li>
-							</ul></li>
-
-
-						<!-- 마이페이지 끝 -->
-
 						<!-- Search Block -->
 						<li><i class="search fa fa-search search-btn"></i>
 							<div class="search-open">
@@ -150,9 +120,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Main Page</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="main.jsp">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">chat</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -160,48 +130,98 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		<!-- Comment -->
-		<div class="container content-md" style="height: 450px; background: #F6F6F6">
-			<div>
-				<label for="comment" style="margin-left: 20px;">Comment:</label>
-				<div class="input-group margin-bottom-20" style="margin-left: 20px;">
-					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
-					<input type="text" id="inputComment" placeholder="content" class="form-control" style=" width: 90%;">
-					<button type="button" id="commentBtn" class="btn btn-success">등록</button>
-				</div>
-			</div>
-			<!-- Comment List -->
-			<div id="comment-list" style="height: 280px; overflow: auto;"></div>
-		</div>
-		<!-- End Comment -->
+		
 
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	추천 콘텐츠
-            </div>
-			<div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>추천 콘텐츠</span> 더보기 +</a>
-		
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	여행 꿀팁
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>여행 꿀팁</span> 더보기 +</a>
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	커뮤니티
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>커뮤니티</span> 더보기 +</a>
+			
+			<div>
+				<table class="table" style="width: 60%; border: 1px solid tomato;">
+					<thead>
+						<th colspan="4">지역별 채팅</th>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td><a href="#">서울</a></td>
+							<td><a href="#">인천</a></td>
+							<td><a href="#">대전</a></td>
+							<td><a href="#">대구</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">광주</a></td>
+							<td><a href="#">부산</a></td>
+							<td><a href="#">울산</a></td>
+							<td><a href="#">세종시</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">경기도</a></td>
+							<td><a href="#">강원도</a></td>
+							<td><a href="#">충청북도</a></td>
+							<td><a href="#">충청남도</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">경상북도</a></td>
+							<td><a href="#">경상남도</a></td>
+							<td><a href="#">전라북도</a></td>
+							<td><a href="#">전라남도</a></td>
+						</tr>
+						<tr>
+							<td><a href="#">제주도</a></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>		
+				</table>
+			</div>
 
+			<div class="input-group margin-bottom-20" style="margin-left: 0px;">
+				<select title="지역 선택" class="select" name="locationid">
+					<option value="" selected="selected">지역선택</option>
+					<option value="서울">서울</option>
+					<option value="인천">인천</option>
+					<option value="대전">대전</option>
+					<option value="대구">대구</option>
+					<option value="광주">광주</option>
+					<option value="부산">부산</option>
+					<option value="울산">울산</option>
+					<option value="세종시">세종시</option>
+					<option value="경기도">경기도</option>
+					<option value="강원도">강원도</option>
+					<option value="충청북도">충청북도</option>
+					<option value="충청남도">충청남도</option>
+					<option value="경상북도">경상북도</option>
+					<option value="경상남도">경상남도</option>
+					<option value="전라북도">전라북도</option>
+					<option value="전라남도">전라남도</option>
+					<option value="제주도">제주도</option>
+				</select> 
+					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
+					<input type="text" id="inputRoomTitle" placeholder="title"
+					class="form-control" style="width: 90%;">
+				<button type="button" id="createRoomBtn" class="btn btn-success">방만들기</button>
+			</div>
+
+
+
+
+			<div class="content" style="height: 800px; border: 1px solid blue;">
+				<table class="table" style="width: 100%; border: 1px solid blue;">
+					<thead>
+						<tr><th>지역</th><th>제목</th></tr>
+					</thead>
+					<tbody class="tbody" id="room-list">
+					
+						<tr><td>서울</td><td style="width: 80%">친해져요01</td><td><button type="button" data-loc="서울" data-tle="친해져요" data-room="101" onclick="intoRoom(this)">입장</button></td></tr>
+						<tr><td>서울</td><td style="width: 80%">친해져요02</td><td><button type="button" data-loc="서울" data-tle="친해져요" data-room="102" onclick="intoRoom(this)">입장</button></td></tr>
+						<tr><td>서울</td><td style="width: 80%">친해져요03</td><td><button type="button" data-loc="서울" data-tle="친해져요" data-room="103" onclick="intoRoom(this)">입장</button></td></tr>
+					</tbody>
+				</table>
+			</div>
+			
+			
+			
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -462,35 +482,34 @@
 	</div>
 	<!-- cd-user-modal -->
 
-
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery.min.js"></script>
+		src="../../assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
+		src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+		src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
+		src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+		src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 	<script type="text/javascript"
-		src="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-	<script type="text/javascript" src="../assets/plugins/modernizr.js"></script>
-	<script src="../assets/plugins/login-signup-modal-window/js/main.js"></script>
+		src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
+	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
 
 	<!-- JS Customization -->
-	<script type="text/javascript" src="../assets/js/custom.js"></script>
+	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="../../assets/js/app.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -498,57 +517,45 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
-			commentList();
 		});
 
 		
-		function commentList() {
-			$.ajax({
-				url : 'http://localhost:8081/main/all',
-				method : 'GET',
-				dataType : 'json',
-				success : function(result) {
-					commentFn(result);
-				}
-			});
-		}
+// 		var room = 100;
 		
-		
-		$("#commentBtn").click(function() {
-			var uid = firebase.auth().currentUser.uid;
-			var comment = $("#inputComment").val();
-
-			$.ajax({
-				url : 'http://localhost:8081/main/' + uid + '/' + comment,
-				method : 'PUT',
-				dataType : 'json',
-				success : function(result) {
-					$("#inputComment").val("");					
-					commentFn(result);
-				}
-			});
-		});
-		
-
-		function commentFn(data) {
-			var cList = $("#comment-list");
-			console.dir(data);
+		$("#createRoomBtn").click(function() {
+			var locationVal =  $("select[name=locationid]").val();
+			var inputRoomTitle = $("#inputRoomTitle").val();
 			
-			cList.html("");
-			for (var i = 0; i < data.length; i++) {
-				var m = data[i];
-				var html = "";
-				html += "<div style='margin: 10px;'>";
-				html += "<img src='../assets/img/user.jpg' style='width:40px; height:40px'>";
-				html += "<span style='margin-left: 20px;'>";
-				html += m.mainContent;
-				html += "</span>";
-				html += "</div>"	
-				cList.append(html);
-			}
+			var uid = firebase.auth().currentUser.uid;
+			alert(uid);
+			
+// 			room++;
+// 			var roomList = $("#room-list");
+// 			var html = "";
+// 			html += "<tr><td>";
+// 			html += locationVal;
+// 			html += "</td><td style='width: 80%'>";
+// 			html += inputRoomTitle;
+// 			html += "</td><td><button type='button' id='in-room'>입장</button></td></tr>";
+
+// 			roomList.html(roomList.html() + html);
+			
+			 
+			
+			window.location = "http://localhost:8081/chat/detail?room=" + room + "&location=" + locationVal + "&title=" + inputRoomTitle;
+		});
+		
+		
+		function intoRoom(e) {
+			console.dir(e);
+			console.log(e.getAttribute("data-loc"));
+			console.log(e.getAttribute("data-tle"));
+			console.log(e.getAttribute("data-room"));
+			
+			window.location = "http://localhost:8081/chat/detail?room=" + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
 		}
 		
-		
+ 		
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -558,8 +565,8 @@
 
 	<!-- firebase 로그인 -->
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script src="../resources/js/firebaseInit.js"></script>
-	<script src="../resources/js/firebaseAuth.js"></script>
-	<script src="../resources/js/menu.js"></script>
+	<script src="../../resources/js/firebaseInit.js"></script>
+	<script src="../../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>

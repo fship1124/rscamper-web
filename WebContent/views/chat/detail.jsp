@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -15,39 +16,41 @@
 <meta name="author" content="">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../favicon.ico">
+<link rel="shortcut icon" href="../../favicon.ico">
 
 <!-- Web Fonts -->
 <!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
 
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet"
-	href="../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/style.css">
+	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../assets/css/footers/footer-v3.css">
+<link rel="stylesheet"
+	href="../../assets/css/headers/header-default.css">
+<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../assets/plugins/animate.css">
-<link rel="stylesheet" href="../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="../../assets/plugins/animate.css">
 <link rel="stylesheet"
-	href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+	href="../../assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet"
-	href="../assets/plugins/parallax-slider/css/parallax-slider.css">
+	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet"
-	href="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet"
-	href="../assets/plugins/login-signup-modal-window/css/style.css">
+	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../assets/css/theme-colors/default.css"
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
 	id="style_color">
-<link rel="stylesheet" href="../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- CSS Customization -->
-<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="stylesheet" href="../../assets/css/custom.css">
 
 
 
@@ -62,7 +65,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
+					src="../../assets/img/logo1-default.png" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -95,36 +98,6 @@
 				class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
 				<div class="container">
 					<ul class="nav navbar-nav" id="start">
-
-						<!-- 마이페이지 -->
-
-						<li class="dropdown" id="mypage" style="display: none;"><a
-							href="javascript:void(0);" class="dropdown-toggle"
-							data-toggle="dropdown" id="mypageTitle"> 마이페이지 </a>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:void(0);"><i class="fa fa-bell"></i>
-										알림</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-envelope-square"></i> 쪽지</a></li>
-								<li><a href="javascript:void(0);"><i
-										class="fa fa-calendar"></i> 여행일정</a></li>
-								<li><a href='http://localhost:8081/post/home;'><i
-										class="fa fa-pencil"></i> 포스트</a></li>
-								<li class="dropdown-submenu"><a href="javascript:void(0);"><i
-										class="fa fa-cog"></i> 회원정보변경</a>
-									<ul class="dropdown-menu">
-										<li><a href="#"><i class="fa fa-user"></i> 프로필수정</a></li>
-										<li><a href="#"><i class="fa fa-lock"></i> 비밀번호변경</a></li>
-										<li><a href="#"><i class="fa fa-bell"></i> 알림설정</a></li>
-										<li><a href="#"><i class="fa fa-unlock"></i> 회원탈퇴</a></li>
-									</ul></li>
-								<li onclick="signout();"><a href="javascript:void(0);"><i
-										class="fa fa-unlock"></i> 로그아웃</a></li>
-							</ul></li>
-
-
-						<!-- 마이페이지 끝 -->
-
 						<!-- Search Block -->
 						<li><i class="search fa fa-search search-btn"></i>
 							<div class="search-open">
@@ -150,9 +123,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Main Page</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="main.jsp">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">chat</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -160,47 +133,48 @@
 		<!--/breadcrumbs-->
 		<!--=== End Breadcrumbs ===-->
 
-		<!-- Comment -->
-		<div class="container content-md" style="height: 450px; background: #F6F6F6">
-			<div>
-				<label for="comment" style="margin-left: 20px;">Comment:</label>
-				<div class="input-group margin-bottom-20" style="margin-left: 20px;">
-					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
-					<input type="text" id="inputComment" placeholder="content" class="form-control" style=" width: 90%;">
-					<button type="button" id="commentBtn" class="btn btn-success">등록</button>
-				</div>
-			</div>
-			<!-- Comment List -->
-			<div id="comment-list" style="height: 280px; overflow: auto;"></div>
-		</div>
-		<!-- End Comment -->
-
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	추천 콘텐츠
-            </div>
-			<div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>추천 콘텐츠</span> 더보기 +</a>
-		
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	여행 꿀팁
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>여행 꿀팁</span> 더보기 +</a>
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	커뮤니티
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>커뮤니티</span> 더보기 +</a>
+			<div>
+				<table class="table" style="width: 100%; border: 1px solid tomato;">
+					<thead>
+						<tr>
+							<th id="locationName" class="locationName"></th>
+							<th colspan="3" id="roomTitle" class="roomTitle"></th>
+						</tr>
+						<tr>
+							<th>화면비우기</th>
+							<th>닉네임변경</th>
+							<th>~~~</th>
+							<th>퇴장</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="3" rowspan="2" class="massagePrint" style="height: 500px; border: 1px solid tomato;">
+								<div id="msg-content" style="height: 500px; border: 1px solid tomato; overflow: auto;">
+								
+								</div>
+							</td>
+							<td style="height: 30px; border: 1px solid tomato;">인원</td>
+						</tr>
+						<tr>
+							<td style="height: 400px; border: 1px solid tomato;"></td>
+						</tr>
+						<tr style="height: 50px; border: 1px solid tomato;">
+							<td></td>
+						</tr>
+						<tr style="height: 30px; border: 1px solid tomato;">
+							<td colspan="4" style="weight: 90%; border: 1px solid tomato;">
+								<input type="text" id="msg" style="width: 90%">
+								<button id="msg-btn" type="button">입력</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
 
 		</div>
 		<!--=== End Content ===-->
@@ -462,35 +436,29 @@
 	</div>
 	<!-- cd-user-modal -->
 
-
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript"
-		src="../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-	<script type="text/javascript" src="../assets/plugins/modernizr.js"></script>
-	<script src="../assets/plugins/login-signup-modal-window/js/main.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
+	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
 
 	<!-- JS Customization -->
-	<script type="text/javascript" src="../assets/js/custom.js"></script>
+	<script type="text/javascript" src="../../assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="../assets/js/app.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/style-switcher.js"></script>
-	<script type="text/javascript" src="../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="../../assets/js/app.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>		
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			App.init();
@@ -498,57 +466,97 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
-			commentList();
+			roomHeadHandler();
+			socketIo();
 		});
 
 		
-		function commentList() {
-			$.ajax({
-				url : 'http://localhost:8081/main/all',
-				method : 'GET',
-				dataType : 'json',
-				success : function(result) {
-					commentFn(result);
-				}
-			});
+		function roomHeadHandler() {
+			var loc = "${param.location}";
+			var title = "${param.title}";
+			room = ${param.room};
+			console.log(loc);
+			console.log(title);
+			console.log(room);
+			$(".locationName").html(loc);
+			$(".roomTitle").html(title);
 		}
 		
 		
-		$("#commentBtn").click(function() {
-			var uid = firebase.auth().currentUser.uid;
-			var comment = $("#inputComment").val();
-
-			$.ajax({
-				url : 'http://localhost:8081/main/' + uid + '/' + comment,
-				method : 'PUT',
-				dataType : 'json',
-				success : function(result) {
-					$("#inputComment").val("");					
-					commentFn(result);
-				}
-			});
-		});
-		
-
-		function commentFn(data) {
-			var cList = $("#comment-list");
-			console.dir(data);
+		var name = 'jin';
+        var room = ${param.room};
+        
+		function socketIo() {
+			// 소켓서버에 접속
+			var socket = io("http://192.168.0.173:10001");
 			
-			cList.html("");
-			for (var i = 0; i < data.length; i++) {
-				var m = data[i];
-				var html = "";
-				html += "<div style='margin: 10px;'>";
-				html += "<img src='../assets/img/user.jpg' style='width:40px; height:40px'>";
-				html += "<span style='margin-left: 20px;'>";
-				html += m.mainContent;
-				html += "</span>";
-				html += "</div>"	
-				cList.append(html);
-			}
+			 socket.on('connection', function(data) {
+                 if (data.type == 'connected') {
+//                 	 alert("connected");
+                     socket.emit('connection', {
+                         type : 'join',
+                         name : name,
+                         room : room
+                     });
+                     socket.emit('room', {
+                         room : room
+                     });
+                 }
+             });
+			
+			 socket.on('system', function(data) {
+// 				 alert("서버에서 전송된 데이터 : " + data.message);
+				 $("#msg-content").append(data.message + "<br>");
+             });
+			 
+			 socket.on('message', function(data) {
+				 alert("서버에서 전송된 데이터 : " + data.message);
+				 $("#msg-content").append(data.message + "<br>");
+             });
+			 
+			 
+
+			$("#msg-btn").click(function() {
+				// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
+				console.log("서버로 전송함");
+				//	 				socket.emit("msg", $("#msg").val());
+				
+				
+				$("#msg-content").append($("#msg").val() + "<br>");
+				socket.emit("user", {
+					name : name,
+					message : $("#msg").val()
+				});
+			});
+			
+			
+			
+
 		}
+
+		/*
+		socket.on("msg", function(data) {
+		// 				alert("서버에서 전송된 데이터 : " + data);
+			$("#msg-content").append(data + "<br>");
+			// 				$("div").prepend(data + "<br>");
+		});
 		
 		
+		
+		
+		
+
+		$("#msg-btn").click(function() {
+			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
+			console.log("서버로 전송함");
+			alert(room);
+		// 				socket.emit("msg", $("#msg").val());
+			socket.emit("msg", {
+				room : room,
+				message : $("#msg").val()
+			});
+		});
+		 */
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
@@ -558,8 +566,8 @@
 
 	<!-- firebase 로그인 -->
 	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script src="../resources/js/firebaseInit.js"></script>
-	<script src="../resources/js/firebaseAuth.js"></script>
-	<script src="../resources/js/menu.js"></script>
+	<script src="../../resources/js/firebaseInit.js"></script>
+	<script src="../../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
