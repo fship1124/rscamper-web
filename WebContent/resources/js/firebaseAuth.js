@@ -28,6 +28,8 @@ function signinEmail() {
     	
         var email = document.getElementById('signin-email').value;
         var password = document.getElementById('signin-password').value;
+        // TODO: 유효성 체크
+        
         
         // 파이어베이스 이메일 로그인 메소드
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -133,6 +135,8 @@ function signupEmail() {
     var email = document.getElementById('signup-email').value;
     var password = document.getElementById('signup-password').value;
     
+    // TODO: 유효성 체크
+    
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function (result) {
         	var user = result;
@@ -194,6 +198,9 @@ function sendEmailVerification() {
 // 비번 재생성 메일 보내는 함수
 function sendPasswordReset() {
     var email = document.getElementById('reset-email').value;
+    
+    // TODO: 유효성 체크
+    
     firebase.auth().sendPasswordResetEmail(email).then(function() {
         alert('비밀번호 초기화 메일이 발송 되었습니다. 이메일을 확인해 주세요!');
         $('.cd-user-modal').removeClass('is-visible');
@@ -237,6 +244,9 @@ function resignAccount() {
 
 // 회원정보 수정
 function updateAccount (userData) {
+	
+	// TODO: 유효성 체크
+	
 	console.log(userData);
 	$.ajax({
 		  type: "POST",
@@ -259,6 +269,9 @@ function updateAccount (userData) {
 		  }
 	})
 };
+
+// TODO : 프로필 사진 변경
+// TODO : 배경화면 변경
 
 // 로케이션 리스트 가져오는 메소드
 function getLocationList () {
