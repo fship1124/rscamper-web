@@ -502,7 +502,7 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
-			travelogList();
+			travelogList(page);
 			
 			var editor_object = [];
 		     
@@ -530,19 +530,19 @@
 		 fCreator: "createSEditorInIFrame"
 		});
 		
-		var page;
+		var page = 1;
 		
 		function travelogList(e) {
  			console.log("in travelogList")
  			console.log("e:" + e);
  			console.dir(e);
  			var obj = new Object();
- 			obj.page = e;
-//  			obj.categoryNo = 2;
+ 			obj.page = 1;
+ 			obj.categoryNo = 2;
  			
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/travelog/list",
+				url : "http://localhost:8081/community/select/categoryBoard",
 				dataType : 'json',
 				data : obj,
 				error : function (err) {
@@ -619,9 +619,8 @@
  		
  		function listCreate(data) {
  			console.dir(data);
- 			var p = data.page;
- 			var pageMaker = data.pageMaker;
- 			page = pageMaker.endPage;
+ 			var p = data.boardList;
+ 			var totalPages = data.totalPages;
  			var list = $("tbody");
  			var html = "";
  			for (var i = 0; i < p.length; i++) {
@@ -632,7 +631,7 @@
  				html += "<td>" + "" + "</td>";
  				html += "<td>" + v.categoryName + "</td>";
  				html += "<td>";
- 				html += "<a href='http://localhost:8081/travelog/" + v.boardNo + "'>";
+ 				html += "<a href='http://localhost:8081/community/select/oneBoard?boardNo=" + v.boardNo + "'>";
  				html += v.title + "</a>";
  				html += "<td>" + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString() + "</td>";
  				html += "<td>" + v.viewCnt + "</td>";
@@ -643,8 +642,19 @@
  			html = "";
  			
  			var pageination = $(".pagination");
- 			console.dir(pageMaker.prev);
- 			if (pageMaker.prev) {
+ 			
+ 			var endPage = (int)(Math.ceil(p.pages / 10) * 10);
+ 			var startPage = (endPage - 10) + 1;
+ 			var tempEndPage = (int)(Math.ceil(p.totalPages / p.count));
+ 			
+ 			if (endPage > tempEndPage) {
+ 				endPage = tempEndPage;
+ 			}
+ 			
+ 			var prev = startPage == 1 ? false : true;
+ 			var next = endPage * p.count >= p.totalPages ? false : true;
+ 			console.dir(prev);
+ 			if (prev) {
 				html += "<li class='page-item'>";
 				html += "<a class='page-link' href='#' aria-label='Previous'>";
 				html += "<span aria-hidden='true' onclick=previousNextFn('P') >&laquo;</span>";
@@ -653,13 +663,13 @@
 				html += "</li>";
 			}
 
-			for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
+			for (var i = startPage; i <= endPage; i++) {
 				html += "<li class='page-item'>";
 				html += "<a href='#' onclick= travelogList(this.text)>" + i + "</a>";
 				html += "</li>";
 			}
 
-			if (pageMaker.next && pageMaker.endPage > 0) {
+			if (next && endPage > 0) {
 				html += "<li class='page-item'>";
 				html += "<a class='page-link' href='#' aria-label='Next'>";
 				html += "<span aria-hidden='true' onclick=previousNextFn('N') >&raquo;</span>";
