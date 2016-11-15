@@ -29,7 +29,10 @@ function signinEmail() {
         var email = document.getElementById('signin-email').value;
         var password = document.getElementById('signin-password').value;
         // TODO: 유효성 체크
-        
+        if(!validCheckService("null", email)) {return;}
+        if(!validCheckService("null", password)) {return;}
+        if(!validCheckService("email", email)) {return;}
+        if(!validCheckService("password", password)) {return;}
         
         // 파이어베이스 이메일 로그인 메소드
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -135,12 +138,17 @@ function signupEmail() {
     var email = document.getElementById('signup-email').value;
     var password = document.getElementById('signup-password').value;
     
-    // TODO: 유효성 체크
+    // 유효성 체크
+    if(!validCheckService("null", email)) {return;}
+    if(!validCheckService("null", password)) {return;}
+    if(!validCheckService("null", displayName)) {return;}
+    
+    if(!validCheckService("email", email)) {return;}
+    if(!validCheckService("password", password)) {return;}
     
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function (result) {
         	var user = result;
-        	console.log(user.providerData[0]);
         	
         	// 1. DB에 유저정보 저장하기 
             $.ajax({
@@ -199,7 +207,9 @@ function sendEmailVerification() {
 function sendPasswordReset() {
     var email = document.getElementById('reset-email').value;
     
-    // TODO: 유효성 체크
+    // 유효성 체크
+    if(!validCheckService("null", email)) {return;}
+    if(!validCheckService("email", email)) {return;}
     
     firebase.auth().sendPasswordResetEmail(email).then(function() {
         alert('비밀번호 초기화 메일이 발송 되었습니다. 이메일을 확인해 주세요!');
@@ -243,14 +253,11 @@ function resignAccount() {
 };
 
 // 회원정보 수정
-function updateAccount (userData) {
-	
-	// TODO: 유효성 체크
-	
-	console.log(userData);
+function updateAccount (userData, successCB) {
+    // 유효성 체크
 	$.ajax({
 		  type: "POST",
-		  url: MyConfig.backEndURL + "/user/update/oneUser",
+		  url: myConfig.serverUrl + "/user/update/oneUser",
 		  dataType : 'json',
 		  data: {
 		    userUid: userData.uid,
@@ -259,31 +266,64 @@ function updateAccount (userData) {
 		    introduce: userData.introduce,
 		    phoneNumber: userData.phoneNumber,
 		    websiteUrl: userData.websiteUrl,
-		    locationNo: userData.locationNo
+		    locationNo: userData.locationNo,
+		    gender: userData.gender
 		  },
 		  error : function(err) {
 		  	alert("에러발생");
 		  },
 		  success : function(result) {
-			alert("프로필 수정 완료");
+			  successCB(result);
 		  }
 	})
 };
 
-// TODO : 프로필 사진 변경
-// TODO : 배경화면 변경
+// TODO
+function updateProfileImage(userPhoto, successCB) {
+    $.ajax({
+      url: MyConfig.backEndURL + "/user/update/profileImage",
+      type: "POST",
+      dataType : 'json',
+      data: ({
+        userUid: userPhoto.userUid,
+        type: userPhoto.type,
+        path: userPhoto.path,
+        size: userPhoto.size
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      }
+    }).success(successCB);
+}
+
+// TODO
+function updateBgImage (userPhoto, successCB) {
+    $http({
+      url: MyConfig.backEndURL + "/user/update/bgImage",
+      method: "POST",
+      data: $.param({
+        userUid: userPhoto.userUid,
+        type: userPhoto.type,
+        path: userPhoto.path,
+        size: userPhoto.size
+      }),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+      }
+    }).success(successCB);
+}
 
 // 로케이션 리스트 가져오는 메소드
-function getLocationList () {
+function getLocationList (successCB) {
   $.ajax({
 	  type: "GET",
-	  url: MyConfig.backEndURL + "/user/select/locations",
+	  url: myConfig.serverUrl + "/user/select/locations",
 	  dataType: "json",
 	  error : function (err) {
 		  
 	  },
 	  success : function (result) {
-		  
+		  successCB(result);
 	  }
   })
 };
@@ -297,7 +337,6 @@ function initApp() {
         		url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + user.uid,
         		dataType : 'json',
         	    error : function(err) {
-                    alert(err);
         		},
         		success : function(result) {
         			// 세션에 유저정보 등록

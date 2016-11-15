@@ -25,11 +25,12 @@ function menuCreate() {
 				html += "<li class='dropdown' id='mypage' style='display: none;'>";
 				html += "	<a href='javascript:void(0);' class='dropdown-toggle' data-toggle='dropdown' id='mypageTitle'>마이페이지</a>";
 				html += "<ul class='dropdown-menu'>";
-				html += "	<li><a href='javascript:void(0);'><i class='fa fa-bell'></i> 알림</a></li>";
-				html += "	<li><a href='javascript:void(0);'><i class='fa fa-envelope-square'></i> 쪽지함</a></li>";
-				html += "	<li><a href='javascript:void(0);'><i class='fa fa-calendar'></i> 내 여행일정</a></li>";
-				html += "	<li><a href='javascript:void(0);'><i class='fa fa-pencil'></i> 내 포스트</a></li>";
-				html += "	<li><a href='/rscamper-web/views/mypage/main.jsp'><i class='fa fa-pencil'></i> 프로필</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/profile.jsp'><i class='fa fa-user'></i> 프로필</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/notification.jsp'><i class='fa fa-bell'></i> 알림</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/message.jsp'><i class='fa  fa-envelope'></i> 쪽지함</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/my_tour_plan.jsp'><i class='fa fa-calendar'></i> 여행일정</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/my_post.jsp'><i class='fa fa-pencil'></i> 포스트</a></li>";
+				html += "	<li><a href='/rscamper-web/views/mypage/bookmark.jsp'><i class='fa fa-bookmark-o'></i> 북마크</a></li>";
 				
 //				서브메뉴 보류
 //				html += "<li class='dropdown-submenu'>";

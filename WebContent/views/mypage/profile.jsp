@@ -37,6 +37,14 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/profile.css">
+
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
@@ -57,7 +65,7 @@
 			<div class="container">
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li><a href="#">MYPAGE</a></li>
+					<li><a href="${pageContext.request.contextPath}/views/mypage/profile.jsp">MYPAGE</a></li>
 					<li class="active"><a href="${pageContext.request.contextPath}/views/mypage/profile.jsp">PROFILE</a></li>
 				</ul>
 			</div>
@@ -65,24 +73,145 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content-md">
-
-
-
-
-
-
-
-
+		<div class="container content profile" ng-app="myApp" ng-controller="ProfileController">
 		
+		<!-- 회원 정보 수정 모달 include -->
+		<%@include file="include/updateProfileFormModal.jsp"%>
 		
-		
-		
-		
+		<div class="parallax-quote parallaxBg" style="background-image:url('{{user.bgPhotoUrl}}');">
+			<div class="container">
+				<div class="parallax-quote-in">
+					<img class="rounded-x" ng-src="{{user.photoUrl}}" id="profile_image" ng-click="updateProfileImage();">
+					<h1 style="color: white;">{{user.displayName}}</h1>
+					<button class="btn-u btn-u-light-green" ng-click="updateBackgroundImage();">배경화면 바꾸기</button>
+				</div>
+			</div>
 		</div>
+		
+		
+			<div class="row" style="margin-top: 30px;">
+				<!--Left Sidebar-->
+				<%@include file="include/left_sidebar.jsp"%>
+				
+				<!-- Profile Content -->
+				<div class="col-md-9">
+					<div class="profile-body margin-bottom-20">
+						<div class="tab-v1">
+							<ul class="nav nav-justified nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#profile">프로필</a></li>
+<!-- 								<li ng-if="user.providerName == 'password'"><a data-toggle="tab" href="#passwordTab">비밀번호 변경</a></li> -->
+								<li><a data-toggle="tab" href="#settings">설정</a></li>
+							</ul>
+							<div class="tab-content">
+								
+								<div id="profile" class="profile-edit tab-pane fade in active">
+									<h2 class="heading-md">{{user.displayName}} 님의 프로필</h2>
+									<br>
+									<dl class="dl-horizontal">
+										<dt><strong>UID</strong></dt>
+										<dd>{{user.userUid}}</dd>
+										<hr>
+										<dt><strong>사용자명</strong></dt>
+										<dd>{{user.displayName}}</dd>
+										<hr>
+										<dt><strong>이메일</strong></dt>
+										<dd>{{user.email}}</dd>
+										<hr>
+										<dt><strong>거주지역</strong></dt>
+										<dd>{{user.locationName}}</dd>
+										<hr>
+										<dt><strong>전화번호</strong></dt>
+										<dd>{{user.phoneNumber}}</dd>
+										<hr>
+										<dt><strong>홈페이지</strong></dt>
+										<dd>{{user.websiteUrl}}</dd>
+										<hr>
+										<dt><strong>생년월일</strong></dt>
+										<dd>{{user.birthday | date : 'yyyy년 MM월 dd일 HH:mm:ss' }}</dd>
+										<hr>
+										<dt><strong>성별</strong></dt>
+										<dd>{{user.gender | gender }}</dd>
+										<hr>
+										<dt><strong>자기소개</strong></dt>
+										<dd>{{user.introduce}}</dd>
+										<hr>
+										<dt><strong>회원가입일자</strong></dt>
+										<dd>{{user.regDate | date : 'yyyy년 MM월 dd일 HH:mm:ss' }}</dd>
+										<hr>
+									</dl>
+									<button type="button" class="btn-u" ng-click="openProfileUpdateFormModal();">프로필 수정</button>
+								</div>
+
+								<div id="passwordTab" class="profile-edit tab-pane fade">
+									<h2 class="heading-md">비밀번호 변경</h2>
+									<br>
+									<form class="sky-form" id="sky-form4" action="#">
+										<dl class="dl-horizontal">
+											<dt>이메일 주소</dt>
+											<dd>
+												<section>
+													<label class="input">
+														<i class="icon-append fa fa-envelope"></i>
+														<input type="email" placeholder="Email address" name="email">
+														<b class="tooltip tooltip-bottom-right">회원가입시 입력한 이메일 주소를 입력해 주세요</b>
+													</label>
+												</section>
+											</dd>
+											<dt>비밀번호</dt>
+											<dd>
+												<section>
+													<label class="input">
+														<i class="icon-append fa fa-lock"></i>
+														<input type="password" id="password" name="password" placeholder="Password">
+														<b class="tooltip tooltip-bottom-right">변경할 비밀번호 입력</b>
+													</label>
+												</section>
+											</dd>
+											<dt>비밀번호 확인</dt>
+											<dd>
+												<section>
+													<label class="input">
+														<i class="icon-append fa fa-lock"></i>
+														<input type="password" name="passwordConfirm" placeholder="Confirm password">
+														<b class="tooltip tooltip-bottom-right">비밀번호 재확인</b>
+													</label>
+												</section>
+											</dd>
+										</dl>
+										<button class="btn-u" type="submit">비밀번호 변경하기</button>
+										<button type="button" class="btn-u btn-u-default">취소</button>
+									</form>
+								</div>
+
+								<div id="settings" class="profile-edit tab-pane fade">
+									<h2 class="heading-md">계정 설정</h2>
+									<br>
+									<form class="sky-form" id="sky-form3" action="#">
+										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>이메일 알림</label>
+										<hr>
+										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>나에게 댓글 달았을시 알림</label>
+										<hr>
+										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>사이트 개편이 알림</label>
+										<hr>
+										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>나에게 쪽지가 왔을때 알림</label>
+										<hr>
+										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>뉴스레터 받기</label>
+										<hr>
+										<button class="btn-u" type="submit">변경사항 저장</button>
+										<button type="button" class="btn-u btn-u-default">되돌리기</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Profile Content -->
+			</div><!--/end row-->
+		</div>
+		
+		<!--=== End Profile ===-->
 		<!--=== 내용 끝 ===-->
 		
-
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
 
@@ -95,10 +224,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- Angular JS -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/modernizr.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
@@ -109,11 +244,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/app.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/masking.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validation.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/html5shiv.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/placeholder-IE-fixes.js"></script>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
 	<![endif]-->
 
 	<!-- 파이어베이스 -->

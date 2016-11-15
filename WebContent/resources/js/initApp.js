@@ -23,6 +23,14 @@ var validCheckService = function(type, value) {
 			return false;
 		}
 		return true;
+	case "emailNull": // 이메일 형식 체크(정규식)(null 가능)
+		if (value) {
+			if (!value.match(/[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/)) {
+				alert("올바른 이메일 형식이 아닙니다.");
+				return false;
+			}
+		}
+		return true;
 	case "password": // 6~20자 문자숫자혼합(정규식)(not null)
 		if (!value) {
 			alert("비밀번호를 입력해 주세요");
@@ -39,7 +47,7 @@ var validCheckService = function(type, value) {
 			return false;
 		}
 		if (value.length > 20) {
-			MyPopup.alert("입력된 사용자 이름이 너무 깁니다.(20자이하)");
+			alert("입력된 사용자 이름이 너무 깁니다.(20자이하)");
 			return false;
 		}
 		return true;
