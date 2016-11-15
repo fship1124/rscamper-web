@@ -633,14 +633,14 @@
 				} else {
 					locationVal -= 1;
 				}
-				w = - (locationVal - 1) * 430; 
+				w = - (locationVal - 1) * 440; 
 			} else {
 				if (locationVal == endpage) {
 					locationVal = endpage;
 				} else {
 					locationVal += 1;
 				}
-				w = - (locationVal - 1) * 430; 
+				w = - (locationVal - 1) * 440; 
 			}
 			
 			$('.bottom_slider_panel').animate({ left: w}, 'slow');

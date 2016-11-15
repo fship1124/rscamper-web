@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="ko" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="ko" class="ie9"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="ko">
+<html lang="en">
 <!--<![endif]-->
 
 <head>
-<title>메인</title>
+<title>디폴트 페이지</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="default.css">
 
 </head>
 
@@ -52,63 +52,31 @@
 		<!-- 헤더 include -->
 		<%@include file="/resources/include/header.jsp"%>
 
-		<!-- ================================================================ -->
-
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
+					<li class="active"><a href="${pageContext.request.contextPath}/views/default/default.jsp">Default Page</a></li>
 				</ul>
 			</div>
 		</div>
+		<!--=== 사이트맵 끝 ===-->
 
-		<!-- Comment -->
-		<div class="container content-md" style="height: 450px; background: #F6F6F6">
-			<div>
-				<label for="comment">Comment:</label>
-				<div class="input-group margin-bottom-20">
-					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
-					<input type="text" id="inputComment" placeholder="content" class="form-control" style="width: 1000px;">
-					<button type="button" id="commentBtn" class="btn btn-success">등록</button>
-				</div>
-			</div>
-			<!-- Comment List -->
-			<div id="comment-list" style="height: 280px; overflow: auto;"></div>
-		</div>
-		<!-- End Comment -->
-
-
-		<!--=== Content ===-->
+		<!--=== 내용 ===-->
 		<div class="container content-md">
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	추천 콘텐츠
-            </div>
-			<div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>추천 콘텐츠</span> 더보기 +</a>
+
+
+
+
 		
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	여행 꿀팁
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>여행 꿀팁</span> 더보기 +</a>
-			<br><br>
-			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
-                	커뮤니티
-            </div>
-            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>커뮤니티</span> 더보기 +</a>
-
+		
+		
+		
+		
 		</div>
-		<!--=== End Content ===-->
-
+		<!--=== 내용 끝 ===-->
+		
 
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
@@ -155,7 +123,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
-	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="default.js"></script>
 	
 </body>
 </html>
