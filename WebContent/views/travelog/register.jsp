@@ -155,7 +155,7 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3"
+							<textarea id="seText" class="form-control" name="content" rows="3"
 								placeholder="Enter ..."></textarea>
 						</div>
 						<div class="form-group">

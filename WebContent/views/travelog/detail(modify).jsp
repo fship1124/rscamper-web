@@ -134,8 +134,8 @@
 
 
 
-		<!--=== Content: detail ===-->
 		<div class="container content-md">
+		<!--=== Content: detail ===-->
 		<form role="form" method="get" >
 			<input type="hidden" name="boardNo" value="${param.boardNo}" >
 		</form>
