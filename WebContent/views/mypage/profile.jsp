@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-<title>마이 페이지</title>
+<title>프로필</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -57,7 +57,8 @@
 			<div class="container">
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li class="active"><a href="${pageContext.request.contextPath}/views/mypage/main.jsp">MyPage</a></li>
+					<li><a href="#">MYPAGE</a></li>
+					<li class="active"><a href="${pageContext.request.contextPath}/views/mypage/profile.jsp">PROFILE</a></li>
 				</ul>
 			</div>
 		</div>
@@ -65,6 +66,10 @@
 
 		<!--=== 내용 ===-->
 		<div class="container content-md">
+
+
+
+
 
 
 
