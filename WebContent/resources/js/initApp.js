@@ -1,7 +1,7 @@
 // 환경설정
 var myConfig = {
-	// serverUrl: "http://localhost:8081"
-	serverUrl : "http://14.32.66.104:8081"
+	// serverUrl: "http://localhost:8081" // 내 컴퓨터
+	serverUrl : "http://14.32.66.104:8081" // 서버 컴퓨터
 };
 
 // 유효성 체크 서비스

@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-<title>디폴트 페이지</title>
+<title>마이 페이지</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="mypage.css">
 
 </head>
 
@@ -57,7 +57,7 @@
 			<div class="container">
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li class="active"><a href="${pageContext.request.contextPath}/views/default/default.jsp">Default Page</a></li>
+					<li class="active"><a href="${pageContext.request.contextPath}/views/mypage/main.jsp">My Page</a></li>
 				</ul>
 			</div>
 		</div>
@@ -123,7 +123,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
-	<script type="text/javascript" src="default.js"></script>
+	<script type="text/javascript" src="mypage.js"></script>
 	
 </body>
 </html>

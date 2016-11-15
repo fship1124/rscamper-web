@@ -3,7 +3,7 @@
 <div class="header header-sticky">
 	<div class="container">
 		<!-- Logo -->
-		<a class="logo" href="/rscamper-web/views/main.jsp"> <img src="/rscamper-web/resources/img/logo1.png" style="width:40px; height: 40px;" alt="Logo"> </a>
+		<a class="logo" href="${pageContext.request.contextPath}/views/main.jsp"> <img src="${pageContext.request.contextPath}/resources/img/logo1.png" style="width:40px; height: 40px;" alt="Logo"> </a>
 		<!-- End Logo -->
 
 		<!-- Topbar -->
