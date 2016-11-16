@@ -278,41 +278,6 @@ function updateAccount (userData, successCB) {
 	})
 };
 
-// TODO
-function updateProfileImage(userPhoto, successCB) {
-    $.ajax({
-      url: MyConfig.backEndURL + "/user/update/profileImage",
-      type: "POST",
-      dataType : 'json',
-      data: ({
-        userUid: userPhoto.userUid,
-        type: userPhoto.type,
-        path: userPhoto.path,
-        size: userPhoto.size
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      }
-    }).success(successCB);
-}
-
-// TODO
-function updateBgImage (userPhoto, successCB) {
-    $http({
-      url: MyConfig.backEndURL + "/user/update/bgImage",
-      method: "POST",
-      data: $.param({
-        userUid: userPhoto.userUid,
-        type: userPhoto.type,
-        path: userPhoto.path,
-        size: userPhoto.size
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      }
-    }).success(successCB);
-}
-
 // 로케이션 리스트 가져오는 메소드
 function getLocationList (successCB) {
   $.ajax({

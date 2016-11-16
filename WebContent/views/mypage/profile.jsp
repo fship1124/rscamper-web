@@ -82,7 +82,7 @@
 			<div class="container">
 				<div class="parallax-quote-in">
 					<img class="rounded-x" ng-src="{{user.photoUrl}}" id="profile_image" ng-click="updateProfileImage();">
-					<h1 style="color: white;">{{user.displayName}}</h1>
+					<h1 style="color: white;" ng-bind="user.displayName">RSCAMPER</h1>
 					<button class="btn-u btn-u-light-green" ng-click="updateBackgroundImage();">배경화면 바꾸기</button>
 				</div>
 			</div>
@@ -99,7 +99,7 @@
 						<div class="tab-v1">
 							<ul class="nav nav-justified nav-tabs">
 								<li class="active"><a data-toggle="tab" href="#profile">프로필</a></li>
-<!-- 								<li ng-if="user.providerName == 'password'"><a data-toggle="tab" href="#passwordTab">비밀번호 변경</a></li> -->
+								<li ng-if="user.providerName == 'password'"><a data-toggle="tab" href="#passwordTab">비밀번호 변경</a></li>
 								<li><a data-toggle="tab" href="#settings">설정</a></li>
 							</ul>
 							<div class="tab-content">
@@ -109,34 +109,34 @@
 									<br>
 									<dl class="dl-horizontal">
 										<dt><strong>UID</strong></dt>
-										<dd>{{user.userUid}}</dd>
+										<dd ng-bind="user.userUid"></dd>
 										<hr>
 										<dt><strong>사용자명</strong></dt>
-										<dd>{{user.displayName}}</dd>
+										<dd ng-bind="user.displayName"></dd>
 										<hr>
 										<dt><strong>이메일</strong></dt>
-										<dd>{{user.email}}</dd>
+										<dd ng-bind="user.email"></dd>
 										<hr>
 										<dt><strong>거주지역</strong></dt>
-										<dd>{{user.locationName}}</dd>
+										<dd ng-bind="user.locationName"></dd>
 										<hr>
 										<dt><strong>전화번호</strong></dt>
-										<dd>{{user.phoneNumber}}</dd>
+										<dd ng-bind="user.phoneNumber"></dd>
 										<hr>
 										<dt><strong>홈페이지</strong></dt>
-										<dd>{{user.websiteUrl}}</dd>
+										<dd ng-bind="user.websiteUrl"></dd>
 										<hr>
 										<dt><strong>생년월일</strong></dt>
-										<dd>{{user.birthday | date : 'yyyy년 MM월 dd일 HH:mm:ss' }}</dd>
+										<dd ng-bind="user.birthday | date : 'yyyy년 MM월 dd일'"></dd>
 										<hr>
 										<dt><strong>성별</strong></dt>
-										<dd>{{user.gender | gender }}</dd>
+										<dd ng-bind="user.gender | gender"></dd>
 										<hr>
 										<dt><strong>자기소개</strong></dt>
-										<dd>{{user.introduce}}</dd>
+										<dd><pre ng-bind="user.introduce"></pre></dd>
 										<hr>
-										<dt><strong>회원가입일자</strong></dt>
-										<dd>{{user.regDate | date : 'yyyy년 MM월 dd일 HH:mm:ss' }}</dd>
+										<dt><strong>회원가입일시</strong></dt>
+										<dd ng-bind="user.regDate | date : 'yyyy년 MM월 dd일 HH:mm:ss'"></dd>
 										<hr>
 									</dl>
 									<button type="button" class="btn-u" ng-click="openProfileUpdateFormModal();">프로필 수정</button>
@@ -186,7 +186,7 @@
 								<div id="settings" class="profile-edit tab-pane fade">
 									<h2 class="heading-md">계정 설정</h2>
 									<br>
-									<form class="sky-form" id="sky-form3" action="#">
+									<form class="sky-form" id="settingForm" action="#">
 										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>이메일 알림</label>
 										<hr>
 										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>나에게 댓글 달았을시 알림</label>
