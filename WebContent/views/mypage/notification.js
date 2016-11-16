@@ -1,6 +1,6 @@
 // 앵귤러 모듈
 angular.module("myApp", [])
-.controller('ProfileController', function($scope) {
+.controller('MyController', function($scope) {
 	$scope.user = sessionStorageService.getObject("user");
 })
 

@@ -14,7 +14,7 @@
 							<label class="label"><strong>사용자명</strong></label>
 							<label class="input"> 
 								<i class="icon-prepend fa fa-user"></i>
-								<input type="text" name="text" ng-model="updateUser.displayName">
+								<input type="text" ng-model="updateUser.displayName">
 							</label>
 						</section>
 						<section>
@@ -28,14 +28,14 @@
 							<label class="label"><strong>생년월일</strong></label>
 							<label class="input"> 
 								<i class="icon-prepend fa fa-calendar"></i>
-								<input type="date" name="birthDay" ng-model="updateUser.birthday">
+								<input type="date" ng-model="updateUser.birthday">
 							</label>
 						</section>
 						<section>
 							<label class="label"><strong>홈페이지</strong></label> 
 							<label class="input">
 								<i class="icon-prepend fa fa-globe"></i>
-								<input type="url" name="url" ng-model="updateUser.websiteUrl">
+								<input type="text" ng-model="updateUser.websiteUrl">
 							</label>
 						</section>
 						<section>

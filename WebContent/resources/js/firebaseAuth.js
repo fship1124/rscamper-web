@@ -252,67 +252,6 @@ function resignAccount() {
 	}
 };
 
-// 회원정보 수정
-function updateAccount (userData, successCB) {
-    // 유효성 체크
-	$.ajax({
-		  type: "POST",
-		  url: myConfig.serverUrl + "/user/update/oneUser",
-		  dataType : 'json',
-		  data: {
-		    userUid: userData.uid,
-		    displayName: userData.displayName,
-		    birthday: userData.birthday,
-		    introduce: userData.introduce,
-		    phoneNumber: userData.phoneNumber,
-		    websiteUrl: userData.websiteUrl,
-		    locationNo: userData.locationNo,
-		    gender: userData.gender
-		  },
-		  error : function(err) {
-		  	alert("에러발생");
-		  },
-		  success : function(result) {
-			  successCB(result);
-		  }
-	})
-};
-
-// TODO
-function updateProfileImage(userPhoto, successCB) {
-    $.ajax({
-      url: MyConfig.backEndURL + "/user/update/profileImage",
-      type: "POST",
-      dataType : 'json',
-      data: ({
-        userUid: userPhoto.userUid,
-        type: userPhoto.type,
-        path: userPhoto.path,
-        size: userPhoto.size
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      }
-    }).success(successCB);
-}
-
-// TODO
-function updateBgImage (userPhoto, successCB) {
-    $http({
-      url: MyConfig.backEndURL + "/user/update/bgImage",
-      method: "POST",
-      data: $.param({
-        userUid: userPhoto.userUid,
-        type: userPhoto.type,
-        path: userPhoto.path,
-        size: userPhoto.size
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-      }
-    }).success(successCB);
-}
-
 // 로케이션 리스트 가져오는 메소드
 function getLocationList (successCB) {
   $.ajax({

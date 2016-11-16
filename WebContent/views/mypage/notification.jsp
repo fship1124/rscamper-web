@@ -73,8 +73,12 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp">
-			<div class="row">
+		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
+		
+			<!-- 사용자 사진 및 배경사진 include -->
+			<%@include file="include/userPhoto.jsp"%>
+		
+			<div class="row" style="margin-top: 30px;">
 			
 				<!--Left Sidebar-->
 				<%@include file="include/left_sidebar.jsp"%>
