@@ -57,7 +57,7 @@
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">benefit</a></li>
+					<li><a href="javascript:history.back()">tour</a></li>
 					<li class="active">New</li>
 				</ul>
 			</div>
@@ -66,13 +66,110 @@
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
 		<div class="container content-md content">
+			<h4></h4>
+			<div class="row">
+					<div class="col-md-6 md-margin-bottom-50">
+						<div class="ms-showcase2-template" style="position: relative;">
+						<!-- Master Slider -->
+						<div class="master-slider ms-skin-default ms-wk" id="masterslider"
+							style="visibility: visible; opacity: 1; margin: 0px;">
+							<div class="ms-container">
+								<div class="ms-inner-controls-cont" style="max-width: 550px;">
+									<div class="ms-view ms-fade-view ms-grab-cursor"
+										style="width: 550px; height: 550px;">
+										<div class="ms-slide-container">
+											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
+												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
+													<img class="ms-brd" src="" alt="lorem ipsum dolor sit" style="width: 550px; height: 550px; margin-left: 0px;">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="image_container" style="margin-top: 20px;  width: 550px; height: 130px;">
+								<div style="margin: 0 auto; width: 545px; height: 130px;">
+								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
+								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
+									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative; border: 1px solid black;"></div>
+								</div>
+								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
+								</div>
+							</div>
+
+							<div class="bx-controls bx-has-pager bx-has-controls-direction">
+							</div>
+						</div>
+					</div>
+					</div>
+
+				<div class="col-md-6 content1">
+					<ul id="myTab" class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a data-target="#home"
+							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+							aria-expanded="true">기본 정보</a></li>
+						<li role="presentation" class=""><a data-target="#profile"
+							role="tab" id="profile-tab" data-toggle="tab"
+							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
+						<li role="presentation" class="dropdown">
+							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
+								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+					
+	
+
+					<div id="myTabContent" class="tab-content">
+						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+							<div id="content1" class="tabCon" style="display: block;">
+								<ul class="txtCon tab1" tabindex="0"></ul>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
+							<div id="content2" class="tabCon" style="display: block;">
+								<ul class="txtCon tab2" tabindex="0"></ul>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
+						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row content2">
+				<div class="news-v3-in">
+					<ul class="list-inline posted-info">
+						<li>By Luke Etheridge</li>
+						<li>In <a href="#">Design</a></li>
+						<li>Posted January 24, 2015</li>
+					</ul>
+					<h2></h2>
+					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
+						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
+						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
+						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
+						Nullam non metus in mi rhoncus efficitur...</p>
+					<ul class="post-shares">
+						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
+						</a></li>
+						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
+						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
+					</ul>
+				</div>
+			</div>
 		</div>
 		<!--=== End Content ===-->
-		<!-- ================================================================ -->
-
 
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
+
 	</div>
 	
 	<!-- 로그인 모달 include -->
@@ -122,10 +219,10 @@
 	<script type="text/javascript" src="detail.js"></script>
 	<script type="text/javascript">
 		var obj = new Object();
-		obj.benefitno = ${param.benefitno};
+		obj.contentid = ${param.contentid};
+		obj.contenttypeid = ${param.contenttypeid};
 		
-		contentCreate(obj);		
+		apiAjax(obj);
 	</script>
-	
 </body>
 </html>

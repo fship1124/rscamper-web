@@ -1,27 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-<meta charset="UTF-8">
+<title>관광지</title>
 
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
 
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../favicon.ico">
+
+<!-- Web Fonts -->
+<!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
+
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet"
+	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="../../assets/css/headers/header-default.css">
 <link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
-<title>Insert title here</title>
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="../../assets/plugins/animate.css">
+<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
+
+<!-- CSS Theme -->
+<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="../../assets/css/custom.css">
+<link rel="stylesheet" href="../../resources/css/content.css">
+<link rel="stylesheet" href="../../resources/css/bxslider.css">
+<link rel="stylesheet" href="../../resources/css/common.css">
 </head>
+
 <body class="header-fixed header-fixed-space-default">
 	<div class="wrapper">
-				<!--=== Header ===-->
+
+		<!--=== Header ===-->
 		<div class="header header-sticky">
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> 
-					<img src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
+					<img src="../../assets/img/logo1.png" alt="Logo" style="width:50px; height:50px;">
 				</a>
 				<!-- End Logo -->
 
@@ -73,124 +108,32 @@
 			<!--/navbar-collapse-->
 		</div>
 		<!--=== End Header ===-->
-		
-				<!--=== Breadcrumbs 사이트맵 ===-->
+
+		<!-- ================================================================ -->
+
+		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">tour</a></li>
+					<li><a href="javascript:history.back()">benefit</a></li>
 					<li class="active">New</li>
 				</ul>
 			</div>
 		</div>
 		<!--=== End Breadcrumbs ===-->
-		
-		
+
 		<!--=== Content ===-->
 		<div class="container content-md content">
-			<h4></h4>
-			<div class="row">
-					<div class="col-md-6 md-margin-bottom-50">
-						<div class="ms-showcase2-template" style="position: relative;">
-						<!-- Master Slider -->
-						<div class="master-slider ms-skin-default ms-wk" id="masterslider"
-							style="visibility: visible; opacity: 1; margin: 0px;">
-							<div class="ms-container">
-								<div class="ms-inner-controls-cont" style="max-width: 550px;">
-									<div class="ms-view ms-fade-view ms-grab-cursor"
-										style="width: 550px; height: 550px;">
-										<div class="ms-slide-container">
-											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
-												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
-													<img class="ms-brd" src="" alt="lorem ipsum dolor sit" style="width: 550px; height: 550px; margin-left: 0px;">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="image_container" style="margin-top: 20px;  width: 550px; height: 130px;">
-								<div style="margin: 0 auto; width: 545px; height: 130px;">
-								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
-								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
-									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative; border: 1px solid black;"></div>
-								</div>
-								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
-								</div>
-							</div>
-
-							<div class="bx-controls bx-has-pager bx-has-controls-direction">
-							</div>
-						</div>
-					</div>
-					</div>
-
-				<div class="col-md-6 content1">
-					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a data-target="#home"
-							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-							aria-expanded="true">기본 정보</a></li>
-						<li role="presentation" class=""><a data-target="#profile"
-							role="tab" id="profile-tab" data-toggle="tab"
-							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
-						<li role="presentation" class="dropdown">
-							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
-								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
-							</ul>
-						</li>
-					</ul>
+			
 					
-					
-	
+			
+			
 
-					<div id="myTabContent" class="tab-content">
-						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							<div id="content1" class="tabCon" style="display: block;">
-								<ul class="txtCon tab1" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
-							<div id="content2" class="tabCon" style="display: block;">
-								<ul class="txtCon tab2" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
-						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row content2">
-				<div class="news-v3-in">
-					<ul class="list-inline posted-info">
-						<li>By Luke Etheridge</li>
-						<li>In <a href="#">Design</a></li>
-						<li>Posted January 24, 2015</li>
-					</ul>
-					<h2></h2>
-					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
-						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
-						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
-						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
-						Nullam non metus in mi rhoncus efficitur...</p>
-					<ul class="post-shares">
-						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
-						</a></li>
-						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
-						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
-					</ul>
-				</div>
-			</div>
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
-		
+
 		<!--=== Footer v3 ===-->
 		<div id="footer-v3" class="footer-v3">
 			<div class="footer">
@@ -256,7 +199,8 @@
 				</div>
 			</div>
 			<!--/footer-->
-		<div class="copyright">
+
+			<div class="copyright">
 				<div class="container">
 					<div class="row">
 						<!-- Terms Info-->
@@ -290,12 +234,11 @@
 				</div>
 			</div>
 			<!--/copyright-->
-			</div>
+		</div>
 		<!--=== End Footer v3 ===-->
-			
-	</div>	
-<!--/wrapper-->
 
+	</div>
+	<!--/wrapper-->
 
 	<div class="cd-user-modal">
 		<!-- this is the entire modal form, including the background -->
@@ -446,8 +389,7 @@
 		<!-- cd-user-modal-container -->
 	</div>
 	<!-- cd-user-modal -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
@@ -462,163 +404,59 @@
 	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
 	<script src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<!-- 모달 컨트롤 -->
+
 	<!-- JS Customization -->
-	<script type="text/javascript" src="../../assets/js/custom.js"></script>	
-	
-<!-- JS Page Level -->
-<script type="text/javascript" src="../../assets/js/app.js"></script>	
+	<script type="text/javascript" src="../../assets/js/custom.js"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="../../assets/js/app.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
-		
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		App.init();
-		OwlCarousel.initOwlCarousel();
-		StyleSwitcher.initStyleSwitcher();
-		ParallaxSlider.initParallaxSlider();
-		menuCreate();
-		apiAjax();
-	});
-	
-	
-	function apiAjax() {
-		var obj = new Object();
-		obj.contentid = ${param.contentid};
-		obj.contenttypeid = ${param.contenttypeid};
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/tour/api/detail",
-			dataType : 'json',
-			data : obj,
-			error : function(err) {
-				alert("에러");
-			},
-			success : function(result) {
-				console.log("apiAjax");
-				console.log(result);
-				
-					var data = JSON.parse(result);
-				console.dir(data);
-				contentCreate(data);
-			}
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			OwlCarousel.initOwlCarousel();
+			StyleSwitcher.initStyleSwitcher();
+			ParallaxSlider.initParallaxSlider();
+			menuCreate();
+			contentCreate();
 		});
-	}
-	
-	
-	function contentCreate(data) {
-		console.log("contentCreate");
-		var data1 = JSON.parse(data[0]);
-		var data2 = JSON.parse(data[1]);
-		var data3 = JSON.parse(data[2]);
-		var data4 = JSON.parse(data[3]);
 		
-		console.dir(data1);
-		console.dir(data2);
-		console.dir(data3);
-		console.dir(data4);
-		
-		var item1 = data1.response.body.items.item;
-		var item2 = data2.response.body.items.item;
-		var item3 = data3.response.body.items.item;
-		var item4 = data4.response.body.items.item;
-		
-		var content = $(".content");
-		content.find("h4").html(item1.title);
-		
-		var tab1 = $(".tab1");
-		var tab2 = $(".tab2");
-		var tab3 = $(".tab3");
-		var tab4 = $(".tab4");
-		var content2 = $(".content2");
-		
-		var html = "";
-		html += "<li><strong>우편번호 : </strong>" + item1.zipcode + "</li>";
-		html += "<li><strong>주소 : </strong>" + item1.addr1 + " " + item1.addr2 + "</li>";
-		tab1.html(html);
-		
-		html = "";
-		html += "<li>" + item2.expguide + "</li>";
-		html += "<li>" + item2.infocenter + "</li>";
-		tab2.html(html);
-		
-		html = "";
-		html += "<li>" + item1.homepage + "</li>";
-		tab3.html(html);
-		
-		html = "";
-		html += "<li>" + item3.infoname + "</li>";
-		html += "<li>" + item3.infotext + "</li>";
-		tab4.html(html);
-		content2.find("h2").html(item1.title);
-		content2.find("p").html(item1.overview);
-		content2.find(".panel-body").html(item1.overview);
-		
-		// 이미지 동적 생성
-		imageProcess(item4);
-		
-	}
-	
-	var endpage = 0;
-	
-	function imageProcess(item) {
-		var mainImg = $(".ms-brd");
-		var panel = $(".bottom_slider_panel");
-		var html = "";
-		
-		var widthPx = item.length * 120;
-		panel.css("width", widthPx + "px");
-		
-		for (var i = 0; i < item.length; i++) {
-			var m = item[i];
-			if (i == 0) { mainImg.attr("src", m.originimgurl); }
+		function contentCreate() {
+			var obj = new Object();
+			obj.benefitno = ${param.benefitno};
 			
-			html += "<img src='" + m.originimgurl + "' class='bottom_slider_image' onclick='imageFnc(this)' style='width: 100px; height: 75px; float: left; margin: 5px 5px'>";
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/benefit/detail",
+				dataType : 'json',
+				data : obj,
+				error : function(err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.log(result);
+					console.dir(result);
+					
+					var content = $(".content");
+					
+					content.html(result.content);
+					
+					
+				}
+			});
 		}
-		
-		var portion = parseInt(item.length / 4);
-		
-		if (item.length % 4 != 0) {
-			portion += 1;
-		}
-		
-		endpage = portion;
-		panel.html(html);
-	}
-	
-	
-	var locationVal = 1;
-	
-	function bottomMove(flag) {
-		var w = 0;
-		if (flag == 1) {
-			if (locationVal == 1) {
-				locationVal = 1;
-			} else {
-				locationVal -= 1;
-			}
-			w = - (locationVal - 1) * 440; 
-		} else {
-			if (locationVal == endpage) {
-				locationVal = endpage;
-			} else {
-				locationVal += 1;
-			}
-			w = - (locationVal - 1) * 440; 
-		}
-		
-		$('.bottom_slider_panel').animate({ left: w}, 'slow');
-	}
-	
-	function imageFnc(e) {
-		 $(".ms-brd").attr("src", e.src); 
-	}
-</script>	
+	</script>
+	<!--[if lt IE 9]>
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
+    <![endif]-->
 
-<!-- firebase 로그인 -->
-<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-<script src="../../resources/js/firebaseInit.js"></script>
-<script src="../../resources/js/firebaseAuth.js"></script>
-<script src="../../resources/js/menu.js"></script>
+	<!-- firebase 로그인 -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+	<script src="../../resources/js/firebaseInit.js"></script>
+	<script src="../../resources/js/firebaseAuth.js"></script>
+	<script src="../../resources/js/menu.js"></script>
 </body>
 </html>
