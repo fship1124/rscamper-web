@@ -1,6 +1,5 @@
 
 function contentCreate(no) {
-	alert(no);
 	var obj = new Object();
 	obj.no = no;
 
