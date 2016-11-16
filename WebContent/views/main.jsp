@@ -69,7 +69,7 @@
 				<label for="comment">Comment:</label>
 				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
-					<input type="text" id="inputComment" placeholder="content" class="form-control" style="width: 1000px;">
+					<input type="text" id="inputComment" placeholder="content" class="form-control" style="width: 90%;">
 					<button type="button" id="commentBtn" class="btn btn-success">등록</button>
 				</div>
 			</div>

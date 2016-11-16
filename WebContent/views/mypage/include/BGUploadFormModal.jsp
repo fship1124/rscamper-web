@@ -8,7 +8,7 @@
 			</div>
 			<div class="modal-body">
 				<form id="BGImageUploadForm" class="sky-form">
-					<fieldset>
+					<fieldset style="padding-top: 5px;">
 						<section>
 							<label class="label"><strong>미리보기</strong></label>
 							<img id="BGImage" style="length:100%, height:100%;" src="${pageContext.request.contextPath}/resources/img/default/default-image.png" alt="upload image" class="img-thumbnail" />

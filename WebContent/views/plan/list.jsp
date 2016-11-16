@@ -37,6 +37,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
@@ -75,16 +76,40 @@
 					<div class="row">
 					
 						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
+						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;">
+							<img class="img-responsive" src="">
+							<div class="news-v3-in-sm" style="border: 1px solid lightgray;">
+								<ul class="list-inline posted-info">
+									<li>아이디</li>
+									<li>카테고리</li>
+									<li>작성일자</li>
+								</ul>
+								<h2><a href="#" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">일정제목</a></h2>
+								<div style="height:100px; overflow:hidden;">
+									요약
+								</div>
+								<ul class="post-shares">
+									<li><a href="#"><i class="rounded-x icon-like"></i><span>좋아요카운트</span></a></li>
+									<li><a href="#"><i class="rounded-x icon-speech"></i><span>댓글카운트</span></a></li>
+									<li><a href="#"><i class="rounded-x icon-flag"></i><span>장소카운트</span></a></li>
+								</ul>
+							</div>
+						</div>
+						
+						
+						<!-- 리스트 한개 -->
+						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;">
+							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
+							<div class="news-v3-in-sm" style="border: 1px solid lightgray; overflow: hidden;">
 								<ul class="list-inline posted-info">
 									<li>오똑똑</li>
 									<li>여행일정</li>
 									<li>2015년 11월 16일</li>
 								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
+								<h2><a href="#" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">제주 핵심 명소 78곳 1분 요약</a></h2>
+								<div style="height:100px; overflow:hidden;">
+								여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.
+								</div>
 								<ul class="post-shares">
 									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
 									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
@@ -93,106 +118,32 @@
 							</div>
 						</div>
 						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
+						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;">
+							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/6EHuODnpVF0_5rJvtbp44AKj9jA=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1411550254627_%EC%9C%84%EC%8B%9C%EB%B9%88_%ED%94%BD_%ED%8C%8C%EB%A6%AC2.jpg">
+							<div class="news-v3-in-sm" style="border: 1px solid lightgray;">
 								<ul class="list-inline posted-info">
 									<li>오똑똑</li>
 									<li>여행일정</li>
 									<li>2015년 11월 16일</li>
 								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
-								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span>5</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
-								<ul class="list-inline posted-info">
-									<li>오똑똑</li>
-									<li>여행일정</li>
-									<li>2015년 11월 16일</li>
-								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
-								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span>5</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
-								<ul class="list-inline posted-info">
-									<li>오똑똑</li>
-									<li>여행일정</li>
-									<li>2015년 11월 16일</li>
-								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
-								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span>5</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
-								<ul class="list-inline posted-info">
-									<li>오똑똑</li>
-									<li>여행일정</li>
-									<li>2015년 11월 16일</li>
-								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
-								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span>5</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
-								<ul class="list-inline posted-info">
-									<li>오똑똑</li>
-									<li>여행일정</li>
-									<li>2015년 11월 16일</li>
-								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
-								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span>5</span></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- 리스트 한개 -->
-						<div class="col-sm-6 news-v3" style="padding-bottom: 30px;">
-							<img class="img-responsive" src="https://thumb-wishbeen.akamaized.net/4gcif2bWPwTIpoWZ1rVOOrBJl8I=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1462948625627_cover.jpg">
-							<div class="news-v3-in-sm no-padding">
-								<ul class="list-inline posted-info">
-									<li>오똑똑</li>
-									<li>여행일정</li>
-									<li>2015년 11월 16일</li>
-								</ul>
-								<h2><a href="#">제주 핵심 명소 78곳 1분 요약</a></h2>
-								<p>여행 기간은 한정적인데 가고 싶은 곳은 너무 많아서 뭘 어디서부터 어떻게 해야 될지 모르겠다면 집중! 가고 싶은 제주 여행지들을 모두 모으고, 지도에 싹 다 찍었다! 눈에 보기 쉬운 제주 위시리스트 78곳 총정리.</p>
+								<h2><a href="#" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">짧은 시간동안 파리를 간략하게 훑을 수 있는 플랜</a></h2>
+								<div style="height:100px; overflow:hidden;">
+									파리를 제대로 보려면 일주일로도 부족하다.
+									하지만 이번 여행에서 우리에게 주어진 시간은 단 4박 5일!
+									파리의 핵심만 쏙쏙 골라 여행하는 플랜! :)
+									
+									비용은 4인 중심으로 정리했다. 그룹할인을 받은 경우는 거의 없으니 4등분하여도 거의 무방할 것.
+									숙박비용이 포함되어 있고, 한인 민박을 이용할 경우 조금 더 저렴할 수 있다.
+									
+									파리를 처음 가보는데, 시간이 촉박하다거나
+									부모님을 모시고 주요 포인트만 관광하는 방식의 여행을 하는 사람들에게 추천!
+									
+									*포함되어 있는 비용
+									- 각종 입장료, 주요 교통비 (시내 교통비 제외), 식비, 숙박비
+									
+									*제외된 비용
+									- 비행기 티켓값, 시내교통비, 에펠탑과 개선문은 올라가지 않았기 때문에 비용에서 제외.
+								</div>
 								<ul class="post-shares">
 									<li><a href="#"><i class="rounded-x icon-like"></i><span>10</span></a></li>
 									<li><a href="#"><i class="rounded-x icon-speech"></i><span>5</span></a></li>
@@ -238,7 +189,11 @@
 						</select>
 						
 						<h4><i class="fa fa-calendar"></i>여행기간</h4>
-						<input class="form-control margin-bottom-20" type="range">
+						<input type="text" id="day-range-value" readonly style="border: 0; color: #f6931f; font-weight: bold;">
+						<div id="day-range" class="margin-bottom-20"></div>
+						
+						<button>검색적용</button>
+
 					</div>
 
 				</div><!-- End Blog Sidebar -->
@@ -271,6 +226,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/modernizr.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/app.js"></script>
