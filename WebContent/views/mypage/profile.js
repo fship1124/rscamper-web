@@ -1,6 +1,7 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('ProfileController', function($scope, $http) {
+angular.module("myApp", ["ngSimpleUpload"])
+.controller('MyController', function($scope, $http) {
+	// 세션에서 유저정보 가져오기
 	$scope.user = sessionStorageService.getObject("user");
 
 	// 수정 모달에 올라갈 현재 프로필 정보 세팅
@@ -18,13 +19,13 @@ angular.module("myApp", [])
 		};
 	});
 	
-	// 수정폼 띄우기
-	$scope.openProfileUpdateFormModal = function() {
-		// 모달 오픈
+	// 수정폼 모달 띄우기
+	$scope.openProfileUpdateFormModal = function () {
 		$('#updateProfileFormModal').modal('show')
 	};
 	
-	$scope.updateProfile = function() {
+	// 프로필 수정 함수
+	$scope.updateProfile = function () {
 	    // 유효성 체크
 	    if (!validCheckService("displayName", $scope.updateUser.displayName)) {return false;}
 	    if (!validCheckService("phoneNumber", $scope.updateUser.phoneNumber)) {return false;}
@@ -33,54 +34,133 @@ angular.module("myApp", [])
 	    if (!validCheckService("birthday", $scope.updateUser.birthday)) {return false;}
 		
 	    // DB에 업데이트
-	    updateAccount($scope.updateUser, function (result) {
-	    	$http({
-	    		url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
-	    		method: "GET"
-	    	}).success(function (result) {
-    			sessionStorageService.setObject('user', result);
-    			$scope.user = result;
-	    	}).error(function (error) {
-	    		console.log(error)
-	    	}).finally(function() {
-	    		$('#updateProfileFormModal').modal('hide')
-			})
-	    });
-	};
-
+        $http({
+            url: myConfig.serverUrl + "/user/update/oneUser",
+            method: "POST",
+            data: $.param({
+                userUid: $scope.updateUser.uid,
+                displayName: $scope.updateUser.displayName,
+                birthday: $scope.updateUser.birthday,
+                introduce: $scope.updateUser.introduce,
+                phoneNumber: $scope.updateUser.phoneNumber,
+                websiteUrl: $scope.updateUser.websiteUrl,
+                locationNo: $scope.updateUser.locationNo,
+                gender: $scope.updateUser.gender
+            }),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+            }
+        })
+        .success(function () {
+        	 $http({
+                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 method: "GET"
+             })
+             .success(function (result) {
+             	sessionStorageService.setObject("user", result);
+             	$scope.user = sessionStorageService.getObject("user");
+             	$('#updateProfileFormModal').modal('hide');
+             });
+        });
+	}
 	
+	
+	
+	/** ===========프로필 이미지 관련============================ */
+	// 프로필 사진 업로드 이미지 미리보기 이벤트
+	$('#profileImageFile').on('change', function(){
+		if(img_validation(this)) {
+			readURL(this, $('#profileImage'));
+		} else {
+			$(this).val("");
+			$('#profileImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
+		};
+	});
+	// 프로필 사진 변경 모달창 열기
 	$scope.updateProfileImage = function () {
-		alert("프로필사진");
+		$scope.uploadProfileUrl = myConfig.serverUrl + "/user/upload/profileImage"
+		$("#profileImage").val("");
+		$("#profileImageFile").val("");
+		$('#profileImageUploadFormModal').modal('show');
+	};
+	// 프로필 업로드 완료 콜백
+	$scope.uploadProfileCallBack = function (result) {
+        var data = JSON.parse(result);
+        var userPhoto = {
+          userUid: $scope.user.userUid,
+          type: data.type,
+          path: data.path,
+          size: data.size
+        }
+        $scope.updateImage(userPhoto, "/user/update/profileImage")
 	};
 	
-	$scope.updateBackgroundImage = function () {
-		alert("배경사진");
-	}
+	// 배경 파일 업로드 이미지 미리보기 이벤트
+	$('#BGImageFile').on('change', function(){
+		if(img_validation(this)) {
+			readURL(this, $('#BGImage'));
+		} else {
+			$(this).val("");
+			$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
+		};
+	});
+	// 배경 사진 변경 모달창 열기
+	$scope.updateBGImage = function () {
+		$scope.uploadBGUrl = myConfig.serverUrl + "/user/upload/bgImage"
+		$("#BGImageFile").val("");
+		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
+		$('#BGImageUploadFormModal').modal('show');
+	};
+	// 배경사진 업로드 완료 콜백
+	$scope.uploadBGCallBack = function (result) {
+        var data = JSON.parse(result);
+        var userPhoto = {
+          userUid: $scope.user.userUid,
+          type: data.type,
+          path: data.path,
+          size: data.size
+        }
+        $scope.updateImage(userPhoto, "/user/update/bgImage")
+	};
 	
-	// TODO : 업로드 이미지 정보 DB에 넣기
-	$scope.updateImageDB = function (userPhoto, successCB) {
-	    $http({
-	    	url: myConfig.serverUrl + "/user/update/profileImage",
-	    	method: "POST",
-	    	data: $.param({
-	    		userUid: userPhoto.userUid,
-		        type: userPhoto.type,
-		        path: userPhoto.path,
-		        size: userPhoto.size
-		    }),
-		    headers: {
-		      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-		    }
-	    }).success(successCB);
-	}
-	
-	// TODO : 이미지업로드
-	$scope.uploadImage = function () {
-		
-	}
-	
+	// 사진 데이터베이스 업데이트
+    $scope.updateImage = function (userPhoto, url) {
+        $http({
+          url: myConfig.serverUrl + url,
+          method: "POST",
+          data: $.param({
+            userUid: userPhoto.userUid,
+            type: userPhoto.type,
+            path: userPhoto.path,
+            size: userPhoto.size
+          }),
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        })
+        .success(function () {
+         	 $http({
+                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 method: "GET"
+             })
+             .success(function (result) {
+             	sessionStorageService.setObject("user", result);
+             	$scope.user = sessionStorageService.getObject("user");
+        		$("#BGImageFile").val("");
+        		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
+        		$('#BGImageUploadFormModal').modal('hide');
+        		$("#profileImage").attr("src", "/rscamper-web/resources/img/default/default-image.png");
+        		$("#profileImageFile").val("");
+        		$('#profileImageUploadFormModal').modal('hide');
+             });
+        });
+   };
+   
+   
+   
 })
 
+// 성별 필터
 .filter("gender", function() {
 	return gender
 	function gender (gen) {
@@ -92,6 +172,22 @@ angular.module("myApp", [])
 	}
 })
 
+// 제공업체 필터
+.filter("provider", function() {
+	return provider
+	function provider (providerName) {
+		switch (providerName) {
+		case "twitter.com" :
+			return "트위터"
+		case "google.com" :
+			return "구글"
+		case "facebook.com" :
+			return "페이스북"
+		case "password" :
+			return "이메일"
+		}
+	}
+})
 
 
 // 시작 메소드

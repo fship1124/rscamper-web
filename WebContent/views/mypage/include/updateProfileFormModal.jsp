@@ -14,21 +14,21 @@
 							<label class="label"><strong>사용자명</strong></label>
 							<label class="input"> 
 								<i class="icon-prepend fa fa-user"></i>
-								<input type="text" name="text" ng-model="updateUser.displayName">
+								<input type="text" ng-model="updateUser.displayName">
 							</label>
 						</section>
 						<section>
-							<label class="label" for="phoneNumber"><strong>전화번호</strong></label> 
+							<label class="label"><strong>전화번호</strong></label> 
 							<label class="input">
 								<i class="icon-prepend fa fa-phone"></i> 
-								<input type="text" id="phoneNumber" ng-model="updateUser.phoneNumber">
+								<input type="text" ng-model="updateUser.phoneNumber">
 							</label>
 						</section>
 						<section>
-							<label class="label" for="birthDay"><strong>생년월일</strong></label>
+							<label class="label"><strong>생년월일</strong></label>
 							<label class="input"> 
 								<i class="icon-prepend fa fa-calendar"></i>
-								<input type="date" id="birthDay" ng-model="updateUser.birthday">
+								<input type="date" ng-model="updateUser.birthday">
 							</label>
 						</section>
 						<section>

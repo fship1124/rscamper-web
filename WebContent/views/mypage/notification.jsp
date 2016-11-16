@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 <!-- CSS Page Style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/shortcode_timeline2.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/profile.css">
 
 <!-- CSS Theme -->
@@ -73,11 +74,73 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp">
-			<div class="row">
+		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
+		
+			<!-- 배경 사진 업로드 모달 -->
+			<%@include file="include/BGUploadFormModal.jsp"%>
+			
+			<!-- 프로필 사진 업로드 모달 -->
+			<%@include file="include/profileUploadFormModal.jsp"%>
+		
+			<!-- 사용자 사진 및 배경사진 include -->
+			<%@include file="include/userPhoto.jsp"%>
+		
+			<div class="row" style="margin-top: 30px;">
 			
 				<!--Left Sidebar-->
 				<%@include file="include/left_sidebar.jsp"%>
+				
+				<!-- 알림 시작 -->
+				<div class="col-md-9">
+					<ul class="timeline-v2">
+					
+						<li class="equal-height-columns">
+							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
+							<i class="cbp_tmicon rounded-x hidden-xs"></i>
+							<div class="cbp_tmlabel equal-height-column">
+								<h2>ㅎㅎㅎ</h2>
+								<div class="row">
+									<div class="col-md-4">
+										<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
+										<div class="md-margin-bottom-20"></div>
+									</div>
+									<div class="col-md-8">
+										<p>ㅋㅋㅋㅋ</p>
+										<p>ㅋㅋㅋㅋ</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						
+						<li class="equal-height-columns">
+							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 14일</span> <span>월요일</span></div>
+							<i class="cbp_tmicon rounded-x hidden-xs"></i>
+							<div class="cbp_tmlabel equal-height-column">
+								<h2>First achievements</h2>
+								<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
+								<div class="row">
+									<div class="col-sm-6">
+										<ul class="list-unstyled">
+											<li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+											<li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+										</ul>
+									</div>
+									<div class="col-sm-6">
+										<ul class="list-unstyled">
+											<li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+											<li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- 알림 끝 -->
 				
 				
 			</div><!--/end row-->
@@ -136,6 +199,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="notification.js"></script>
 	
 </body>

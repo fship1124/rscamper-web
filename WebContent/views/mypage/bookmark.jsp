@@ -50,7 +50,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="notification.js">
+<link rel="stylesheet" href="bookmark.css">
 
 </head>
 
@@ -73,8 +73,18 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp">
-			<div class="row">
+		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
+			
+			<!-- 배경 사진 업로드 모달 -->
+			<%@include file="include/BGUploadFormModal.jsp"%>
+			
+			<!-- 프로필 사진 업로드 모달 -->
+			<%@include file="include/profileUploadFormModal.jsp"%>
+		
+			<!-- 사용자 사진 및 배경사진 include -->
+			<%@include file="include/userPhoto.jsp"%>
+			
+			<div class="row" style="margin-top: 30px;">
 			
 				<!--Left Sidebar-->
 				<%@include file="include/left_sidebar.jsp"%>
@@ -133,6 +143,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="bookmark.js"></script>
 	
 </body>

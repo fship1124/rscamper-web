@@ -72,24 +72,25 @@
 		</div>
 		<!--=== 사이트맵 끝 ===-->
 
-		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp" ng-controller="ProfileController">
-		
-		<!-- 회원 정보 수정 모달 include -->
-		<%@include file="include/updateProfileFormModal.jsp"%>
-		
-		<div class="parallax-quote parallaxBg" style="background-image:url('{{user.bgPhotoUrl}}');">
-			<div class="container">
-				<div class="parallax-quote-in">
-					<img class="rounded-x" ng-src="{{user.photoUrl}}" id="profile_image" ng-click="updateProfileImage();">
-					<h1 style="color: white;" ng-bind="user.displayName">RSCAMPER</h1>
-					<button class="btn-u btn-u-light-green" ng-click="updateBackgroundImage();">배경화면 바꾸기</button>
-				</div>
-			</div>
-		</div>
+		<!--=== 바디 ===-->
+		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
 		
 		
+			<!-- 배경 사진 업로드 모달 -->
+			<%@include file="include/BGUploadFormModal.jsp"%>
+			
+			<!-- 프로필 사진 업로드 모달 -->
+			<%@include file="include/profileUploadFormModal.jsp"%>
+		
+			<!-- 회원 정보 수정 모달 include -->
+			<%@include file="include/updateProfileFormModal.jsp"%>
+			
+			<!-- 사용자 사진 및 배경사진 include -->
+			<%@include file="include/userPhoto.jsp"%>
+		
+			<!-- 메뉴 및  프로필 내용 -->
 			<div class="row" style="margin-top: 30px;">
+				
 				<!--Left Sidebar-->
 				<%@include file="include/left_sidebar.jsp"%>
 				
@@ -105,11 +106,14 @@
 							<div class="tab-content">
 								
 								<div id="profile" class="profile-edit tab-pane fade in active">
-									<h2 class="heading-md">{{user.displayName}} 님의 프로필</h2>
+									<h2 class="heading-md"><a>{{user.displayName}}</a>님의 프로필</h2>
 									<br>
 									<dl class="dl-horizontal">
 										<dt><strong>UID</strong></dt>
 										<dd ng-bind="user.userUid"></dd>
+										<hr>
+										<dt><strong>계정 유형</strong></dt>
+										<dd ng-bind="user.providerName | provider"></dd>
 										<hr>
 										<dt><strong>사용자명</strong></dt>
 										<dd ng-bind="user.displayName"></dd>
@@ -127,7 +131,7 @@
 										<dd ng-bind="user.websiteUrl"></dd>
 										<hr>
 										<dt><strong>생년월일</strong></dt>
-										<dd ng-bind="user.birthday | date : 'yyyy년 MM월 dd일'"></dd>
+										<dd ng-bind="user.birthday | date : 'yyyy년 MM월 dd일 HH:mm:ss'"></dd>
 										<hr>
 										<dt><strong>성별</strong></dt>
 										<dd ng-bind="user.gender | gender"></dd>
@@ -135,13 +139,13 @@
 										<dt><strong>자기소개</strong></dt>
 										<dd><pre ng-bind="user.introduce"></pre></dd>
 										<hr>
-										<dt><strong>회원가입일시</strong></dt>
+										<dt><strong>회원가입일자</strong></dt>
 										<dd ng-bind="user.regDate | date : 'yyyy년 MM월 dd일 HH:mm:ss'"></dd>
 										<hr>
 									</dl>
 									<button type="button" class="btn-u" ng-click="openProfileUpdateFormModal();">프로필 수정</button>
 								</div>
-
+		
 								<div id="passwordTab" class="profile-edit tab-pane fade">
 									<h2 class="heading-md">비밀번호 변경</h2>
 									<br>
@@ -182,11 +186,11 @@
 										<button type="button" class="btn-u btn-u-default">취소</button>
 									</form>
 								</div>
-
+		
 								<div id="settings" class="profile-edit tab-pane fade">
 									<h2 class="heading-md">계정 설정</h2>
 									<br>
-									<form class="sky-form" id="settingForm" action="#">
+									<form class="sky-form" id="sky-form3" action="#">
 										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>이메일 알림</label>
 										<hr>
 										<label class="toggle"><input type="checkbox" checked="" name="checkbox-toggle-1"><i class="no-rounded"></i>나에게 댓글 달았을시 알림</label>
@@ -204,13 +208,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- End Profile Content -->
-			</div><!--/end row-->
-		</div>
-		
-		<!--=== End Profile ===-->
-		<!--=== 내용 끝 ===-->
+				</div><!-- End Profile Content -->
+			</div><!--end row-->
+		</div><!--=== 내용 끝 ===-->
 		
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
@@ -268,6 +268,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="profile.js"></script>
 	
 </body>

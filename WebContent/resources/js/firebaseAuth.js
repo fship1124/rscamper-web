@@ -252,32 +252,6 @@ function resignAccount() {
 	}
 };
 
-// 회원정보 수정
-function updateAccount (userData, successCB) {
-    // 유효성 체크
-	$.ajax({
-		  type: "POST",
-		  url: myConfig.serverUrl + "/user/update/oneUser",
-		  dataType : 'json',
-		  data: {
-		    userUid: userData.uid,
-		    displayName: userData.displayName,
-		    birthday: userData.birthday,
-		    introduce: userData.introduce,
-		    phoneNumber: userData.phoneNumber,
-		    websiteUrl: userData.websiteUrl,
-		    locationNo: userData.locationNo,
-		    gender: userData.gender
-		  },
-		  error : function(err) {
-		  	alert("에러발생");
-		  },
-		  success : function(result) {
-			  successCB(result);
-		  }
-	})
-};
-
 // 로케이션 리스트 가져오는 메소드
 function getLocationList (successCB) {
   $.ajax({
