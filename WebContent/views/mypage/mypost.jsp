@@ -50,7 +50,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="my_post.css">
+<link rel="stylesheet" href="mypost.css">
 
 </head>
 
@@ -144,7 +144,7 @@
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
-	<script type="text/javascript" src="my_post.js"></script>
+	<script type="text/javascript" src="mypost.js"></script>
 	
 </body>
 </html>
