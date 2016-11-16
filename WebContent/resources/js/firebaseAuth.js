@@ -1,9 +1,22 @@
-// 로그아웃
+// 메인페이지로 이동
+function redirectToMain() {
+	location.href = "/rscamper-web/views/main.jsp";
+}
+
+// 로그아웃 - 물음
+function logout() {
+	if(confirm("로그아웃 하시겠습니까?")) {
+		signout();
+	}
+}
+
+// 로그아웃 - 실행
 function signout() {
     firebase.auth().signOut();
-
     // 세션에 유저정보 삭제
     sessionStorageService.remove('user');
+    // 로그아웃하면 메인페이지로 이동;
+    redirectToMain();
 };
 
 // 이메일 로그인
@@ -15,11 +28,12 @@ function signinEmail() {
     	
         var email = document.getElementById('signin-email').value;
         var password = document.getElementById('signin-password').value;
+        // TODO: 유효성 체크
+        
         
         // 파이어베이스 이메일 로그인 메소드
         firebase.auth().signInWithEmailAndPassword(email, password)
 	        .then(function (result) {
-	        	
 	        	// 이메일 인증 확인
 	            if (!result.emailVerified) {
 	            	if(confirm("이메일 인증이 필요합니다. 인증메일을 다시 받으시겠습니까?") == true) {
@@ -33,6 +47,9 @@ function signinEmail() {
 	            	return;
 	            }
 	            alert("로그인 되었습니다.");
+	            // 로그인하면 메인 페이지로 이동
+	            redirectToMain();
+	            
 	        })
 	        .catch(function(error) {
 	            if (error.code === 'auth/wrong-password') {
@@ -70,7 +87,6 @@ function signinProvider(providerName) {
 	            if (result.credential.secret) {
 	                secret = result.credential.secret;
 	            }
-	            
 	            // 외부로그인 정보 DB에 넣기
 	            $.ajax({
 	            	type: "POST",
@@ -91,7 +107,7 @@ function signinProvider(providerName) {
 						alert(err);
 					},
 					success : function(result) {
-						
+						redirectToMain();
 					}
 	            });
 	        })
@@ -113,12 +129,13 @@ function signinProvider(providerName) {
     }
 };
 
-
 // 이메일 회원가입
 function signupEmail() {
     var displayName = document.getElementById('signup-username').value;
     var email = document.getElementById('signup-email').value;
     var password = document.getElementById('signup-password').value;
+    
+    // TODO: 유효성 체크
     
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function (result) {
@@ -176,11 +193,14 @@ function sendEmailVerification() {
     firebase.auth().currentUser.sendEmailVerification().then(function() {
         alert('인증메일이 발송되었습니다.!');
     });
-}
+};
 
 // 비번 재생성 메일 보내는 함수
 function sendPasswordReset() {
     var email = document.getElementById('reset-email').value;
+    
+    // TODO: 유효성 체크
+    
     firebase.auth().sendPasswordResetEmail(email).then(function() {
         alert('비밀번호 초기화 메일이 발송 되었습니다. 이메일을 확인해 주세요!');
         $('.cd-user-modal').removeClass('is-visible');
@@ -194,51 +214,7 @@ function sendPasswordReset() {
         }
         console.log(error);
     });
-}
-
-// 로그인과 로그아웃 상태 감지
-function initApp() {
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-        	$.ajax({
-        		type: "GET",
-        		url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + user.uid,
-        		dataType : 'json',
-        	    error : function(err) {
-                    alert(err);
-        		},
-        		success : function(result) {
-        			// 세션에 유저정보 등록
-        			sessionStorageService.setObject('user', result);
-        			if (result.displayName) {
-        				$('#mypageTitle').html(result.displayName);
-        			}
-        		}
-        	});
-        	
-        	  // 로그인 모달창 닫기
-            $('.cd-user-modal').removeClass('is-visible');
-
-            // UI 로그인상태로 변경
-            $('#loginBtn').css('display', 'none');
-            $('#logoutBtn').css('display', 'inline');
-            $('#mypage').css('display', 'block');
-
-        } else {
-            // UI 로그아웃상태로 변경
-            $('#loginBtn').css('display', 'inline');
-            $('#logoutBtn').css('display', 'none');
-            $('#mypage').css('display', 'none');
-            $('#mypageTitle').html('마이페이지');
-        }
-    });
-
-    // 로그인 관련 이벤트 등록
-    $('#signin-email-btn').on('click', signinEmail);
-    $('#signup-email-btn').on('click', signupEmail);
-    $('#reset-password-btn').on('click', sendPasswordReset);
-}
-
+};
 
 //회원탈퇴
 function resignAccount() {
@@ -267,35 +243,93 @@ function resignAccount() {
 };
 
 // 회원정보 수정
-function updateAccount (userData, successCB) {
-console.log(userData);
-$http({
-  url: MyConfig.backEndURL + "/user/update/oneUser",
-  method: "POST",
-  data: $.param({
-    userUid: userData.uid,
-    displayName: userData.displayName,
-    birthday: userData.birthday,
-    introduce: userData.introduce,
-    phoneNumber: userData.phoneNumber,
-    websiteUrl: userData.websiteUrl,
-    locationNo: userData.locationNo
-  }),
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
-  }
-}).success(successCB);
+function updateAccount (userData) {
+	
+	// TODO: 유효성 체크
+	
+	console.log(userData);
+	$.ajax({
+		  type: "POST",
+		  url: MyConfig.backEndURL + "/user/update/oneUser",
+		  dataType : 'json',
+		  data: {
+		    userUid: userData.uid,
+		    displayName: userData.displayName,
+		    birthday: userData.birthday,
+		    introduce: userData.introduce,
+		    phoneNumber: userData.phoneNumber,
+		    websiteUrl: userData.websiteUrl,
+		    locationNo: userData.locationNo
+		  },
+		  error : function(err) {
+		  	alert("에러발생");
+		  },
+		  success : function(result) {
+			alert("프로필 수정 완료");
+		  }
+	})
+};
 
-}
+// TODO : 프로필 사진 변경
+// TODO : 배경화면 변경
 
 // 로케이션 리스트 가져오는 메소드
-function getLocationList (successCB) {
-  $http({
-    url: MyConfig.backEndURL + "/user/select/locations",
-    method: "GET",
-  }).success(successCB);
-}
+function getLocationList () {
+  $.ajax({
+	  type: "GET",
+	  url: MyConfig.backEndURL + "/user/select/locations",
+	  dataType: "json",
+	  error : function (err) {
+		  
+	  },
+	  success : function (result) {
+		  
+	  }
+  })
+};
 
+//로그인과 로그아웃 상태 감지
+function initApp() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+        	$.ajax({
+        		type: "GET",
+        		url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + user.uid,
+        		dataType : 'json',
+        	    error : function(err) {
+                    alert(err);
+        		},
+        		success : function(result) {
+        			// 세션에 유저정보 등록
+        			sessionStorageService.setObject('user', result);
+        			if (result.displayName) {
+        				$('#mypageTitle').html(result.displayName);
+        			}
+        			// 로그인 모달창 닫기
+                    $('.cd-user-modal').removeClass('is-visible');
+
+                    // UI 로그인상태로 변경
+                    $('#loginBtn').css('display', 'none');
+                    $('#logoutBtn').css('display', 'inline');
+                    $('#mypage').css('display', 'block');
+        		}
+        	});
+        } else {
+            // UI 로그아웃상태로 변경
+            $('#loginBtn').css('display', 'inline');
+            $('#logoutBtn').css('display', 'none');
+            $('#mypage').css('display', 'none');
+            $('#mypageTitle').html('마이페이지');
+        }
+    });
+
+    // 로그인 관련 이벤트 등록
+    $('#signin-email-btn').on('click', signinEmail);
+    $('#signup-email-btn').on('click', signupEmail);
+    $('#reset-password-btn').on('click', sendPasswordReset);
+};
+
+// 시작
 window.onload = function() {
     initApp();
 };
