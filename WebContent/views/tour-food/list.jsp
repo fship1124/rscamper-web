@@ -13,43 +13,35 @@
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="rscamper">
+<meta name="author" content="rscamper">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../../favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 <!-- Web Fonts -->
-<link rel='stylesheet' type='text/css'
-	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet"
-	href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet"
-	href="../../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
-<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="default.css">

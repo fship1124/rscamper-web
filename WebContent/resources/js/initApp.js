@@ -5,7 +5,7 @@ var myConfig = {
 };
 
 //이미지 유효성 체크
-function img_validation(input) { 
+function img_validation(input) {
 	var image = input.value;
     if (image != "" ) {
         var ext = image.slice(image.lastIndexOf(".") + 1).toLowerCase();

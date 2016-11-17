@@ -40,7 +40,9 @@
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
+<!-- 사용자 정의 CSS -->
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="main.css">
 
