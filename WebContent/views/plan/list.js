@@ -21,10 +21,10 @@ tourPlanApp
 
 		// TODO : 여행일정 리스트 가져오기
 
-		// 정렬 : 필터로
+		// 정렬 : 쿼리로
 		$scope.align = {
-			standard: 1,
-			order: 1
+			standard: "REG_DATE",
+			order: "DESC"
 		};
 
 		// 검색 : 쿼리로
@@ -40,14 +40,13 @@ tourPlanApp
 		// 검색 옵션 데이터
 		$scope.optionDatas = {
 			standardList: [
-				{standardValue: 1, standardName: "날짜"},
-				{standardValue: 2, standardName: "조회수"},
-				{standardValue: 3, standardName: "좋아요수"},
-				{standardValue: 4, standardName: "등록장소수"}
+				{standardValue: "REG_DATE", standardName: "날짜"},
+				{standardValue: "LIKE_CNT", standardName: "좋아요수"},
+				{standardValue: "LOCATION_CNT", standardName: "등록장소수"}
 			],
 			orderList: [
-				{orderValue: 1, orderName: "오름차순"},
-				{orderValue: 2, orderName: "내림차순"}
+				{orderValue: "DESC", orderName: "내림차순"},
+				{orderValue: "ASC", orderName: "오름차순"}
 			],
 			amountList: [
 				{amountValue: 10, amountName: "10개"},
@@ -70,7 +69,7 @@ tourPlanApp
 		$scope.getPlanList = function () {
 			console.log($scope.searchParams);
 			$http({
-				url: MyConfig.backEndURL + "tourPlan/select/tourPlanList",
+				url: MyConfig.backEndURL + "/tourPlan/select/tourPlanList",
 				method: "POST",
 				data: $.param($scope.searchParams),
 				headers: {

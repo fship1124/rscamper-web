@@ -71,14 +71,16 @@
 		<!--=== 내용 ===-->
 		<div class="container content-md" style="padding-top: 50px;" ng-app="tourPlanApp" ng-controller="ListController">
 
+			<!-- 일정 및 사이드바 -->
 			<div class="row">
 
-				<!-- 리스트 컨탠츠 -->
+				<!-- 여행일정 전체 -->
 				<div class="col-md-9">
 
+					<!-- 여행일정 리스트 DIV -->
 					<div class="row">
 
-						<!-- 리스트 한개 -->
+						<!-- 여행일정 한개 -->
 						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
 							<img class="img-responsive" ng-if="plan.cover" ng-src="plan.cover" >
 							<img class="img-responsive" ng-if="!plan.cover" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
@@ -97,9 +99,9 @@
 									<li><a href="#"><i class="rounded-x icon-flag"></i><span ng-bind="plan.locationCnt"></span></a></li>
 								</ul>
 							</div>
-						</div>
+						</div><!-- 여행일정 한개 끝 -->
 
-					</div><!--/end row-->
+					</div><!-- 여행일정 리스트 DIV -->
 
 					<!-- 페이징 -->
 					<div class="text-center">
@@ -112,7 +114,7 @@
 						</ul>
 					</div><!-- 페이징 끝 -->
 
-				</div><!-- 일정 리스트 끝 -->
+				</div><!-- 여행일정 전체 끝 -->
 
 
 				<!-- 사이드 바 -->
@@ -141,15 +143,14 @@
 						<div id="day-range" class="margin-bottom-30"></div>
 
 						<button class="btn rounded btn-block btn-bitcoin-inversed" ng-click="getPlanList();">
-							<i class="fa fa-list-ul"></i> 검색적용
+							<i class="fa fa-list-ul"></i> 검색 및 정렬 적용
 						</button>
 
 					</div>
 
-				</div><!-- End Blog Sidebar -->
+				</div><!-- 사이드바 끝 -->
 
-			</div>
-
+			</div><!-- 일정 및 사이드바 끝 -->
 
 		</div>
 		<!--=== 내용 끝 ===-->
