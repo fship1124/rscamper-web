@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="makeplan.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -65,7 +65,7 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content-md" ng-app="TourPlanApp" ng-controller="MakePlanController">
+		<div class="container content-md" ng-app="TourPlanApp" ng-controller="DetailController">
 			<div id="left_content"></div>
 			<div id="right_content"></div>
 		</div>
@@ -120,7 +120,7 @@
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
 	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
-	<script type="text/javascript" src="makeplan.js"></script>
+	<script type="text/javascript" src="detail.js"></script>
 
 </body>
 </html>

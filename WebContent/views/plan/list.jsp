@@ -69,13 +69,24 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content-md" style="padding-top: 50px;" ng-app="tourPlanApp" ng-controller="ListController">
+		<div class="container content-md" style="padding-top: 20px;" ng-app="TourPlanApp" ng-controller="ListController">
+
+			<!-- 여행일정 만들기 폼 모달 -->
+			<%@include file="include/createTourPlanFormModal.jsp"%>
 
 			<!-- 일정 및 사이드바 -->
 			<div class="row">
 
+				<!-- 표시해줄 일정이 없을때 -->
+				<div class="col-md-9" ng-if="planList.length == 0">
+					<div>
+						<img src="">
+						일정이 없습니다. ㅜㅜ
+					</div>
+				</div>
+
 				<!-- 여행일정 전체 -->
-				<div class="col-md-9">
+				<div class="col-md-9" ng-if="planList.length > 0">
 
 					<!-- 여행일정 리스트 DIV -->
 					<div class="row">
@@ -84,19 +95,20 @@
 						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
 							<img class="img-responsive" ng-if="plan.cover" ng-src="plan.cover" >
 							<img class="img-responsive" ng-if="!plan.cover" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
-							<div style="position: absolute; top: 40px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
-							<div class="news-v3-in-sm" style="border: 1px solid lightgray;">
+							<div style="position: absolute; top: 50px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
+							<div class="news-v3-in-sm main-counters" style="border: 1px solid lightgray;">
 								<ul class="list-inline posted-info">
-									<li ng-bind="plan.userUid"></li>
-									<li ng-bind="plan.datePeriod"></li>
+									<li ng-bind="plan.displayName"></li>
+									<li ng-bind="plan.period"></li>
 									<li ng-bind="plan.regDate | timesince : 'kr'"></li>
 								</ul>
-								<h2><a href="{{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.title"></a></h2>
+								<h2><a href="${pageContext.request.contextPath}/views/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.title"></a></h2>
 								<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
 								<ul class="post-shares">
-									<li><a href="#"><i class="rounded-x icon-like"></i><span ng-bind="plan.likeCnt"></span></a></li>
-									<li><a href="#"><i class="rounded-x icon-speech"></i><span ng-bind="plan.commentCnt"></span></a></li>
-									<li><a href="#"><i class="rounded-x icon-flag"></i><span ng-bind="plan.locationCnt"></span></a></li>
+									<li><a href="#"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
+									<li><a href="#"><i class="rounded-2x fa fa-comments-o"></i><span ng-bind="plan.commentCnt"></span></a></li>댓글
+									<li><a href="#"><i class="rounded-2x fa fa-pencil-square-o"></i><span ng-bind="plan.postCnt"></span></a></li>포스트
+									<li><a href="#"><i class="rounded-2x fa fa-map-marker"></i><span ng-bind="plan.locationCnt"></span></a></li>관광지
 								</ul>
 							</div>
 						</div><!-- 여행일정 한개 끝 -->
@@ -106,11 +118,9 @@
 					<!-- 페이징 -->
 					<div class="text-center">
 						<ul class="pagination">
-							<li><a href="#">«</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li class="active"><a href="#">3</a></li>
-							<li><a href="#">»</a></li>
+							<li><a href="javascript:void(0);" ng-click="pnPage(false)">«</a></li>
+								<li ng-repeat="pageNumber in pageArr" ng-class="{true: 'active'}[pageNumber == searchParams.pageNo]"><a href="javascript:void(0);" ng-click="noPage(pageNumber)" ng-bind="pageNumber"></a></li>
+							<li><a href="javascript:void(0);" ng-click="pnPage(true)">»</a></li>
 						</ul>
 					</div><!-- 페이징 끝 -->
 
@@ -118,13 +128,21 @@
 
 
 				<!-- 사이드 바 -->
-				<div class="col-md-3 ">
+				<div class="col-md-3">
+
+					<!-- 일정 만들기 -->
+					<div class="bg-light">
+						<h4><i class="fa fa-map-signs"></i>여행일정 만들기</h4>
+						<button class="btn rounded btn-block btn-bitcoin-inversed" ng-click="createTourPlan();">
+							<i class="fa fa-map-signs"></i> 내 여행일정 만들기
+						</button>
+					</div>
 
 					<!-- 정렬 -->
 					<div class="bg-light">
 						<h4><i class="fa fa-sort"></i>정렬방식</h4>
-						<select class="form-control margin-bottom-10" ng-options="standard.standardValue as standard.standardName for standard in optionDatas.standardList" ng-model="align.standard"></select>
-						<select class="form-control" ng-options="order.orderValue as order.orderName for order in optionDatas.orderList" ng-model="align.order"></select>
+						<select class="form-control margin-bottom-10" ng-options="standard.standardValue as standard.standardName for standard in optionDatas.standardList" ng-model="searchParams.standard"></select>
+						<select class="form-control" ng-options="order.orderValue as order.orderName for order in optionDatas.orderList" ng-model="searchParams.order"></select>
 					</div>
 
 					<!-- 검색 -->
@@ -132,7 +150,7 @@
 						<h4><i class="fa fa-keyboard-o"></i>검색어</h4>
 						<input type="text" class="form-control margin-bottom-20" placeholder="검색어를 입력하세요" ng-model="searchParams.word">
 
-						<h4><i class="fa fa-sort-amount-asc"></i>표시수</h4>
+						<h4><i class="fa fa-th-large"></i>표시개수</h4>
 						<select class="form-control margin-bottom-20" ng-options="amount.amountValue as amount.amountName for amount in optionDatas.amountList" ng-model="searchParams.amount"></select>
 
 						<h4><i class="fa fa-sliders"></i>검색범위</h4>
@@ -154,6 +172,7 @@
 
 		</div>
 		<!--=== 내용 끝 ===-->
+
 
 
 		<!-- 푸터 include -->
@@ -180,6 +199,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/counter/waypoints.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/counter/jquery.counterup.min.js"></script>
+
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/app.js"></script>

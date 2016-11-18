@@ -1,5 +1,5 @@
 // 서비스
-tourPlanApp
+angular.module("TourPlanApp")
 // 설정 정보 관련 서비스
   .factory("MyConfig", function () {
     return {
