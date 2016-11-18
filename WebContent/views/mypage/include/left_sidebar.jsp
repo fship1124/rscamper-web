@@ -5,12 +5,12 @@
 			<a href="profile.jsp"><i class="fa fa-user"></i> 프로필</a>
 		</li>
 		<li id="notification_menu" class="list-group-item">
-			<span class="badge badge-u">1</span>
+			<span class="badge badge-u rounded">1</span>
 			<a href="notification.jsp"><i class="fa fa-bell"></i> 알림</a>
 		</li>
 		<li id="message_menu" class="list-group-item">
-			<span class="badge badge-u">1</span>
-			<a href="message.jsp"><i class="fa  fa-envelope"></i> 쪽지함</a>
+			<span class="badge badge-u rounded">1</span>
+			<a href="message.jsp"><i class="fa fa-envelope"></i> 쪽지함</a>
 		</li>
 		<li id="my_tour_plan_menu" class="list-group-item">
 			<a href="my_tour_plan.jsp"><i class="fa fa-calendar"></i> 여행일정</a>
