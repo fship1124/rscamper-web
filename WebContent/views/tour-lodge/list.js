@@ -121,11 +121,11 @@
 		
 		
 		function tourList(e) {
-			var contenttypeid = $("select[name=contenttypeid]").val();
+			var contenttypeid = '32';
 			var areaCode = $("select[name=areacode]").val();
 			var sigunguCode = $("select[name=sigungucode]").val();
-			var cat1 = $("select[name=cat1]").val();
-			var cat2 = $("select[name=cat2]").val();
+			var cat1 = 'B02';
+			var cat2 = 'B0201';
 			var cat3 = $("select[name=cat3]").val();
 			var pageNo = e;
 			

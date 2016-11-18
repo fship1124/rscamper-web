@@ -135,8 +135,6 @@
 			</div>
 
 
-
-
 			<div class="content" style="height: 800px; border: 1px solid blue;">
 				<table class="table" style="width: 100%; border: 1px solid blue;">
 					<thead>

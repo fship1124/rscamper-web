@@ -27,7 +27,7 @@ if (user == null) {
 function chat_room_list() {
 	
 	$.ajax({
-		url : 'http://localhost:8081/chat/room_list',
+		url : myConfig.imsiServerUrl + '/chat/room_list',
 		method : 'GET',
 		dataType : 'json',
 		success : function(result) {
@@ -71,41 +71,40 @@ function listRoomCreate(data) {
 		var locationVal =  $("select[name=locationid]").val();
 		var inputRoomTitle = $("#inputRoomTitle").val();
 		
-		window.location = "http://localhost:8081/chat/detail?room=" + room + "&location=" + locationVal + "&title=" + inputRoomTitle;
+		window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + room + "&location=" + locationVal + "&title=" + inputRoomTitle;
 	});
 	
 	
-	function intoRoom(e) {
-		console.dir(e);
-		console.log(e.getAttribute("data-loc"));
-		console.log(e.getAttribute("data-tle"));
-		console.log(e.getAttribute("data-room"));
-		
-		console.dir($(e).parent().siblings());
-		console.log($(e).parent().siblings(".room-name").text());
-		
-		var room_name = $(e).parent().siblings(".room-name").text();
-		
-		var obj = new Object();
-		
-		obj.userUid = user.userUid;
-		obj.chatRoomInfoNo = e.getAttribute("data-loc");
-		
-		console.log(obj.userUid);
-		console.log(obj.chatRoomInfoNo);
-		alert(obj.chatRoomInfoNo);
-		
-		$.ajax({
-			url : 'http://localhost:8081/chat/insert_user',
-			method : 'POST',
-			dataType : 'json',
-			data : obj,
-			success : function(result) {
-				console.dir(result);
-				window.location = "http://localhost:8081/chat/detail?room=" + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
-			}
-		});
-	}
+function intoRoom(e) {
+	console.dir(e);
+	console.log(e.getAttribute("data-loc"));
+	console.log(e.getAttribute("data-tle"));
+	console.log(e.getAttribute("data-room"));
+	
+	console.dir($(e).parent().siblings());
+	console.log($(e).parent().siblings(".room-name").text());
+	
+	var room_name = $(e).parent().siblings(".room-name").text();
+	
+	var obj = new Object();
+	
+	obj.userUid = user.userUid;
+	obj.chatRoomInfoNo = e.getAttribute("data-loc");
+	
+	console.log(obj.userUid);
+	console.log(obj.chatRoomInfoNo);
+	
+	$.ajax({
+		url : myConfig.imsiServerUrl + '/chat/insert_user',
+		method : 'POST',
+		dataType : 'json',
+		data : obj,
+		success : function(result) {
+			console.dir(result);
+			window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
+		}
+	});
+}
 		
 		
 		
