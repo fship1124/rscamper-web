@@ -126,8 +126,6 @@ angular.module("TourPlanApp")
 			$("#createTourPlanFormModal").modal("show");
 		};
 
-
-
 	})
 
 // 시작

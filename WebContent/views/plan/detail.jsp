@@ -44,7 +44,6 @@
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="detail.css">
-
 </head>
 
 <body class="header-fixed header-fixed-space-default">
