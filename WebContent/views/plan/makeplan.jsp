@@ -36,6 +36,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons-inversed.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/shortcode_timeline2.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
@@ -68,13 +73,194 @@
 		<%@include file="include/planHeader.jsp"%>
 
 		<!--=== 내용 ===-->
-		<div class="container" ng-app="TourPlanApp" ng-controller="MakePlanController">
-		
-			<div class="row">
-				<div>dd</div>
-				<div>dd</div>
+		<div id="writeTourPlan" ng-app="TourPlanApp" ng-controller="MakePlanController">
+			<div id="leftMenu">
+			
+				<!-- 저장 취소 -->
+				<div id="controllers">
+					<div class="bg-light">
+						<button class="btn rounded btn-block btn-android-inversed" ng-click="">
+							<i class="fa fa-floppy-o"></i> 저장하기
+						</button>
+						<button class="btn rounded btn-block btn-android-inversed" ng-click="">
+							<i class="fa fa-times"></i> 취소
+						</button>
+					</div>
+				</div>
+				
+				<!-- 일정 정보 -->
+				<div id="status" style="font-size: 14px;">
+					<ul class="list-group sidebar-nav-v1" >
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">9</span>
+							<a href="#"><i class="fa fa-map-marker"></i> 관광지</a>
+						</li>
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
+							<a href="#"><i class="fa fa-money"></i> 예산</a>
+						</li>
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">10</span>
+							<a href="#"><i class="fa fa-book"></i> 여행기</a>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- 일정 클릭시 나오는 장소 탭  -->
+				<div id="attractionTab">
+					
+					<div class="tab-v2">
+					
+						<!-- 탭 버튼 -->
+						<ul class="nav nav-tabs">
+							<li class="active" style="width:50%; text-align: center;">
+								<a href="#searchTab" data-toggle="tab"><span class="fa fa-search"></span> 검색</a>
+							</li>
+							<li style="width:50%; text-align: center;">
+								<a href="#bookmarkTab" data-toggle="tab"><span class="fa fa-bookmark-o"></span> 북마크</a>
+							</li>
+						</ul>
+						
+						<!-- 탭 내용 -->
+						<div class="tab-content">
+						
+							<!-- 검색 -->						
+							<div class="tab-pane fade in active" id="searchTab">
+								검색
+							</div><!-- 검색 끝 -->
+							
+							
+							<!-- 북마크 -->
+							<div class="tab-pane fade in" id="bookmarkTab">
+								북마크
+							</div><!-- 북마크 끝 -->
+							
+						</div>
+						
+					</div>
+				
+				</div>
+				
 			</div>
-		
+			
+			
+			<div id="rightContents">
+			
+				<!-- 콘텐츠 헤더 -->
+				<div id="contentHeader">
+					<form class="sky-form">
+						<fieldset>
+							<section>
+								<label class="input"> 
+									<i class="icon-prepend fa fa-pencil-square-o"></i>
+									<input type="text" placeholder="소제목을 입력해 주세요" ng-model="writeTourPlan.strapline">
+								</label>
+							</section>
+							<section>
+								<label class="textarea">
+									<textarea rows="5" placeholder="일정에 대한 간략한 소개글을 입력해 주세요" ng-model="writeTourPlan.introduce"></textarea>
+								</label>
+							</section>
+							<section>
+								<div class="row">
+									<section class="col col-5">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행시작일</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<i class="icon-prepend fa fa-calendar"></i>
+											<input type="date" ng-model="writeTourPlan.departureDate">
+										</label>
+									</section>
+									<section class="col col-5">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행종료일</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<i class="icon-prepend fa fa-calendar"></i>
+											<input type="date" ng-model="writeTourPlan.arriveDate">
+										</label>
+									</section>
+									<section class="col col-2">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행기간</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<input type="text" ng-model="writeTourPlan.period" readonly>
+										</label>
+									</section>
+								</div>
+							</section>
+						</fieldset>
+					</form>
+				</div>
+				
+				<!-- 콘텐츠 탭 -->
+				<div id="contentTab">
+					<div class="tab-v2">
+					
+						<!-- 탭 버튼 -->
+						<ul class="nav nav-tabs">
+							<li class="active" style="width:50%; text-align: center; font-size: 16px;">
+								<a href="#tourPlanTab" data-toggle="tab"><span class="fa fa-map-o"></span> 일정/맵</a>
+							</li>
+							<li style="width:50%; text-align: center; font-size: 16px;">
+								<a href="#tourStoryTab" data-toggle="tab"><span class="fa fa-book"></span> 스토리</a>
+							</li>
+						</ul>
+						
+						<!-- 탭 내용 -->
+						<div class="tab-content">
+						
+							<!-- 일정/맵 -->						
+							<div class="tab-pane fade in active" id="tourPlanTab">
+								
+								<div id="map">
+								
+								</div>
+								
+								<div id="timeTable">
+									
+								
+								</div>
+								
+							</div><!-- 일정/맵 끝 -->
+							
+							
+							<!-- 스토리 -->
+							<div class="tab-pane fade in" id="tourStoryTab">
+								<ul class="timeline-v2">
+								
+									<li class="equal-height-columns">
+										<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
+										<i class="cbp_tmicon rounded-x hidden-xs"></i>
+										<div class="cbp_tmlabel equal-height-column">
+											<h2>ㅎㅎㅎ</h2>
+											<div class="row">
+												<div class="col-md-4">
+													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
+													<div class="md-margin-bottom-20"></div>
+												</div>
+												<div class="col-md-8">
+													<p>ㅋㅋㅋㅋ</p>
+													<p>ㅋㅋㅋㅋ</p>
+												</div>
+											</div>
+										</div>
+									</li>
+									
+								</ul>
+							</div><!-- 스토리 끝 -->
+							
+							
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<!-- 댓글 -->
+				<div id=tourPlanComment>
+				</div>
+				
+			</div>
 		</div>
 		<!--=== 내용 끝 ===-->
 		

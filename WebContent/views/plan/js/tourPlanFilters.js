@@ -17,13 +17,13 @@ angular.module("TourPlanApp")
 		return provider
 		function provider (providerName) {
 			switch (providerName) {
-				case "twitter.com" :
+			case "twitter.com" :
 				return "트위터"
-				case "google.com" :
+			case "google.com" :
 				return "구글"
-				case "facebook.com" :
+			case "facebook.com" :
 				return "페이스북"
-				case "password" :
+			case "password" :
 				return "이메일"
 			}
 		}

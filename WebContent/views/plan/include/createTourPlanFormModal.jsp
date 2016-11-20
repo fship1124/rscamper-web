@@ -13,14 +13,14 @@
 						<section>
 							<label class="label"><strong>제목</strong></label>
 							<label class="input"> 
-								<i class="icon-prepend fa fa-user"></i>
+								<i class="icon-prepend fa fa-pencil-square-o"></i>
 								<input type="text" placeholder="제목을 입력해 주세요" ng-model="writeTourPlan.title">
 							</label>
 						</section>
 						<section>
 							<label class="label"><strong>소제목</strong></label>
 							<label class="input"> 
-								<i class="icon-prepend fa fa-user"></i>
+								<i class="icon-prepend fa fa-pencil-square-o"></i>
 								<input type="text" placeholder="소제목을 입력해 주세요" ng-model="writeTourPlan.strapline">
 							</label>
 						</section>
