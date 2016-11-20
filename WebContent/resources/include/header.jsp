@@ -11,20 +11,21 @@
 			<ul class="loginbar pull-right">
 				<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 				<li class="topbar-devider"></li>
-				<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
-					href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-				<li id="logoutBtn" style="display: none;"><a
-					href="javascript:void(0);" onclick="logout();"><i
-						class="fa fa-unlock-alt"></i> Logout</a></li>
+				<li id="loginBtn" class="cd-log_reg">
+					<a class="cd-signin" href="javascript:void(0);">
+					<i class="fa fa-lock"></i> Login</a>
+				</li>
+				<li id="logoutBtn" style="display: none;">
+					<a href="javascript:void(0);" onclick="logout();">
+					<i class="fa fa-unlock-alt"></i> Logout</a>
+				</li>
 			</ul>
 		</div>
 		<!-- End Topbar -->
 
 		<!-- Toggle get grouped for better mobile display -->
-		<button type="button" class="navbar-toggle" data-toggle="collapse"
-			data-target=".navbar-responsive-collapse">
-			<span class="sr-only">Toggle navigation</span> <span
-				class="fa fa-bars"></span>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			<span class="sr-only">Toggle navigation</span> <span class="fa fa-bars"></span>
 		</button>
 		<!-- End Toggle -->
 	</div>

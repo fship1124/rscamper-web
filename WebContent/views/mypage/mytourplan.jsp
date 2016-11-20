@@ -73,7 +73,7 @@
 		<!--=== 사이트맵 끝 ===-->
 		
 		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
+		<div class="container content profile" style="padding-top: 20px;" ng-app="myApp" ng-controller="MyController">
 		
 			<!-- 배경 사진 업로드 모달 -->
 			<%@include file="include/BGUploadFormModal.jsp"%>

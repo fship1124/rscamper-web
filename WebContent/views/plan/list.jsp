@@ -9,45 +9,49 @@
 <head>
 <title>여행일정</title>
 
-<!-- Meta -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="rscamper">
-<meta name="author" content="rscamper">
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="rscamper">
+	<meta name="author" content="rscamper">
 
-<!-- Favicon -->
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
-<!-- Web Fonts -->
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
-<!-- CSS Header and Footer -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
 
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/lib/jquery-ui-1.12.1/jquery-ui.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons-inversed.css">
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/lib/jquery-ui-1.12.1/jquery-ui.min.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons-inversed.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+	
+	
 
-<!-- CSS Theme -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
-<!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="list.css">
+	<!-- 사용자 정의 CSS -->
+	<link rel="stylesheet" href="list.css">
 
 </head>
 
@@ -77,14 +81,6 @@
 			<!-- 일정 및 사이드바 -->
 			<div class="row">
 
-				<!-- 표시해줄 일정이 없을때 -->
-				<div class="col-md-9" ng-if="planList.length == 0">
-					<div>
-						<img src="">
-						일정이 없습니다. ㅜㅜ
-					</div>
-				</div>
-
 				<!-- 여행일정 전체 -->
 				<div class="col-md-9" ng-if="planList.length > 0">
 
@@ -96,7 +92,7 @@
 							<img class="img-responsive" ng-if="plan.cover" ng-src="plan.cover" >
 							<img class="img-responsive" ng-if="!plan.cover" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
 							<div style="position: absolute; top: 50px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
-							<div class="news-v3-in-sm main-counters" style="border: 1px solid lightgray;">
+							<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
 								<ul class="list-inline posted-info">
 									<li ng-bind="plan.displayName"></li>
 									<li ng-bind="plan.period"></li>
@@ -114,7 +110,13 @@
 						</div><!-- 여행일정 한개 끝 -->
 
 					</div><!-- 여행일정 리스트 DIV -->
-
+					
+					<!-- 표시해줄 일정이 없을때 -->
+					<div class="col-md-9" style="text-align: center;" ng-if="planList.length == 0">
+						<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
+						<span>일정이 없습니다.</span>
+					</div>
+						
 					<!-- 페이징 -->
 					<div class="text-center">
 						<ul class="pagination">
@@ -160,7 +162,7 @@
 						<input type="text" id="day-range-value" readonly style="border: 0; color: #f6931f; font-weight: bold;">
 						<div id="day-range" class="margin-bottom-30"></div>
 
-						<button class="btn rounded btn-block btn-bitcoin-inversed" ng-click="getPlanList();">
+						<button class="btn rounded btn-block btn-bitcoin-inversed" ng-click="filtering();">
 							<i class="fa fa-list-ul"></i> 검색 및 정렬 적용
 						</button>
 
@@ -199,8 +201,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/counter/waypoints.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/counter/jquery.counterup.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 
 
 	<!-- JS Page Level -->
@@ -208,6 +211,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/fancy-box.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/masking.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/validation.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>

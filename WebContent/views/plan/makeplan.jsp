@@ -63,15 +63,21 @@
 			</div>
 		</div>
 		<!--=== 사이트맵 끝 ===-->
+		
+		<!-- 일정 만들기 헤더 include -->
+		<%@include file="include/planHeader.jsp"%>
 
 		<!--=== 내용 ===-->
-		<div class="container content-md" ng-app="TourPlanApp" ng-controller="MakePlanController">
-			<div id="left_content"></div>
-			<div id="right_content"></div>
+		<div class="container" ng-app="TourPlanApp" ng-controller="MakePlanController">
+		
+			<div class="row">
+				<div>dd</div>
+				<div>dd</div>
+			</div>
+		
 		</div>
 		<!--=== 내용 끝 ===-->
-
-
+		
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
 
@@ -84,6 +90,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/angular-1.5.8/angular.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>

@@ -64,7 +64,7 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content-md" ng-app="TourPlanApp" ng-controller="DetailController">
+		<div class="container content-md" style="padding-top: 20px;" ng-app="TourPlanApp" ng-controller="DetailController">
 			<div id="left_content"></div>
 			<div id="right_content"></div>
 		</div>
@@ -83,6 +83,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/angular-1.5.8/angular.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>

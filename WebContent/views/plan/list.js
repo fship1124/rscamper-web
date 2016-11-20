@@ -1,5 +1,5 @@
 angular.module("TourPlanApp")
-	.controller("ListController", function ($rootScope, $scope, $http, MyConfig) {
+	.controller("ListController", function ($rootScope, $scope, $http, $window, MyConfig) {
 		// 여행기간 레인지 슬라이더 함수
 		$(function() {
 			$("#day-range").slider({
@@ -96,39 +96,96 @@ angular.module("TourPlanApp")
 		};
 
 		// 이전페이지, 다음페이지로 이동 메소드
-		$scope.pnPage = function (isNext) {
+		$scope.pnPage = function (isNext, count) {
+			if (!count) {
+				count = 1;
+			}
 			if (isNext) {
-				if ($scope.totalPages > $scope.searchParams.pageNo) {
-					$scope.searchParams.pageNo++;
+				if ($scope.totalPages >= $scope.searchParams.pageNo + count) {
+					$scope.searchParams.pageNo += count;
 					$scope.getPlanList();
 				} else {
-					alert("끝페이지 입니다.");
+					alert("더이상 갈수 없습니다.");
 					return false;
 				}
 			} else {
-				if ($scope.searchParams.pageNo > 1) {
-					$scope.searchParams.pageNo--;
+				if ($scope.searchParams.pageNo - count >= 1) {
+					$scope.searchParams.pageNo -= count;
 					$scope.getPlanList();
 				} else {
-					alert("첫페이지 입니다.");
+					alert("더이상 갈수 없습니다.");
 					return false;
 				}
 			}
 		};
+		
+		// 필터링
+		$scope.filtering = function () {
+			$scope.searchParams.pageNo = 1;
+			$scope.getPlanList();
+		}
 
-		// 리스트 가져오기
+		// 처음에 리스트 가져오기
 		$scope.getPlanList();
 
-		// 여행일정 만들기
-		// 입력 사항
-		// 제목, 출발일, 도착일, UserUid,
+		// 여행일정 만들기 폼 열기
 		$scope.createTourPlan = function () {
-			$("#createTourPlanFormModal").modal("show");
-		};
+			// 로그인 했는지 판단
+			if($rootScope.user) {
+				// 폼 내용 리셋
+				$scope.writeTourPlan = {};
+				$("#createTourPlanFormModal").modal("show");
+			} else {
+				if ($rootScope.user == null) {
+					var $form_modal = $('.cd-user-modal'), $form_login = $form_modal
+							.find('#cd-login'), $form_signup = $form_modal.find('#cd-signup'), $form_forgot_password = $form_modal
+							.find('#cd-reset-password'), $form_modal_tab = $('.cd-switcher'), $tab_login = $form_modal_tab
+							.children('li').eq(0).children('a'), $tab_signup = $form_modal_tab
+							.children('li').eq(1).children('a'), $forgot_password_link = $form_login
+							.find('.cd-form-bottom-message a'), $back_to_login_link = $form_forgot_password
+							.find('.cd-form-bottom-message a');
 
+					$form_modal.addClass("is-visible");
+
+					$form_login.removeClass('is-selected');
+					$form_signup.addClass('is-selected');
+					$form_forgot_password.removeClass('is-selected');
+					$tab_login.removeClass('selected');
+					$tab_signup.addClass('selected');
+				}
+			}
+		};
+		
+		$scope.insertTourPlan = function () {
+			// 유효성 체크(undefined issue resolved)
+		    if (!validCheckService("null", $scope.writeTourPlan.title)) {return false;}
+		    if (!validCheckService("null", $scope.writeTourPlan.strapline)) {return false;}
+		    if (!validCheckService("null", $scope.writeTourPlan.introduce)) {return false;}
+		    if (!validCheckService("null", $scope.writeTourPlan.departureDate)) {return false;}
+		    if (!validCheckService("null", $scope.writeTourPlan.arriveDate)) {return false;}
+			
+			// 사용자 UID 입력
+			$scope.writeTourPlan.userUid = $rootScope.user.userUid; 
+			
+			$http({
+				url: MyConfig.backEndURL + "/tourPlan/insert/tourPlan",
+				method: "POST",
+				data: $.param($scope.writeTourPlan),
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
+			}).success(function (result) {
+				$("#createTourPlanFormModal").modal("hide");
+				
+				// 일정 만들기 페이지로 이동
+				// 파라미터 : result.recordNo
+				// $window.location.href = "makeplan.jsp";
+			}).error(function (error) {
+				console.log(error);
+			});
+		}
+		
 	})
 
 // 시작
 jQuery(document).ready(function() {
-	App.initCounter();
+	Masking.initMasking();
 });
