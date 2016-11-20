@@ -129,22 +129,25 @@
 						
 							<!-- 검색 -->						
 							<div class="tab-pane fade in active" id="searchTab">
-								검색
+								<!-- 검색창 제어 -->
+								<div></div>
+								<!-- 검색창 결과물 -->
+								<div></div>
 							</div><!-- 검색 끝 -->
-							
 							
 							<!-- 북마크 -->
 							<div class="tab-pane fade in" id="bookmarkTab">
-								북마크
+								<!-- 북마크 결과물 -->
+								<div></div>
 							</div><!-- 북마크 끝 -->
 							
-						</div>
+						</div><!-- 탭 내용 끝 -->
 						
-					</div>
+					</div><!-- 탭버전2 끝 -->
 				
-				</div>
+				</div><!-- 탭 전체 끝 -->
 				
-			</div>
+			</div><!-- left Menu 끝  -->
 			
 			
 			<div id="rightContents">
@@ -215,17 +218,192 @@
 								<div id="map">
 								
 								</div>
-								
-								<div id="timeTable">
+
+								<div id="schedule">
+									<div class="sch-tbl-inner-nav">
+										<div class="inner-nav-wrap">
+											<a class="day-btn-in-schedule btn-all-check" data-day="all">
+											All
+											<span class="active"></span>
+											</a>
+											<a id="prev-btn-in-schedule" class="btn-prev-first">
+											<img src="/images/btn-prev-first.png" alt=""></a>
+											<a class="day-btn-in-schedule active" data-day="0">
+											<span class="date">Day 1 <span>/</span> 11.01.Tue </span>
+											<span class="state"></span></a><a id="next-btn-in-schedule"class="btn-next-last">
+											<img src="/images/btn-next-last.png" alt=""></a>
+										</div>
+									</div>
 									
-								
+									<div class="schedule-step ui-droppable">
+										<div class="weekcalendar">
+											<table>
+												<tbody>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">06:00	AM</span></td>
+														<td id="schedule-0-0" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-1" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">07:00</span></td>
+														<td id="schedule-0-2" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-3" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">08:00</span></td>
+														<td id="schedule-0-4" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-5" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">09:00</span></td>
+														<td id="schedule-0-6" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-7" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">10:00</span></td>
+														<td id="schedule-0-8" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-9" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">11:00</span></td>
+														<td id="schedule-0-10" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-11" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">12:00 PM</span></td>
+														<td id="schedule-0-12" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-13" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">01:00</span></td>
+														<td id="schedule-0-14" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-15" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">02:00</span></td>
+														<td id="schedule-0-16" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-17" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">03:00</span></td>
+														<td id="schedule-0-18" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-19" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">04:00</span></td>
+														<td id="schedule-0-20" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-21" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">05:00</span></td>
+														<td id="schedule-0-22" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-23" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">06:00</span></td>
+														<td id="schedule-0-24" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-25" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">07:00</span></td>
+														<td id="schedule-0-26" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-27" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">08:00</span></td>
+														<td id="schedule-0-28" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-29" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">09:00</span></td>
+														<td id="schedule-0-30" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-31" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">10:00</span></td>
+														<td id="schedule-0-32" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-33" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">11:00</span></td>
+														<td id="schedule-0-34" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-35" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="axis" rowspan="2"><span class="time-label">12:00
+																AM</span></td>
+														<td id="schedule-0-36" class="cell active"></td>
+													</tr>
+													<tr>
+														<td class="hidden"></td>
+														<td id="schedule-0-37" class="cell active"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 								</div>
-								
+
 							</div><!-- 일정/맵 끝 -->
 							
 							
 							<!-- 스토리 -->
 							<div class="tab-pane fade in" id="tourStoryTab">
+							
 								<ul class="timeline-v2">
 								
 									<li class="equal-height-columns">
@@ -247,6 +425,7 @@
 									</li>
 									
 								</ul>
+								
 							</div><!-- 스토리 끝 -->
 							
 							
