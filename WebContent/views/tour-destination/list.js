@@ -292,6 +292,6 @@
 			console.log(e.getAttribute("data-value1"));
 			console.log(e.getAttribute("data-value2"));
 			
-			var url = "http://localhost:80/rscamper-web/views/tour/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+			var url = "http://localhost:80/rscamper-web/views/tour-destination/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 			$(e).attr('href', url);
 		}

@@ -47,7 +47,7 @@
 
 </head>
 
-<body class="header-fixed header-fixed-space-default">
+<body class="header-fixed header-fixed-space-default" onkeydown='on_key_down()'>
 	<div class="wrapper">
 
 		<!-- 헤더 include -->
@@ -66,51 +66,62 @@
 
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
-		<div class="container content-md">
-		          <div class="direct-chat-messages">
-            <!-- Message. Default to the left -->
-            <div class="direct-chat-msg">
-              <div class="direct-chat-info clearfix">
-                <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-              </div>
-              <!-- /.direct-chat-info -->
-              <img class="direct-chat-img" src="http://bootdey.com/img/Content/user_1.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
-              <div class="direct-chat-text">
-                Is this template really for free? That's unbelievable!
-              </div>
-              <!-- /.direct-chat-text -->
-            </div>
-            <!-- /.direct-chat-msg -->
-    
+		
+		<!-- 모달  -->
+<!-- 		<button class="btn btn-default" data-target="#layerpop" -->
+<!-- 			data-toggle="modal">모달출력버튼</button> -->
+<!-- 		<br /> -->
+		<!-- 모달 > 대화명 변경 -->
+		<div class="modal fade" id="layerpop">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- header -->
+					<div class="modal-header">
+						<!-- 닫기(x) 버튼 -->
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<!-- header title -->
+						<h4 class="modal-title">대화명 변경</h4>
+					</div>
+					<!-- body -->
+					<div class="modal-body">
+					대화명 : <input type="text" id="nickname">
+					
+					</div>
+					<!-- Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="nickNameMod()">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end 모달 > 대화명 변경-->
+		<!-- end 모달 -->
 
-          </div>
-          <!--/.direct-chat-messages-->
-		
-		
-		
-		
+		<div class="container content-md">
 			<div>
-				<table class="table" style="width: 100%; border: 1px solid tomato;">
+				<table class="table" style="width: 100%; background: #EEEEEE; border: 1px solid tomato;">
 					<thead>
 						<tr>
 							<th id="locationName" class="locationName"></th>
-							<th colspan="3" id="roomTitle" class="roomTitle"></th>
+							<th id="roomTitle" class="roomTitle"></th>
 						</tr>
 						<tr>
-							<th>화면비우기</th>
-							<th>닉네임변경</th>
-							<th>~~~</th>
-							<th><button type="button" id="out-room">퇴장</button></th>
+							<th colspan="2">
+							<button type="button" id="clean-screen">화면비우기</button>
+							<button type="button" id="nickname-modfy">방제목변경</button>
+							<button type="button" id="room-background">방테마변경</button>
+							<button type="button" id="room-save">저장하기</button>
+							<button type="button" id="out-room">퇴장</button>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="3" rowspan="2" class="massagePrint" style="width: 70%; height: 500px; border: 1px solid tomato;">
-								<div id="msg-content" style="height: 500px; border: 1px solid tomato; overflow: auto;">
+							<td colspan="3" rowspan="2" class="massagePrint" style="width: 85%; height: 500px; border: 1px solid tomato;">
+								<div id="msg-content" style="height: 500px; background: #FFFFFF; border: 1px solid tomato; overflow: auto;">
 								</div>
 							</td>
-							<td id="chat-user-cnt" style="height: 30px; border: 1px solid tomato;">접속자</td>
+							<td id="chat-user-cnt" data-cnt="" style="height: 30px; border: 1px solid tomato;">접속자</td>
 						</tr>
 						<tr>
 							<td id="chat-user-info" style="height: 400px; border: 1px solid tomato;"></td>
@@ -187,9 +198,14 @@
 		obj.loc = "${param.location}";
 		obj.title = "${param.title}";
 		obj.room = "${param.room}";
+		obj.roomNo = "${param.roomNo}";
+		
+		console.log("detail.jsp");
+		console.dir(obj);
 		
 		roomHeadHandler(obj);
 		
+		var userName = user.displayName;
 		
 		// nodejs 소켓 통신
 		function socketIo() {
@@ -204,7 +220,7 @@
 	                 socket.emit('connection', {
 	                     type : 'join',
 	                     name : user.displayName,
-	                     room : room
+	                     room : obj.roomNo
 	                 });
 // 	                 socket.emit('room', {
 // 	                     room : room
@@ -214,7 +230,8 @@
 			 
 			 socket.on('system', function(data) {
 				 console.log("system");
- 				 console.log("서버에서 전송된 데이터 : " + data.message);
+ 				 console.log("서버에서 전송된 메세지 : " + data.message);
+ 				 console.log("서버에서 전송된 방번호 : " + data.roomNo);
  				 
 				 var html = "";
 				 html += "<div style='text-align:center; height:20px;'>";
@@ -223,151 +240,126 @@
 				 html += "</span>";
 				 html += "</div>";
 				 $("#msg-content").append(html);
-// 				 $("#msg-content").append(data.message + "<br>");
+				 listUser(data);
 	         });
 			 
 			 socket.on('message', function(data) {
 				 console.log("서버에서 전송된 데이터 : " + data.message);
-				 console.log("서버에서 전송된 데이터 : " + data.name);
+				 console.log("서버에서 전송된 이름 : " + data.name);
 				 var html = "";
 				 
 			      html += "<div class='direct-chat-messages'>";
 			      html += "<div class='direct-chat-msg'>";
 			      html += "<div class='direct-chat-info clearfix'>";
-			      html += "<span class='direct-chat-name pull-left'>Alexander Pierce</span>";
+			      html += "<span class='direct-chat-name pull-left'>";
+			      html += data.name + "</span>";
 			      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
 			      html += "</div>";
 			      html += "<img class='direct-chat-img' src='http://bootdey.com/img/Content/user_1.jpg' alt='Message User Image'>";;
 			      html += "<div class='direct-chat-text'>";
-			      html += "Is this template really for free? That's unbelievable!";
+			      html += data.message;
 			      html += "</div></div>";
-			      html += "</div>";
-				 
-				 
-				 
-				 
-				 
-//  				 html += "<div style='text-align:left; height:60px;'>";
-//  				 html += "<span>";
-//  				 html += data.name;
-//  				 html += "</span><br>";
-//  				 html += "<span>";
-//  				 html += data.message;
-//  				 html += "</span>";
-// 				 html += "</div>";
-
 				 $("#msg-content").append(html);
 // 				 $("#msg-content").append(data.message + "<br>");
 	         });
 			 
 			 
-			$("#msg-btn").click(function() {
-				// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
-				console.log("서버로 전송함");
-				//	 				socket.emit("msg", $("#msg").val());
-				
-				 var html = "";
-// 				 html += "<div style='text-align:right; height:20px;'>";;
-// 				 html += "<span>";
-// 				 html += $("#msg").val();
-// 				 html += "</span>";
-// 				 html += "</div>";
-				  html += "<div class='direct-chat-messages'>";
-		    	  html += "<div class='direct-chat-msg right'>";
-		    	  html += "<div class='direct-chat-info clearfix'>";
-		    	  html += "<span class='direct-chat-name pull-right'>Sarah Bullock</span>";
-		    	  html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
-		    	  html += "</div>";
-		    	  html += "<img class='direct-chat-img' src='http://bootdey.com/img/Content/user_2.jpg' alt='Message User Image'>";
-		    	  html += "<div class='direct-chat-text'>";
-		    	  html += "You better believe it!";
-   				  html += "</div>";
-				  html += "</div>";
-			      html += "</div>";
+			
+		$("#msg-btn").click(function() {
+			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
+			console.log("서버로 전송함");
 
-				 $("#msg-content").append(html);
-				
-// 				$("#msg-content").append($("#msg").val() + "<br>");
-				socket.emit("user", {
-					name : user.displayName,
-					message : $("#msg").val()
-				});
-				
-				$("#msg").val("");
-				$("#msg").focus();
+			var html = "";
+			html += "<div class='direct-chat-messages'>";
+			html += "<div class='direct-chat-msg right'>";
+			html += "<div class='direct-chat-info clearfix'>";
+			html += "<span class='direct-chat-name pull-right'>";
+			html += userName + "</span>";
+			html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
+			html += "</div>";
+			html += "<img class='direct-chat-img' src='" + user.photoUrl + "' alt='Message User Image'>";
+			html += "<div class='direct-chat-text'>";
+			html += $("#msg").val();
+			html += "</div>";
+			html += "</div>";
+			html += "</div>";
+
+			$("#msg-content").append(html);
+			// 				$("#msg-content").append($("#msg").val() + "<br>");
+			socket.emit("user", {
+				name : user.displayName,
+				message : $("#msg").val()
 			});
+
+			$("#msg").val("");
+			$("#msg").focus();
 			
-			
+			$("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
+		});
+
 			// 방 퇴장
-			$("#out-room").click(function() {
+	$("#out-room").click(function() {
+			console.log("in out");
 				var obj = new Object();
 				obj.userUid = user.userUid;
-				obj.chatRoomInfoNo = room;
-				
+				obj.chatRoomInfoNo = "${param.roomNo}";
+
 				console.log(obj.userUid);
 				console.log(obj.chatRoomInfoNo);
-				
+
 				$.ajax({
-					url : myConfig.imsiServerUrl + '/chat/delete/user/' + user.userUid + "/" + room,
+					url : myConfig.imsiServerUrl + '/chat/delete/user/'	
+					+ user.userUid + "/" + obj.chatRoomInfoNo,
 					type : "DELETE",
-					success :function() {
-						alert("success");
-						
+					success : function() {
+						// alert("success");
+
 						socket.emit("out", {
 							name : user.displayName
 						});
+
+						alert("방에서 퇴장하셨습니다.");
 						
-						alert("퇴장하셨습니다.");
+						
+						// 방 접속자수가 0일때 방 폐쇄
+						var user_cnt = $("#chat-user-cnt");
+						
+						console.dir(user_cnt);
+						alert(user_cnt[0].dataset.cnt);
+						
+						if (user_cnt[0].dataset.cnt == 1) {
+							$.ajax({
+								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
+								type : "DELETE",
+								success : function() {
+									alert(obj.chatRoomInfoNo +  "방 삭제");
+								}
+							});				
+						}
 						
 						window.location = myConfig.imsiServerUrl + '/chat/home';
 					}
 				});
 			});
-			
-			
-			 socket.on('out', function(data) {
-				 console.log("on out");
-				 console.log("서버에서 전송된 데이터 : " + data.name);
-				 console.log(room);
-					
-				 console.log(data.message);
-					
-// 				 alert("서버에서 전송된 데이터 : " + data.message);
-				 var html = "";
-				 html += "<div style='text-align:center;'>";
-				 html += "<span>";
-				 html += data.message;
-				 html += "</span>";
-				 html += "</div>";
-				 $("#msg-content").append(html);
-				 
-				 listUser(room);
-	         });
-			
-// 			// 방 퇴장
-// 			function room_out(e) {
-// 				alert("out");
-				
-// 				var obj = new Object();
-// 				obj.userUid = user.userUid;
-// 				obj.chatRoomInfoNo = room;
-				
-// 				console.log(obj.userUid);
-// 				console.log(obj.chatRoomInfoNo);
-				
-// 				$.ajax({
-// 					url : myConfig.imsiServerUrl + '/chat/delete/user/' + user.userUid + "/" + room,
-// 					type : "DELETE",
-// 					success :function() {
-// 						alert("퇴장하셨습니다.");
-// 						window.location = myConfig.imsiServerUrl + '/chat/home';
-// 					}
-// 				});
-// 			};
+
+			socket.on('out', function(data) {
+				console.log("on out");
+				console.log("서버에서 전송된 데이터 > name : " + data.name);
+				console.log("서버에서 전송된 데이터 > message : " + data.message);
+				console.log("roomNo : " + room);
+
+				var html = "";
+				html += "<div style='text-align:center;'>";
+				html += "<span>";
+				html += data.message;
+				html += "</span>";
+				html += "</div>";
+				$("#msg-content").append(html);
+
+				listUser(room);
+			});
 		}
-		
-		
-		
+
 		socketIo();
 	</script>
 </body>

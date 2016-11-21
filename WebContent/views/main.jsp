@@ -65,7 +65,7 @@
 		</div>
 
 		<!-- Comment -->
-		<div class="container content-md" style="height: 450px; background: #F6F6F6">
+		<div class="container content-md" style="height: 450px; background: #F6F6F6; padding: 20px;">
 			<div>
 				<label for="comment">Comment:</label>
 				<div class="input-group margin-bottom-20">

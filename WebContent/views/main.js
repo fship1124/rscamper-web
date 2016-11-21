@@ -1,3 +1,5 @@
+var user = sessionStorageService.getObject("user");
+
 function commentList() {
 	$.ajax({
 		url : 'http://localhost:8081/main/all',
@@ -29,11 +31,16 @@ function commentFn(data) {
 	console.dir(data);
 
 	cList.html("");
+	
 	for (var i = 0; i < data.length; i++) {
 		var m = data[i];
 		var html = "";
 		html += "<div style='margin: 10px;'>";
+		if (m.providerPhotoUrl) {
+			html += "<img src='" + m.providerPhotoUrl + "' style='width:40px; height:40px'>";
+		} else {
 		html += "<img src='../assets/img/user.jpg' style='width:40px; height:40px'>";
+		}
 		html += "<span style='margin-left: 20px;'>";
 		html += m.mainContent;
 		html += "</span>";
