@@ -47,6 +47,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
+<!-- DayPilot Themes -->
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_transparent.css" />    
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_white.css" />    
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_green.css" />    
+
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="makeplan.css">
 
@@ -79,10 +84,10 @@
 				<!-- 저장 취소 -->
 				<div id="controllers">
 					<div class="bg-light">
-						<button class="btn rounded btn-block btn-android-inversed" ng-click="">
+						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="">
 							<i class="fa fa-floppy-o"></i> 저장하기
 						</button>
-						<button class="btn rounded btn-block btn-android-inversed" ng-click="">
+						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="">
 							<i class="fa fa-times"></i> 취소
 						</button>
 					</div>
@@ -129,10 +134,53 @@
 						
 							<!-- 검색 -->						
 							<div class="tab-pane fade in active" id="searchTab">
+								
 								<!-- 검색창 제어 -->
-								<div></div>
+								<div id="searchHeader">
+									
+									<!-- 검색 -->
+									<div class="bg-light" style="text-align: center;">
+										<!-- 검색 텍스트 -->
+										<input type="text" class="form-control margin-bottom-10" placeholder="검색할 장소이름" ng-model="searchParams.word">
+										<!-- 검색 카테고리 -->
+										<div class="btn-group" data-toggle="buttons" style="width:100%;">
+										  <label class="btn rounded btn-tumblr" style="width:22%; margin: 3px;">
+										    <input type="radio" name="searchOptions" ng-model="searchOption1">
+										    <i class="fa fa-bars"></i>
+										  </label>
+										  <label class="btn rounded btn-amazon" style="width:22%; margin: 3px;">
+										    <input type="radio" name=""searchOptions"">
+										    <i class="fa fa-binoculars"></i>
+										  </label>
+										  <label class="btn rounded btn-twitter" style="width:22%; margin: 3px;">
+										    <input type="radio" name=""searchOptions"" >
+										    <i class="fa fa-cutlery"></i>
+										  </label>
+										  <label class="btn rounded btn-evernote" style="width:22%; margin: 3px;">
+										    <input type="radio" name=""searchOptions"">
+										    <i class="fa fa-bed"></i>
+										  </label>
+										</div>
+									</div>
+									
+									<div class="row" style="border-top: 1px solid black; border-bottom: 1px solid black; height: 15px;">
+									</div>
+									
+									<div class="row">
+										dsfsdfsd
+										dsfsdf
+									</div>
+									
+									
+								
+									
+								</div>
+								
 								<!-- 검색창 결과물 -->
-								<div></div>
+								<div id="searchContent">
+									
+								</div>
+								
 							</div><!-- 검색 끝 -->
 							
 							<!-- 북마크 -->
@@ -215,189 +263,19 @@
 							<!-- 일정/맵 -->						
 							<div class="tab-pane fade in active" id="tourPlanTab">
 								
-								<div id="map">
+								<!-- 구글맵 -->
+								<div id="map"></div>
 								
-								</div>
+								<!-- 일정표 버튼 -->
+								<div id="dpControl">
+									<p>====================</p>
+									<p>버튼들</p>
+									<p>====================</p>
+								</div>	
 
-								<div id="schedule">
-									<div class="sch-tbl-inner-nav">
-										<div class="inner-nav-wrap">
-											<a class="day-btn-in-schedule btn-all-check" data-day="all">
-											All
-											<span class="active"></span>
-											</a>
-											<a id="prev-btn-in-schedule" class="btn-prev-first">
-											<img src="/images/btn-prev-first.png" alt=""></a>
-											<a class="day-btn-in-schedule active" data-day="0">
-											<span class="date">Day 1 <span>/</span> 11.01.Tue </span>
-											<span class="state"></span></a><a id="next-btn-in-schedule"class="btn-next-last">
-											<img src="/images/btn-next-last.png" alt=""></a>
-										</div>
-									</div>
-									
-									<div class="schedule-step ui-droppable">
-										<div class="weekcalendar">
-											<table>
-												<tbody>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">06:00	AM</span></td>
-														<td id="schedule-0-0" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-1" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">07:00</span></td>
-														<td id="schedule-0-2" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-3" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">08:00</span></td>
-														<td id="schedule-0-4" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-5" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">09:00</span></td>
-														<td id="schedule-0-6" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-7" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">10:00</span></td>
-														<td id="schedule-0-8" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-9" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">11:00</span></td>
-														<td id="schedule-0-10" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-11" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">12:00 PM</span></td>
-														<td id="schedule-0-12" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-13" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">01:00</span></td>
-														<td id="schedule-0-14" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-15" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">02:00</span></td>
-														<td id="schedule-0-16" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-17" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">03:00</span></td>
-														<td id="schedule-0-18" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-19" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">04:00</span></td>
-														<td id="schedule-0-20" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-21" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">05:00</span></td>
-														<td id="schedule-0-22" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-23" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">06:00</span></td>
-														<td id="schedule-0-24" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-25" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">07:00</span></td>
-														<td id="schedule-0-26" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-27" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">08:00</span></td>
-														<td id="schedule-0-28" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-29" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">09:00</span></td>
-														<td id="schedule-0-30" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-31" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">10:00</span></td>
-														<td id="schedule-0-32" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-33" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">11:00</span></td>
-														<td id="schedule-0-34" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-35" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="axis" rowspan="2"><span class="time-label">12:00
-																AM</span></td>
-														<td id="schedule-0-36" class="cell active"></td>
-													</tr>
-													<tr>
-														<td class="hidden"></td>
-														<td id="schedule-0-37" class="cell active"></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-
+								<!-- 일정표 DIV -->
+								<div id="dp"></div>
+								
 							</div><!-- 일정/맵 끝 -->
 							
 							
@@ -405,20 +283,22 @@
 							<div class="tab-pane fade in" id="tourStoryTab">
 							
 								<ul class="timeline-v2">
-								
-									<li class="equal-height-columns">
+									
+									<li class="equal-height-columns" ng-repeat="schedule in scheduleList">
 										<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>ㅎㅎㅎ</h2>
+											<h2>{{schedule.text}}</h2>
 											<div class="row">
 												<div class="col-md-4">
 													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
-													<div class="md-margin-bottom-20"></div>
+													<div class="md-margin-bottom-20">
+													</div>
 												</div>
 												<div class="col-md-8">
-													<p>ㅋㅋㅋㅋ</p>
-													<p>ㅋㅋㅋㅋ</p>
+													<p>일정 UID : {{schedule.id}}</p>
+													<p>시작 시간  : {{schedule.start}}</p>
+													<p>끝나는 시간 : {{schedule.end}}</p>
 												</div>
 											</div>
 										</div>
@@ -481,18 +361,23 @@
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
-
+	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
+	
+	<!-- DayPilot -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-common.src.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-calendar.src.js"></script>
 
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
 	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
+	
 
 </body>
 </html>
