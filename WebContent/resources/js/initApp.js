@@ -1,7 +1,8 @@
 // 환경설정
 var myConfig = {
 	// serverUrl: "http://localhost:8081" // 내 컴퓨터
-	serverUrl : "http://14.32.66.104:8081" // 서버 컴퓨터
+	serverUrl : "http://14.32.66.104:8081", // 서버 컴퓨터
+	imsiServerUrl : "http://192.168.0.173:8081" // 호동 서버 컴퓨터
 };
 
 //이미지 유효성 체크

@@ -64,7 +64,7 @@
 
 		<!--=== 내용 ===-->
 			<!--=== Content ===-->
-		<div class="container content-md">
+		<div class="container content-md" style="padding: 20px;">
 			
 			<div>
 				<table class="table" style="width: 60%; border: 1px solid tomato;">
@@ -110,23 +110,23 @@
 			<div class="input-group margin-bottom-20" style="margin-left: 0px;">
 				<select title="지역 선택" class="select" name="locationid">
 					<option value="" selected="selected">지역선택</option>
-					<option value="서울">서울</option>
-					<option value="인천">인천</option>
-					<option value="대전">대전</option>
-					<option value="대구">대구</option>
-					<option value="광주">광주</option>
-					<option value="부산">부산</option>
-					<option value="울산">울산</option>
-					<option value="세종시">세종시</option>
-					<option value="경기도">경기도</option>
-					<option value="강원도">강원도</option>
-					<option value="충청북도">충청북도</option>
-					<option value="충청남도">충청남도</option>
-					<option value="경상북도">경상북도</option>
-					<option value="경상남도">경상남도</option>
-					<option value="전라북도">전라북도</option>
-					<option value="전라남도">전라남도</option>
-					<option value="제주도">제주도</option>
+					<option value="1">서울</option>
+					<option value="2">인천</option>
+					<option value="3">대전</option>
+					<option value="4">대구</option>
+					<option value="5">광주</option>
+					<option value="6">부산</option>
+					<option value="7">울산</option>
+					<option value="8">세종시</option>
+					<option value="31">경기도</option>
+					<option value="32">강원도</option>
+					<option value="33">충청북도</option>
+					<option value="34">충청남도</option>
+					<option value="35">경상북도</option>
+					<option value="36">경상남도</option>
+					<option value="37">전라북도</option>
+					<option value="38">전라남도</option>
+					<option value="39">제주도</option>
 				</select> 
 					<span class="input-group-addon"><i class="fa fa-plug"></i></span> 
 					<input type="text" id="inputRoomTitle" placeholder="title"
@@ -135,16 +135,18 @@
 			</div>
 
 
-
-
-			<div class="content" style="height: 800px; border: 1px solid blue;">
-				<table class="table" style="width: 100%; border: 1px solid blue;">
-					<thead>
+			<div class="content" style="height: 800px; border: 1px solid blue; padding: 0px;">
+				<table class="table" style="width: 100%; height: 100%; border: 1px solid blue; margin : 0;">
+					<thead style="height: 10%;">
 						<tr><th>지역</th><th>제목</th><th>인원수</th></tr>
 					</thead>
+				</table>
+				<div style="height: 760px; overflow: auto;">
+				<table class="table" style="width: 100%; height: 100%;">
 					<tbody class="tbody" id="room-list">
 					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 		<!--=== End Content ===-->

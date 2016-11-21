@@ -121,11 +121,11 @@
 		
 		
 		function tourList(e) {
-			var contenttypeid = $("select[name=contenttypeid]").val();
+			var contenttypeid = '39';
 			var areaCode = $("select[name=areacode]").val();
 			var sigunguCode = $("select[name=sigungucode]").val();
-			var cat1 = $("select[name=cat1]").val();
-			var cat2 = $("select[name=cat2]").val();
+			var cat1 = 'A05';
+			var cat2 = 'A0502';
 			var cat3 = $("select[name=cat3]").val();
 			var pageNo = e;
 			
@@ -292,6 +292,6 @@
 			console.log(e.getAttribute("data-value1"));
 			console.log(e.getAttribute("data-value2"));
 			
-			var url = "http://localhost:80/rscamper-web/views/tour/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+			var url = "http://localhost:80/rscamper-web/views/tour-food/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 			$(e).attr('href', url);
 		}

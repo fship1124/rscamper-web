@@ -59,7 +59,7 @@
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">tour</a></li>
+					<li><a href="javascript:history.back()">tour-destination</a></li>
 				</ul>
 			</div>
 		</div>
@@ -71,23 +71,6 @@
 				<table class="table bbsSearch">
 					<tbody>
 						<tr>
-							<th scope="row">관광타입</th>
-								<td>
-								<select title="타입 선택" name="contenttypeid" onchange="typeChange(this)">
-										<option value="" selected="selected">타입선택</option>
-										<option value="12">관광지</option>
-										<option value="14">문화시설</option>
-										<option value="15">축제공연행사</option>
-										<option value="25">여행코스</option>
-										<option value="28">레포츠</option>
-										<option value="32">숙박</option>
-										<option value="38">쇼핑</option>
-										<option value="39">음식점</option>
-								</select>
-								</td>
-						</tr>
-
-						<tr>
 							<th scope="row">서비스분류</th>
 							<td class="dataSearch">
 								<div>
@@ -95,11 +78,6 @@
 											<option value="">대분류</option>
 											<option value="A01">자연</option>
 											<option value="A02">인문(문화/예술/역사)</option>
-											<option value="A03">레포츠</option>
-											<option value="A04">쇼핑</option>
-											<option value="A05">음식</option>
-											<option value="B02">숙박</option>
-											<option value="C01">추천코스</option>
 									</select> <select name="cat2" onchange="getCat3List(this);" title="중분류">
 											<option value="">중분류</option>
 									</select> <select name="cat3" style="width: 308px;" title="소분류">

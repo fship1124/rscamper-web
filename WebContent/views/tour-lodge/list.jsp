@@ -59,7 +59,7 @@
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">tour</a></li>
+					<li><a href="javascript:history.back()">tour-lodge</a></li>
 				</ul>
 			</div>
 		</div>
@@ -70,41 +70,31 @@
 			<div class="table">
 				<table class="table bbsSearch">
 					<tbody>
-						<tr>
-							<th scope="row">관광타입</th>
-								<td>
-								<select title="타입 선택" name="contenttypeid" onchange="typeChange(this)">
-										<option value="" selected="selected">타입선택</option>
-										<option value="12">관광지</option>
-										<option value="14">문화시설</option>
-										<option value="15">축제공연행사</option>
-										<option value="25">여행코스</option>
-										<option value="28">레포츠</option>
-										<option value="32">숙박</option>
-										<option value="38">쇼핑</option>
-										<option value="39">음식점</option>
-								</select>
-								</td>
-						</tr>
+
 
 						<tr>
 							<th scope="row">서비스분류</th>
 							<td class="dataSearch">
 								<div>
-									<span> <select title="대분류" name="cat1"	onchange="getCat2List(this);">
-											<option value="">대분류</option>
-											<option value="A01">자연</option>
-											<option value="A02">인문(문화/예술/역사)</option>
-											<option value="A03">레포츠</option>
-											<option value="A04">쇼핑</option>
-											<option value="A05">음식</option>
-											<option value="B02">숙박</option>
-											<option value="C01">추천코스</option>
-									</select> <select name="cat2" onchange="getCat3List(this);" title="중분류">
-											<option value="">중분류</option>
-									</select> <select name="cat3" style="width: 308px;" title="소분류">
-											<option value="">소분류</option>
-									</select>
+									<span>
+									<select name="cat3" style="width: 308px;" title="소분류">
+											<option	value="">소분류</option>
+											<option value="B02010100">관광호텔</option>
+											<option value="B02010200">수상관광호텔</option>
+											<option value="B02010300">전통호텔</option>
+											<option value="B02010400">가족호텔</option>
+											<option value="B02010500">콘도미니엄</option>
+											<option value="B02010600">유스호스텔</option>
+											<option value="B02010700">펜션</option>
+											<option value="B02010800">여관</option>
+											<option value="B02010900">모텔</option>
+											<option value="B02011000">민박</option>
+											<option value="B02011100">게스트하우스</option>
+											<option value="B02011200">홈스테이</option>
+											<option value="B02011300">서비스드레지던스</option>
+											<option value="B02011400">의료관광호텔</option>
+											<option value="B02011500">소형호텔</option>
+											<option value="B02011600">한옥스테이</option></select>
 									</span>
 								</div>
 							</td>

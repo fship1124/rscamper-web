@@ -1,8 +1,8 @@
 
 
 var user = sessionStorageService.getObject("user");
-	console.dir(user);
-	console.log(user);
+
+var chatRoomInfoNo = "";
 
 if (user == null) {
 	  var $form_modal = $('.cd-user-modal'), $form_login = $form_modal
@@ -23,21 +23,19 @@ if (user == null) {
 }
 
 
-
 function chat_room_list() {
 	
 	$.ajax({
-		url : 'http://localhost:8081/chat/room_list',
+		url : myConfig.imsiServerUrl + '/chat/room_list',
 		method : 'GET',
 		dataType : 'json',
 		success : function(result) {
-			console.dir(result);
 			listRoomCreate(result);
 		}
 	});
 }
-
 chat_room_list();
+
 
 function listRoomCreate(data) {
 	var room_list = $("#room-list");
@@ -45,7 +43,6 @@ function listRoomCreate(data) {
 	var html = "";
 	
 	for (var i = 0; i < data.length; i++) {
-		console.log(i);
 		var item = data[i];
 		html += "<tr><td>";
 		html += item.areaName
@@ -67,45 +64,85 @@ function listRoomCreate(data) {
 }
 
 
-	$("#createRoomBtn").click(function() {
-		var locationVal =  $("select[name=locationid]").val();
-		var inputRoomTitle = $("#inputRoomTitle").val();
-		
-		window.location = "http://localhost:8081/chat/detail?room=" + room + "&location=" + locationVal + "&title=" + inputRoomTitle;
+// 방 생성
+$("#createRoomBtn").click(function() {
+	var obj = new Object();
+	obj.areacode =  $("select[name=locationid]").val();
+	obj.chatRoomName = $("#inputRoomTitle").val();
+	obj.userUid = user.userUid;
+	
+	console.log(obj.areacode);
+	console.log(obj.chatRoomName);
+	console.log(obj.userUid);
+	
+	// 1. 방 생성 -> 디비 입력 -> 디비 방 정보 가져오기
+	$.ajax({
+		url : myConfig.imsiServerUrl + '/chat/detail',
+		method : 'POST',
+		dataType : 'json',
+		data : obj,
+		success : function(result) {
+			alert("success");
+			console.dir(result);
+			
+			var userObj = new Object();
+			
+			console.log(result);
+			
+			var s1 = result.split("&");
+			console.log(s1[3]);
+			
+			var s2 = s1[3].split("=");
+			console.log(s2[1]);
+			
+			
+			console.log(user.userUid);
+			userObj.userUid = user.userUid;
+			userObj.chatRoomInfoNo = s2[1];
+			$.ajax({
+				url : myConfig.imsiServerUrl + '/chat/insert_user',
+				method : 'POST',
+				dataType : 'json',
+				data : userObj,
+				success : function() {
+					alert("insert seccess");
+					window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + userObj.chatRoomInfoNo + "&location=" + obj.areacode + "&title=" + obj.chatRoomName;
+				}
+			});
+		}
+	})
+});
+	
+	
+function intoRoom(e) {
+//	console.dir(e);
+//	console.log(e.getAttribute("data-loc"));
+//	console.log(e.getAttribute("data-tle"));
+//	console.log(e.getAttribute("data-room"));
+	
+//	console.dir($(e).parent().siblings());
+//	console.log($(e).parent().siblings(".room-name").text());
+	
+	var room_name = $(e).parent().siblings(".room-name").text();
+	
+	var obj = new Object();
+	
+	obj.userUid = user.userUid;
+	obj.chatRoomInfoNo = e.getAttribute("data-room");
+	chatRoomInfoNo = obj.chatRoomInfoNo; 
+//	console.log(obj.userUid);
+//	console.log(obj.chatRoomInfoNo);
+	
+	$.ajax({
+		url : myConfig.imsiServerUrl + '/chat/insert_user',
+		method : 'POST',
+		dataType : 'json',
+		data : obj,
+		success : function(result) {
+			window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
+		}
 	});
-	
-	
-	function intoRoom(e) {
-		console.dir(e);
-		console.log(e.getAttribute("data-loc"));
-		console.log(e.getAttribute("data-tle"));
-		console.log(e.getAttribute("data-room"));
-		
-		console.dir($(e).parent().siblings());
-		console.log($(e).parent().siblings(".room-name").text());
-		
-		var room_name = $(e).parent().siblings(".room-name").text();
-		
-		var obj = new Object();
-		
-		obj.userUid = user.userUid;
-		obj.chatRoomInfoNo = e.getAttribute("data-loc");
-		
-		console.log(obj.userUid);
-		console.log(obj.chatRoomInfoNo);
-		alert(obj.chatRoomInfoNo);
-		
-		$.ajax({
-			url : 'http://localhost:8081/chat/insert_user',
-			method : 'POST',
-			dataType : 'json',
-			data : obj,
-			success : function(result) {
-				console.dir(result);
-				window.location = "http://localhost:8081/chat/detail?room=" + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
-			}
-		});
-	}
+}
 		
 		
 		

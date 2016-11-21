@@ -1,29 +1,44 @@
-	
-	var name = 'test';
-    var room = "";
-
+	console.log(myConfig.imsiServerUrl);
+    var user = sessionStorageService.getObject("user");
     
-	function listUser(room) {
+	function listUser(obj) {
+		console.log("in listUser");
 		var user_cnt = $("#chat-user-cnt");
 		var user_info = $("#chat-user-info");
-		
-		var obj = new Object();
-		obj.roomNo = room;
+
+		console.log("방 번호 : " + obj.roomNo);
+		var obj2 = new Object();
+		obj2.roomNo = obj.roomNo;
 		
 		$.ajax({
-			url : 'http://localhost:8081/chat/list_user',
+			url : myConfig.imsiServerUrl + '/chat/list_user',
 			method : 'GET',
 			dataType : 'json',
-			data : obj,
+			data : obj2,
 			success : function(result) {
+				user_info.html("");
 				console.dir(result);
-				user_cnt.html(user_cnt.html() + " " + result.length + " 명")
+				user_cnt.html("접속자 " + result.length + " 명");
+				user_cnt.attr("data-cnt", result.length);
 				
-				html = "";
+				console.dir(user_cnt);
+//				alert(user_cnt[0].dataset.cnt);
+				
+				var html = "";
+				
 				for (var i = 0; i < result.length; i++) {
 					var item = result[i];
-					html += item.userUid + "<br>";
+					html += "<div class='dropdown'>";
+					html += "<span class='dropbtn' id=" + item.userUid + ">" + item.displayName + "</span>";
+					html += "<div class='dropdown-content'>";
+					html += "<a href='#'>프로필</a>";
+					html += "<a href='#' data-target='#layerpop' data-toggle='modal'>대화명 변경</a>";
+					html += "<a href='#'>사진 변경</a>";
+					html += "</div>";
+					html += "</div>";
+					html += "<br>";
 				}
+				
 				user_info.html(html);
 			}
 		});
@@ -31,59 +46,39 @@
     
 	
 	function roomHeadHandler(obj) {
-		console.log(obj.loc);
-		console.log(obj.title);
-		console.log(obj.room);
+		console.log("in roomHeadHandler");
+		console.log("지역번호 : " + obj.loc);
+		console.log("제목 : " + obj.title);
+		console.log("지역 : " + obj.room);
+		console.log("방 번호 : " + obj.roomNo);
 		
-		room = obj.loc;
 		
-		$(".locationName").html(obj.room);
-		$(".roomTitle").html(obj.title);
-		listUser(room);
+		$(".locationName").html("지역 : " + obj.room);
+		$(".roomTitle").html("방제목 : " + obj.title);
+//		listUser(obj);
 	}
 	
 	
-	function socketIo() {
-		// 소켓서버에 접속
-		var socket = io("http://192.168.0.173:10001");
+	function nickNameMod() {
 		
-		 socket.on('connection', function(data) {
-             if (data.type == 'connected') {
-             	 console.log("connected");
-                 socket.emit('connection', {
-                     type : 'join',
-                     name : name,
-                     room : room
-                 });
-                 socket.emit('room', {
-                     room : room
-                 });
-             }
-         });
+		var nick = $("#nickname");
+		alert(nick.val());
 		
-		 
-		 socket.on('system', function(data) {
-// 				 alert("서버에서 전송된 데이터 : " + data.message);
-			 $("#msg-content").append(data.message + "<br>");
-         });
-		 
-		 socket.on('message', function(data) {
-			 alert("서버에서 전송된 데이터 : " + data.message);
-			 $("#msg-content").append(data.message + "<br>");
-         });
-		 
-		 
-		$("#msg-btn").click(function() {
-			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
-			console.log("서버로 전송함");
-			//	 				socket.emit("msg", $("#msg").val());
-			
-			$("#msg-content").append($("#msg").val() + "<br>");
-			socket.emit("user", {
-				name : name,
-				message : $("#msg").val()
-			});
-		});
+		console.log(nick.val());
+		console.log(user.userUid);
+		$("#" + user.userUid).text(nick.val());
+		userName = nick.val();
 	}
+	
+	
+	function on_key_down() {
+		console.log(event.keyCode);
 		
-	socketIo();		
+		if (event.keyCode == 13) {
+			$("#msg-btn").trigger("click");
+		}
+	}
+	
+	
+	
+	

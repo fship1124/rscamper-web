@@ -59,14 +59,15 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<ul class="pull-left breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
+				<h1 class="pull-left">Butterfly Train</h1>
+				<ul class="pull-right breadcrumb">
+					<li class="active"><a href="main.jsp">home</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<!-- Comment -->
-		<div class="container content-md" style="height: 450px; background: #F6F6F6">
+		<div class="container content-md" style="height: 450px; background: #F6F6F6; padding: 20px;">
 			<div>
 				<label for="comment">Comment:</label>
 				<div class="input-group margin-bottom-20">
@@ -86,12 +87,8 @@
 			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
                 	추천 콘텐츠
             </div>
-			<div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
-            </div>
-            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
-            <span>추천 콘텐츠</span> 더보기 +</a>
-		
-			<br><br>
+            <br><br>
+            
 			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
                 	여행 꿀팁
             </div>
@@ -107,7 +104,15 @@
             </div>
             <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
             <span>커뮤니티</span> 더보기 +</a>
-
+			
+			<br><br>
+			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;">
+                	관광지 맛집 숙소
+            </div>
+            <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;">
+            </div>
+            <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;">
+            <span>관광지 맛집 숙소</span> 더보기 +</a>
 		</div>
 		<!--=== End Content ===-->
 
