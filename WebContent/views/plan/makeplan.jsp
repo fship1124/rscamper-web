@@ -81,7 +81,7 @@
 		<div id="writeTourPlan" ng-app="TourPlanApp" ng-controller="MakePlanController">
 			<div id="leftMenu">
 			
-				<!-- 저장 취소 -->
+				<!-- 저장 / 취소 -->
 				<div id="controllers">
 					<div class="bg-light">
 						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="">
@@ -162,22 +162,194 @@
 										  </label>
 										</div>
 									</div>
-									
-									<div class="row" style="border-top: 1px solid black; border-bottom: 1px solid black; height: 15px;">
-									</div>
-									
-									<div class="row">
-										dsfsdfsd
-										dsfsdf
-									</div>
-									
-									
-								
-									
 								</div>
+								
+								<div class="row" style="border-top: 1px solid lightgray; height: 1px;"></div>
 								
 								<!-- 검색창 결과물 -->
 								<div id="searchContent">
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+									<!-- 결과 카드 -->
+									<div id="eachContent" class="row" draggable="true" style="height: 100px; margin-top: 2px; margin-bottom: 2px;">
+										<div id="listImage" style="float: left;">
+											<img draggable="false" src="http://lorempixel.com/400/200" style="height: 100px; width: 100px;">
+										</div>
+										<div id="listContent" style="float: left; padding: 5px; width: 160px; height: 100px; overflow: hidden; color: gray;">
+											<b>카테고리</b><br>
+											<h5><strong>이름</strong></h5>
+											<b>설명</b><br>
+											<b>도시</b> <b>추천수</b>
+										</div>
+									</div>
+							
+								
 									
 								</div>
 								
@@ -284,7 +456,7 @@
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="schedule in scheduleList">
+									<li class="equal-height-columns" ng-repeat="schedule in scheduleList | orderBy: 'start'">
 										<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
