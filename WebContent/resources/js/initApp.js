@@ -1,7 +1,36 @@
 // 환경설정
 var myConfig = {
 	// serverUrl: "http://localhost:8081" // 내 컴퓨터
-	serverUrl : "http://14.32.66.104:8081" // 서버 컴퓨터
+	serverUrl : "http://14.32.66.104:8081", // 서버 컴퓨터
+	imsiServerUrl : "http://192.168.0.173:8081" // 호동 서버 컴퓨터
+};
+
+//이미지 유효성 체크
+function img_validation(input) {
+	var image = input.value;
+    if (image != "" ) {
+        var ext = image.slice(image.lastIndexOf(".") + 1).toLowerCase();
+        if (!(ext == "gif" || ext == "jpg" || ext == "png")) {
+            alert("이미지 파일 (JPG, GIF, PNG) 만 업로드 가능합니다.");
+            input.focus();
+            return false;
+        }
+    }
+    return true;
+};
+
+//이미지 미리보기 혹은 이미지 파일 데이터
+function readURL(input, img) {
+    if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.readAsDataURL(input.files[0]);
+	    reader.onload = function (e) {
+	    	if (img) {
+	    		img.attr('src', e.target.result);
+	    	}
+	    	return e.target.result;
+	    }
+    }
 };
 
 // 유효성 체크 서비스

@@ -1,1 +1,4 @@
-/* Add here all your css styles (customizations) */
+/* 전체 CSS 설정 */
+.breadcrumbs {
+	padding: 0px;
+}

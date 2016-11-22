@@ -40,6 +40,7 @@
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="default.css">
@@ -65,14 +66,6 @@
 
 		<!--=== 내용 ===-->
 		<div class="container content-md">
-
-
-
-
-		
-		
-		
-		
 		
 		</div>
 		<!--=== 내용 끝 ===-->
