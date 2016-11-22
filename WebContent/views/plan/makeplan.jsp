@@ -268,7 +268,7 @@
 							<div class="tab-pane fade in active" id="tourPlanTab">
 								
 								<!-- 구글맵 -->
-								<div id="map"></div>
+								<div id="map" style="height: 400px;"></div>
 								
 								<!-- 일정표 버튼 -->
 								<div id="dpControl">
@@ -375,12 +375,17 @@
 	<!-- DayPilot -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-common.src.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-calendar.src.js"></script>
-
+	
+	<!-- Googla Map API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
+	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
 	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
+	
+	
 	
 
 </body>

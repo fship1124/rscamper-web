@@ -64,8 +64,9 @@
     padding-right: 3px;
 }
 
+/* 검색 결과 창 */
 #searchContent {
-    height: 1200px;
+    height: 1450px;
     width: 275px;
     overflow: auto;
     overflow-x: hidden;

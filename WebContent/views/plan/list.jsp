@@ -89,8 +89,8 @@
 
 						<!-- 여행일정 한개 -->
 						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
-							<img class="img-responsive" ng-if="plan.cover" ng-src="plan.cover" >
-							<img class="img-responsive" ng-if="!plan.cover" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
+							<img style="width: 100%;" ng-if="plan.cover" ng-src="plan.cover" >
+							<img style="width: 100%;" ng-if="!plan.cover" ng-src="http://lorempixel.com/600/280/nature">
 							<div style="position: absolute; top: 50px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
 							<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
 								<ul class="list-inline posted-info">
