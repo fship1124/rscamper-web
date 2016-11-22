@@ -82,7 +82,7 @@
 			<div class="row">
 
 				<!-- 여행일정 전체 -->
-				<div class="col-md-9" ng-if="planList.length > 0">
+				<div class="col-md-9" ng-show="planList.length != 0">
 
 					<!-- 여행일정 리스트 DIV -->
 					<div class="row">
@@ -112,7 +112,7 @@
 					</div><!-- 여행일정 리스트 DIV -->
 					
 					<!-- 표시해줄 일정이 없을때 -->
-					<div class="col-md-9" style="text-align: center;" ng-if="planList.length == 0">
+					<div class="col-md-9" style="text-align: center;" ng-show="planList.length == 0">
 						<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
 						<span>일정이 없습니다.</span>
 					</div>

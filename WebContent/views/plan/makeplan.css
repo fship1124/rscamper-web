@@ -50,10 +50,51 @@
 }
 
 #attractionTab {
-	overflow:hidden;
-	height:1130px;
+	height: 100%;
 }
 
 #attractionTab > div {
     height: 100%;
 }
+
+/* tabContent */
+#attractionTab > div > div {
+    height: 100%;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+#searchContent {
+    height: 1200px;
+    width: 275px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+
+.tourSpot {
+	height: 100px;
+	width: 270px;
+	margin-top: 2px; 
+	margin-bottom: 2px;
+	box-shadow: 0 1px 1px rgba(125, 125, 125, .2);
+}
+
+.tourSpotImageDiv {
+	float: left;
+}
+
+.tourSpotImage {
+	height: 98px;
+	width: 98px;
+}
+
+.tourSpotContent {
+	float: left;
+	padding: 5px;
+	width: 165px;
+	height: 100px;
+	overflow: hidden;
+	color: gray;
+}
+
