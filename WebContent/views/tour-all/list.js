@@ -1,33 +1,33 @@
-	function typeChange(contenttypeid, cat1Value){
-			var index =$("select[name=contenttypeid]").index(contenttypeid);
-			var typeid = $(contenttypeid).val();	
-		    var params = {"contenttypeid":typeid ,"langtype":"KOR"};
-			
-		    $.ajax({
-		    	url : "http://api.visitkorea.or.kr/guide/typeServiceCodeAjax.do",
-		        type: "post",
-		        dataType: "json",
-		        data : params,
-		        success:function(data){
-		    		console.dir(data);
-		        	$("select[name=cat1]:eq("+index+")").empty();	        	
-		        	$("select[name=cat1]:eq("+index+")").append("<option value=''>대분류</option>");
-		        	
-		        	for(var  i = 0;  i < data.list.length; i ++){	        		
-		        		if(cat1Value == data.list[i].cat1){
-		        			$("select[name=cat1]:eq("+index+")").append("<option value='"+data.list[i].cat1+"' selected>"+ data.list[i].catname1 +"</option>");
-		        		}else{
-		        			$("select[name=cat1]:eq("+index+")").append("<option value='"+data.list[i].cat1+"'>"+ data.list[i].catname1 +"</option>");
-		        		}
-		        	}
-		        },
-				error:function(args){
-					alert("dateserviceCodeAjax:error:"+request+"status:"+status+"error:"+error);
-				}
-		    });
-		}
+	// 버튼으로 바꿔버려서 전역변수로 뺏어요!!
+	var typeid = "";
+	
+	function typeChange(contenttypeid) {
+		// 버튼 눌린 상태로 보이게 하려고 클래스에 active 추가/삭제
+		$('button[onclick="typeChange(this)"]').removeClass('active');
+		$(contenttypeid).addClass('active');
 		
+		typeid = $(contenttypeid).val();
+		var params = {"contenttypeid":typeid ,"langtype":"KOR"};
 		
+	    $.ajax({
+	    	url : "http://api.visitkorea.or.kr/guide/typeServiceCodeAjax.do",
+	        type: "post",
+	        dataType: "json",
+	        data : params,
+	        success:function(data){
+	    		console.dir(data);
+	        	$("select[name=cat1]:eq(0)").empty();	        	
+	        	$("select[name=cat1]:eq(0)").append("<option value=''>대분류</option>");
+	        	
+	        	for(var  i = 0;  i < data.list.length; i ++){	        		
+        			$("select[name=cat1]:eq(0)").append("<option value='"+data.list[i].cat1+"'>"+ data.list[i].catname1 +"</option>");
+	        	}
+	        },
+			error:function(args){
+				alert("dateserviceCodeAjax:error:"+request+"status:"+status+"error:"+error);
+			}
+	    });
+	}
 		
 		function getCat2List(cat1 , initFlag, cat2Value, cat3Value){
 			var index = $("select[name=cat1]").index(cat1);		
@@ -47,7 +47,8 @@
 		        type: "post",
 		        dataType: "json",
 		        data : params,
-		        success:function(data){	        	
+		        success:function(data){
+		        	
 		        	$("select[name=cat2]:eq("+index+")").empty();	        	
 		        	$("select[name=cat2]:eq("+index+")").append("<option value=''>중분류</option>");
 		        	
@@ -111,7 +112,7 @@
 		    					$(this).attr("selected","selected");	    	
 		    				}
 		    			});	
-		        	}	        	
+		        	}
 		        },
 				error:function(args){
 					alert("serviceCodeAjax2:error:"+request+"status:"+status+"error:"+error);
@@ -121,7 +122,7 @@
 		
 		
 		function tourList(e) {
-			var contenttypeid = $("select[name=contenttypeid]").val();
+//			var contenttypeid = $("select[name=contenttypeid]").val();
 			var areaCode = $("select[name=areacode]").val();
 			var sigunguCode = $("select[name=sigungucode]").val();
 			var cat1 = $("select[name=cat1]").val();
@@ -132,15 +133,16 @@
 			console.log(areaCode);
 			console.log(sigunguCode);
 			
-			
 			var params = new Object();
-			params.contentTypeid = contenttypeid;
+			params.contentTypeId = typeid;
 			params.areaCode = areaCode;
 			params.sigunguCode = sigunguCode;
 			params.cat1 = cat1;
 			params.cat2 = cat2;
 			params.cat3 = cat3;
 			params.pageNo = pageNo;
+			
+			console.log(params);
 			
 		    $.ajax({
 		    	url : "http://localhost:8081/tour/api/list",
@@ -161,6 +163,7 @@
 		    });
 		};
 		
+		tourList();
 		
 		function pageing(data) {
 			var body = data.response.body;
@@ -254,7 +257,72 @@
 		    });
 		}
 		
-		
+		// 이미지 모달
+		(function($, window, document, undefined) {
+		    'use strict';
+
+		    // init cubeportfolio
+		    $('#js-grid-masonry-projects').cubeportfolio({
+		        filters: '#js-filters-masonry-projects',
+		        loadMore: '#js-loadMore-masonry-projects',
+		        loadMoreAction: 'click',
+		        layoutMode: 'grid',
+		        defaultFilter: '*',
+		        animationType: 'quicksand',
+		        gapHorizontal: 35,
+		        gapVertical: 25,
+		        gridAdjustment: 'responsive',
+		        mediaQueries: [{
+		            width: 1500,
+		            cols: 5
+		        }, {
+		            width: 1100,
+		            cols: 4
+		        }, {
+		            width: 800,
+		            cols: 3
+		        }, {
+		            width: 480,
+		            cols: 2
+		        }, {
+		            width: 320,
+		            cols: 1
+		        }],
+		        caption: 'zoom',
+		        displayType: 'fadeIn',
+		        displayTypeSpeed: 100,
+
+		        // lightbox
+		        lightboxDelegate: '.cbp-lightbox',
+		        lightboxGallery: true,
+		        lightboxTitleSrc: 'data-title',
+		        lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>',
+
+		        // singlePage popup
+		        singlePageDelegate: '.cbp-singlePage',
+		        singlePageDeeplinking: true,
+		        singlePageStickyNavigation: true,
+		        singlePageCounter: '<div class="cbp-popup-singlePage-counter">{{current}} of {{total}}</div>',
+		        singlePageCallback: function(url, element) {
+		            // to update singlePage content use the following method: this.updateSinglePage(yourContent)
+		            var t = this;
+
+		            $.ajax({
+		                    url: url,
+		                    type: 'GET',
+		                    dataType: 'html',
+		                    timeout: 30000
+		                })
+		                .done(function(result) {
+		                    t.updateSinglePage(result);
+		                })
+		                .fail(function() {
+		                    t.updateSinglePage('AJAX Error! Please refresh the page!');
+		                });
+		        },
+		    });
+		})(jQuery, window, document);
+
 		function listPrint(data) {
 			console.log("in listPrint");
 			console.dir(data);
@@ -267,27 +335,50 @@
 				var v = item[i];
 				if (i % 4 == 0) {
 					console.log(i);
-					html += "<ul class='list-unstyled row'>";
+					html += "<div id='grid-container' class='cbp-caption-active cbp-caption-zoom cbp-l-grid-agency cbp-ready'>";
 				}
 				console.log(v.addr1);
 				
 				var sAddr = v.addr1.split(" ");
 				var addr = sAddr[0] + " " + sAddr[1];
 				
-				html += "<li class='col-sm-3 col-xs-6 md-margin-bottom-30'>";
-				html += "<div class='team-img'>";
-				html += "<a href='#' onclick='goDetail(this)' data-value1='" + v.contentid + "' data-value2='" + v.contenttypeid + "'>";
-				html += "<img class='img-responsive' src='" + v.firstimage2 + "' alt=''  style='width:263px; height:174px'>";
-				html += "</a>";
+				html += "<div class='cbp-item graphic'>";
+				html += "<div class='cbp-caption margin-bottom-20'>";
+				html += "<div class='cbp-caption-defaultWrap'>";
+				html += "<img src='" + v.firstimage2 + "' alt='' style='width:263px; height:174px;'>";
 				html += "</div>";
-				html += "<h3>" + v.title + "</h3>";
-				html += "<h4>" + addr + "</h4>";
-				html += "</li>";
+				html += "<div id='list-div-" + v.contentid + "' class='cbp-caption-activeWrap'>";
+				html += "<div class='cbp-l-caption-alignCenter'>";
+				html += "<div class='cbp-l-caption-body'>";
+				html += "<ul class='link-captions no-bottom-space'>";
+				html += "<li><a href='#' onclick='goDetail(this)' data-value1='" + v.contentid + "' data-value2='" + v.contenttypeid + "'><i class='rounded-x fa fa-link'></i></a></li>";
+				html += "<li><a href='" + v.firstimage2 + "' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				html += "</ul>";
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+				html += "<div class='cbp-title-dark'>";
+				html += "<div id='list-title-" + v.contentid + "' class='cbp-l-grid-agency-title'>" + v.title + "</div>";
+				html += "<div class='cbp-l-grid-agency-desc'>" + addr + "</div>";
+				html += "</div>";
+				html += "</div>";
 				
-				if (i % 4 == 3) { html += "</ul>";}
+				if (i % 4 == 3) {
+					html += "</div>";
+				}
 			}
 			
 			list.html(html);
+//			
+//			$("div[id^='list-div-']").mouseenter(function() {
+//				var idValue = $(this).attr('id').substring(9);
+//				$("#list-title-" + idValue).css({'font-weight': 'bold'});
+//			});
+//			$("div[id^='list-div-']").mouseleave(function() {
+//				var idValue = $(this).attr('id').substring(9);
+//				$("#list-title-" + idValue).css('font-weight', 'normal');
+//			});
 		}
 
 

@@ -44,7 +44,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+<link rel="stylesheet"
+	href="../../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+<link rel="stylesheet"
+	href="list.css">
+
 
 </head>
 
@@ -66,83 +72,85 @@
 
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<div class="table">
-				<table class="table bbsSearch">
-					<tbody>
-						<tr>
-							<th scope="row">관광타입</th>
-								<td>
-								<select title="타입 선택" name="contenttypeid" onchange="typeChange(this)">
-										<option value="" selected="selected">타입선택</option>
-										<option value="12">관광지</option>
-										<option value="14">문화시설</option>
-										<option value="15">축제공연행사</option>
-										<option value="25">여행코스</option>
-										<option value="28">레포츠</option>
-										<option value="32">숙박</option>
-										<option value="38">쇼핑</option>
-										<option value="39">음식점</option>
-								</select>
-								</td>
-						</tr>
-
-						<tr>
-							<th scope="row">서비스분류</th>
-							<td class="dataSearch">
-								<div>
-									<span> <select title="대분류" name="cat1"	onchange="getCat2List(this);">
-											<option value="">대분류</option>
-											<option value="A01">자연</option>
-											<option value="A02">인문(문화/예술/역사)</option>
-											<option value="A03">레포츠</option>
-											<option value="A04">쇼핑</option>
-											<option value="A05">음식</option>
-											<option value="B02">숙박</option>
-											<option value="C01">추천코스</option>
-									</select> <select name="cat2" onchange="getCat3List(this);" title="중분류">
-											<option value="">중분류</option>
-									</select> <select name="cat3" style="width: 308px;" title="소분류">
-											<option value="">소분류</option>
-									</select>
-									</span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">지역</th>
-							<td>
-								<select title="지역선택" name="areacode" onchange="getSigunguList(this.value);">
-									<option value="" selected="selected">지역선택</option>
-									<option value="1">서울</option>
-									<option value="2">인천</option>
-									<option value="3">대전</option>
-									<option value="4">대구</option>
-									<option value="5">광주</option>
-									<option value="6">부산</option>
-									<option value="7">울산</option>
-									<option value="8">세종특별자치시</option>
-									<option value="31">경기도</option>
-									<option value="32">강원도</option>
-									<option value="33">충청북도</option>
-									<option value="34">충청남도</option>
-									<option value="35">경상북도</option>
-									<option value="36">경상남도</option>
-									<option value="37">전라북도</option>
-									<option value="38">전라남도</option>
-									<option value="39">제주도</option>
-								</select> 
-								<select name="sigungucode" title="시군구선택">
-									<option value="" selected="selected">시군구 선택</option>
-								</select>
-						</td>
-						</tr>
-					</tbody>
-				</table>
-				<button type="button" onclick="tourList()">검색</button>
+		<div class="container content-md" style="padding: 0px; margin-top: 10px;">
+			<div class="row">
+				<section class="col-lg-12">
+					<button class="btn-u rounded" type="button" value="12" onclick="typeChange(this)"><i class="fa fa-bookmark-o"></i> 관광지</button>
+					<button class="btn-u btn-u-purple rounded" type="button" value="14" onclick="typeChange(this)"><i class="fa fa-coffee"></i> 문화시설</button>
+					<button class="btn-u btn-u-red rounded" type="button" value="15" onclick="typeChange(this)"><i class="fa fa-child"></i> 축제공연행사</button>
+					<button class="btn-u btn-u-orange rounded" type="button" value="25" onclick="typeChange(this)"><i class="fa fa-plane"></i> 여행코스</button>
+					<button class="btn-u btn-u-blue rounded" type="button" value="28" onclick="typeChange(this)"><i class="fa fa-soccer-ball-o"></i> 레포츠</button>
+					<button class="btn-u btn-u-brown rounded" type="button" value="32" onclick="typeChange(this)"><i class="fa fa-home"></i> 숙박</button>
+					<button class="btn-u btn-u-green rounded" type="button" value="38" onclick="typeChange(this)"><i class="fa fa-shopping-cart"></i> 쇼핑</button>
+					<button class="btn-u btn-u-default rounded" type="button" value="39" onclick="typeChange(this)"><i class="fa fa-cutlery"></i> 음식점</button>
+				</section>
 			</div>
-
-			<div class="title-v1" id="list"></div>
+			<div id="category-div">
+				<div class="col-lg-11">
+					<div class="row" id="cat2-list">
+						<section class="col-lg-4">
+							<select class="form-control rounded" title="대분류" name="cat1" onchange="getCat2List(this);">
+								<option value="">대분류</option>
+								<option value="A01">자연</option>
+								<option value="A02">인문(문화/예술/역사)</option>
+								<option value="A03">레포츠</option>
+								<option value="A04">쇼핑</option>
+								<option value="A05">음식</option>
+								<option value="B02">숙박</option>
+								<option value="C01">추천코스</option>
+							</select>
+						</section>
+						<section class="col-lg-4">
+							<select class="form-control rounded" name="cat2" onchange="getCat3List(this);" title="중분류">
+								<option value="">중분류</option>
+							</select>
+						</section>
+						<section class="col-lg-4">
+							<select class="form-control rounded" name="cat3" title="소분류">
+								<option value="">소분류</option>
+							</select>
+						</section>
+					</div>
+					<div class="row" id="sigungu-list">
+						<section class="col-lg-6">
+							<select class="form-control rounded" title="지역선택" name="areacode" onchange="getSigunguList(this.value);">
+								<option value="" selected="selected">지역선택</option>
+								<option value="1">서울</option>
+								<option value="2">인천</option>
+								<option value="3">대전</option>
+								<option value="4">대구</option>
+								<option value="5">광주</option>
+								<option value="6">부산</option>
+								<option value="7">울산</option>
+								<option value="8">세종특별자치시</option>
+								<option value="31">경기도</option>
+								<option value="32">강원도</option>
+								<option value="33">충청북도</option>
+								<option value="34">충청남도</option>
+								<option value="35">경상북도</option>
+								<option value="36">경상남도</option>
+								<option value="37">전라북도</option>
+								<option value="38">전라남도</option>
+								<option value="39">제주도</option>
+							</select> 
+						</section>
+						<section class="col-lg-6">
+							<select class="form-control rounded" name="sigungucode" title="시군구선택">
+								<option value="" selected="selected">시군구 선택</option>
+							</select>
+						</section>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<button class="btn-u rounded btn-u-yellow" type="button" onclick="tourList()"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
+			</div>
+			
+			<div class="cube-portfolio container margin-bottom-60" id="list">
+				<div id="js-grid-masonry-projects" class="cbp cbp-l-grid-masonry-projects">
+				</div>
+			</div>
 
 			<div class="text-center">
 				<ul class="pagination pagination-lg"></ul>
@@ -200,6 +208,8 @@
 	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
 
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="../../assets/plugins/cube-portfolio/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+	<script type="text/javascript" src="../../assets/js/plugins/cube-portfolio/cube-portfolio-4.js"></script>
 	<script type="text/javascript" src="list.js"></script>
 </body>
 </html>
