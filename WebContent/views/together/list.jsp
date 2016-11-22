@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="list.css">
 
 </head>
 
@@ -69,9 +69,12 @@
 
 		<!--=== Content ===-->
 		<div id = "list" class="container content-md">
-			<table class="table" border='1'>
+			<table class="table table-hover">
 				<thead>
-					<th>번호</th>	<th>지역</th>	<th>제목</th>	<th>날짜</th>
+					<th width="10%">번호</th>
+					<th width="10%">지역</th>
+					<th width="*">제목</th>
+					<th width="20%">날짜</th>
 				</thead>	
 				<tbody>
 				</tbody>

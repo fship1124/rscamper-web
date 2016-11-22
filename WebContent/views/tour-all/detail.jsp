@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -105,63 +105,76 @@
 					</div>
 
 				<div class="col-md-6 content1">
-					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a data-target="#home"
-							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-							aria-expanded="true">기본 정보</a></li>
-						<li role="presentation" class=""><a data-target="#profile"
-							role="tab" id="profile-tab" data-toggle="tab"
-							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
-						<li role="presentation" class="dropdown">
-							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
-								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
-							</ul>
-						</li>
-					</ul>
-					
-					
-	
-
-					<div id="myTabContent" class="tab-content">
-						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							<div id="content1" class="tabCon" style="display: block;">
-								<ul class="txtCon tab1" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
-							<div id="content2" class="tabCon" style="display: block;">
-								<ul class="txtCon tab2" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
-						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
+					<div class="tag-box tag-box-v1">
+						<ul id="ul-info">
+							<li id="li-title">
+								<i class="icon-custom icon-sm rounded-x icon-bg-orange glyphicon glyphicon-flag"></i><h2 id="text-title"></h2>
+							</li>
+							<li>
+								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-map-marker"></i><strong class="strong-custom"> 주소</strong>
+								<span id="text-address"></span>
+							</li>
+							<li>
+								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-home"></i><strong class="strong-custom"> 홈페이지</strong>
+								<p class='p-custom' id="text-homepage"></p>
+							</li>
+<!-- 							<li> -->
+<!-- 								<p><i class="fa fa-info-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-credit-card"></i></p> -->
+<!-- 								<p><i class="fa fa-comment-o"></i></p> -->
+<!-- 								<p><i class="fa fa-exclamation-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-tag"></i></p> -->
+<!-- 								<p><i class="fa fa-wheelchair"></i></p> -->
+<!-- 								<p><i class="fa fa-bookmark"></i></p> -->
+<!-- 								<p><i class="fa fa-check-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-comments"></i></p> -->
+<!-- 								<p><i class="fa fa-question-circle"></i></p> -->
+<!-- 							</li> -->
+						</ul>
 					</div>
-				</div>
-			</div>
+					
+					
+					<div class="panel-group acc-v1" id="accordion-1">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One">
+										<i class="glyphicon glyphicon-pencil"></i>개요
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-One" class="panel-collapse collapse in">
+								<div class="panel-body" id="text-content"></div>
+							</div>
+						</div>
 
-			<div class="row content2">
-				<div class="news-v3-in">
-					<ul class="list-inline posted-info">
-						<li>By Luke Etheridge</li>
-						<li>In <a href="#">Design</a></li>
-						<li>Posted January 24, 2015</li>
-					</ul>
-					<h2></h2>
-					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
-						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
-						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
-						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
-						Nullam non metus in mi rhoncus efficitur...</p>
-					<ul class="post-shares">
-						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
-						</a></li>
-						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
-						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
-					</ul>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
+										<!-- <i class="icon-custom rounded-x icon-bg-yellow fa fa-info-circle"></i>이용안내 -->
+										<i class="fa fa-info-circle"></i>이용안내
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-Two" class="panel-collapse collapse">
+								<div class="panel-body" id="text-info"></div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Three">
+										<i class="glyphicon glyphicon-plus-sign"></i>부가정보
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-Three" class="panel-collapse collapse">
+								<div class="panel-body" id="text-plusInfo">
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
