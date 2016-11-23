@@ -50,14 +50,17 @@
 <!-- DayPilot Calendar Themes -->
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_transparent.css" />    
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_white.css" />    
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_green.css" />    
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_green.css" />
+
+<!-- Sweet Alert -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="makeplan.css">
 
 </head>
 
-<body class="header-fixed header-fixed-space-default">
+<body class="header-fixed header-fixed-space-default" ng-app="TourPlanApp" ng-controller="MakePlanController">
 	<div class="wrapper">
 
 		<!-- 헤더 include -->
@@ -78,16 +81,23 @@
 		<%@include file="include/planHeader.jsp"%>
 
 		<!--=== 내용 ===-->
-		<div id="writeTourPlan" ng-app="TourPlanApp" ng-controller="MakePlanController">
+		<div id="writeTourPlan">
+			
+			<!-- 배경사진 업로드 모달 -->
+			<%@include file="include/BGUploadFormModal.jsp"%>
+			
+			<!-- 여행장소 디테일 모달 -->
+			<%@include file="include/detailTourSpotModal.jsp"%>
+		
 			<div id="leftMenu">
 			
 				<!-- 저장 / 취소 -->
 				<div id="controllers">
 					<div class="bg-light">
-						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="">
+						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="saveTourPlan();">
 							<i class="fa fa-floppy-o"></i> 저장하기
 						</button>
-						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="">
+						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="cancelTourPlan();">
 							<i class="fa fa-times"></i> 취소
 						</button>
 					</div>
@@ -99,17 +109,17 @@
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
 							<span class="badge badge-u rounded" style="font-size: 12px;">9</span>
-							<a href="#"><i class="fa fa-map-marker"></i> 관광지</a>
-						</li>
-						<li id="notification_menu" class="list-group-item">
-							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
-							<a href="#"><i class="fa fa-money"></i> 예산</a>
+							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
 							<span class="badge badge-u rounded" style="font-size: 12px;">10</span>
-							<a href="#"><i class="fa fa-book"></i> 여행기</a>
+							<a href="javascript:void(0);"><i class="fa fa-book"></i> 여행기</a>
+						</li>
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
+							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
 						</li>
 					</ul>
 				</div>
@@ -140,7 +150,7 @@
 									<!-- 검색 -->
 									<div class="bg-light" style="text-align: center;">
 										<!-- 검색 텍스트 -->
-										<input type="text" class="form-control margin-bottom-10" placeholder="검색할 장소이름" ng-model="searchWord">
+										<input type="text" id="searchText" class="form-control margin-bottom-10" placeholder="검색할 장소명, 주소" ng-model="searchWord">
 										<!-- 검색 카테고리 -->
 										<div class="btn-group" data-toggle="buttons" style="width:100%;">
 										  <label class="btn rounded btn-tumblr" style="width:22%; margin: 3px;" ng-click="initSpotList('all')">
@@ -163,23 +173,22 @@
 									</div>
 								</div>
 								
-								<div>
-									<h5>검색결과</h5>
+								<div id="searchResult">
+									<p>검색 결과</p>
 								</div>
 								
 								<!-- 검색창 결과물 -->
 								<div id="searchContent">
 								
 									<!-- 결과 카드 반복 -->
-									<div class="tourSpot" draggable="true" ng-repeat="tourSpot in tourSpotList">
+									<div class="tourSpot" draggable="true" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);">
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
 										</div>
 										<div class="tourSpotContent">
-											<b ng-bind="tourSpot.contenttypeid"></b><br>
-											<b ng-bind="tourSpot.title"></b><br>
-											<b ng-bind="tourSpot.contentid"></b><br>
-											<b ng-bind="tourSpot.areacode"></b> <b ng-bind="tourSpot.contentid">추천수</b>
+											<span ng-bind="tourSpot.contenttypeid | tourSpotCategory"></span> <span ng-bind="tourSpot.title"></span>
+											<span ng-bind="tourSpot.contentid"></span>
+											<span ng-bind="tourSpot.areacode"></span> <span ng-bind="tourSpot.contentid">추천수</span>
 										</div>
 									</div>
 									
@@ -211,12 +220,12 @@
 							<section>
 								<label class="input"> 
 									<i class="icon-prepend fa fa-pencil-square-o"></i>
-									<input type="text" placeholder="소제목을 입력해 주세요" ng-model="writeTourPlan.strapline">
+									<input type="text" placeholder="소제목을 입력해 주세요" ng-model="tourPlan.strapline">
 								</label>
 							</section>
 							<section>
 								<label class="textarea">
-									<textarea rows="5" placeholder="일정에 대한 간략한 소개글을 입력해 주세요" ng-model="writeTourPlan.introduce"></textarea>
+									<textarea rows="5" placeholder="일정에 대한 간략한 소개글을 입력해 주세요" ng-model="tourPlan.introduce"></textarea>
 								</label>
 							</section>
 							<section>
@@ -225,20 +234,20 @@
 										<label class="label" style="margin-bottom: 0px;"><strong>여행시작일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="writeTourPlan.departureDate">
+											<input type="date" ng-model="tourPlan.departureDate">
 										</label>
 									</section>
 									<section class="col col-5">
 										<label class="label" style="margin-bottom: 0px;"><strong>여행종료일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="writeTourPlan.arriveDate">
+											<input type="date" ng-model="tourPlan.arriveDate">
 										</label>
 									</section>
 									<section class="col col-2">
 										<label class="label" style="margin-bottom: 0px;"><strong>여행기간</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
-											<input type="text" ng-model="writeTourPlan.period" readonly>
+											<input type="text" ng-model="tourPlan.period" readonly>
 										</label>
 									</section>
 								</div>
@@ -270,12 +279,12 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
-								<!-- 일정표 버튼 -->
-								<div id="dpControl">
-									<p>====================</p>
-									<p>버튼들</p>
-									<p>====================</p>
-								</div>	
+<!-- 								일정표 버튼 -->
+<!-- 								<div id="dpControl"> -->
+<!-- 									<p>====================</p> -->
+<!-- 									<p>버튼들</p> -->
+<!-- 									<p>====================</p> -->
+<!-- 								</div>	 -->
 
 								<!-- 일정표 DIV -->
 								<div id="dp"></div>
@@ -366,12 +375,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
-	<!-- 메뉴 -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
-
-	<!-- INIT APP -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
-	
 	<!-- DayPilot -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-common.src.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-calendar.src.js"></script>
@@ -379,7 +382,17 @@
 	<!-- Googla Map API -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
 	
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<!-- 메뉴 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
+	
+	<!-- INIT APP -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
+	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
 	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->

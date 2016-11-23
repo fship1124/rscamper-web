@@ -88,7 +88,7 @@ angular.module("TourPlanApp")
 		// 페이지 번호로 이동 메소드
 		$scope.noPage = function (paramPageNo) {
 			if (paramPageNo < 1 || paramPageNo > $scope.totalPages) {
-				alert("없는 페이지 번호입니다.");
+				swal("에러", "없는 페이지 번호입니다.", "error");
 				return false;
 			}
 			$scope.searchParams.pageNo = paramPageNo;
@@ -105,7 +105,7 @@ angular.module("TourPlanApp")
 					$scope.searchParams.pageNo += count;
 					$scope.getPlanList();
 				} else {
-					alert("더이상 갈수 없습니다.");
+					swal("에러", "더이상 갈수 없습니다.", "error");
 					return false;
 				}
 			} else {
@@ -113,7 +113,7 @@ angular.module("TourPlanApp")
 					$scope.searchParams.pageNo -= count;
 					$scope.getPlanList();
 				} else {
-					alert("더이상 갈수 없습니다.");
+					swal("에러", "더이상 갈수 없습니다.", "error");
 					return false;
 				}
 			}
