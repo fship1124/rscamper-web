@@ -289,14 +289,14 @@ function initApp() {
                     // UI 로그인상태로 변경
                     $('#loginBtn').css('display', 'none');
                     $('#logoutBtn').css('display', 'inline');
-                    $('#mypage').css('display', 'block');
+                    $('#23').css('display', 'block');
         		}
         	});
         } else {
             // UI 로그아웃상태로 변경
             $('#loginBtn').css('display', 'inline');
             $('#logoutBtn').css('display', 'none');
-            $('#mypage').css('display', 'none');
+            $('#23').css('display', 'none');
             $('#mypageTitle').html('마이페이지');
         }
     });

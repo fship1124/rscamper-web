@@ -1,5 +1,5 @@
 angular.module("TourPlanApp")
-	.controller("MakePlanController", function ($rootScope, $scope, $http, MyConfig, RequestService) {
+	.controller("MakePlanController", function ($rootScope, $scope, $http, $window, MyConfig, RequestService) {
 		/** ==================================================== */
 		/** TODO 여행일정 데이터 불러오기 */
 		/** ==================================================== */
@@ -13,16 +13,21 @@ angular.module("TourPlanApp")
 				console.log(response);
 				if (response.userUid != $rootScope.user.userUid) {
 					swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
-					// TODO 일정리스트 페이지로 리다이렉트
+					// 일정리스트 페이지로 리다이렉트
+					$window.location.href = "list.jsp";
 				};
 				$scope.tourPlan = response;
+				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
+				$scope.tourPlan.departureDate = new Date(response.departureDate);
+				$scope.tourPlan.regDate = new Date(response.regDate);
 			}).error(function (error) {
 				swal("에러", "잘못된 접근입니다.", "error");
-				// TODO 일정리스트 페이지로 리다이렉트
+				// 일정리스트 페이지로 리다이렉트
+				$window.location.href = "list.jsp";
 			});
 		}
 		
-//		$scope.getTourPlan();
+		$scope.getTourPlan();
 
 
 		/** ==================================================== */
@@ -240,7 +245,7 @@ angular.module("TourPlanApp")
 	        "start": "2016-06-05T10:00:00",
 	        "end": "2016-06-05T13:00:00",
 	        "id": "23ef6fcd-e12d-b085-e38a-a4e23d0bb61d",
-	        "text": "관광지",
+	        "text": "석모도",
 	        "tags": {
 	            "type": "sight"
 	        }
@@ -248,7 +253,7 @@ angular.module("TourPlanApp")
 	        "start": "2016-06-06T11:00:00",
 	        "end": "2016-06-06T14:00:00",
 	        "id": "fb62e2dd-267e-ec91-886b-73574d24e25a",
-	        "text": "음식점",
+	        "text": "통영맛집",
 	        "tags": {
 	            "type": "rest"
 	        }
@@ -256,7 +261,7 @@ angular.module("TourPlanApp")
 	        "start": "2016-06-07T10:00:00",
 	        "end": "2016-06-07T13:00:00",
 	        "id": "29b7a553-d44f-8f2c-11e1-a7d5f62eb123",
-	        "text": "숙박업소",
+	        "text": "더존팬션",
 	        "tags": {
 	            "type": "bed"
 	        }
@@ -264,7 +269,7 @@ angular.module("TourPlanApp")
 	        "start": "2016-06-07T14:00:00",
 	        "end": "2016-06-07T17:00:00",
 	        "id": "ff968cfb-eba1-8dc1-7396-7f0d4f465c8a",
-	        "text": "기타",
+	        "text": "이동",
 	        "tags": {
 	            "type": "important"
 	        }
@@ -298,7 +303,9 @@ angular.module("TourPlanApp")
 	        		  end: args.end,
 	        		  id: DayPilot.guid(),
 	        		  text: name,
-	        		  tag: {"type" : "custom"}
+	        		  tag: {
+	        			  "type" : "custom"
+	        		  }
 	          }
 	          dp.events.add(new DayPilot.Event(event));
 	          dp.clearSelection();
@@ -421,7 +428,7 @@ function initMap() {
 	      };
 
 	      infoWindow.setPosition(pos);
-	      infoWindow.setContent('Location found.');
+	      infoWindow.setContent('공사중');
 	      map.setCenter(pos);
 	    }, function() {
 	      handleLocationError(true, infoWindow, map.getCenter());
