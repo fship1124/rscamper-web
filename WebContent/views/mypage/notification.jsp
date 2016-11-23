@@ -43,11 +43,16 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 <!-- CSS Page Style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/shortcode_timeline2.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/profile.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+
+<!-- Sweet Alert -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="notification.css">
@@ -73,7 +78,7 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" ng-app="myApp" ng-controller="MyController">
+		<div class="container content profile" style="padding-top: 20px;" ng-app="myApp" ng-controller="MyController">
 		
 			<!-- 배경 사진 업로드 모달 -->
 			<%@include file="include/BGUploadFormModal.jsp"%>
@@ -88,6 +93,58 @@
 			
 				<!--Left Sidebar-->
 				<%@include file="include/left_sidebar.jsp"%>
+				
+				<!-- 알림 시작 -->
+				<div class="col-md-9">
+					<ul class="timeline-v2">
+					
+						<li class="equal-height-columns">
+							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
+							<i class="cbp_tmicon rounded-x hidden-xs"></i>
+							<div class="cbp_tmlabel equal-height-column">
+								<h2>ㅎㅎㅎ</h2>
+								<div class="row">
+									<div class="col-md-4">
+										<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
+										<div class="md-margin-bottom-20"></div>
+									</div>
+									<div class="col-md-8">
+										<p>ㅋㅋㅋㅋ</p>
+										<p>ㅋㅋㅋㅋ</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						
+						<li class="equal-height-columns">
+							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 14일</span> <span>월요일</span></div>
+							<i class="cbp_tmicon rounded-x hidden-xs"></i>
+							<div class="cbp_tmlabel equal-height-column">
+								<h2>First achievements</h2>
+								<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
+								<div class="row">
+									<div class="col-sm-6">
+										<ul class="list-unstyled">
+											<li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+											<li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+										</ul>
+									</div>
+									<div class="col-sm-6">
+										<ul class="list-unstyled">
+											<li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+											<li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+											<li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- 알림 끝 -->
 				
 				
 			</div><!--/end row-->
@@ -138,6 +195,9 @@
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
+	
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>

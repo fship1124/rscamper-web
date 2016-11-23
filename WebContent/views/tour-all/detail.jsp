@@ -12,37 +12,38 @@
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="rscamper">
+<meta name="author" content="rscamper">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../../favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 <!-- Web Fonts -->
 <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="../../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet" href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet" href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -105,63 +106,76 @@
 					</div>
 
 				<div class="col-md-6 content1">
-					<ul id="myTab" class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a data-target="#home"
-							id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-							aria-expanded="true">기본 정보</a></li>
-						<li role="presentation" class=""><a data-target="#profile"
-							role="tab" id="profile-tab" data-toggle="tab"
-							aria-controls="profile" aria-expanded="false">이용 안내</a></li>
-						<li role="presentation" class="dropdown">
-							<a data-target="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">상세 정보 
-								<span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-								<li><a data-target="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">홈페이지</a></li>
-								<li><a data-target="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">상세 정보</a></li>
-							</ul>
-						</li>
-					</ul>
-					
-					
-	
-
-					<div id="myTabContent" class="tab-content">
-						<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							<div id="content1" class="tabCon" style="display: block;">
-								<ul class="txtCon tab1" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade" id="profile"	aria-labelledby="profile-tab">
-							<div id="content2" class="tabCon" style="display: block;">
-								<ul class="txtCon tab2" tabindex="0"></ul>
-							</div>
-						</div>
-						<div role="tabpanel" class="tab-pane fade tab3" id="dropdown1" aria-labelledby="dropdown1-tab"></div>
-						<div role="tabpanel" class="tab-pane fade tab4" id="dropdown2" aria-labelledby="dropdown2-tab"></div>
+					<div class="tag-box tag-box-v1">
+						<ul id="ul-info">
+							<li id="li-title">
+								<i class="icon-custom icon-sm rounded-x icon-bg-orange glyphicon glyphicon-flag"></i><h2 id="text-title"></h2>
+							</li>
+							<li>
+								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-map-marker"></i><strong class="strong-custom"> 주소</strong>
+								<span id="text-address"></span>
+							</li>
+							<li>
+								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-home"></i><strong class="strong-custom"> 홈페이지</strong>
+								<p class='p-custom' id="text-homepage"></p>
+							</li>
+<!-- 							<li> -->
+<!-- 								<p><i class="fa fa-info-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-credit-card"></i></p> -->
+<!-- 								<p><i class="fa fa-comment-o"></i></p> -->
+<!-- 								<p><i class="fa fa-exclamation-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-tag"></i></p> -->
+<!-- 								<p><i class="fa fa-wheelchair"></i></p> -->
+<!-- 								<p><i class="fa fa-bookmark"></i></p> -->
+<!-- 								<p><i class="fa fa-check-circle"></i></p> -->
+<!-- 								<p><i class="fa fa-comments"></i></p> -->
+<!-- 								<p><i class="fa fa-question-circle"></i></p> -->
+<!-- 							</li> -->
+						</ul>
 					</div>
-				</div>
-			</div>
+					
+					
+					<div class="panel-group acc-v1" id="accordion-1">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One">
+										<i class="glyphicon glyphicon-pencil"></i>개요
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-One" class="panel-collapse collapse in">
+								<div class="panel-body" id="text-content"></div>
+							</div>
+						</div>
 
-			<div class="row content2">
-				<div class="news-v3-in">
-					<ul class="list-inline posted-info">
-						<li>By Luke Etheridge</li>
-						<li>In <a href="#">Design</a></li>
-						<li>Posted January 24, 2015</li>
-					</ul>
-					<h2></h2>
-					<p>Nullam elementum tincidunt massa, a pulvinar leo ultricies
-						ut. Ut fringilla lectus tellus, imperdiet molestie est volutpat
-						at. Sed viverra cursus nibh, sed consectetur ipsum sollicitudin
-						sed. Cras erat est, euismod id congue sed, sollicitudin sed odio.
-						Nullam non metus in mi rhoncus efficitur...</p>
-					<ul class="post-shares">
-						<li><a href="#"> <i class="rounded-x icon-speech"></i> <span>5</span>
-						</a></li>
-						<li><a href="#"><i class="rounded-x icon-share"></i></a></li>
-						<li><a href="#"><i class="rounded-x icon-heart"></i></a></li>
-					</ul>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
+										<!-- <i class="icon-custom rounded-x icon-bg-yellow fa fa-info-circle"></i>이용안내 -->
+										<i class="fa fa-info-circle"></i>이용안내
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-Two" class="panel-collapse collapse">
+								<div class="panel-body" id="text-info"></div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h5 class="panel-title">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Three">
+										<i class="glyphicon glyphicon-plus-sign"></i>부가정보
+									</a>
+								</h5>
+							</div>
+							<div id="collapse-Three" class="panel-collapse collapse">
+								<div class="panel-body" id="text-plusInfo">
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -176,40 +190,40 @@
 	<%@include file="/resources/include/userModal.jsp"%>
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="../../assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="../../assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/modernizr.js"></script>
-	<script type="text/javascript" src="../../assets/plugins/login-signup-modal-window/js/main.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/modernizr.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="../../assets/js/app.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="../../assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/app.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
 
 	<!--[if lt IE 9]>
-	<script src="../../assets/plugins/respond.js"></script>
-	<script src="../../assets/plugins/html5shiv.js"></script>
-	<script src="../../assets/plugins/placeholder-IE-fixes.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/html5shiv.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
 
 	<!-- 파이어베이스 -->
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script type="text/javascript" src="../../resources/js/firebaseInit.js"></script>
-	<script type="text/javascript" src="../../resources/js/firebaseAuth.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
 	<!-- 메뉴 -->
-	<script type="text/javascript" src="../../resources/js/menu.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
 	<!-- INIT APP -->
-	<script type="text/javascript" src="../../resources/js/initApp.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	
 	
