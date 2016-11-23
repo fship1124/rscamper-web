@@ -108,7 +108,7 @@
 					<ul class="list-group sidebar-nav-v1" >
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">9</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="scheduleList.length"></span>
 							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -298,7 +298,7 @@
 								<ul class="timeline-v2">
 									
 									<li class="equal-height-columns" ng-repeat="schedule in scheduleList | orderBy: 'start'">
-										<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
+										<div class="cbp_tmtime equal-height-column"><span>{{schedule.start | convertDate}}</span> <span>{{schedule.tags.type}}</span></div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
 											<h2>{{schedule.text}}</h2>

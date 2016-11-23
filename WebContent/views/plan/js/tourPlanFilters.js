@@ -7,6 +7,18 @@ angular.module("TourPlanApp")
 	*  음식점 : 39
 	*  숙박업소 : 32
 	*/
+
+	//성별 필터
+	.filter("convertDate", function() {
+		return convertDate
+		function convertDate (scheduleDate) {
+			console.log(scheduleDate);
+			var resultDate = scheduleDate.value.split("T");
+			return resultDate[0];
+		}
+	})
+
+
 	.filter("tourSpotCategory", function() {
 		return tourSpotCategory
 		function tourSpotCategory (contentTypeId) {

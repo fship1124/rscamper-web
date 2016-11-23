@@ -176,7 +176,7 @@ angular.module("TourPlanApp")
 				$("#createTourPlanFormModal").modal("hide");
 				// 일정 만들기 페이지로 이동
 				// 파라미터 : result.recordNo
-				// $window.location.href = "makeplan.jsp?recordNo=" + result.recordNo;
+				 $window.location.href = "makeplan.jsp?recordNo=" + result.recordNo;
 			}).error(function (error) {
 				console.log(error);
 			});
