@@ -55,13 +55,12 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<ul class="pull-left breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li class="active"><a href="${pageContext.request.contextPath}/views/default/default.jsp">Default Page</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">travelog</a></li>
 				</ul>
 			</div>
 		</div>
-		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
 		<div class="container content-md">
@@ -73,12 +72,20 @@
 					<thead></thead>
 					<tbody></tbody>
 				</table>
+				<!--=== Content: 좋아요,북마크 버튼 ===-->
+				<div style='float:left;'>
+					<button type='button' class='btn btn-like' id='like-btn' style='vertical-align:bottom; '>
+						<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'   ></span>
+					<button type='button' class='btn btn-bookmark' id='bookmark-btn' style='vertical-align:bottom; '>
+						<span class='glyphicon glyphicon-bookmark' aria-hidden='true'   ></span>
+				</div>
+				<!--=== Content: 삭제,수정,list 버튼 ===-->
 				<div style='float:right;'>
-					<button type='submit' class='btn btn-delete' id='delete' style='vertical-align:bottom;'>
+					<button type='button' class='btn btn-delete' id='delete-btn' style='vertical-align:bottom;'>
 						<span class='glyphicon glyphicon-trash' aria-hidden='true'   ></span>
-					<button type='button' class='btn btn-primary btn-small' id='update' data-toggle="modal" data-target=".bs-example-modal-lg" style='vertical-align:bottom;'>
+					<button type='button' class='btn btn-primary' id='update-btn' data-toggle="modal" data-target=".bs-example-modal-lg" style='vertical-align:bottom;'>
 						<span class='glyphicon glyphicon-pencil' aria-hidden='true'   ></span>
-					<button type='submit' class='btn btn-list' id='list' style='vertical-align:bottom;'>
+					<button type='submit' class='btn btn-list' id='list-btn' style='vertical-align:bottom;'>
 						<span class='glyphicon glyphicon-th-list' aria-hidden='true'   ></span>
 					</button>
 				</div>
@@ -87,12 +94,12 @@
 			<!--=== Content: update ===-->
 			<div>
 			<br>
-				<!--============ Modal: update ============-->
+				<!--==== Modal: update ===-->
 				<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				  <div class="modal-dialog modal-lg">
 				    <div class="modal-content">
 				      <div class="modal-header">
-					                제목 : <input type="text" name="title" id="title" style="width:800px; height:30px; " />
+					                제목 : <input type="text" name="updateTitle" id="updateTitle" style="width:80%; height:30px; " />
 				      </div>
 				      
 				      <form action="http://localhost:8081/travelog/register" method="post" enctype="multipart/form-data" >
@@ -113,7 +120,7 @@
 				
 			<!--=== End Content ===-->
 			
-			<!-- Comment -->
+			<!--=== Comment ===-->
 			<div class="container content-md"
 				style="border: 1px solid red; height: 500px">
 				<div>
@@ -127,7 +134,6 @@
 						<button type='button' class='btn btn-success' id="commentBtn" style='vertical-align:bottom;'>
 							<span class='glyphicon glyphicon-ok' aria-hidden='true'   ></span>
 						</button>
-	<!-- 					<button type="button" id="commentBtn" class="btn btn-success">등록</button> -->
 					</div>
 				</div>
 				<!-- Comment List -->
@@ -136,35 +142,30 @@
 				</div>
 			</div>
 			
-			<!-- Modal comment -->
-			<div id="modifyModal" class="modal modal-primary fade" role="dialog">
-			  <div class="modal-dialog">
-			    <!-- Modal content-->
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal">&times;</button>
-			        <h4 class="modal-title"></h4>
-			      </div>
-			      <div class="modal-body" data-rno>
-			        <p><input type="text" id="replytext" class="form-control"></p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-			        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+			<!-- Modal 수정 comment -->
+			<div class="modal fade bs-comment-modal-lg" id="commentModal" >
+  				<div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        	<p class="modalComment-title" style="color:gray;" >수정할 댓글을 작성해주세요</p>
+				      </div>
+				      <div class="modalComment-body" >
+				      	<input type="hidden" name="modalCommentNo" id="modalCommentNo" />
+				      	<input type="text" id="modalComment" name="modalComment" style="padding:10px; width:100%; height:50px; border:0px;" />
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" class="btn btn-primary" id=commentUpdateBtn >Save changes</button>
+				      </div>
+				    </div><!-- /.modal-content -->
+				 </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+
 	
 			<!-- End Comment -->
 
-
-
-		
-		
-		
-		
 		
 		</div>
 		<!--=== 내용 끝 ===-->
@@ -214,54 +215,146 @@
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
+	<!-- 스마트에디터 -->
+	<script type="text/javascript" src="../../resources/se/js/HuskyEZCreator.js" charset="utf-8"></script>
+	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			contentCreate();
 			commentList();
 			
+		
+			/* 스마트에디터 */
+			var editor_object = [];
+		     
+		    nhn.husky.EZCreator.createInIFrame({
+		        oAppRef: editor_object,
+		        elPlaceHolder: "smarteditor",
+		        sSkinURI: "../../resources/se/SmartEditor2Skin.html", 
+		        htParams : {
+		            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseToolbar : true,             
+		            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseVerticalResizer : true,     
+		            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		            bUseModeChanger : true, 
+		        }
+		    });
+		    
+		    
+		    function contentCreate() {
+				var obj = new Object();
+				obj.boardNo = ${param.boardNo};
+				
+				$.ajax({
+					type : "POST",
+					url : "http://localhost:8081/travelog/detail",
+					dataType : 'json',
+					data : obj,
+					error : function(err) {
+						alert("에러");
+					},
+					success : function(result) {
+						detailContent = result;
+						console.log(detailContent);
+						var d = new Date(result.regDate);
+		 				var mon = d.getMonth() + 1;
+						
+						var html = "";
+						html += "<th style='height:30px; text-align:center;'>";
+						html += result.categoryName;
+						html += "</th>";
+						html += "<th colspan='2' >";
+						html += result.title;
+						html += "</th>";
+						html += "<th>";
+						html += d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2)+ " " + d.toLocaleTimeString();
+						html += "</th>";
+						
+						$("thead").html(html);
+						
+						html = "";
+						html += "<td colspan='4' style='height:300px;'>";
+						html += result.content;
+						html += "</td>";
+						
+						$("tbody").html(html);
+					}
+				});
+			}
+		    
+		    
+		    var detailContent;
+		 	/* 게시글 수정 */
+		 	$("#update-btn").click(function () {
+		 		$("#updateTitle").val(detailContent.title);
+		 		editor_object.getById['smarteditor'].exec('PASTE_HTML',[detailContent.content]);
+			})
 			
+		    var page;
+		    
+		    /* 게시물 수정 저장 버튼 클릭 */
+		    $("#submit-btn").click(function () {
+		    	var boardNo = ${param.boardNo};
+		    	var title = $("#updateTitle").val();
+		    	var content = editor_object.getById['smarteditor'].getIR();
+		    	var user = sessionStorageService.getObject("user");
+				var uid = user.userUid;
+				var categoryNo = 2;
+				page = 1;
+				console.log(boardNo);
+		    	console.log("수정:",title);		    	
+		    	console.log(content);	
+		    	console.log(uid);
+		    	
+		    	$.ajax ({
+		    		type : "POST",
+		    		url : "http://localhost:8081/travelog/update",
+		    		dataType : 'json',
+		    		data : {
+		    			"boardNo" : boardNo,
+		    			"userUid" : uid,
+		    			"title" : title,
+		    			"content" : content,
+		    			"categoryNo" : categoryNo
+		    		},
+		    		success : function(result) {
+		    			$('#myModal').modal('hide');
+		    			self.location = "http://localhost:8081/travelog/" + boardNo;
+		    			
+		    		}
+		    	});
+		    })
+		    
+			/* 게시글 삭제 */
+			$("#delete-btn").click(function () {
+		 		var obj = new Object();
+				obj.boardNo = ${param.boardNo};
+				
+				$.ajax({
+					type : "POST",
+					url : "http://localhost:8081/travelog/delete",
+					dataType : 'json',
+					data : obj,
+					error : function(err) {
+						alert("에러");
+					},
+					success : function() {
+					}
+				});
+			})
+			
+			/* 리스트목록으로 이동 */
+			$(".btn-list").on("click", function() {
+				self.location = "http://localhost:8081/travelog/home";
+			});
+		 	
+	    
 		});
 		
-		function contentCreate() {
-			var obj = new Object();
-			obj.boardNo = ${param.boardNo};
-			
-			$.ajax({
-				type : "POST",
-				url : "http://localhost:8081/travelog/detail",
-				dataType : 'json',
-				data : obj,
-				error : function(err) {
-					alert("에러");
-				},
-				success : function(result) {
-					
-					var d = new Date(result.regDate);
-	 				var mon = d.getMonth() + 1;
-					
-					var html = "";
-					html += "<th style='height:30px; text-align:center;'>";
-					html += result.categoryName;
-					html += "</th>";
-					html += "<th colspan='2' >";
-					html += result.title;
-					html += "</th>";
-					html += "<th>";
-					html += d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2)+ " " + d.toLocaleTimeString();
-					html += "</th>";
-					
-					$("thead").html(html);
-					
-					html = "";
-					html += "<td colspan='4' style='height:300px;'>";
-					html += result.content;
-					html += "</td>";
-					
-					$("tbody").html(html);
-				}
-			});
-		}
+	    
+		
 		
 		function prependZero(num, len) {
 			while (num.toString().length < len) {
@@ -276,47 +369,17 @@
 			formObj.attr("action", "http://localhost:8081/travelog/delete");
 			formObj.attr("method", "POST");
 			formObj.submit();
-			/*
-			$.ajax({
-				url : 'http://localhost:8081/travelog/delete/' + boardNo,
-				method : 'DELETE',
-				dataTy : 'JSON',
-				success : function(result) {
-				}
-			});
-			*/
 		});
 		
-		/* 게시글수정 */
-		$(".btn-update").on("click", function() {
-			formObj.attr("action", "http://localhost:8081/travelog/update");
-			formObj.attr("method", "POST");
-			formObj.submit();
-			/* $.ajax({
-				url : 'http://localhost:8081/travelog/update',
-				method : 'GET',
-				dataTy : 'JSON',
-				success : function(result) {
-				}
-			}); */
-			
-		});
 		
 		/* 리스트목록으로 이동 */
 		$(".btn-list").on("click", function() {
 			self.location = "http://localhost:8081/travelog/home";
-			/*
-			$.ajax({
-				url : 'http://localhost:8081/travelog/home',
-				method : 'GET',
-				dataTy : 'JSON',
-				success : function(result) {
-				}
-			});
-			*/
 		});
 		
 		
+		/* comment(댓글)========================================================= */
+		/* 댓글 목록 */
 		var page;
 		function commentList() {
 			var boardNo = ${param.boardNo};
@@ -336,7 +399,7 @@
 			});
 		};
 		
-		
+		/* 댓글 등록시 */
 		$("#commentBtn").click(function() {
 			var user = sessionStorageService.getObject("user");
 			var uid = user.userUid;
@@ -361,37 +424,37 @@
 				success : function() {
 					$("#inputComment").val("");
 					commentList();
-					/* $("#inputComment").val("");					
-					commentFn(result); */
 				}
 			});
 		});
 	
 		function commentFn(data) {
 			var cList = $("#comment-list");
-			
 			cList.html("");
+			
 			for (var i = 0; i < data.page.length; i++) {	
 				var c = data.page[i];
 				var d = new Date(c.regDate);
 				var mon = d.getMonth() + 1;
 				var html = "";
-				html += "<div><form>";
+				html += "<div>";
+// 				html += "<form role='form' method='get' >";
+// 				html += "	<input type='hidden' name='commentNo' value='${c.commentNo}' ></form>";
 				html += "<div style='margin:10px; width: 95%; height: 60px;' >";
 				html += "	<img src='../assets/img/user.jpg' style='vertical-align: inherit; width:40px; height:40px;'>";
 				html += "	<div style='display: inline-block;'>";
-				html += "		<input type='hidden' id='commentNo' name='commentNo' value='${c.commentNo}' ></input>";
+				html += "		<input type='hidden' name='commentNo' id='commentNo' value='" + c.commentNo + "' />";
 				html += "		<p style='margin-left:20px;' style='' >";
 				html += 		d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + " " + d.toLocaleTimeString();
 				html += "		</p>";				
-				html += "		<p style='margin-left:20px;'>";
+				html += "		<p id='commentContent-"+c.commentNo+"' class='commentContent' style='margin-left:20px;'>";
 				html += 		c.commentContent;
 				html += "		</p>";
 				html += "	</div>";
 				html += "   <div style='float:right; margin-top: 10px;' >";
-				html += "		<button type='submit' class='btn btn-default' id='cmtDelete' style='vertical-align:bottom;'>";
+				html += "		<button type='button' class='btn btn-commentDelete' id='cmtDelete' onclick='commentDelete();' style='vertical-align:bottom;'>";
 				html += "			<span class='glyphicon glyphicon-trash' aria-hidden='true'   ></span>";
-				html += "		<button type='submit' class='btn btn-default' id='cmtModify' style='vertical-align:bottom;'>";
+				html += "		<button type='submit' class='btn btn-default cmtModifyModal' id='cmtModify-"+c.commentNo+"' data-toggle='modal' data-target='.bs-comment-modal-lg' style='vertical-align:bottom;'>";
 				html += "			<span class='glyphicon glyphicon-pencil' aria-hidden='true'   ></span>";
 				html += "		</button>"
 				html += "   </div>";
@@ -400,24 +463,99 @@
 				html += "</div>"	
 				cList.append(html);
 			}
+			
+			/* 댓글삭제 */
+			function commentDelete(){
+				var commentNo = $("#commentNo").val();
+				$.ajax({
+					url : 'http://localhost:8081/travelog/commentDelete',
+					type : 'GET',
+					dataType : 'JSON',
+					data : {
+						"commentNo" : commentNo
+					},
+					success : function() {
+						commentList();
+					}
+				});
+			};
+		
+			/* 댓글수정1.수정버튼 클릭 */
+			$('button[id^=cmtModify]').click( function() {
+				var commentNo = $(this).attr("id").replace("cmtModify-", "");
+				var commentContent = document.getElementById('commentContent-' + commentNo).innerHTML;
+				console.log(commentContent);
+				$("#modalComment").val(commentContent);
+				$("#modalCommentNo").val(commentNo);
+			});
+			
+			/* 댓글수정2.저장버튼 클릭 */
+			$("#commentUpdateBtn").click(function() {
+				var user = sessionStorageService.getObject("user");
+				var uid = user.userUid;
+				var commentContent = $("#modalComment").val();
+				var commentNo = $("#modalCommentNo").val();
+				console.log(commentContent);
+				console.log(commentNo);
+				
+				page = 1;
+				
+				//빈칸으로 댓글 입력시..
+				if($("#modalComment").val()==""){
+					alert("댓글 내용이 없습니다.");
+					$("#modalComment").focus(); return;
+				}
+				$.ajax({
+					url : 'http://localhost:8081/travelog/commentUpdate',
+					type : 'POST',
+					data : {
+						"userUid" : uid,
+						"commentContent" : commentContent,
+						"commentNo" : commentNo,
+						"page" : page
+					},
+					success : function() {
+						commentList();
+						$('#commentModal').modal('hide');
+					}
+				});
+			});
+		
 		};
 		
-		$("#cmtDelete").click(function() {
-			var commentNo = $("#commentNo").val();
-			console.log(commentNo);
-			$.ajax({
-				url : 'http://localhost:8081/travelog/delete/' + boardNo,
-				type : 'GET',
-				dataTy : 'JSON',
-				success : function(result) {
-				}
-			});
-		});
 		
+		/* 게시글 수정 모달 호출 */
 		$('.bs-example-modal-lg').on('shown.bs.modal', function () {
 			  $('#myInput').focus();
 		})
 	
+		/* 댓글 수정 모달 호출 */
+		$("#commentModal").on('shown.bs.modal', function () {
+			  $('#myInput').focus();
+		})
+		
+		
+		$('#like-btn').click(function(){
+			var user = sessionStorageService.getObject("user");
+			var uid = user.userUid;
+			var boardNo = ${param.boardNo};
+			
+			$.ajax({
+				url : 'http://localhost:8081/travelog/like',
+				type : 'POST',
+				data : {
+					"userUid" : uid,
+					"targetNo" : boardNo,
+					"targetType" : 1
+				},
+				success : function() {
+				}
+			});
+		});
+		
+		$('#bookmark').click(function(){
+			
+		});
 	
 	</script>
 	
