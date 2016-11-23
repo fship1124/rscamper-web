@@ -27,7 +27,7 @@ angular.module("TourPlanApp")
 			});
 		}
 		
-		$scope.getTourPlan();
+//		$scope.getTourPlan();
 
 
 		/** ==================================================== */
