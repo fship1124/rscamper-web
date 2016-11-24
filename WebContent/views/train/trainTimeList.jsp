@@ -646,6 +646,22 @@ function joinBtn() {
 			var data = JSON.parse(data);
 			timeList(data);
 
+<<<<<<< HEAD
+=======
+	function joinBtn() {
+		var trainGradeCodeIsTrue = false;
+		var trainGradeCode = document.getElementsByName('trainRadio');
+		var trainGradeCodeVal = "00";
+		for (var i = 0; i < trainGradeCode.length; i++) {
+			var t = trainGradeCode[i];
+
+			if (t.checked == true) {
+				console.log("ttttt");
+				console.dir(t);
+				trainGradeCodeIsTrue = true;
+				trainGradeCodeVal = t.defaultValue; 
+			}
+>>>>>>> 4e807d39fb5f4f10055ffbf5eab6b8aa94e65c30
 		}
 	});
 }

@@ -24,7 +24,6 @@ jQuery(document).ready(function($) {
       //show the selected form
       ($(event.target).is('.cd-signup')) ? signup_selected() : login_selected();
     }
-
   });
 
   //close modal

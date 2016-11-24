@@ -20,7 +20,6 @@
 	//파일 기본경로 _ 상세경로
 	String path = defaultPath + "upload" + File.separator;
 	File file = new File(path);
-	System.out.println(path);
 	if(!file.exists()) {
 	    file.mkdirs();
 	}
