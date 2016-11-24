@@ -337,27 +337,21 @@
 					+ user.userUid + "/" + obj.chatRoomInfoNo,
 					type : "DELETE",
 					success : function() {
-						// alert("success");
-
 						socket.emit("out", {
 							name : user.displayName
 						});
 
-						alert("방에서 퇴장하셨습니다.");
-						
-						
 						// 방 접속자수가 0일때 방 폐쇄
 						var user_cnt = $("#chat-user-cnt");
 						
 						console.dir(user_cnt);
-						alert(user_cnt[0].dataset.cnt);
 						
 						if (user_cnt[0].dataset.cnt == 1) {
 							$.ajax({
 								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
 								type : "DELETE",
 								success : function() {
-									alert(obj.chatRoomInfoNo +  "방 삭제");
+// 									alert(obj.chatRoomInfoNo +  "방 삭제");
 								}
 							});				
 						}

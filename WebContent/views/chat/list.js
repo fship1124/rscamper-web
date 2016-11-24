@@ -82,7 +82,6 @@ $("#createRoomBtn").click(function() {
 		dataType : 'json',
 		data : obj,
 		success : function(result) {
-			alert("success");
 			console.dir(result);
 			
 			var userObj = new Object();
@@ -105,7 +104,6 @@ $("#createRoomBtn").click(function() {
 				dataType : 'json',
 				data : userObj,
 				success : function() {
-					alert("insert seccess");
 					window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + userObj.chatRoomInfoNo + "&location=" + obj.areacode + "&title=" + obj.chatRoomName;
 				}
 			});

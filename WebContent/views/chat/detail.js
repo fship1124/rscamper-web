@@ -93,7 +93,6 @@
 				user_cnt.attr("data-cnt", result.length);
 				
 				console.dir(user_cnt);
-//				alert(user_cnt[0].dataset.cnt);
 				
 				var html = "";
 				
@@ -131,9 +130,7 @@
 	
 	
 	function nickNameMod() {
-		
 		var nick = $("#nickname");
-		alert(nick.val());
 		
 		console.log(nick.val());
 		console.log(user.userUid);
