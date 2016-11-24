@@ -115,23 +115,12 @@ $("#createRoomBtn").click(function() {
 	
 	
 function intoRoom(e) {
-//	console.dir(e);
-//	console.log(e.getAttribute("data-loc"));
-//	console.log(e.getAttribute("data-tle"));
-//	console.log(e.getAttribute("data-room"));
-	
-//	console.dir($(e).parent().siblings());
-//	console.log($(e).parent().siblings(".room-name").text());
-	
 	var room_name = $(e).parent().siblings(".room-name").text();
-	
 	var obj = new Object();
 	
 	obj.userUid = user.userUid;
 	obj.chatRoomInfoNo = e.getAttribute("data-room");
 	chatRoomInfoNo = obj.chatRoomInfoNo; 
-//	console.log(obj.userUid);
-//	console.log(obj.chatRoomInfoNo);
 	
 	$.ajax({
 		url : myConfig.imsiServerUrl + '/chat/insert_user',
@@ -143,7 +132,6 @@ function intoRoom(e) {
 		}
 	});
 }
-		
 		
 		
  		
