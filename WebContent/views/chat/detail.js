@@ -63,15 +63,6 @@
     	}
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	function listUser(obj) {
 		console.log("in listUser");
 		var user_cnt = $("#chat-user-cnt");
@@ -99,7 +90,7 @@
 				for (var i = 0; i < result.length; i++) {
 					var item = result[i];
 					html += "<div class='dropdown'>";
-					html += "<span class='dropbtn' id=" + item.userUid + ">" + item.displayName + "</span>";
+					html += "<span id=" + item.userUid + ">" + item.displayName + "</span>";
 					html += "<div class='dropdown-content'>";
 					html += "<a href='#'>프로필</a>";
 					html += "<a href='#' data-target='#layerpop' data-toggle='modal'>대화명 변경</a>";

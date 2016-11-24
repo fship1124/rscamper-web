@@ -40,6 +40,7 @@
 <!-- CSS Theme -->
 <link rel="stylesheet" href="../../assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="../../assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="default.css">
@@ -67,7 +68,7 @@
 		<div class="container content-md" style="padding: 20px;">
 			
 			<div>
-				<table class="table" style="width: 60%; border: 1px solid tomato;">
+				<table class="table" style="width: 60%;">
 					<thead>
 						<th colspan="4">지역별 채팅</th>
 					</thead>
@@ -135,8 +136,8 @@
 			</div>
 
 
-			<div class="content" style="height: 800px; border: 1px solid blue; padding: 0px;">
-				<table class="table" style="width: 100%; height: 100%; border: 1px solid blue; margin : 0;">
+			<div class="content" style="height: 800px; padding: 0px;">
+				<table class="table" style="width: 100%; height: 100%; margin : 0;">
 					<thead style="height: 10%;">
 						<tr><th>지역</th><th>제목</th><th>인원수</th></tr>
 					</thead>

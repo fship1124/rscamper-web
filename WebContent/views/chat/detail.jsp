@@ -101,7 +101,7 @@
 
 		<div class="container content-md">
 			<div>
-				<table class="table" style="width: 100%; background: #EEEEEE; border: 1px solid tomato;">
+				<table class="table" style="width: 100%; background: #EEEEEE;">
 					<thead>
 						<tr>
 							<th id="locationName" class="locationName"></th>
@@ -109,30 +109,30 @@
 						</tr>
 						<tr>
 							<th colspan="2">
-							<button type="button" id="clean-screen">화면비우기</button>
-							<button type="button" id="nickname-modfy">방제목변경</button>
-							<button type="button" id="room-background">방테마변경</button>
-							<button type="button" id="room-save">저장하기</button>
-							<button type="button" id="out-room">퇴장</button>
+							<button id="clean-screen" class='btn'>화면비우기</button>
+							<button id="nickname-modfy" class='btn'>방제목변경</button>
+							<button id="room-background" class='btn'>방테마변경</button>
+							<button id="room-save" class='btn'>저장하기</button>
+							<button id="out-room" class='btn'>퇴장</button>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="3" rowspan="2" class="massagePrint" style="width: 85%; height: 500px; border: 1px solid tomato;">
-								<div id="msg-content" style="height: 500px; background: #FFFFFF; border: 1px solid tomato; overflow: auto;">
+							<td colspan="3" rowspan="2" class="massagePrint" style="width: 85%; height: 500px;">
+								<div id="msg-content" style="height: 500px; background: #FFFFFF; overflow: auto;">
 								</div>
 							</td>
-							<td id="chat-user-cnt" data-cnt="" style="height: 30px; border: 1px solid tomato;">접속자</td>
+							<td id="chat-user-cnt" data-cnt="" style="height: 30px;">접속자</td>
 						</tr>
 						<tr>
-							<td id="chat-user-info" style="height: 400px; border: 1px solid tomato;"></td>
+							<td id="chat-user-info" style="height: 400px;"></td>
 						</tr>
-						<tr style="height: 50px; border: 1px solid tomato;">
+						<tr style="height: 50px; ">
 							<td></td>
 						</tr>
-						<tr style="height: 30px; border: 1px solid tomato;">
-							<td colspan="4" style="weight: 90%; border: 1px solid tomato;">
+						<tr style="height: 30px; ">
+							<td colspan="4" style="weight: 90%; ">
 								<input type="text" id="msg" style="width: 90%">
 								<button id="msg-btn" type="button">입력</button>
 								<input type="file" id="imgSend" />

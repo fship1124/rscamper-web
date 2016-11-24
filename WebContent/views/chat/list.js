@@ -51,13 +51,13 @@ function listRoomCreate(data) {
 		html += "</td><td>";
 		html += item.roomUserCnt;
 		html += "</td>";
-		html += "<td><button type='button' data-loc=";
+		html += "<td><button class='btn' data-loc=";
 		html += item.areacode;
 		html += " data-tle= '";
 		html += item.chatRoomName;
 		html += "' data-room=";
 		html += item.chatRoomInfoNo;
-		html += " onclick='intoRoom(this)'>입장</button></td></tr>";
+		html += " onclick='intoRoom(this)'>GO</button></td></tr>";
 	}
 	
 	room_list.html(html);
