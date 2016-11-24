@@ -19,7 +19,7 @@
 		    });
 		    
 		    var page;
-		    
+		    /*게시글 등록*/
 		    $("#submit-btn").click(function () {
 		    	var title = $("#title").val();
 		    	var content = editor_object.getById['smarteditor'].getIR();
@@ -51,6 +51,7 @@
 		    
 		});
 		
+		/* 스마트에디터 */
 		var oEditors = [];
 		 nhn.husky.EZCreator.createInIFrame({
 		 oAppRef: oEditors,
@@ -60,7 +61,7 @@
 		});
 		
 		 
-		
+		 /* 여행기 게시 목록 */
 		function travelogList(e) {
  			console.log("in travelogList")
  			console.log("e:" + e);
@@ -151,6 +152,7 @@
  			var p = data.page;
  			var pageMaker = data.pageMaker;
  			page = pageMaker.endPage;
+			
  			var list = $("tbody");
  			var html = "";
  			for (var i = 0; i < p.length; i++) {
