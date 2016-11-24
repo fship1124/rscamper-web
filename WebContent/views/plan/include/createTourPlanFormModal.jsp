@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!-- 회원정보수정 모달 -->
 <div id="createTourPlanFormModal" class="modal fade" tabindex="-1" role="dialog" style="top: 50px;">
-	
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-body">

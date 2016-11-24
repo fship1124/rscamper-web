@@ -273,7 +273,7 @@ if (typeof DayPilot.Global === 'undefined') {
         // potentially leaking a bit but significantly faster in IE
         this.fasterDispose = true;
 
-        this.angularAutoApply = false;
+        this.angularAutoApply = true;
         this.api = 2;
         this.borderColor = "#CED2CE";
         this.businessBeginsHour = 9;
@@ -342,6 +342,9 @@ if (typeof DayPilot.Global === 'undefined') {
         this.onEventResized = null;
         this.onTimeRangeSelect = null;
         this.onTimeRangeSelected = null;
+        
+        /** 추가 */
+        this.onEventDroped = null;
 
         this.clearSelection = function() {
             for(var j = 0; j < DayPilotCalendar.selectedCells.length; j++) {
@@ -914,7 +917,6 @@ if (typeof DayPilot.Global === 'undefined') {
                         break;
                 }
             }
-        
         };    
         
         this.timeRangeSelectedPostBack = function(start, end, resource, data) {
@@ -2725,6 +2727,7 @@ if (typeof DayPilot.Global === 'undefined') {
             else {
                 this.hide();
             }
+            
         };
 
         this._loadTop = function() {

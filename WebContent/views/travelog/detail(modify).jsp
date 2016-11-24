@@ -739,6 +739,8 @@
  				var mon = d.getMonth() + 1;
 				var html = "";
 				html += "<div>";
+				html += "<form role="form" method="get" >";
+				html += "	<input type="hidden" name="commentNo" value="c.commentNo" ></form>";
 				html += "<div style='margin:10px; width: 95%; height: 60px;' >";
 				html += "	<img src='../assets/img/user.jpg' style='vertical-align: inherit; width:40px; height:40px;'>";
 				html += "	<div style='display: inline-block;'>";
@@ -751,7 +753,7 @@
 				html += "		</p>";
 				html += "	</div>";
 				html += "   <div style='float:right; margin-top: 10px;' >";
-				html += "		<button type='submit' class='btn btn-default' id='cmtDelete' style='vertical-align:bottom;'>";
+				html += "		<button type='submit' class='btn btn-commentDelete' id='cmtDelete' style='vertical-align:bottom;'>";
 				html += "		<span class='glyphicon glyphicon-trash' aria-hidden='true'   ></span>";
 				html += "		<button type='submit' class='btn btn-default' id='cmtModify' style='vertical-align:bottom;'>";
 				html += "		<span class='glyphicon glyphicon-pencil' aria-hidden='true'   ></span>";
@@ -764,7 +766,15 @@
 			}
 		}
 		
-		$("#cmtDelete").click(function() {
+		
+		/* 댓글삭제 */
+		var formObj = $("form[role='form']");
+		$(".btn-commentDelete").on("click", function() {
+			formObj.attr("action", "http://localhost:8081/travelog/commentDelte");
+			formObj.attr("method", "POST");
+			formObj.submit();
+		});
+		/* $("#cmtDelete").click(function() {
 			var boardNo = ${param.boardNo};
 			$.ajax({
 				url : 'http://localhost:8081/travelog/remove/' + boardNo,
@@ -773,7 +783,7 @@
 				success : function(result) {
 				}
 			});
-		});
+		}); */
 		
 		$('.bs-example-modal-lg').on('shown.bs.modal', function () {
 			  $('#myInput').focus()

@@ -43,12 +43,13 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 	
-	
-
 	<!-- CSS Theme -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+	
+	<!-- Sweet Alert -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
 
 	<!-- 사용자 정의 CSS -->
 	<link rel="stylesheet" href="list.css">
@@ -82,15 +83,15 @@
 			<div class="row">
 
 				<!-- 여행일정 전체 -->
-				<div class="col-md-9" ng-if="planList.length > 0">
+				<div class="col-md-9" ng-show="planList.length != 0">
 
 					<!-- 여행일정 리스트 DIV -->
 					<div class="row">
 
 						<!-- 여행일정 한개 -->
 						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
-							<img class="img-responsive" ng-if="plan.cover" ng-src="plan.cover" >
-							<img class="img-responsive" ng-if="!plan.cover" src="https://thumb-wishbeen.akamaized.net/oHYq83t5yv8DeMJ3OhAuLPtEdTY=/448x170/smart/filters:no_upscale()/img-wishbeen.akamaized.net/plan/1460703895209_5386658122_c4ac5fdfe3_b.jpg">
+							<img style="width: 100%;" ng-if="plan.cover" ng-src="plan.cover" >
+							<img style="width: 100%;" ng-if="!plan.cover" ng-src="http://lorempixel.com/600/280/nature">
 							<div style="position: absolute; top: 50px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
 							<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
 								<ul class="list-inline posted-info">
@@ -110,6 +111,7 @@
 						</div><!-- 여행일정 한개 끝 -->
 
 					</div><!-- 여행일정 리스트 DIV -->
+					
 					
 					<!-- 표시해줄 일정이 없을때 -->
 					<div class="col-md-9" style="text-align: center;" ng-if="planList.length == 0">
@@ -225,6 +227,9 @@
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
+	
+	<!-- Sweet Alert -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
@@ -233,6 +238,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
 	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
