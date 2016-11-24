@@ -11,11 +11,11 @@ angular.module("TourPlanApp")
 			}).success(function (response) {
 				// 불러온 일정정보 uid값이 $rootScope.user와 같은지 확인 : 같으면 진행, 아니면 오류 메세지 띄우고 일정 리스트 페이지로 이동
 				console.log(response);
-				if (response.userUid != $rootScope.user.userUid) {
-					swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
-					// 일정리스트 페이지로 리다이렉트
-					$window.location.href = "list.jsp";
-				};
+//				if (response.userUid != $rootScope.user.userUid) {
+//					swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
+//					// 일정리스트 페이지로 리다이렉트
+//					$window.location.href = "list.jsp";
+//				};
 				$scope.tourPlan = response;
 				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
 				$scope.tourPlan.departureDate = new Date(response.departureDate);
@@ -70,7 +70,7 @@ angular.module("TourPlanApp")
 		
 		// 배경 사진 변경 모달창 열기
 		$scope.changeTourPlanBGImage = function () {
-			$scope.uploadBGUrl = myConfig.serverUrl + "/tourPlan/upload/bgImage"
+			$scope.uploadBGUrl = MyConfig.backEndURL + "/tourPlan/upload/coverImage"
 			$("#BGImageFile").val("");
 			$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 			$('#BGImageUploadFormModal').modal('show');
@@ -78,42 +78,63 @@ angular.module("TourPlanApp")
 		// 배경사진 업로드 완료 콜백
 		$scope.uploadBGCallBack = function (result) {
 	        var data = JSON.parse(result);
-//	        var tourPlanPhoto = {
-//	          userUid: $scope.user.userUid,
-//	          type: data.type,
-//	          path: data.path,
-//	          size: data.size
-//	        }
-	        $scope.updateImage(tourPlanPhoto, "/user/update/bgImage")
+	        var TourPlanCover = {
+	        		recordNo: RequestService.getParameter("recordNo"),
+	        		realPath: data.realPath, // 서버 경로
+	        		filePath: data.filePath, // 웹 경로
+	        		oriName: data.oriName, // 업로드시 파일이름
+	        		fileName: data.fileName, // 서버저장 파일이름
+	        		fileSize: data.fileSize // 파일 크기
+	        }
+	        $scope.updateImage(TourPlanCover, "/tourPlan/update/coverImage")
 		};
 		
+		
+//		$scope.recordNo = RequestService.getParameter("recordNo");
 		// 사진 데이터베이스 업데이트
-	    $scope.updateImage = function (userPhoto, url) {
+	    $scope.updateImage = function (TourPlanCover, url) {
 	        $http({
-	          url: myConfig.serverUrl + url,
+	          url: MyConfig.backEndURL + url,
 	          method: "POST",
 	          data: $.param({
-//	            userUid: userPhoto.userUid,
-//	            type: userPhoto.type,
-//	            path: userPhoto.path,
-//	            size: userPhoto.size
+	        		recordNo: RequestService.getParameter("recordNo"),
+	        		realPath: TourPlanCover.realPath, // 서버 경로
+	        		filePath: TourPlanCover.filePath, // 웹 경로
+	        		oriName: TourPlanCover.oriName, // 업로드시 파일이름
+	        		fileName: TourPlanCover.fileName, // 서버저장 파일이름
+	        		fileSize: TourPlanCover.fileSize // 파일 크기
 	          }),
 	          headers: {
 	            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
 	          }
 	        })
 	        .success(function () {
-	         	 $http({
-	                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
-	                 method: "GET"
-	             })
-	             .success(function (result) {
-	             	sessionStorageService.setObject("user", result);
-	             	$scope.user = sessionStorageService.getObject("user");
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
+					method: "GET",
+				}).success(function (response) {
+					// 불러온 일정정보 uid값이 $rootScope.user와 같은지 확인 : 같으면 진행, 아니면 오류 메세지 띄우고 일정 리스트 페이지로 이동
+					console.log(response);
+					if (response.userUid != $rootScope.user.userUid) {
+						swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
+						// 일정리스트 페이지로 리다이렉트
+						$window.location.href = "list.jsp";
+					};
+					$scope.tourPlan = response;
+					$scope.tourPlan.arriveDate = new Date(response.arriveDate);
+					$scope.tourPlan.departureDate = new Date(response.departureDate);
+					$scope.tourPlan.regDate = new Date(response.regDate);
+					
 	        		$("#BGImageFile").val("");
 	        		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 	        		$('#BGImageUploadFormModal').modal('hide');
-	             });
+					
+				}).error(function (error) {
+					swal("에러", "잘못된 접근입니다.", "error");
+					// 일정리스트 페이지로 리다이렉트
+					$window.location.href = "list.jsp";
+				});
+		
 	        });
 	    };
 		
@@ -303,7 +324,7 @@ angular.module("TourPlanApp")
 	        		  end: args.end,
 	        		  id: DayPilot.guid(),
 	        		  text: name,
-	        		  tag: {
+	        		  tags: {
 	        			  "type" : "custom"
 	        		  }
 	          }
