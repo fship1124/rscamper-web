@@ -1,5 +1,16 @@
 // 필터
 angular.module("TourPlanApp")
+
+
+	// 일정표 필터
+	.filter("convertDate", function() {
+		return convertDate
+		function convertDate (scheduleDate) {
+			var resultDate = scheduleDate.value.split("T");
+			return resultDate[0];
+		}
+	})
+
 	// 여행지정보 카테고리 필터
 	/** 
 	* 	contentTypeId
@@ -7,18 +18,6 @@ angular.module("TourPlanApp")
 	*  음식점 : 39
 	*  숙박업소 : 32
 	*/
-
-	//성별 필터
-	.filter("convertDate", function() {
-		return convertDate
-		function convertDate (scheduleDate) {
-			console.log(scheduleDate);
-			var resultDate = scheduleDate.value.split("T");
-			return resultDate[0];
-		}
-	})
-
-
 	.filter("tourSpotCategory", function() {
 		return tourSpotCategory
 		function tourSpotCategory (contentTypeId) {
