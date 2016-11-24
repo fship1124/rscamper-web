@@ -77,11 +77,11 @@
 							<div class="ms-container">
 								<div class="ms-inner-controls-cont" style="max-width: 550px;">
 									<div class="ms-view ms-fade-view ms-grab-cursor"
-										style="width: 550px; height: 550px;">
+										style="width: 550px; height: 367px;">
 										<div class="ms-slide-container">
-											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 550px; opacity: 1;">
+											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 367px; opacity: 1;">
 												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
-													<img class="ms-brd" src="" alt="lorem ipsum dolor sit" style="width: 550px; height: 550px; margin-left: 0px;">
+													<img class="ms-brd" src="" alt="이미지가 없습니다." style="width: 550px; height: 367px; margin-left: 0px;">
 												</div>
 											</div>
 										</div>
@@ -93,7 +93,7 @@
 								<div style="margin: 0 auto; width: 545px; height: 130px;">
 								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
 								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
-									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative; border: 1px solid black;"></div>
+									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative;"></div>
 								</div>
 								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
 								</div>

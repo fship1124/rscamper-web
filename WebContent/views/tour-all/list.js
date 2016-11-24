@@ -345,14 +345,22 @@
 				html += "<div class='cbp-item graphic'>";
 				html += "<div class='cbp-caption margin-bottom-20'>";
 				html += "<div class='cbp-caption-defaultWrap'>";
-				html += "<img src='" + v.firstimage2 + "' alt='' style='width:263px; height:174px;'>";
+				if (v.firstimage2) {
+					html += "<img src='" + v.firstimage2 + "' alt='' style='width:263px; height:174px;'>";
+				} else {
+					html += "<img src='/rscamper-web/resources/img/default/default-image.png' alt='' style='width:263px; height:174px;'>";
+				}
 				html += "</div>";
 				html += "<div id='list-div-" + v.contentid + "' class='cbp-caption-activeWrap'>";
 				html += "<div class='cbp-l-caption-alignCenter'>";
 				html += "<div class='cbp-l-caption-body'>";
 				html += "<ul class='link-captions no-bottom-space'>";
 				html += "<li><a href='#' onclick='goDetail(this)' data-value1='" + v.contentid + "' data-value2='" + v.contenttypeid + "'><i class='rounded-x fa fa-link'></i></a></li>";
-				html += "<li><a href='" + v.firstimage2 + "' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				if (v.firstimage2) {
+					html += "<li><a href='" + v.firstimage2 + "' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				} else {
+					html += "<li><a href='/rscamper-web/resources/img/default/default-image.png' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				}
 				html += "</ul>";
 				html += "</div>";
 				html += "</div>";
@@ -370,15 +378,6 @@
 			}
 			
 			list.html(html);
-//			
-//			$("div[id^='list-div-']").mouseenter(function() {
-//				var idValue = $(this).attr('id').substring(9);
-//				$("#list-title-" + idValue).css({'font-weight': 'bold'});
-//			});
-//			$("div[id^='list-div-']").mouseleave(function() {
-//				var idValue = $(this).attr('id').substring(9);
-//				$("#list-title-" + idValue).css('font-weight', 'normal');
-//			});
 		}
 
 

@@ -1,8 +1,5 @@
 		
 	function apiAjax(obj) {
-//		var obj = new Object();
-//		obj.contentid = ${param.contentid};
-//		obj.contenttypeid = ${param.contenttypeid};
 		$.ajax({
 			type : "GET",
 			url : "http://localhost:8081/tour/api/detail",
@@ -124,11 +121,11 @@
 			phone = item2.infocenterlodging;
 			tags.push("<strong><i class='fa fa-check color-yellow'></i> 입실 시간</strong><p class='info-custom'>" + item2.checkintime + "</p>");
 			tags.push("<strong><i class='fa fa-check color-yellow'></i> 퇴실 시간</strong><p class='info-custom'>" + item2.checkouttime + "</p>");
-			tags.push("<strong><i class='fa fa-check color-yellow'></i> 굿스테이 여부</strong><p class='info-custom'>" + item2.goodstay + "</p>");
+			tags.push("<strong><i class='fa fa-check color-yellow'></i> 굿스테이 여부</strong><p class='info-custom'>" + (item2.goodstay == 1 ? "<i class='fa fa-circle-o'></i>" : "<i class='fa fa-times'></i>") + "</p>");
 			tags.push("<strong><i class='fa fa-check color-yellow'></i> 픽업 서비스</strong><p class='info-custom'>" + item2.pickup + "</p>");
 			tags.push("<strong><i class='fa fa-check color-yellow'></i> 예약안내</strong><p class='info-custom'>" + item2.reservationlodging + "</p>");
 			tags.push("<strong><i class='fa fa-check color-yellow'></i> 예약안내 홈페이지</strong><p class='info-custom'>" + item2.reservationurl + "</p>");
-			tags.push("<strong><i class='fa fa-check color-yellow'></i> 자전거 대여 여부</strong><p class='info-custom'>" + item2.bicycle + "</p>");
+			tags.push("<strong><i class='fa fa-check color-yellow'></i> 자전거 대여 여부</strong><p class='info-custom'>" + (item2.bicycle == 1 ? "<i class='fa fa-circle-o'></i>" : "<i class='fa fa-times'></i>") + "</p>");
 			break;
 		case 38:
 			phone = item2.infocentershopping;
@@ -174,15 +171,21 @@
 		var item3tag = "";
 		switch (item2.contenttypeid) {
 		case 25:
-			for (var i = 0; i < array.length; i++) {
+			for (var i = 0; i < item3.length; i++) {
 				item3tag += "<strong><i class='fa fa-check color-yellow'></i> " + item3[i].subname + "</strong>";
 				item3tag += "<p class='info-custom'>" + item3[i].subdetailoverview + "</p>";
 			}
 			break;
 		case 32:
-			for (var i = 0; i < array.length; i++) {
+			for (var i = 0; i < item3.length; i++) {
 				item3tag += "<strong><i class='fa fa-check color-yellow'></i> " + item3[i].roomtitle + "</strong>";
-				item3tag += "<p class='info-custom'>" + item3[i].roomintro + "</p>";
+				item3tag += "<p class='info-custom'>비수기 주중 " + item3[i].roomoffseasonminfee1 + "원/주말 " + item3[i].roomoffseasonminfee2 + "원<br>"
+				+ "성수기 주중 " + item3[i].roompeakseasonminfee1 +"원/주말 " + item3[i].roompeakseasonminfee2 + "원</p>";
+				if (item3[i].roomintro) {
+					item3tag += "<p class='info-custom'>" + item3[i].roomintro + "</p>";
+				} else {
+					item3tag += "<br>";
+				}
 			}
 			break;
 		default:
@@ -196,6 +199,7 @@
 				item3tag += "<p class='info-custom'>" + item3.infotext + "</p>";
 			}
 			break;
+		}
 		
 		$("#text-plusInfo").html(item3tag);
 		
@@ -228,6 +232,7 @@
 		imageProcess(item4);
 		
 	}
+		
 	
 	var endpage = 0;
 	

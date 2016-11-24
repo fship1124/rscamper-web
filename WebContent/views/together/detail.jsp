@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -67,10 +67,17 @@
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<table class="table" border='1'>
-				<thead></thead>
-				<tbody></tbody>
-			</table>
+<!-- 			<table class="table" border='1'> -->
+<!-- 				<thead></thead> -->
+<!-- 				<tbody></tbody> -->
+<!-- 			</table> -->
+			<div id="container-div">
+				<div id="together-title"></div>
+				<hr class="line-custom">
+				<div id="together-regdate"></div>
+				<div id="together-content"></div>
+				<hr class="line-custom">
+			</div>
 		</div>
 		<!--=== End Content ===-->
 		
