@@ -12,44 +12,35 @@
 <!-- Meta -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="rscamper">
+<meta name="author" content="rscamper">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="../../favicon.ico">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
 
 <!-- Web Fonts -->
-<!--     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'> -->
+<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="../../assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet"
-	href="../../assets/css/headers/header-default.css">
-<link rel="stylesheet" href="../../assets/css/footers/footer-v3.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="../../assets/plugins/animate.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="../../assets/css/theme-colors/default.css"
-	id="style_color">
-<link rel="stylesheet" href="../../assets/css/theme-skins/dark.css">
-
-<!-- CSS Customization -->
-<link rel="stylesheet" href="../../assets/css/custom.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 
 
@@ -748,6 +739,8 @@
  				var mon = d.getMonth() + 1;
 				var html = "";
 				html += "<div>";
+				html += "<form role="form" method="get" >";
+				html += "	<input type="hidden" name="commentNo" value="c.commentNo" ></form>";
 				html += "<div style='margin:10px; width: 95%; height: 60px;' >";
 				html += "	<img src='../assets/img/user.jpg' style='vertical-align: inherit; width:40px; height:40px;'>";
 				html += "	<div style='display: inline-block;'>";
@@ -760,7 +753,7 @@
 				html += "		</p>";
 				html += "	</div>";
 				html += "   <div style='float:right; margin-top: 10px;' >";
-				html += "		<button type='submit' class='btn btn-default' id='cmtDelete' style='vertical-align:bottom;'>";
+				html += "		<button type='submit' class='btn btn-commentDelete' id='cmtDelete' style='vertical-align:bottom;'>";
 				html += "		<span class='glyphicon glyphicon-trash' aria-hidden='true'   ></span>";
 				html += "		<button type='submit' class='btn btn-default' id='cmtModify' style='vertical-align:bottom;'>";
 				html += "		<span class='glyphicon glyphicon-pencil' aria-hidden='true'   ></span>";
@@ -773,7 +766,15 @@
 			}
 		}
 		
-		$("#cmtDelete").click(function() {
+		
+		/* 댓글삭제 */
+		var formObj = $("form[role='form']");
+		$(".btn-commentDelete").on("click", function() {
+			formObj.attr("action", "http://localhost:8081/travelog/commentDelte");
+			formObj.attr("method", "POST");
+			formObj.submit();
+		});
+		/* $("#cmtDelete").click(function() {
 			var boardNo = ${param.boardNo};
 			$.ajax({
 				url : 'http://localhost:8081/travelog/remove/' + boardNo,
@@ -782,7 +783,7 @@
 				success : function(result) {
 				}
 			});
-		});
+		}); */
 		
 		$('.bs-example-modal-lg').on('shown.bs.modal', function () {
 			  $('#myInput').focus()

@@ -40,6 +40,7 @@
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="list.css">
@@ -55,13 +56,13 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<ul class="pull-left breadcrumb">
-					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li class="active"><a href="${pageContext.request.contextPath}/views/default/default.jsp">Default Page</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">travelog</a></li>
 				</ul>
 			</div>
 		</div>
-		<!--=== 사이트맵 끝 ===-->
+		
 
 		<!--=== 내용 ===-->
 		<div class="container content-md"

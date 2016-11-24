@@ -6,7 +6,7 @@
 			<div class="row">
 				<!-- About -->
 				<div class="col-sm-3 md-margin-bottom-40">
-					<a href="${pageContext.request.contextPath}/views/main.jsp"><img id="logo-footer" class="footer-logo" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-512-236195.png" alt="Logo" style="height: 100px; width:100px;"></a>
+					<a href="${pageContext.request.contextPath}/views/main.jsp"><img id="logo-footer" class="footer-logo" src="${pageContext.request.contextPath}/resources/img/icon/train/android-icon-192x192.png" alt="Logo" style="height: 100px; width:100px;"></a>
 					<p>About Unify dolor sit amet, consectetur adipiscing elit.
 						Maecenas eget nisl id libero tincidunt sodales.</p>
 				</div>

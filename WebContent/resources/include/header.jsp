@@ -3,7 +3,7 @@
 <div class="header header-sticky">
 	<div class="container">
 		<!-- Logo -->
-		<a class="logo" href="${pageContext.request.contextPath}/views/main.jsp"> <img src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-512-236195.png" style="width:40px; height: 40px;" alt="Logo"> </a>
+		<a class="logo" href="${pageContext.request.contextPath}/views/main.jsp"> <img src="${pageContext.request.contextPath}/resources/img/icon/train/android-icon-192x192.png" style="width:40px; height: 40px;" alt="Logo"> </a>
 		<!-- End Logo -->
 
 		<!-- Topbar -->
@@ -11,20 +11,21 @@
 			<ul class="loginbar pull-right">
 				<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 				<li class="topbar-devider"></li>
-				<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
-					href="javascript:void(0);"><i class="fa fa-lock"></i> Login</a></li>
-				<li id="logoutBtn" style="display: none;"><a
-					href="javascript:void(0);" onclick="logout();"><i
-						class="fa fa-unlock-alt"></i> Logout</a></li>
+				<li id="loginBtn" class="cd-log_reg">
+					<a class="cd-signin" href="javascript:void(0);">
+					<i class="fa fa-lock"></i> Login</a>
+				</li>
+				<li id="logoutBtn" style="display: none;">
+					<a href="javascript:void(0);" onclick="logout();">
+					<i class="fa fa-unlock-alt"></i> Logout</a>
+				</li>
 			</ul>
 		</div>
 		<!-- End Topbar -->
 
 		<!-- Toggle get grouped for better mobile display -->
-		<button type="button" class="navbar-toggle" data-toggle="collapse"
-			data-target=".navbar-responsive-collapse">
-			<span class="sr-only">Toggle navigation</span> <span
-				class="fa fa-bars"></span>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			<span class="sr-only">Toggle navigation</span> <span class="fa fa-bars"></span>
 		</button>
 		<!-- End Toggle -->
 	</div>
