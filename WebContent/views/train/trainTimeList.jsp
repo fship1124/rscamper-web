@@ -56,7 +56,30 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script type="text/javascript" src="../../assets/js/jquery-3.1.1.min.js"></script>
-
+<style type="text/css">
+#timeList{
+	border-collapse: separate;
+    border-spacing: 1px;
+    text-align: center;
+    line-height: 1.5;
+    margin: 20px 10px;
+}
+#timeList tr{
+	width: 155px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+    background: #eee;
+}
+#timeList td{
+	width: 155px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #ce4869;
+}
+</style>
 
 </head>
 
@@ -191,6 +214,8 @@
 				</div>
 			</div>
 		</div>
+		
+		
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
 
@@ -689,7 +714,7 @@ function ajaxList() {
 					
 					// 주요역
 					var html = "";
-					html += "<table>";
+					html += "<table width='90%' border='1' align='center' cellpadding='5' cellspacing='5' style='box-sizing: border-box; border-collapse: collapse; border-spacing: 0px; max-width: 100%; color: rgb(0, 0, 0); font-family: Arial, 돋움, Dotum, AppleGothic, sans-serif; font-size: 16px; line-height: 32px; border: 1px solid grey;'>";
 					console.log(result.length);
 					for (var i = 0; i < result.length; i++) {
 						var data = result[i];
@@ -704,11 +729,11 @@ function ajaxList() {
 						case "trainSaemaeul":
 							console.log("case : trainSaemaeul");
 							if (data.trainSaemaeul > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -717,11 +742,11 @@ function ajaxList() {
 						case "trainMugunghwa":
 							console.log("case : trainMugunghwa");
 							if (data.trainMugunghwa > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -730,11 +755,11 @@ function ajaxList() {
 						case "trainTonggeun":
 							console.log("case : trainTonggeun");
 							if (data.trainTonggeun > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
-										+ "</a></td>";
+										+ "</a align='center'></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -743,11 +768,11 @@ function ajaxList() {
 						case "trainNuriro":
 							console.log("case : trainNuriro");
 							if (data.trainNuriro > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -756,11 +781,11 @@ function ajaxList() {
 						case "trainItxchungchun":
 							console.log("case : trainItxchungchun");
 							if (data.trainItxchungchun > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -769,11 +794,11 @@ function ajaxList() {
 						case "trainItxsaemaeul":
 							console.log("case : trainItxsaemaeul");
 							if (data.trainItxsaemaeul > 0) {
-								html += "<td><a href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -789,7 +814,7 @@ function ajaxList() {
 					$(".modal-body").html(html);
 
 					html = "<div id='sort'>";
-					html = "<ul style='overflow: hidden; height:25px; padding:8px 0 0 5px; margin-bottom: 20px; border: 1px solid tomato; list-style: none;'>";
+					html = "<ul style='overflow: hidden; height:25px; padding:8px 0 0 5px; margin-bottom: 20px; border: 1px solid skyblue; list-style: none;'>";
 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄱ\")'>가</div></li>";
 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄴ\")'>나</div></li>";
 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄷ\")'>다</div></li>";
@@ -808,7 +833,7 @@ function ajaxList() {
 					html += "</div>";
 
 					// 철도역
-					html += "<table>";
+					html += "<table width='90%' border='1' align='center' cellpadding='5' cellspacing='5' style='box-sizing: border-box; border-collapse: collapse; border-spacing: 0px; max-width: 100%; color: rgb(0, 0, 0); font-family: Arial, 돋움, Dotum, AppleGothic, sans-serif; font-size: 16px; line-height: 32px; border: 1px solid grey;'>";
 					console.log(result)
 
 					var trainVal = "";
@@ -847,11 +872,11 @@ function ajaxList() {
 							case "trainSaemaeul":
 								console.log("case : trainSaemaeul");
 								if (data.trainSaemaeul > 0) {
-									html += "<td><a href='#1' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#1' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#1' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#1' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -860,11 +885,11 @@ function ajaxList() {
 							case "trainMugunghwa":
 								console.log("case : trainMugunghwa");
 								if (data.trainMugunghwa > 0) {
-									html += "<td><a href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -873,11 +898,11 @@ function ajaxList() {
 							case "trainTonggeun":
 								console.log("case : trainTonggeun");
 								if (data.trainTonggeun > 0) {
-									html += "<td><a href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -886,11 +911,11 @@ function ajaxList() {
 							case "trainNuriro":
 								console.log("case : trainNuriro");
 								if (data.trainNuriro > 0) {
-									html += "<td><a href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -899,11 +924,11 @@ function ajaxList() {
 							case "trainItxchungchun":
 								console.log("case : trainItxchungchun");
 								if (data.trainItxchungchun > 0) {
-									html += "<td><a href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -912,11 +937,11 @@ function ajaxList() {
 							case "trainItxsaemaeul":
 								console.log("case : trainItxsaemaeul");
 								if (data.trainItxsaemaeul > 0) {
-									html += "<td><a href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}

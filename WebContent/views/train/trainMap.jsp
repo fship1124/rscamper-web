@@ -62,7 +62,7 @@
 			<div class="container">
 				<!-- Logo -->
 				<a class="logo" href="index.html"> <img
-					src="../../assets/img/logo1.png" alt="Logo" style="width:50px; height:50px;">
+					src="../../assets/img/logo1.png" style="width:50px; height: 50px;" alt="Logo">
 				</a>
 				<!-- End Logo -->
 
@@ -120,9 +120,9 @@
 		<!--=== Breadcrumbs 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">노선도</h1>
-				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="http://localhost:8081">Main</a></li>
+				<ul class="breadcrumb pull-left">
+					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
+					<li><a href="javascript:history.back()">노선도</a></li>
 				</ul>
 			</div>
 			<!--/container-->
@@ -134,11 +134,14 @@
 
 		<!--=== Content ===-->
 		<div class="container content-md">
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br>
+			<div id="map" style="width: 1000px; height: 800px;"></div>
+			
+			
+			
+			
+			
+			
+			
 		</div>
 		<!--=== End Content ===-->
 		<!-- ================================================================ -->
@@ -399,6 +402,7 @@
 	</div>
 	<!-- cd-user-modal -->
 
+
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript"
 		src="../../assets/plugins/jquery/jquery.min.js"></script>
@@ -434,11 +438,20 @@
 			StyleSwitcher.initStyleSwitcher();
 			ParallaxSlider.initParallaxSlider();
 			menuCreate();
+			togetherList();
 		});
-		
- 	
-		
+	var map;
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			center : {lat: 37.6, lng: 127.0},
+			zoom: 8
+		});
+	}
+ 		
 	</script>
+	<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP280f_8sA7GmSMVAXTl9DdUsDGRXTUgM&callback=initMap">
+    </script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>
     <script src="assets/plugins/html5shiv.js"></script>
@@ -450,5 +463,6 @@
 	<script src="../../resources/js/firebaseInit.js"></script>
 	<script src="../../resources/js/firebaseAuth.js"></script>
 	<script src="../../resources/js/menu.js"></script>
+
 </body>
 </html>
