@@ -83,15 +83,15 @@
 			<div class="row">
 
 				<!-- 여행일정 전체 -->
-				<div class="col-md-9" ng-show="planList.length != 0">
+				<div class="col-md-9" ng-if="planList.length > 0">
 
 					<!-- 여행일정 리스트 DIV -->
 					<div class="row">
 
 						<!-- 여행일정 한개 -->
 						<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
-							<img style="width: 100%;" ng-if="plan.cover" ng-src="plan.cover" >
-							<img style="width: 100%;" ng-if="!plan.cover" ng-src="http://lorempixel.com/600/280/nature">
+							<img style="width: 100%; height: 170px;" ng-if="plan.filePath" ng-src="{{plan.filePath}}" >
+							<img style="width: 100%; height: 170px;" ng-if="!plan.filePath" ng-src="http://lorempixel.com/600/280/nature">
 							<div style="position: absolute; top: 50px; color: white; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;" ng-bind="plan.strapline"></div>
 							<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
 								<ul class="list-inline posted-info">
@@ -112,13 +112,6 @@
 
 					</div><!-- 여행일정 리스트 DIV -->
 					
-					
-					<!-- 표시해줄 일정이 없을때 -->
-					<div class="col-md-9" style="text-align: center;" ng-if="planList.length == 0">
-						<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
-						<span>일정이 없습니다.</span>
-					</div>
-						
 					<!-- 페이징 -->
 					<div class="text-center">
 						<ul class="pagination">
@@ -129,7 +122,12 @@
 					</div><!-- 페이징 끝 -->
 
 				</div><!-- 여행일정 전체 끝 -->
-
+				
+				<!-- 표시해줄 일정이 없을때 -->
+				<div class="col-md-9" style="text-align: center;" ng-if="planList.length == 0">
+					<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
+					<span>일정이 없습니다.</span>
+				</div>
 
 				<!-- 사이드 바 -->
 				<div class="col-md-3">

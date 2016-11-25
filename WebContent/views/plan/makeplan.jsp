@@ -234,14 +234,14 @@
 										<label class="label" style="margin-bottom: 0px;"><strong>여행시작일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="tourPlan.departureDate">
+											<input id="departureDate" type="date" ng-model="tourPlan.departureDate">
 										</label>
 									</section>
 									<section class="col col-5">
 										<label class="label" style="margin-bottom: 0px;"><strong>여행종료일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="tourPlan.arriveDate">
+											<input id="arriveDate" type="date" ng-model="tourPlan.arriveDate">
 										</label>
 									</section>
 									<section class="col col-2">

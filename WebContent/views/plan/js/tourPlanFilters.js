@@ -1,7 +1,6 @@
 // 필터
 angular.module("TourPlanApp")
 
-
 	// 일정표 필터
 	.filter("convertDate", function() {
 		return convertDate

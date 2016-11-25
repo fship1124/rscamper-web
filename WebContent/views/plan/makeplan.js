@@ -9,23 +9,57 @@ angular.module("TourPlanApp")
 				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET",
 			}).success(function (response) {
-				// 불러온 일정정보 uid값이 $rootScope.user와 같은지 확인 : 같으면 진행, 아니면 오류 메세지 띄우고 일정 리스트 페이지로 이동
 				console.log(response);
-//				if (response.userUid != $rootScope.user.userUid) {
-//					swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
-//					// 일정리스트 페이지로 리다이렉트
-//					$window.location.href = "list.jsp";
-//				};
+				if (response.userUid != $rootScope.user.userUid) {
+					swal("에러", "해당 일정에 대한 수정권한이 없습니다.", "error");
+					
+					// 일정리스트 페이지로 리다이렉트
+					$window.location.href = "list.jsp";
+				};
 				$scope.tourPlan = response;
-				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
 				$scope.tourPlan.departureDate = new Date(response.departureDate);
+				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
+				$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
 				$scope.tourPlan.regDate = new Date(response.regDate);
 			}).error(function (error) {
 				swal("에러", "잘못된 접근입니다.", "error");
 				// 일정리스트 페이지로 리다이렉트
 				$window.location.href = "list.jsp";
 			});
-		}
+		};
+		
+		// 기간 표시 메소드
+		$scope.convertDate = function(dDate, aDate) {
+			var result = "";
+			var nTime = aDate.getTime() - dDate.getTime();
+			var year = Math.floor(nTime/1000/60/60/24/365);
+			var day = nTime/1000/60/60/24;
+			if (day >= 1) {
+				var duty = day + 1;
+				result = day + "박" + duty + "일";
+			} else if (day == 0){
+				result = "당일치기";
+			} else if (day < 0) {
+				result = "시간여행";
+				swal("시간여행을 하시겠습니까?");
+			}
+			return result;
+		};
+		
+		// 출발시간 변경시 이벤트
+		angular.element("#departureDate").change( function() {
+            $scope.$apply(function() {
+            	$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
+            });
+		});
+		
+		// 도착시간 변경시 이벤트
+		angular.element("#arriveDate").change( function() {
+            $scope.$apply(function() {
+            	$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
+            });
+		});
+		
 		
 		$scope.getTourPlan();
 

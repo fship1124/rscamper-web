@@ -31,10 +31,10 @@ angular.module("TourPlanApp")
 		// 검색 옵션 데이터
 		$scope.optionDatas = {
 			standardList: [
-				{standardValue: "REG_DATE", standardName: "등록날짜"},
-				{standardValue: "LIKE_CNT", standardName: "좋아요수"},
-				{standardValue: "COMMENT_CNT", standardName: "댓글수"},
-				{standardValue: "LOCATION_CNT", standardName: "여행지수"}
+				{standardValue: "REG_DATE", standardName: "등록일"},
+				{standardValue: "LIKE_CNT", standardName: "좋아요 개수"},
+				{standardValue: "COMMENT_CNT", standardName: "댓글 개수"},
+				{standardValue: "LOCATION_CNT", standardName: "여행지 개수"}
 			],
 			orderList: [
 				{orderValue: "DESC", orderName: "내림차순"},
@@ -65,7 +65,6 @@ angular.module("TourPlanApp")
 				data: $.param($scope.searchParams),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 			}).success(function (result) {
-				console.log(result)
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
@@ -77,8 +76,9 @@ angular.module("TourPlanApp")
 		// 페이지 번호 배열 생성 메소드
 		$scope.pageList = function () {
 			var pagerAmount = 10;
+			var pagerStart =  Math.floor(($scope.searchParams.pageNo - 1)/10) * 10 + 1
 			$scope.pageArr = [];
-			for (var i = 1; i <= pagerAmount; i++) {
+			for (var i = pagerStart; i < pagerAmount + pagerStart; i++) {
 				if (i > $scope.totalPages) {
 					break;
 				}
