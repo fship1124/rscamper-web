@@ -70,6 +70,7 @@
 				<input type="hidden" name="boardNo" value="${param.boardNo}" >
 			</form>
 				<table class="table" border='1'>
+<!-- 					<div id="writer" ></div> -->
 					<thead></thead>
 					<tbody></tbody>
 				</table>
@@ -263,6 +264,15 @@
 		 				var mon = d.getMonth() + 1;
 						
 						var html = "";
+						if (result.providerPhotoUrl) {
+							html += "<img src='" + result.providerPhotoUrl + "' style='width:40px; height:40px'>";
+						} else {
+						html += "<img src='../assets/img/user.jpg' style='width:40px; height:40px'>";
+						}
+						html += "<p>" + result.displayName + "</p>";
+						$("#writer").html(html);
+						
+						html = "";
 						html += "<th style='height:30px; text-align:center;'>";
 						html += result.categoryName;
 						html += "</th>";
@@ -272,14 +282,12 @@
 						html += "<th>";
 						html += d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2)+ " " + d.toLocaleTimeString();
 						html += "</th>";
-						
 						$("thead").html(html);
 						
 						html = "";
 						html += "<td colspan='4' style='height:300px;'>";
 						html += result.content;
 						html += "</td>";
-						
 						$("tbody").html(html);
 					}
 				});
@@ -439,10 +447,12 @@
 				var mon = d.getMonth() + 1;
 				var html = "";
 				html += "<div>";
-// 				html += "<form role='form' method='get' >";
-// 				html += "	<input type='hidden' name='commentNo' value='${c.commentNo}' ></form>";
 				html += "<div style='margin:10px; width: 95%; height: 60px;' >";
+				if (c.providerPhotoUrl) {
+					html += "<img src='" + c.providerPhotoUrl + "' style='width:40px; height:40px'>";
+				} else {
 				html += "	<img src='../assets/img/user.jpg' style='vertical-align: inherit; width:40px; height:40px;'>";
+				}
 				html += "	<div style='display: inline-block;'>";
 				html += "		<input type='hidden' name='commentNo' id='commentNo' value='" + c.commentNo + "' />";
 				html += "		<p style='margin-left:20px;' style='' >";

@@ -48,8 +48,10 @@
 </head>
 
 <body class="header-fixed header-fixed-space-default" onkeydown='on_key_down()'>
+	<!-- 프로필 사진 업로드 모달 -->
+	<%@include file="../mypage/include/profileUploadFormModal.jsp"%>
+	
 	<div class="wrapper">
-
 		<!-- 헤더 include -->
 		<%@include file="/resources/include/header.jsp"%>
 
@@ -99,7 +101,7 @@
 
 		<div class="container content-md">
 			<div>
-				<table class="table" style="width: 100%; background: #EEEEEE; border: 1px solid tomato;">
+				<table class="table" style="width: 100%; background: #EEEEEE;">
 					<thead>
 						<tr>
 							<th id="locationName" class="locationName"></th>
@@ -107,32 +109,33 @@
 						</tr>
 						<tr>
 							<th colspan="2">
-							<button type="button" id="clean-screen">화면비우기</button>
-							<button type="button" id="nickname-modfy">방제목변경</button>
-							<button type="button" id="room-background">방테마변경</button>
-							<button type="button" id="room-save">저장하기</button>
-							<button type="button" id="out-room">퇴장</button>
+							<button id="clean-screen" class='btn'>화면비우기</button>
+							<button id="nickname-modfy" class='btn'>방제목변경</button>
+							<button id="room-background" class='btn'>방테마변경</button>
+							<button id="room-save" class='btn'>저장하기</button>
+							<button id="out-room" class='btn'>퇴장</button>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="3" rowspan="2" class="massagePrint" style="width: 85%; height: 500px; border: 1px solid tomato;">
-								<div id="msg-content" style="height: 500px; background: #FFFFFF; border: 1px solid tomato; overflow: auto;">
+							<td colspan="3" rowspan="2" class="massagePrint" style="width: 85%; height: 500px;">
+								<div id="msg-content" style="height: 500px; background: #FFFFFF; overflow: auto;">
 								</div>
 							</td>
-							<td id="chat-user-cnt" data-cnt="" style="height: 30px; border: 1px solid tomato;">접속자</td>
+							<td id="chat-user-cnt" data-cnt="" style="height: 30px;">접속자</td>
 						</tr>
 						<tr>
-							<td id="chat-user-info" style="height: 400px; border: 1px solid tomato;"></td>
+							<td id="chat-user-info" style="height: 400px;"></td>
 						</tr>
-						<tr style="height: 50px; border: 1px solid tomato;">
+						<tr style="height: 50px; ">
 							<td></td>
 						</tr>
-						<tr style="height: 30px; border: 1px solid tomato;">
-							<td colspan="4" style="weight: 90%; border: 1px solid tomato;">
+						<tr style="height: 30px; ">
+							<td colspan="4" style="weight: 90%; ">
 								<input type="text" id="msg" style="width: 90%">
 								<button id="msg-btn" type="button">입력</button>
+								<input type="file" id="imgSend" />
 							</td>
 						</tr>
 					</tbody>
@@ -217,14 +220,12 @@
 				 // socket 연결 완료
 	             if (data.type == 'connected') {
 	             	 console.log("connected");
-	                 socket.emit('connection', {
-	                     type : 'join',
+	                 socket.emit('joinRoom', {
+	                     uid : user.userUid,
 	                     name : user.displayName,
-	                     room : obj.roomNo
+	                     room : obj.roomNo,
+	                     photoUrl : user.photoUrl
 	                 });
-// 	                 socket.emit('room', {
-// 	                     room : room
-// 	                 });
 	             }
 	         });
 			 
@@ -240,27 +241,48 @@
 				 html += "</span>";
 				 html += "</div>";
 				 $("#msg-content").append(html);
+				 $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 				 listUser(data);
 	         });
 			 
 			 socket.on('message', function(data) {
 				 console.log("서버에서 전송된 데이터 : " + data.message);
 				 console.log("서버에서 전송된 이름 : " + data.name);
+				 console.log("서버에서 전송된 타입 : " + data.type);
+				 console.log("서버에서 전송된 포토 : " + data.photoUrl);
+				
 				 var html = "";
+				 switch (data.type) {
+			    	case 'text' :
+			    		 html += "<div class='direct-chat-messages'>";
+					      html += "<div class='direct-chat-msg'>";
+					      html += "<div class='direct-chat-info clearfix'>";
+					      html += "<span class='direct-chat-name pull-left'>";
+					      html += data.name + "</span>";
+					      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
+					      html += "</div>";
+					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
+					      html += "<div class='direct-chat-text'>";
+					      html += data.message;
+					      html += "</div></div>";
+			    		break;
+			    	case 'image' :
+			    		  html += "<div style='height: 100%'>";
+					      html += "<div class='direct-chat-msg'>";
+					      html += "<div class='direct-chat-info clearfix'>";
+					      html += "<span class='direct-chat-name pull-left'>";
+					      html += data.name + "</span>";
+					      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
+					      html += "</div>";
+					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
+					      html += "<div>";
+					      html += "<img src=" + data.imgUrl + ">";
+					      html += "</div></div>";
+			    		break;
+			    	}
 				 
-			      html += "<div class='direct-chat-messages'>";
-			      html += "<div class='direct-chat-msg'>";
-			      html += "<div class='direct-chat-info clearfix'>";
-			      html += "<span class='direct-chat-name pull-left'>";
-			      html += data.name + "</span>";
-			      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
-			      html += "</div>";
-			      html += "<img class='direct-chat-img' src='http://bootdey.com/img/Content/user_1.jpg' alt='Message User Image'>";;
-			      html += "<div class='direct-chat-text'>";
-			      html += data.message;
-			      html += "</div></div>";
 				 $("#msg-content").append(html);
-// 				 $("#msg-content").append(data.message + "<br>");
+				 $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 	         });
 			 
 			 
@@ -287,8 +309,11 @@
 			$("#msg-content").append(html);
 			// 				$("#msg-content").append($("#msg").val() + "<br>");
 			socket.emit("user", {
+				type : "text",
 				name : user.displayName,
-				message : $("#msg").val()
+				message : $("#msg").val(),
+				photoUrl : user.photoUrl,
+				uid : user.userUid
 			});
 
 			$("#msg").val("");
@@ -312,27 +337,21 @@
 					+ user.userUid + "/" + obj.chatRoomInfoNo,
 					type : "DELETE",
 					success : function() {
-						// alert("success");
-
 						socket.emit("out", {
 							name : user.displayName
 						});
 
-						alert("방에서 퇴장하셨습니다.");
-						
-						
 						// 방 접속자수가 0일때 방 폐쇄
 						var user_cnt = $("#chat-user-cnt");
 						
 						console.dir(user_cnt);
-						alert(user_cnt[0].dataset.cnt);
 						
 						if (user_cnt[0].dataset.cnt == 1) {
 							$.ajax({
 								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
 								type : "DELETE",
 								success : function() {
-									alert(obj.chatRoomInfoNo +  "방 삭제");
+// 									alert(obj.chatRoomInfoNo +  "방 삭제");
 								}
 							});				
 						}
@@ -357,6 +376,47 @@
 				$("#msg-content").append(html);
 
 				listUser(room);
+			});
+			
+			
+			function readImage(input) {
+		        if (input.files && input.files[0]) {
+		          var FR= new FileReader();
+		          FR.onload = function(e) {
+		            var data = {
+		              "type" : "image",
+		              "name" : user.displayName,
+		              "imgUrl" : e.target.result,
+		              "uid" : user.userUid
+		            }
+		            socket.emit('user', data);
+		            var imgUrl = e.target.result;
+		            
+           			var html = "";
+					html += "<div style='height: 100%'>";
+					html += "<div class='direct-chat-msg right'>";
+					html += "<div class='direct-chat-info clearfix'>";
+					html += "<span class='direct-chat-name pull-right'>";
+					html += userName + "</span>";
+					html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
+					html += "</div>";
+					html += "<img class='direct-chat-img' src='" + user.photoUrl + "' alt='Message User Image'>";
+					html += "<div>";
+					html += "<img src=" + imgUrl + " style='margin: auto;'>";
+					html += $("#msg").val();
+					html += "</div>";
+					html += "</div>";
+					html += "</div>";
+		            
+		            $("#msg-content").append(html);
+		            $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
+		          };
+		          FR.readAsDataURL( input.files[0] );
+		        }
+		      }
+			
+			$("#imgSend").change(function () {
+				readImage(this);
 			});
 		}
 

@@ -51,13 +51,13 @@ function listRoomCreate(data) {
 		html += "</td><td>";
 		html += item.roomUserCnt;
 		html += "</td>";
-		html += "<td><button type='button' data-loc=";
+		html += "<td><button class='btn' data-loc=";
 		html += item.areacode;
 		html += " data-tle= '";
 		html += item.chatRoomName;
 		html += "' data-room=";
 		html += item.chatRoomInfoNo;
-		html += " onclick='intoRoom(this)'>입장</button></td></tr>";
+		html += " onclick='intoRoom(this)'>GO</button></td></tr>";
 	}
 	
 	room_list.html(html);
@@ -82,7 +82,6 @@ $("#createRoomBtn").click(function() {
 		dataType : 'json',
 		data : obj,
 		success : function(result) {
-			alert("success");
 			console.dir(result);
 			
 			var userObj = new Object();
@@ -105,7 +104,6 @@ $("#createRoomBtn").click(function() {
 				dataType : 'json',
 				data : userObj,
 				success : function() {
-					alert("insert seccess");
 					window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + userObj.chatRoomInfoNo + "&location=" + obj.areacode + "&title=" + obj.chatRoomName;
 				}
 			});
@@ -115,23 +113,12 @@ $("#createRoomBtn").click(function() {
 	
 	
 function intoRoom(e) {
-//	console.dir(e);
-//	console.log(e.getAttribute("data-loc"));
-//	console.log(e.getAttribute("data-tle"));
-//	console.log(e.getAttribute("data-room"));
-	
-//	console.dir($(e).parent().siblings());
-//	console.log($(e).parent().siblings(".room-name").text());
-	
 	var room_name = $(e).parent().siblings(".room-name").text();
-	
 	var obj = new Object();
 	
 	obj.userUid = user.userUid;
 	obj.chatRoomInfoNo = e.getAttribute("data-room");
 	chatRoomInfoNo = obj.chatRoomInfoNo; 
-//	console.log(obj.userUid);
-//	console.log(obj.chatRoomInfoNo);
 	
 	$.ajax({
 		url : myConfig.imsiServerUrl + '/chat/insert_user',
@@ -143,7 +130,6 @@ function intoRoom(e) {
 		}
 	});
 }
-		
 		
 		
  		
