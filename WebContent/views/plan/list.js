@@ -65,6 +65,7 @@ angular.module("TourPlanApp")
 				data: $.param($scope.searchParams),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 			}).success(function (result) {
+				console.log(result)
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
@@ -175,8 +176,8 @@ angular.module("TourPlanApp")
 			}).success(function (result) {
 				$("#createTourPlanFormModal").modal("hide");
 				// 일정 만들기 페이지로 이동
-				// 파라미터 : result.recordNo
-				 $window.location.href = "makeplan.jsp?recordNo=" + result.recordNo;
+				// 파라미터 : result
+				 $window.location.href = "makeplan.jsp?recordNo=" + result;
 			}).error(function (error) {
 				console.log(error);
 			});

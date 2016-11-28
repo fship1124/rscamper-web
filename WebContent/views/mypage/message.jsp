@@ -153,21 +153,67 @@
 
 											<div class="col-md-4" style="padding-left:40px; padding-right: 0px;">
 												<span class="check_mail primary _c1(mlCore|toggleCheckAll)">
-														<p>
+													<p>
 														<label for="mailCheckAll" class="blind">보기: </label>
-  <button type="button" class="btn btn-primary btn-sm active">모든 쪽지</button>
-  <button type="button" class="btn btn-default btn-sm">읽지않은쪽지</button>
-</p>
-												</span> 
+														<button type="button"
+															class="btn btn-primary btn-sm active">모든 쪽지</button>
+														<button type="button" class="btn btn-default btn-sm">읽지않은쪽지</button>
+													</p>
+												</span>
 											</div>
 										</div>
 
-
-
-
+										
+										<div class="note-table">
+											<table>
+												<tbody>
+													<tr>
+													<td style="padding: 10px;">
+														<input type="checkbox">
+														<img src="http://14.32.66.104:8081/images?path=upload/images/profile/profile-c37fc7a5-d910-4bf2-81b5-bb7e4d096156.jpg" 
+														alt="..." class="img-thumbnail" style="width: 70px; height: 70px;">
+													</td>
+													<td style="padding: 10px;">
+														<a title="displayName" href="#">
+														<span class="spr l8">
+															<span class="blind">JAMES DEAN</span>
+														</span>
+														</a>
+														<br>
+														<span>3월 5일 오전 12:17</span>
+													</td>
+													<td style="padding: 10px;">
+														<span>제목 1</span>
+														<br>
+														<span>안녕하세요. ^^* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 10px;">
+														<input type="checkbox">
+														<img src="http://14.32.66.104:8081/images?path=upload/images/profile/profile-c37fc7a5-d910-4bf2-81b5-bb7e4d096156.jpg" 
+														alt="..." class="img-thumbnail" style="width: 70px; height: 70px;">
+													</td>
+													<td style="padding: 10px;">
+														<a title="displayName" href="#">
+														<span class="spr l8">
+															<span class="blind">JAMES DEAN</span>
+														</span>
+														</a>
+														<br>
+														<span>3월 5일 오전 12:17</span>
+													</td>
+													<td style="padding: 10px;">
+														<span>제목 1</span>
+														<br>
+														<span>안녕하세요. ^^* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+													</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 								</div>
-
 
 
 								<div id="settings" class="profile-edit tab-pane fade">
@@ -276,6 +322,7 @@
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="message.js"></script>
+	<script type="text/javascript" src="message_sub.js"></script>
 	
 </body>
 </html>
