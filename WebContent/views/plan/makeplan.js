@@ -198,9 +198,8 @@ angular.module("TourPlanApp")
 			$('#detailTourSpotModal').modal('show');
 		}
 		
-		// TODO 정보 리스트 제대로 된것 가져오기
-		
 		// 장소 리스트 가져오기
+		// TODO 정보 리스트 제대로 된것 가져오기
 		$scope.getSpotList = function () {
 			// 무한로딩 방지
 			if ($scope.spotParams.pageNo >= $scope.totalPages) {

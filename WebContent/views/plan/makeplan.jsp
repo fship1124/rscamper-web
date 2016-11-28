@@ -186,9 +186,11 @@
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
 										</div>
 										<div class="tourSpotContent">
-											<span ng-bind="tourSpot.contenttypeid | tourSpotCategory"></span> <span ng-bind="tourSpot.title"></span>
-											<span ng-bind="tourSpot.contentid"></span>
-											<span ng-bind="tourSpot.areacode"></span> <span ng-bind="tourSpot.contentid">추천수</span>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory" style=""></b>
+											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
+											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa  fa-file-text-o"></i></button>
 										</div>
 									</div>
 									

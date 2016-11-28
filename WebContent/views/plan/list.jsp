@@ -99,7 +99,7 @@
 									<li ng-bind="plan.period"></li>
 									<li ng-bind="plan.regDate | timesince : 'kr'"></li>
 								</ul>
-								<h2><a href="${pageContext.request.contextPath}/views/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.title"></a></h2>
+								<h2><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.title"></a></h2>
 								<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
 								<ul class="post-shares">
 									<li><a href="#"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
