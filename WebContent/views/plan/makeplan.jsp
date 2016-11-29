@@ -47,10 +47,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
-<!-- DayPilot Calendar Themes -->
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_transparent.css" />    
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_white.css" />    
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_green.css" />
+<!-- Full Calendar -->
+<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
@@ -181,11 +179,11 @@
 								<div id="searchContent">
 								
 									<!-- 결과 카드 반복 -->
-									<div class="tourSpot" draggable="true" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);">
+									<div class="tourSpot" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);" on-finish-render="ngRepeatFinished">
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
 										</div>
-										<div class="tourSpotContent">
+										<div class="tourSpotContent" >
 											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory" style=""></b>
 											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
 											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
@@ -281,15 +279,10 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
-<!-- 								일정표 버튼 -->
-<!-- 								<div id="dpControl"> -->
-<!-- 									<p>====================</p> -->
-<!-- 									<p>버튼들</p> -->
-<!-- 									<p>====================</p> -->
-<!-- 								</div>	 -->
-
-								<!-- 일정표 DIV -->
-								<div id="dp"></div>
+								<!-- Full Calendar -->
+								<div id="calendar">
+								</div>
+								
 								
 							</div><!-- 일정/맵 끝 -->
 							
@@ -348,6 +341,7 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/angular-1.5.8/angular.min.js"></script>
@@ -377,13 +371,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
-	<!-- DayPilot -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-common.src.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-calendar.src.js"></script>
-	
-	<!-- Googla Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
-	
+	<!-- Full Calendar -->
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js'></script>
+
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	
@@ -397,10 +388,12 @@
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
-	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
+	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 사용자정의 서비스 선언 -->
+	<script type="text/javascript" src="js/tourPlanDirectives.js"></script><!-- 앵귤러 사용자정의 지시자 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
 	
-	
+	<!-- Googla Map API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
 	
 
 </body>

@@ -1,5 +1,5 @@
 angular.module("TourPlanApp")
-	.controller("MakePlanController", function ($rootScope, $scope, $http, $window, MyConfig, RequestService) {
+	.controller("MakePlanController", function ($rootScope, $scope, $http, $window, $timeout, MyConfig, RequestService) {
 		/** ==================================================== */
 		/** TODO 여행일정 데이터 불러오기 */
 		/** ==================================================== */
@@ -21,6 +21,17 @@ angular.module("TourPlanApp")
 				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
 				$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
 				$scope.tourPlan.regDate = new Date(response.regDate);
+				
+				// 
+				$scope.setCalendarDate();
+				
+				// 일정표 init
+				$scope.initCalendar();
+				
+				// TODO 이미 저장되있던 일정 넣어줘야함
+				
+				
+				
 			}).error(function (error) {
 				swal("에러", "잘못된 접근입니다.", "error");
 				// 일정리스트 페이지로 리다이렉트
@@ -42,7 +53,9 @@ angular.module("TourPlanApp")
 			} else if (day < 0) {
 				result = "시간여행";
 				swal("시간여행을 하시겠습니까?");
+				// TODO 날짜 못고치게 막아야함
 			}
+			
 			return result;
 		};
 		
@@ -51,6 +64,7 @@ angular.module("TourPlanApp")
             $scope.$apply(function() {
             	$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
             });
+            $scope.getCalendarDate();
 		});
 		
 		// 도착시간 변경시 이벤트
@@ -58,6 +72,7 @@ angular.module("TourPlanApp")
             $scope.$apply(function() {
             	$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
             });
+            $scope.getCalendarDate();
 		});
 		
 		
@@ -78,7 +93,8 @@ angular.module("TourPlanApp")
 		
 		$scope.cancelTourPlan = function () {
 			swal("취소");
-			// TODO 일정 디테일 페이지로 리다이렉트
+			// 일정리스트 페이지로 리다이렉트
+//			$window.location.href = "detail.jsp?recordNo=" + RequestService.getParameter("recordNo");
 		}
 		
 		
@@ -89,8 +105,12 @@ angular.module("TourPlanApp")
 			swal("제목변경");
 		}
 		
+		$(".parallax-quote-in > h1").mouseover(function (){
+			console.log("ddd");
+		})
+		
 		/** ==================================================== */
-		/** TODO 배경사진 바꾸기 */
+		/** 배경사진 바꾸기 */
 		/** ==================================================== */
 		// 배경 파일 업로드 이미지 미리보기 이벤트
 		$('#BGImageFile').on('change', function(){
@@ -122,9 +142,6 @@ angular.module("TourPlanApp")
 	        }
 	        $scope.updateImage(TourPlanCover, "/tourPlan/update/coverImage")
 		};
-		
-		
-//		$scope.recordNo = RequestService.getParameter("recordNo");
 		// 사진 데이터베이스 업데이트
 	    $scope.updateImage = function (TourPlanCover, url) {
 	        $http({
@@ -199,7 +216,7 @@ angular.module("TourPlanApp")
 		}
 		
 		// 장소 리스트 가져오기
-		// TODO 정보 리스트 제대로 된것 가져오기
+		// TODO 장소 리스트 제대로 된것 가져오기
 		$scope.getSpotList = function () {
 			// 무한로딩 방지
 			if ($scope.spotParams.pageNo >= $scope.totalPages) {
@@ -212,17 +229,22 @@ angular.module("TourPlanApp")
 				method: "GET",
 				params: $scope.spotParams
 			}).success(function (response) {
+//				console.log(response);
 				angular.forEach(response.tourSpotList, function (spot) {
 					$scope.tourSpotList.push(spot);
 				})					
 				$scope.totalPages = response.totalPages;
 				
-//				console.log($scope.tourSpotList);
-//				console.log(response.totalPages);
 			}).error(function (error) {
 				console.log(error);
 			});
+			
 		};
+		
+		// 장소리스트 ng-repeat 완료 함수
+		$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+			$scope.addDragEvent();
+		});
 		
 		// 무한 스크롤 이벤트
 		angular.element("#searchContent").scroll( function() {
@@ -272,195 +294,191 @@ angular.module("TourPlanApp")
 		/** TODO 북마크 */
 		/** ==================================================== */
 		
-		
-		
 		/** ==================================================== */
 		/** TODO 스토리 */
 		/** ==================================================== */
 		
-		
-		
-		
-		
-		
-		
 		/** ==================================================== */
-		/** 일정표관련 */
+		/** 일정표관련 : 기초데이터를 불러온 후에 init 해야함 */
 		/** ==================================================== */
-	    // 일정표 생성 및 옵션
-		var dp = new DayPilot.Calendar("dp");
-	    dp.startDate = "2016-06-05";
-	    dp.viewType = "3Days";
-	    dp.durationBarVisible = true;
-	    dp.heightSpec = "Full";
-
-	    // 일정 디폴트 더미 데이터
-	    $scope.scheduleList = [{
-	        "start": "2016-06-05T10:00:00",
-	        "end": "2016-06-05T13:00:00",
-	        "id": "23ef6fcd-e12d-b085-e38a-a4e23d0bb61d",
-	        "text": "석모도",
-	        "tags": {
-	            "type": "sight"
-	        }
-	    }, {
-	        "start": "2016-06-06T11:00:00",
-	        "end": "2016-06-06T14:00:00",
-	        "id": "fb62e2dd-267e-ec91-886b-73574d24e25a",
-	        "text": "통영맛집",
-	        "tags": {
-	            "type": "rest"
-	        }
-	    }, {
-	        "start": "2016-06-07T10:00:00",
-	        "end": "2016-06-07T13:00:00",
-	        "id": "29b7a553-d44f-8f2c-11e1-a7d5f62eb123",
-	        "text": "더존팬션",
-	        "tags": {
-	            "type": "bed"
-	        }
-	    }, {
-	        "start": "2016-06-07T14:00:00",
-	        "end": "2016-06-07T17:00:00",
-	        "id": "ff968cfb-eba1-8dc1-7396-7f0d4f465c8a",
-	        "text": "이동",
-	        "tags": {
-	            "type": "important"
-	        }
-	    }];
-	    
-	    // 일정표 일정 리스트에 초기 바인딩
-	    dp.events.list = $scope.scheduleList;
-	    
-	    
-        // 일정 생성
-        dp.onTimeRangeSelected = function (args) {
-            swal({
-	    	  title: "새 여행 일정",
-	    	  text: "여행 일정 명을 쓰세요",
-	    	  type: "input",
-	    	  showCancelButton: true,
-	    	  closeOnConfirm: true,
-	    	  inputPlaceholder: "여행 일정 명"
-	    	},
-	    	function(inputValue){
-	    	  if (inputValue === false) return false;
-	    	  
-	    	  if (inputValue === "") {
-	    	    swal.showInputError("아무것도 입력을 안하셨습니다!");
-	    	    return false
-	    	  }
-	    	  var name = inputValue;
-	          if (!name) return;
-	          var event = {
-	        		  start: args.start,
-	        		  end: args.end,
-	        		  id: DayPilot.guid(),
-	        		  text: name,
-	        		  tags: {
-	        			  "type" : "custom"
-	        		  }
-	          }
-	          dp.events.add(new DayPilot.Event(event));
-	          dp.clearSelection();
-	            
-	            // 리스트에 바인딩 시키기
-	            $scope.$apply(function() {
-	            	$scope.scheduleList = dp.events.list;
-	            });
-	    	});
-        };
-	    
-	    // 일정 이동시 이벤트
-	    dp.onEventResized = function (args) {
-	    	// 바인딩
-            $scope.$apply(function() {
-            	$scope.scheduleList = dp.events.list;
-            });
-            // 드랍이벤트
-            addSchedulDropEvent();
+		// 시작일 : $scope.tourPlan.departureDate
+		// 종료일 : $scope.tourPlan.arriveDate
+		
+		$scope.calendarObj = $("#calendar");
+		
+		// 일정표 날짜 변수
+		$scope.setCalendarDate = function () {
+			$scope.calendarPage = {
+				start: moment($scope.tourPlan.departureDate),
+				end: moment($scope.tourPlan.arriveDate),
+				startLimit: moment($scope.tourPlan.departureDate),
+				endLimit: moment($scope.tourPlan.arriveDate).subtract(0,"days")
+			}
 		}
-	    
-	    // 일정 이동시 이벤트
-	    dp.onEventMoved = function (args) {
-            $scope.$apply(function() {
-            	$scope.scheduleList = dp.events.list;
-            });
-	    }
+		
+		
+		// 일정표 initialize
+		$scope.initCalendar = function () {
+			
+			// Full Calendar 옵션
+			$scope.calendarObj.fullCalendar({
+				// 높이
+				height: "auto",
+				
+				editable: true,
+				droppable: true, // this allows things to be dropped onto the calendar
+				
+				// 사용자 정의 버튼
+			    customButtons: {
+			    	firstDayBtn: {
+			            text: "첫날",
+			            click: $scope.toDayMethods.toFirstDay
+			    	},
+			    	LastDayBtn: {
+						text: "마지막날",
+						click: $scope.toDayMethods.toLastDay
+			    	},
+			        prevDayBtn: {
+			            text: "이전",
+			            click: $scope.toDayMethods.toPrevDay
+			        },
+					nextDayBtn: {
+						text: "다음",
+						click: $scope.toDayMethods.toNextDay
+					}
+			    },
+			    
+			    // 헤더 메뉴 구성
+			    header: {
+			    	left: "firstDayBtn",
+			    	center: "prevDayBtn, title, nextDayBtn",
+			    	right: "LastDayBtn"
+			    },
+			    
+			    views: {
+			        agendaOneDay: {
+			            type: "agendaDay",
+			            duration: { days: 1 },
+			            buttonText: "1 day",
+			            titleFormat: 'YYYY년 MM월 DD일'
+			        },
+			        agendaThreeDay: {
+			            type: "agenda",
+			            duration: { days: 3 },
+			            buttonText: "3 day",
+			            titleFormat: 'YYYY년 MM월 DD일',
+			        }
+			    },
+			    
+			    // 기본 뷰
+				defaultView: "agendaOneDay",
+				
+				// 공통일정 : 허용하지 않음
+				allDaySlot: false,
+				
+				// 매일 시작시간 : 아침 06시
+				minTime: "06:00:00",
+				
+				// 일정 중첩 옵션 : 허용하지 않음
+				slotEventOverlap: false,
+				eventOverlap: false,
+				
+				// 일정 시작 일자
+				defaultDate: $scope.calendarPage.start
 
-        // TODO 일정 클릭 이벤트(해당 관광지정보 상세보기)
-        dp.onEventClick = function (args) {
-        	// 상세보기
-        };
-        
-	    
-	    // TODO 일정 지우기
-	    var delSchedule = function (args) {
-	    	console.log("지우기")
-        	// 상세보기 / 지우기 / 취소
-            if(confirm("지울래")) {
-            	dp.events.remove(args.e);
-            }
-            // 리스트에 바인딩 시키기
-            $scope.$apply(function() {
-            	$scope.scheduleList = dp.events.list;
-            });
-        };
-        
-        // TODO 일정표 드랍 이벤트
-        var addSchedulDropEvent = function () {
-        	$(".calendar_default_cell").on("drop", function (event) {
-        		console.log(event);
-        	})
-        	$(".calendar_default_cell").on("dragover", function () {
-        		return false;
-        	})
-        }
-        
-        // TODO : 일정 커스터마이징 정리해야함
-	    dp.onBeforeEventRender = function(args) {
-	        if (args.data.tags && args.data.tags.type){
-		    	switch (args.data.tags.type) {
-		    	case "important":
-		            args.data.html = "<b>중요일정</b><br>" + args.data.text;
-		            args.data.fontColor = "#fff";
-		            args.data.backColor = "#E06666";
-		            args.data.borderColor = "#CC0000";
-		    		break;
-		    	case "sight":
-		    		args.data.html = "<b>관광지</b><br>" + args.data.text;
-		    		args.data.fontColor = "#fff";
-		    		args.data.backColor = "#FFE599";
-		    		args.data.borderColor = "#F1C232";
-		    		break;
-		    	case "rest":
-		    		args.data.html = "<b>음식점</b><br>" + args.data.text;
-		    		args.data.fontColor = "#fff";
-		    		args.data.backColor = "#9FC5E8";
-		    		args.data.borderColor = "#3D85C6";
-		    		break;
-		    	case "bed":
-		    		args.data.html = "<b>숙박업소</b><br>" + args.data.text;
-		    		args.data.fontColor = "#fff";
-		    		args.data.backColor = "#B6D7A8";
-		    		args.data.borderColor = "#6AA84F";
-		    		break;
-		    	case "custom":
-		            args.data.html = "<b>기타일정</b><br>" + args.data.text;
-		            args.data.fontColor = "#fff";
-		            args.data.backColor = "#EA9999";
-		            args.data.borderColor = "#CC0000";
-		    		break;
-		    	}
-	        }
-	    };
+				
+			});
+		}
+		
+		// 여행장소리스트 드래그 이벤트 추가 함수
+		$scope.addDragEvent = function () {
+	        angular.element($('#searchContent .tourSpot')).each(function() {
+	    		// store data so the calendar knows to render an event upon drop
+	    		$(this).data('event', {
+	    			title: $.trim($(this).text()), // 태그안 택스트를 title 변수로 준다
+//	    			stick: true // maintain when user navigates (see docs on the renderEvent method)
+	    		});
+	    		
+	    		// JQuery-UI 드래그 이벤트 추가 함수
+	    		$(this).draggable({
+	    			zIndex: 99,
+	    			revert: true,
+	    			revertDuration: 0,
+	    			appendTo: 'body',
+	    			containment: 'window',
+	    			scroll: false,
+	    			helper: 'clone'
+	    		});
+	    	});
+		};
 
-	    // 일정표 시작
-	    dp.init();
-	    addSchedulDropEvent();
+		// 일정 이동 메소드들
+		// TODO 첫째날 마지막날 제대로 되게 설정
+		$scope.toDayMethods = {
+			toFirstDay: function () {
+				$scope.calendarObj.fullCalendar("gotoDate", $scope.calendarPage.startLimit);
+			},
+			toLastDay: function () {
+				$scope.calendarObj.fullCalendar("gotoDate", $scope.calendarPage.endLimit);
+			},
+			toPrevDay: function () {
+				if ($scope.calendarPage.start.isSameOrBefore($scope.calendarPage.startLimit)) {
+					swal('첫날입니다.');
+				} else {
+					$scope.calendarPage.start.subtract(1, "days");
+					$scope.calendarObj.fullCalendar("gotoDate", $scope.calendarPage.start);
+				}
+			},
+			toNextDay: function () {
+				if ($scope.calendarPage.start.isSameOrAfter($scope.calendarPage.endLimit)) {
+					swal('마지막날 입니다.');
+				} else {
+					$scope.calendarPage.start.add(1, "days");
+					$scope.calendarObj.fullCalendar("gotoDate", $scope.calendarPage.start);
+				}
+			}
+		};
+		
+		
+		
+		// TODO 일정표 커스텀 뷰
+		$.fullCalendar.views.custom = $.fullCalendar.View.extend({ // make a subclass of View
+
+		    initialize: function() {
+		        // called once when the view is instantiated, when the user switches to the view.
+		        // initialize member variables or do other setup tasks.
+		    },
+
+		    render: function() {
+		        // responsible for displaying the skeleton of the view within the already-defined
+		        // this.el, a jQuery element.
+		    },
+
+		    renderEvents: function(events) {
+		        // reponsible for rendering the given Event Objects
+		    },
+
+		    destroyEvents: function() {
+		        // responsible for undoing everything in renderEvents
+		    },
+
+		    renderSelection: function(range) {
+		        // accepts a {start,end} object made of Moments, and must render the selection
+		    },
+
+		    destroySelection: function() {
+		        // responsible for undoing everything in renderSelection
+		    }
+
+		});
+
+		
+
+		
 
         
   })
+  
   
 /** ==================================================== */
 /** TODO 구글맵 */
