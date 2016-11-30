@@ -55,6 +55,91 @@
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="message.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+<style>
+#project-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+
+#project-icon {
+	float: left;
+	height: 32px;
+	width: 32px;
+}
+
+#project-description {
+	margin: 0;
+	padding: 0;
+}
+
+.ui-autocomplete-input {
+  border: none; 
+  font-size: 14px;
+  width: 300px;
+  height: 24px;
+  margin-bottom: 5px;
+  padding-top: 2px;
+  border: 1px solid #DDD !important;
+  padding-top: 0px !important;
+  z-index: 1511;
+  position: relative;
+}
+.ui-menu .ui-menu-item a {
+  font-size: 12px;
+}
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1051 !important;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+}
+.ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.ui-state-hover, .ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #0088cc;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+}
+</style>
+
 
 </head>
 
@@ -84,6 +169,8 @@
 			
 			<!-- 프로필 사진 업로드 모달 -->
 			<%@include file="include/profileUploadFormModal.jsp"%>
+			
+			
 		
 			<!-- 사용자 사진 및 배경사진 include -->
 			<%@include file="include/userPhoto.jsp"%>
@@ -120,7 +207,7 @@
 														<span id="inputSuccess4Status" class="sr-only">(success)</span>
 												</div>
 												<div class="col-md-4">
-													<button class="btn btn-default">+ 새 쪽지</button>
+													<button id="new_note" class="btn btn-default">+ 새 쪽지</button>
 												</div>
 											</div>
 										</div>
@@ -130,7 +217,8 @@
 													<span class="check_mail primary _c1(mlCore|toggleCheckAll)">
 														<label for="mailCheckAll" class="blind">선택: </label>
 													</span> 
-													<a title="메일 목록 보기" href="javascript:;">
+<!-- 													<a title="메일 목록 보기" href="javascript:;" onclick='noteCheck(\"Y\")'> -->
+													<a title="메일 목록 보기" href="javascript:;" data-val="Y" onclick="noteCheck(this)">
 														<span class="spr _c1(myCore|showViewTypeLayer) _ccr(clt.viewType) _stopDefault">
 														<span class="blind">모든 쪽지, </span>
 														</span>
@@ -142,7 +230,7 @@
 															<span class="blind">읽은 쪽지, </span>
 														</span>
 													</a> 
-													<a title="인쇄" href="#">
+													<a title="인쇄" href="javascript:;" data-val="E" onclick="noteCheck(this)">
 														<span class="spr l8">
 															<span class="blind">선택 취소</span>
 														</span>
@@ -165,117 +253,83 @@
 
 										
 										<div class="note-table">
-											<table>
-												<tbody>
-													<tr>
-													<td style="padding: 10px;">
-														<input type="checkbox">
-														<img src="http://14.32.66.104:8081/images?path=upload/images/profile/profile-c37fc7a5-d910-4bf2-81b5-bb7e4d096156.jpg" 
-														alt="..." class="img-thumbnail" style="width: 70px; height: 70px;">
-													</td>
-													<td style="padding: 10px;">
-														<a title="displayName" href="#">
-														<span class="spr l8">
-															<span class="blind">JAMES DEAN</span>
-														</span>
-														</a>
-														<br>
-														<span>3월 5일 오전 12:17</span>
-													</td>
-													<td style="padding: 10px;">
-														<span>제목 1</span>
-														<br>
-														<span>안녕하세요. ^^* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-													</td>
-												</tr>
-												<tr>
-													<td style="padding: 10px;">
-														<input type="checkbox">
-														<img src="http://14.32.66.104:8081/images?path=upload/images/profile/profile-c37fc7a5-d910-4bf2-81b5-bb7e4d096156.jpg" 
-														alt="..." class="img-thumbnail" style="width: 70px; height: 70px;">
-													</td>
-													<td style="padding: 10px;">
-														<a title="displayName" href="#">
-														<span class="spr l8">
-															<span class="blind">JAMES DEAN</span>
-														</span>
-														</a>
-														<br>
-														<span>3월 5일 오전 12:17</span>
-													</td>
-													<td style="padding: 10px;">
-														<span>제목 1</span>
-														<br>
-														<span>안녕하세요. ^^* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-													</td>
-												</tr>
-												</tbody>
+											<table style="width: 100%;">
+												<tbody id="recv-tbody"></tbody>
 											</table>
+											<div class="text-center">
+												<ul class="pagination pagination-lg"></ul>
+											</div>
+
 										</div>
 									</div>
 								</div>
 
 
 								<div id="settings" class="profile-edit tab-pane fade">
-									<dl class="dl-horizontal">
-										<dt><strong>UID</strong></dt>
-										<dd ng-bind="user.userUid" class="ng-binding">XhYKEtss94gRsy1OfhNqwk3mEE43</dd>
-										<hr>
-									</dl>
+									<div>
+										<input type="text" class="form-control" id="inputSuccess4" aria-describedby="inputSuccess4Status" 
+										placeholder="search" style="width: 40%; display: inline-block;"> 
+														<span class="glyphicon glyphicon-search form-control-feedback"
+														aria-hidden="true" style="margin-right: 510px; margin-top: 75px;"></span>
+														
+										<button class="btn btn-default">삭제</button>				
+									</div>
+								
+									
+									<div class="layoutSelect" style="margin-top: 20px;">
+										<span class="check_mail primary _c1(mlCore|toggleCheckAll)">
+											<label for="mailCheckAll" class="blind">선택: </label>
+										</span> 
+<!-- 													<a title="메일 목록 보기" href="javascript:;" onclick='noteCheck(\"Y\")'> -->
+										<a title="메일 목록 보기" href="javascript:;" data-val="Y" onclick="noteCheck(this)">
+											<span class="spr _c1(myCore|showViewTypeLayer) _ccr(clt.viewType) _stopDefault">
+											<span class="blind">모든 쪽지, </span>
+											</span>
+										</a>
+										<p id="trash_list_notice_msg" class="notice_msg"
+											style="display: none;"></p>
+										<a title="목록/본문 보기" href="javascript:;">
+											<span>
+												<span class="blind">읽은 쪽지, </span>
+											</span>
+										</a> 
+										<a title="인쇄" href="javascript:;" data-val="E" onclick="noteCheck(this)">
+											<span class="spr l8">
+												<span class="blind">선택 취소</span>
+											</span>
+										</a>
+									</div>
+								
+								
+									<div class="note-table">
+											<table style="width: 100%;">
+												<tbody id="sent-tbody"></tbody>
+											</table>
+											<div class="text-center">
+<!-- 												<ul class="pagination pagination-lg"></ul> -->
+											</div>
+
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
-				
 			</div><!--/end row-->
 		</div>
 		<!--=== End Profile ===-->
 		<!--=== 내용 끝 ===-->
-				
-				
-				
-				
+
 
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
-
 	</div>
 	
 	<!-- 로그인 모달 include -->
 	<%@include file="/resources/include/userModal.jsp"%>
+	
+		<!-- 쪽지보내기 모달 -->
+	<%@include file="include/noteSendModal.jsp"%>
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
@@ -319,10 +373,13 @@
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
+	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="message.js"></script>
 	<script type="text/javascript" src="message_sub.js"></script>
 	
+
 </body>
 </html>
