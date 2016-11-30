@@ -279,6 +279,10 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
+								<div>
+									<button ng-click="getCalendarEvents();">일정표 보기</button>
+								</div>
+								
 								<!-- Full Calendar -->
 								<div id="calendar">
 								</div>
