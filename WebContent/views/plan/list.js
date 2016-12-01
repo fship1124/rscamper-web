@@ -128,6 +128,12 @@ angular.module("TourPlanApp")
 
 		// 처음에 리스트 가져오기
 		$scope.getPlanList();
+		
+		// TODO 여행일정 삭제하기
+		// 리스트에 버튼달기(자기글만 버튼 보이기)
+		$scope.removeTourPlan = function () {
+			
+		};
 
 		// 여행일정 만들기 폼 열기
 		$scope.createTourPlan = function () {
@@ -170,7 +176,7 @@ angular.module("TourPlanApp")
 			
 			// 사용자 UID 입력
 			$scope.writeTourPlan.userUid = $rootScope.user.userUid; 
-			
+			console.log($scope.writeTourPlan);
 			$http({
 				url: MyConfig.backEndURL + "/tourPlan/insert/tourPlan",
 				method: "POST",

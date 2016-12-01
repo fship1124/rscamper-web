@@ -177,14 +177,23 @@
 								
 								<!-- 검색창 결과물 -->
 								<div id="searchContent">
-								
 									<!-- 결과 카드 반복 -->
 									<div class="tourSpot" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);" on-finish-render="ngRepeatFinished">
+										<!-- 전송용 데이터 -->
+										<div id="tourSpotData" ng-hide="true">
+											<b ng-bind="tourSpot.contentid"></b>
+											<b ng-bind="tourSpot.contenttypeid"></b>
+											<b ng-bind="tourSpot.title"></b>
+											<b ng-bind="tourSpot.mapx"></b>
+											<b ng-bind="tourSpot.mapy"></b>
+											<b ng-bind="tourSpot.firstimage"></b>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotColor"></b>
+										</div>
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
 										</div>
 										<div class="tourSpotContent" >
-											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory" style=""></b>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory"></b>
 											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
 											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
 											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
@@ -280,7 +289,8 @@
 								<div id="map" style="height: 400px;"></div>
 								
 								<div>
-									<button ng-click="getCalendarEvents();">일정표 보기</button>
+									<button ng-click="getAllCalendarEvents();">전체 일정</button>
+									<button ng-click="getCurrentDateCalendarEvents();">선택 날짜 일정</button>
 								</div>
 								
 								<!-- Full Calendar -->

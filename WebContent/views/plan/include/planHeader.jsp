@@ -10,7 +10,7 @@
 			</div>
 			<h5 style="color: white;" ng-bind="tourPlan.period"></h5>
 			<br>
-			<button id="changeTourPlanBGImage" class="btn-u btn-u-sea" ng-click="changeTourPlanBGImage();" style="display: ">배경화면 바꾸기</button>
+			<button id="changeTourPlanBGImage" class="btn-u btn-u-sea" ng-click="changeTourPlanBGImage();" >배경화면 바꾸기</button>
 		</div>
 	</div>
 </div>
