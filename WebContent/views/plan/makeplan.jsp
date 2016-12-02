@@ -106,7 +106,7 @@
 					<ul class="list-group sidebar-nav-v1" >
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="scheduleList.length"></span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length"></span>
 							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -306,21 +306,22 @@
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="schedule in scheduleList | orderBy: 'start'">
-										<div class="cbp_tmtime equal-height-column"><span>{{schedule.start | convertDate}}</span> <span>{{schedule.tags.type}}</span></div>
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+										<div class="cbp_tmtime equal-height-column"><span></span> <span></span></div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>{{schedule.text}}</h2>
+											<h2>{{tourSpotEvent.title}}</h2>
 											<div class="row">
 												<div class="col-md-4">
-													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
+													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
+													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
 													<div class="md-margin-bottom-20">
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>일정 UID : {{schedule.id}}</p>
-													<p>시작 시간  : {{schedule.start}}</p>
-													<p>끝나는 시간 : {{schedule.end}}</p>
+													<p>{{}}</p>
+													<p>{{}}</p>
+													<p>{{}}</p>
 												</div>
 											</div>
 										</div>

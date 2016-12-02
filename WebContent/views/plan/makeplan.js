@@ -7,7 +7,7 @@ angular.module("TourPlanApp")
 		$scope.getTourPlan = function () {
 			$http({
 				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
-				method: "GET",
+				method: "GET"
 			}).success(function (response) {
 //				console.log(response);
 				if (response.userUid != $rootScope.user.userUid) {
@@ -22,17 +22,61 @@ angular.module("TourPlanApp")
 				$scope.tourPlan.regDate = new Date(response.regDate);
 				
 				/** ==================================================== */
-				/** TODO 여행일정 상세 데이터 불러오기 */
+				/** TODO 여행일정 스케쥴 데이터 불러오기 */
 				/** ==================================================== */
-				
 				// 일정표 날짜 정보 셋팅
 				$scope.setCalendarDate();
-				
 				// 일정표 init
 				$scope.initCalendar();
-				
-				// TODO 이미 저장되있던 일정 넣어줘야함
-				
+				// 포함된 일정 불러오기
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					method: "GET"
+				}).success(function (response) {
+//					console.log(response);
+					// 일정표에 불러온 이벤트 추가
+					for (var i = 0; i < response.length ; i++) {
+						switch (response[i].contentTypeId) {
+							case 12: var color = "#f29e37"; break;
+							case 14: var color = "#f29e37"; break;
+							case 15: var color = "#f29e37"; break;
+							case 25: var color = "#f29e37"; break;
+							case 28: var color = "#f29e37"; break;
+							case 38: var color = "#f29e37"; break;
+							case 39: var color = "#46c0fb"; break;
+							case 32: var color = "#6bb130"; break;
+						}
+						var event = {
+				    		title: response[i].title, // 태그안 택스트를 title 변수로 준다
+				    		stick: true, // 날짜이동해도 일정을 유지시켜줌
+				    		constraint: "availableDate", // availableDate필드에만 일정 추가 가능
+				    		color: color,
+				    			
+				    		// 필터를 위한
+				    		category: "tourSpot",
+				    			
+				    		// DB에 들어가야할 일정 데이터 
+							locationNo: response[i].locationNo,
+				    		recordNo: RequestService.getParameter("recordNo"),
+				    		contentId: response[i].contentCode,
+				    		contentTypeId: response[i].contentTypeId,
+				    		spotTitle: response[i].title,
+				    		mapX: response[i].mapX,
+				    		mapY: response[i].mapY,
+				    		imageUrl: response[i].imageUrl,
+				    		start: moment(response[i].detailDepartureDate)
+						}
+						if (response[i].detailArriveDate) {
+							event.end = moment(response[i].detailArriveDate);
+						}
+						calendarObj.fullCalendar("renderEvent", event, true);
+					}
+					
+					$scope.getAllCalendarEvents();
+					
+				}).error(function (error) {
+					console.log(error);
+				});
 			}).error(function (error) {
 				swal("에러", "잘못된 접근입니다.", "error");
 				// 일정리스트 페이지로 리다이렉트
@@ -42,25 +86,22 @@ angular.module("TourPlanApp")
 		
 		// 기간 표시 메소드
 		$scope.convertDate = function(dDate, aDate) {
-			var result = "";
+			var response = "";
 			var nTime = aDate.getTime() - dDate.getTime();
 			var year = Math.floor(nTime/1000/60/60/24/365);
 			var day = nTime/1000/60/60/24;
 			if (day >= 1) {
 				var duty = day + 1;
-				result = day + "박" + duty + "일";
+				response = day + "박" + duty + "일";
 			} else if (day == 0){
-				result = "당일치기";
+				response = "당일치기";
 			} else if (day < 0) {
-				result = "시간여행";
-				swal("시간여행을 하시겠습니까?");
-				// TODO 날짜 못고치게 막아야함
+				response = "시간여행";
 			}
-			return result;
+			return response;
 		};
 		
 		// TODO 일정 시간 변경시 유효성 체크
-		
 		// 출발시간 변경시 이벤트
 		angular.element("#departureDate").change( function() {
             $scope.$apply(function() {
@@ -86,67 +127,59 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		/*	저장요소
 		 *  전체정보 : record_tb
-		 *  일정정보 : record_schedule_tb
+		 *  일정정보 : record_location_tb
 		 */
-		
-		// 저장버튼 이벤트
+		// 일정 전체 저장 메소드
 		$scope.saveTourPlan = function () {
-			console.log($scope.tourPlan);
-			console.log($scope.getAllCalendarEvents());
+//			console.log($scope.tourPlan);
+//			console.log($scope.getAllCalendarEvents());
 			var tourPlanScheduleList = $scope.getAllCalendarEvents()
-			
+			// 전체정보 입력
 			$http({
 				url: MyConfig.backEndURL + "/tourPlan/update/tourPlan",
 				method: "POST",
 				data: $.param($scope.tourPlan),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
-			}).success(function (result) {
-				for (var i = 0, len = tourPlanScheduleList.length; i < len; i++) {
-					var tps = tourPlanScheduleList[i]
-					console.log(tps.start);
-					if (!tps.locationNo) {
+			}).success(function (response) {
+				// 스케줄 정보 삭제
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/delete/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					method: "GET",
+				}).success(function (response) {
+					// 스케쥴 정보 입력
+					for (var i = 0, len = tourPlanScheduleList.length; i < len; i++) {
+						var tps = tourPlanScheduleList[i]
 						var tourPlanSchedule = {
-							contentCode: tps.contentId,
-							recordNo: tps.recordNo,
-							title: tps.spotTitle,
-							imageUrl: tps.imageUrl,
-//							detailDepartureDate: tps.start.toDate(),
-//							detailArriveDate: tps.end.toDate(),
-							contentTypeId: tps.contentTypeId,
-							mapX: tps.mapX,
-							mapY: tps.mapY
-						}
-					} else {
-						var tourPlanSchedule = {
-								locationNo: tps.locationNo,
 								contentCode: tps.contentId,
 								recordNo: tps.recordNo,
 								title: tps.spotTitle,
 								imageUrl: tps.imageUrl,
-//								detailDepartureDate: tps.start.toDate(),
-//								detailArriveDate: tps.end.toDate(),
 								contentTypeId: tps.contentTypeId,
 								mapX: tps.mapX,
-								mapY: tps.mapY
+								mapY: tps.mapY,
+								detailDepartureDate: tps.start.format("YYYY-MM-DD HH:mm:ss"),
+								departureDate: tps.start.format("YYYY. MM. DD. ddd")
 						}
+						if (tps.end) { tourPlanSchedule.detailArriveDate = tps.end.format("YYYY-MM-DD HH:mm:ss") }
+						if (tps.locationNo) { tourPlanSchedule.locationNo = tps.locationNo }
+//						console.log(tourPlanSchedule);
+						$http({
+							url: MyConfig.backEndURL + "/tourPlan/insert/tourPlanSchedule",
+							method: "POST",
+							data: $.param(tourPlanSchedule),
+							headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
+						}).success(function (response) {
+							swal("일정 저장이 완료되었습니다.");
+						}).error(function (error) {
+							console.log(error);
+						})
 					}
-					
-					$http({
-						url: MyConfig.backEndURL + "/tourPlan/insert/tourPlanSchedule",
-						method: "POST",
-						data: $.param(tourPlanSchedule),
-						headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
-					}).success(function (result) {
-						
-					}).error(function (error) {
-						console.log(error);
-					})
-				}
-				
+				}).error(function (error) {
+					console.log(error);
+				})
 			}).error(function (error) {
 				console.log(error);
 			})
-			
 		}
 		
 		// 취소버튼 이벤트
@@ -173,7 +206,7 @@ angular.module("TourPlanApp")
 					title: $scope.tourPlan.title
 				}),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
-			}).success(function (result) {
+			}).success(function (response) {
 				$scope.modTitle = false;
 			}).error(function (error) {
 				console.log(error);
@@ -204,8 +237,8 @@ angular.module("TourPlanApp")
 		};
 		
 		// 배경사진 업로드 완료 콜백
-		$scope.uploadBGCallBack = function (result) {
-	        var data = JSON.parse(result);
+		$scope.uploadBGCallBack = function (response) {
+	        var data = JSON.parse(response);
 	        var TourPlanCover = {
 	        		recordNo: RequestService.getParameter("recordNo"),
 	        		realPath: data.realPath, // 서버 경로
@@ -557,13 +590,18 @@ angular.module("TourPlanApp")
 						element.find(".fc-bg").css("pointer-events","none");
 					    element.append("<div style='position:absolute;bottom:0px;right:0px'><button type='button' id='btnDeleteEvent' class='btn btn-block btn-primary btn-flat'>X</button></div>" );
 					    element.find("#btnDeleteEvent").click(function(){
-					         $('#calendar').fullCalendar('removeEvents',event._id);
+					    	$('#calendar').fullCalendar('removeEvents',event._id);
+					    	$scope.$apply(function() {
+					    		$scope.getAllCalendarEvents();
+					    	});
 					    });
 					}
 				},
 				// 이벤트 추가시 콜백
 			    eventReceive: function(event) {
-			    	$scope.getAllCalendarEvents();
+		            $scope.$apply(function() {
+		            	$scope.getAllCalendarEvents();
+		            });
 			    }
 			});
 		};
