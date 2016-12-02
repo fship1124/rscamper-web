@@ -47,10 +47,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
-<!-- DayPilot Calendar Themes -->
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_transparent.css" />    
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_white.css" />    
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/demo/themes/calendar_green.css" />
+<!-- Full Calendar -->
+<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
@@ -108,7 +106,7 @@
 					<ul class="list-group sidebar-nav-v1" >
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="scheduleList.length"></span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length"></span>
 							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -179,16 +177,27 @@
 								
 								<!-- 검색창 결과물 -->
 								<div id="searchContent">
-								
 									<!-- 결과 카드 반복 -->
-									<div class="tourSpot" draggable="true" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);">
+									<div class="tourSpot" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);" on-finish-render="ngRepeatFinished">
+										<!-- 전송용 데이터 -->
+										<div id="tourSpotData" ng-hide="true">
+											<b ng-bind="tourSpot.contentid"></b>
+											<b ng-bind="tourSpot.contenttypeid"></b>
+											<b ng-bind="tourSpot.title"></b>
+											<b ng-bind="tourSpot.mapx"></b>
+											<b ng-bind="tourSpot.mapy"></b>
+											<b ng-bind="tourSpot.firstimage"></b>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotColor"></b>
+										</div>
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
 										</div>
-										<div class="tourSpotContent">
-											<span ng-bind="tourSpot.contenttypeid | tourSpotCategory"></span> <span ng-bind="tourSpot.title"></span>
-											<span ng-bind="tourSpot.contentid"></span>
-											<span ng-bind="tourSpot.areacode"></span> <span ng-bind="tourSpot.contentid">추천수</span>
+										<div class="tourSpotContent" >
+											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory"></b>
+											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
+											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa  fa-file-text-o"></i></button>
 										</div>
 									</div>
 									
@@ -234,14 +243,14 @@
 										<label class="label" style="margin-bottom: 0px;"><strong>여행시작일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="tourPlan.departureDate">
+											<input id="departureDate" type="date" ng-model="tourPlan.departureDate">
 										</label>
 									</section>
 									<section class="col col-5">
 										<label class="label" style="margin-bottom: 0px;"><strong>여행종료일</strong></label>
 										<label class="input" style="margin-bottom: 0px;">
 											<i class="icon-prepend fa fa-calendar"></i>
-											<input type="date" ng-model="tourPlan.arriveDate">
+											<input id="arriveDate" type="date" ng-model="tourPlan.arriveDate">
 										</label>
 									</section>
 									<section class="col col-2">
@@ -279,15 +288,15 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
-<!-- 								일정표 버튼 -->
-<!-- 								<div id="dpControl"> -->
-<!-- 									<p>====================</p> -->
-<!-- 									<p>버튼들</p> -->
-<!-- 									<p>====================</p> -->
-<!-- 								</div>	 -->
-
-								<!-- 일정표 DIV -->
-								<div id="dp"></div>
+								<div>
+									<button ng-click="getAllCalendarEvents();">전체 일정</button>
+									<button ng-click="getCurrentDateCalendarEvents();">선택 날짜 일정</button>
+								</div>
+								
+								<!-- Full Calendar -->
+								<div id="calendar">
+								</div>
+								
 								
 							</div><!-- 일정/맵 끝 -->
 							
@@ -297,21 +306,22 @@
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="schedule in scheduleList | orderBy: 'start'">
-										<div class="cbp_tmtime equal-height-column"><span>{{schedule.start | convertDate}}</span> <span>{{schedule.tags.type}}</span></div>
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+										<div class="cbp_tmtime equal-height-column"><span></span> <span></span></div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>{{schedule.text}}</h2>
+											<h2>{{tourSpotEvent.title}}</h2>
 											<div class="row">
 												<div class="col-md-4">
-													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
+													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
+													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
 													<div class="md-margin-bottom-20">
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>일정 UID : {{schedule.id}}</p>
-													<p>시작 시간  : {{schedule.start}}</p>
-													<p>끝나는 시간 : {{schedule.end}}</p>
+													<p>{{}}</p>
+													<p>{{}}</p>
+													<p>{{}}</p>
 												</div>
 											</div>
 										</div>
@@ -346,6 +356,7 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/angular-1.5.8/angular.min.js"></script>
@@ -375,13 +386,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
-	<!-- DayPilot -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-common.src.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/DayPilotLiteJavaScript-1.3.215/scripts/src/daypilot-calendar.src.js"></script>
-	
-	<!-- Googla Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
-	
+	<!-- Full Calendar -->
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js'></script>
+
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	
@@ -395,10 +403,12 @@
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
-	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
+	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 사용자정의 서비스 선언 -->
+	<script type="text/javascript" src="js/tourPlanDirectives.js"></script><!-- 앵귤러 사용자정의 지시자 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
 	
-	
+	<!-- Googla Map API -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
 	
 
 </body>

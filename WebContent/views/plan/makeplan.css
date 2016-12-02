@@ -12,6 +12,11 @@
 	float: left;
 }
 
+.parallax-quote-in > h1:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 #leftMenu {
 	width: 300px;
 	height: 100%;
@@ -74,17 +79,23 @@
 #searchContent {
     height: 1450px;
     width: 275px;
-    overflow: auto;
-    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+#searchContent:hover {
+	
 }
 
 .tourSpot {
-	cursor:pointer;
+	cursor: pointer;
 	height: 100px;
 	width: 270px;
 	margin-top: 2px; 
 	margin-bottom: 2px;
 	box-shadow: 0 1px 1px rgba(125, 125, 125, .2);
+	position: relative;
+	background-color: white;
 }
 
 .tourSpot:HOVER {
@@ -101,8 +112,8 @@
 }
 
 .tourSpotImage {
-	height: 98px;
-	width: 98px;
+	height: 100px;
+	width: 100px;
 }
 
 .tourSpotContent {
@@ -112,5 +123,10 @@
 	height: 100px;
 	overflow: hidden;
 	color: gray;
+}
+
+/* 일정표 */
+#calendar {
+	margin-top: 20px;
 }
 
