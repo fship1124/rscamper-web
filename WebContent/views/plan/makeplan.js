@@ -69,10 +69,18 @@ angular.module("TourPlanApp")
 						if (response[i].detailArriveDate) {
 							event.end = moment(response[i].detailArriveDate);
 						}
+
+						// 일정표 바인딩
+						$scope.getAllCalendarEvents();
+						
+						// 일정표에 이벤트 렌더링
 						calendarObj.fullCalendar("renderEvent", event, true);
+
 					}
 					
-					$scope.getAllCalendarEvents();
+					initMap();
+					// 지도에 이벤트 렌더링
+					renderingEventToMap();
 					
 				}).error(function (error) {
 					console.log(error);
@@ -450,7 +458,7 @@ angular.module("TourPlanApp")
 				return a.start.isBefore(b.start) ? -1 : a.start.isAfter(b.start) ? 1 : 0;
 			});
 			
-			console.log($scope.currentDateTourSpotEvents);
+			return $scope.currentDateTourSpotEvents;
 		};
 		
 		
@@ -588,12 +596,17 @@ angular.module("TourPlanApp")
 				eventRender: function(event, element) { 
 					if (event.id != "currentDate" && event.id != "availableDate") {
 						element.find(".fc-bg").css("pointer-events","none");
-					    element.append("<div style='position:absolute;bottom:0px;right:0px'><button type='button' id='btnDeleteEvent' class='btn btn-block btn-primary btn-flat'>X</button></div>" );
+					    element.append(
+					    		"<div class='btnDiv' style='position:absolute;top:1px;right:1px;z-index:1000;display:none;'>" +
+					    		"<button type='button' id='btnDeleteEvent' class='btn-u btn-u-xs btn-u-red rounded'><i class='fa fa-times' aria-hidden='true'></i></button>" +
+					    		"</div>" 
+					    );
 					    element.find("#btnDeleteEvent").click(function(){
 					    	$('#calendar').fullCalendar('removeEvents',event._id);
 					    	$scope.$apply(function() {
 					    		$scope.getAllCalendarEvents();
 					    	});
+					    	renderingEventToMap();
 					    });
 					}
 				},
@@ -602,7 +615,27 @@ angular.module("TourPlanApp")
 		            $scope.$apply(function() {
 		            	$scope.getAllCalendarEvents();
 		            });
-			    }
+		            renderingEventToMap();
+			    },
+			    
+				// 이벤트 클릭
+			    eventClick: function(calEvent, jsEvent, view) {
+			    	$scope.openDetailTourSpot(calEvent);
+			    },
+			    // 이벤트 마우스 오버
+			    eventMouseover: function( event, jsEvent, view ) {
+			        $(this).css('border-width', '2px');
+			        $(this).find(".btnDiv").css("display", "block");
+			    },
+			    // 이벤트 마우스 아웃
+			    eventMouseout : function( event, jsEvent, view ) { 
+			    	$(this).css('border-width', '1px');
+			    	$(this).find(".btnDiv").css("display", "none");
+			    },
+			    // 이벤트 변경시
+			    
+				
+				
 			});
 		};
 		
@@ -655,6 +688,8 @@ angular.module("TourPlanApp")
 				calendarObj.fullCalendar("gotoDate", $scope.calendarPage.currentDate);
 				
 				$scope.setCurrentBackgroundEvent();
+				
+				renderingEventToMap();
 			},
 			toLastDay: function () {
 				$scope.calendarPage = {
@@ -667,6 +702,8 @@ angular.module("TourPlanApp")
 				calendarObj.fullCalendar("gotoDate", $scope.calendarPage.currentDate);
 				
 				$scope.setCurrentBackgroundEvent();
+				
+				renderingEventToMap();
 			},
 			toPrevDay: function () {
 				if ($scope.calendarPage.currentDate.isSameOrBefore($scope.calendarPage.startLimitDate)) {
@@ -678,6 +715,8 @@ angular.module("TourPlanApp")
 					calendarObj.fullCalendar("gotoDate", $scope.calendarPage.currentDate);
 					
 					$scope.setCurrentBackgroundEvent();
+					
+					renderingEventToMap();
 				}
 			},
 			toNextDay: function () {
@@ -691,51 +730,143 @@ angular.module("TourPlanApp")
 					calendarObj.fullCalendar("gotoDate", $scope.calendarPage.currentDate);
 					
 					$scope.setCurrentBackgroundEvent();
+					
+					renderingEventToMap();
 				}
 			}
 		};
+		
+		
+		/** ==================================================== */
+		/** TODO 구글맵 */
+		/** ==================================================== */
+		// 맵 설정 변수
+		var infowindow;
+		var markers = [];
+		var map;
+		var labels = '123456789';
+		var labelIndex = 0;
+		var flightPath = null;
+		
+		// 맵 이닛 함수
+		function initMap() {
+			var myLatlng = new google.maps.LatLng(37.4963799255, 127.0265547405);
+			var mapOptions = {
+				center : myLatlng,
+				zoom : 8
+			};
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		}
+		
+		// 선긋기
+		function addLocationInfo(eventList) {
+			var locationInfos = [];
+			for (var i = 0; i < eventList.length; i++) {
+				var locationInfo = {
+					lat : Number(eventList[i].mapY),
+					lng : Number(eventList[i].mapX)
+				}
+				locationInfos.push(locationInfo);
+			}
 
+			flightPath = new google.maps.Polyline({
+				path : locationInfos,
+				geodesic : true,
+				strokeColor : '#46c0fb',
+				strokeOpacity : 0.8,
+				strokeWeight : 3
+			});
+			flightPath.setMap(map);
+			
+			// 위치정보에 따라 맵 범위 설정
+			var bounds = new google.maps.LatLngBounds();
+			if (eventList.length == 0) {
+				bounds.extend(new google.maps.LatLng(37.5, 127.1000000000));
+				bounds.extend(new google.maps.LatLng(35, 127.0265547405));
+			}
+			for (var i = 0; i < eventList.length; i++) {
+				var locationInfo = {
+					lat : Number(eventList[i].mapY),
+					lng : Number(eventList[i].mapX)
+				}
+				bounds.extend(locationInfo);
+			}
+			map.fitBounds(bounds);
 
-        
+		}
+		
+		// 선지우기
+		function removePath() {
+			flightPath.setMap(null);
+		}
+		
+		// 마커 이벤트
+		function drop(eventList) {
+			clearMarkers();
+			labelIndex = 0;
+			for (var i = 0; i < eventList.length; i++) {
+				addMarkerWithTimeout(eventList[i], i * 50);
+			}
+		}
+		
+		// 마커 1초후에 찍어주기
+		function addMarkerWithTimeout(position, timeout) {
+			var locationPosition = {
+				lat : Number(position.mapY),
+				lng : Number(position.mapX)
+			}
+			window.setTimeout(function() {
+				// 마커
+				var marker = new google.maps.Marker({
+					position : locationPosition,
+					map : map,
+					animation : google.maps.Animation.DROP,
+					label : labels[labelIndex++ % labels.length],
+					title : position.title
+				});
+
+				markers.push(marker);
+				
+				// 인포윈도우
+				var content = '<a style="text-decoration: none; font-weight: bold" href="#'
+						+ position.recordNo
+						+ '/'
+						+ position.locationNo
+						+ '">'
+						+ position.title
+						+ '</a>';
+				infowindow = new google.maps.InfoWindow();
+				marker.addListener('click', function() {
+					infowindow.close();
+					infowindow.setContent(content);
+					infowindow.open(map, marker);
+				})
+				
+			}, timeout);
+		}
+
+		// 마커 클리어
+		function clearMarkers() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		
+		// 일정표 지도에 렌더링
+		function renderingEventToMap() {
+			var currentEventList = $scope.getCurrentDateCalendarEvents();
+			if (flightPath) {
+				removePath();
+			}
+			addLocationInfo(currentEventList);
+			drop(currentEventList);
+		}
+		
+		// 지도범위 알맞게 하기 LatLngBounds
+		
+		
+
   })
-  
-  
-/** ==================================================== */
-/** TODO 구글맵 */
-/** ==================================================== */
-function initMap() {
-	  var map = new google.maps.Map(document.getElementById("map"), {
-	    center: {lat: -34.397, lng: 150.644},
-	    zoom: 10
-	  });
-	  
-	  var infoWindow = new google.maps.InfoWindow({map: map});
-
-	  // Try HTML5 geolocation.
-	  if (navigator.geolocation) {
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	      var pos = {
-	        lat: position.coords.latitude,
-	        lng: position.coords.longitude
-	      };
-
-	      infoWindow.setPosition(pos);
-	      infoWindow.setContent("공사중");
-	      map.setCenter(pos);
-	    }, function() {
-	      handleLocationError(true, infoWindow, map.getCenter());
-	    });
-	  } else {
-	    // Browser doesn"t support Geolocation
-	    handleLocationError(false, infoWindow, map.getCenter());
-	  }
-}
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-	infoWindow.setPosition(pos);
-	infoWindow.setContent(browserHasGeolocation ?
-		"에러: 위치정보 서비스 구동 실패" :
-		"에러: 브라우져가 위치정보 서비스를 지원하지 않습니다.");
-}
   
 	

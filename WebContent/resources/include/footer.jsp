@@ -8,8 +8,7 @@
 				<div class="col-sm-3 md-margin-bottom-40">
 <%-- 					<a href="${pageContext.request.contextPath}/views/main.jsp"><img id="logo-footer" class="footer-logo" src="${pageContext.request.contextPath}/resources/img/icon/train/android-icon-192x192.png" alt="Logo" style="height: 100px; width:100px;"></a> --%>
 					<a href="${pageContext.request.contextPath}/views/main.jsp"><img id="logo-footer" class="footer-logo" src="${pageContext.request.contextPath}/resources/img/logo/catbuslogo.png" alt="Logo" style="height: 100px; width: 150px;"></a>
-					<p>About Unify dolor sit amet, consectetur adipiscing elit.
-						Maecenas eget nisl id libero tincidunt sodales.</p>
+					<p>당신이 원하는 내일로 여행정보</p>
 				</div>
 				<!--/col-md-3-->
 				<!-- End About -->
@@ -17,45 +16,36 @@
 				<!-- Simple List -->
 				<div class="col-sm-3 md-margin-bottom-40">
 					<div class="thumb-headline">
-						<h2>About Unify</h2>
+						<h2>서비스 소개</h2>
 					</div>
 					<ul class="list-unstyled simple-list margin-bottom-20">
-						<li><a href="#">About Us</a></li>
-						<li><a href="#">Forum</a></li>
-						<li><a href="#">Careers</a></li>
-						<li><a href="#">Community</a></li>
-						<li><a href="#">Stories</a></li>
-						<li><a href="#">Contact Us</a></li>
+						<li><a href="#">About RScamper</a></li>
+						<li><a href="#">이용문의</a></li>
 					</ul>
 				</div>
 				<!--/col-md-3-->
 
 				<div class="col-sm-3">
 					<div class="thumb-headline">
-						<h2>Topics</h2>
+						<h2>내일로정보</h2>
 					</div>
 					<ul class="list-unstyled simple-list margin-bottom-20">
-						<li><a href="#">Bootstrap</a></li>
-						<li><a href="#">Font Awesome</a></li>
-						<li><a href="#">WordPress</a></li>
-						<li><a href="#">Favicon</a></li>
-						<li><a href="#">Javascript</a></li>
-						<li><a href="#">iOS</a></li>
+						<li><a href="#">내일로란?</a></li>
 					</ul>
 				</div>
 				<!--/col-md-3-->
 
 				<div class="col-sm-3">
 					<div class="thumb-headline">
-						<h2>Developers</h2>
+						<h2>사이트맵</h2>
 					</div>
 					<ul class="list-unstyled simple-list margin-bottom-20">
-						<li><a href="#">Web Development</a></li>
-						<li><a href="#">Web Design</a></li>
-						<li><a href="#">Android Development</a></li>
-						<li><a href="#">PHP Development</a></li>
-						<li><a href="#">Programmer</a></li>
-						<li><a href="#">Start-up</a></li>
+						<li><a href="#">추천콘텐츠</a></li>
+						<li><a href="#">여행정보</a></li>
+						<li><a href="#">기차정보</a></li>
+						<li><a href="#">여행일정</a></li>
+						<li><a href="#">커뮤니티</a></li>
+						<li><a href="#">마이페이지</a></li>
 					</ul>
 				</div>
 				<!--/col-md-3-->
@@ -71,9 +61,10 @@
 				<!-- Terms Info-->
 				<div class="col-md-6">
 					<p>
-						2015 &copy; All Rights Reserved. Unify Theme by <a target="_blank"
-							href="https://twitter.com/htmlstream">Htmlstream</a> | <a
-							href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+						2016 &copy; All Rights Reserved. RScamper 
+						<a target="_blank" href="https://twitter.com/htmlstream">이용문의</a> | 
+						<a href="#">이용약관</a> | 
+						<a href="#">개인정보 취급방침</a>
 					</p>
 				</div>
 				<!-- End Terms Info-->

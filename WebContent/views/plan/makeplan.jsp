@@ -393,6 +393,9 @@
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	
+	<!-- Googla Map API -->
+ 	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4"></script>
+	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
@@ -407,9 +410,5 @@
 	<script type="text/javascript" src="js/tourPlanDirectives.js"></script><!-- 앵귤러 사용자정의 지시자 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
 	
-	<!-- Googla Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
-	
-
 </body>
 </html>

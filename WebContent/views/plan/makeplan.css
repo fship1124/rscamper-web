@@ -77,10 +77,13 @@
 
 /* 검색 결과 창 */
 #searchContent {
-    height: 1450px;
+    height: 1235px;
     width: 275px;
     overflow-y: auto;
     position: relative;
+/*     position:fixed; */
+/*     top:200px; */
+    
 }
 
 #searchContent:hover {
