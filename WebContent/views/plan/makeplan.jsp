@@ -86,7 +86,7 @@
 			
 			<!-- 여행장소 디테일 모달 -->
 			<%@include file="include/detailTourSpotModal.jsp"%>
-		
+			
 			<div id="leftMenu">
 			
 				<!-- 저장 / 취소 -->
@@ -106,7 +106,7 @@
 					<ul class="list-group sidebar-nav-v1" >
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length"></span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length + 1"></span>
 							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -288,15 +288,9 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
-								<div>
-									<button ng-click="getAllCalendarEvents();">전체 일정</button>
-									<button ng-click="getCurrentDateCalendarEvents();">선택 날짜 일정</button>
-								</div>
-								
 								<!-- Full Calendar -->
 								<div id="calendar">
 								</div>
-								
 								
 							</div><!-- 일정/맵 끝 -->
 							
@@ -307,7 +301,10 @@
 								<ul class="timeline-v2">
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
-										<div class="cbp_tmtime equal-height-column"><span></span> <span></span></div>
+										<div class="cbp_tmtime equal-height-column">
+											<span></span>
+											<span></span>
+										</div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
 											<h2>{{tourSpotEvent.title}}</h2>
@@ -336,10 +333,6 @@
 						</div>
 						
 					</div>
-				</div>
-				
-				<!-- 댓글 -->
-				<div id=tourPlanComment>
 				</div>
 				
 			</div>

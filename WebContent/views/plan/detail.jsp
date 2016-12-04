@@ -36,20 +36,29 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/brand-buttons/brand-buttons-inversed.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pages/shortcode_timeline2.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
+<!-- Full Calendar -->
+<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
+
 <!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="detail.css">
+<link rel="stylesheet" href="makeplan.css">
+
 </head>
 
-<body class="header-fixed header-fixed-space-default">
+<body class="header-fixed header-fixed-space-default" ng-app="TourPlanApp" ng-controller="DetailController">
 	<div class="wrapper">
 
 		<!-- 헤더 include -->
@@ -65,15 +74,191 @@
 			</div>
 		</div>
 		<!--=== 사이트맵 끝 ===-->
+		
+		<!-- 일정 만들기 헤더 include -->
+		<%@include file="include/planHeaderDetail.jsp"%>
 
 		<!--=== 내용 ===-->
-		<div class="container content-md" style="padding-top: 20px;" ng-app="TourPlanApp" ng-controller="DetailController">
-			<div id="left_content"></div>
-			<div id="right_content"></div>
+		<div id="writeTourPlan">
+			
+			<!-- 여행장소 디테일 모달 -->
+			<%@include file="include/detailTourSpotModal.jsp"%>
+			
+			<div id="leftMenu">
+			
+				<!-- 저장 / 취소 -->
+				<div id="controllers" ng-show="isWriter">
+					<div class="bg-light">
+						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="modTourPlan();">
+							<i class="fa fa-floppy-o"></i> 수정
+						</button>
+						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="togglePrivateTourPlan();">
+							<i class="fa fa-times"></i> 공개/비공개
+						</button>
+					</div>
+				</div>
+				
+				<!-- 작성자 프로필 -->
+				<div id="writerProfile">
+					<div class="bg-light">
+						작성자 프로필
+					</div>
+				</div>
+				
+				<!-- 추천 / 북마크  -->
+				<div id="writerProfile" ng-hide="isWriter">
+					<div class="bg-light">
+						추천 | 북마크
+					</div>
+				</div>
+				
+				<!-- 일정 정보 -->
+				<div id="status" style="font-size: 14px;">
+					<ul class="list-group sidebar-nav-v1" >
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length"></span>
+							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
+						</li>
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">10</span>
+							<a href="javascript:void(0);"><i class="fa fa-book"></i> 여행기</a>
+						</li>
+						<li id="notification_menu" class="list-group-item">
+							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
+							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
+						</li>
+					</ul>
+				</div>
+				
+
+				
+			</div><!-- left Menu 끝  -->
+			
+			
+			<div id="rightContents">
+			
+				<!-- 콘텐츠 헤더 -->
+				<div id="contentHeader">
+					<form class="sky-form">
+						<fieldset>
+							<section>
+								<label class="input"> 
+									<i class="icon-prepend fa fa-pencil-square-o"></i>
+									<input type="text" ng-model="tourPlan.strapline" readonly>
+								</label>
+							</section>
+							<section>
+								<label class="textarea">
+									<textarea rows="5" ng-model="tourPlan.introduce" readonly></textarea>
+								</label>
+							</section>
+							<section>
+								<div class="row">
+									<section class="col col-5">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행시작일</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<i class="icon-prepend fa fa-calendar"></i>
+											<input id="departureDate" type="date" ng-model="tourPlan.departureDate" readonly>
+										</label>
+									</section>
+									<section class="col col-5">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행종료일</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<i class="icon-prepend fa fa-calendar"></i>
+											<input id="arriveDate" type="date" ng-model="tourPlan.arriveDate" readonly>
+										</label>
+									</section>
+									<section class="col col-2">
+										<label class="label" style="margin-bottom: 0px;"><strong>여행기간</strong></label>
+										<label class="input" style="margin-bottom: 0px;">
+											<input type="text" ng-model="tourPlan.period" readonly>
+										</label>
+									</section>
+								</div>
+							</section>
+						</fieldset>
+					</form>
+				</div>
+				
+				<!-- 콘텐츠 탭 -->
+				<div id="contentTab">
+					<div class="tab-v2">
+					
+						<!-- 탭 버튼 -->
+						<ul class="nav nav-tabs">
+							<li class="active" style="width:50%; text-align: center; font-size: 16px;">
+								<a href="#tourPlanTab" data-toggle="tab"><span class="fa fa-map-o"></span> 일정/맵</a>
+							</li>
+							<li style="width:50%; text-align: center; font-size: 16px;">
+								<a href="#tourStoryTab" data-toggle="tab"><span class="fa fa-book"></span> 스토리</a>
+							</li>
+						</ul>
+						
+						<!-- 탭 내용 -->
+						<div class="tab-content">
+						
+							<!-- 일정/맵 -->						
+							<div class="tab-pane fade in active" id="tourPlanTab">
+								
+								<!-- 구글맵 -->
+								<div id="map" style="height: 400px;"></div>
+								
+								<!-- Full Calendar -->
+								<div id="calendar">
+								</div>
+								
+							</div><!-- 일정/맵 끝 -->
+							
+							
+							<!-- 스토리 -->
+							<div class="tab-pane fade in" id="tourStoryTab">
+							
+								<ul class="timeline-v2">
+									
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+										<div class="cbp_tmtime equal-height-column">
+											<span></span>
+											<span></span>
+										</div>
+										<i class="cbp_tmicon rounded-x hidden-xs"></i>
+										<div class="cbp_tmlabel equal-height-column">
+											<h2>{{tourSpotEvent.title}}</h2>
+											<div class="row">
+												<div class="col-md-4">
+													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
+													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
+													<div class="md-margin-bottom-20">
+													</div>
+												</div>
+												<div class="col-md-8">
+													<p>{{}}</p>
+													<p>{{}}</p>
+													<p>{{}}</p>
+												</div>
+											</div>
+										</div>
+									</li>
+									
+								</ul>
+								
+							</div><!-- 스토리 끝 -->
+							
+						</div>
+						
+					</div>
+				</div>
+				
+				<!-- 댓글 -->
+				<div id=tourPlanComment>
+				</div>
+				
+			</div>
 		</div>
 		<!--=== 내용 끝 ===-->
-
-
+		
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
 
@@ -84,6 +269,7 @@
 
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/lib/angular-1.5.8/angular.min.js"></script>
@@ -113,21 +299,29 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
+	<!-- Full Calendar -->
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>
+	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js'></script>
+
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
-
+	
+	<!-- Googla Map API -->
+ 	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4"></script>
+	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
-
+	
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
-
+	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
-	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
+	<script type="text/javascript" src="js/tourPlanServices.js"></script><!-- 앵귤러 사용자정의 서비스 선언 -->
 	<script type="text/javascript" src="js/tourPlanDirectives.js"></script><!-- 앵귤러 사용자정의 지시자 선언 -->
 	<script type="text/javascript" src="detail.js"></script>
-
+	
 </body>
 </html>

@@ -75,9 +75,8 @@ angular.module("TourPlanApp")
 						
 						// 일정표에 이벤트 렌더링
 						calendarObj.fullCalendar("renderEvent", event, true);
-
 					}
-					
+					// 구글맵 이니시
 					initMap();
 					// 지도에 이벤트 렌더링
 					renderingEventToMap();
@@ -110,6 +109,7 @@ angular.module("TourPlanApp")
 		};
 		
 		// TODO 일정 시간 변경시 유효성 체크
+		
 		// 출발시간 변경시 이벤트
 		angular.element("#departureDate").change( function() {
             $scope.$apply(function() {
@@ -224,8 +224,6 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		/** 배경사진 바꾸기 */
 		/** ==================================================== */
-		// TODO 배경사진 바꾸기 버튼 호버 이벤트
-		
 		// 배경 파일 업로드 이미지 미리보기 이벤트
 		$("#BGImageFile").on("change", function(){
 			if(img_validation(this)) {
@@ -324,12 +322,14 @@ angular.module("TourPlanApp")
 		 *  음식점 : 39
 		 *  숙박업소 : 32
 		 */
-		// TODO 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
+		// 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
 		$scope.openDetailTourSpot = function (tourSpot) {
-			// 누를때 http로 디테일 정보 요청(param : contentId)
-			$scope.detailTourSpot = tourSpot;
+			// 주소
+			var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot.contentid + "&contenttypeid=" + tourSpot.contenttypeid;
+			$("#tourSpotDetailIframe").attr("src", src);
 			$("#detailTourSpotModal").modal("show");
 		}
+		
 		
 		// 여행 장소 리스트 불러오기 
 		$scope.getSpotList = function () {
@@ -569,6 +569,8 @@ angular.module("TourPlanApp")
 				// 드래그앤드랍설정
 				editable: true,
 				droppable: true,
+				// 드래그시 투명도
+				dragOpacity: 0.8,
 				// 이벤트 디폴트 시간
 				defaultTimedEventDuration: "02:00:00",
 				// 디폴트 이벤트(백그라운드)
@@ -591,8 +593,7 @@ angular.module("TourPlanApp")
 						color: "#ff9f89"
 					}
 				],
-				
-				// 삭제 버튼 주기
+				// 이벤트 렌더시 삭제 버튼 주기
 				eventRender: function(event, element) { 
 					if (event.id != "currentDate" && event.id != "availableDate") {
 						element.find(".fc-bg").css("pointer-events","none");
@@ -617,10 +618,28 @@ angular.module("TourPlanApp")
 		            });
 		            renderingEventToMap();
 			    },
-			    
+			    // 이벤트 드래그앤 드롭시
+			    eventDrop: function(event) {
+		            $scope.$apply(function() {
+		            	$scope.getAllCalendarEvents();
+		            });
+		            renderingEventToMap();
+			    },
+			    // 이벤트 리사이즈시
+			    eventResize: function(event, delta, revertFunc) {
+		            $scope.$apply(function() {
+		            	$scope.getAllCalendarEvents();
+		            });
+		            renderingEventToMap();
+			    },
 				// 이벤트 클릭
 			    eventClick: function(calEvent, jsEvent, view) {
-			    	$scope.openDetailTourSpot(calEvent);
+			    	var param = {
+			    		contentid: calEvent.contentId,
+			    		contenttypeid: calEvent.contentTypeId
+			    	}
+			    	
+			    	$scope.openDetailTourSpot(param);
 			    },
 			    // 이벤트 마우스 오버
 			    eventMouseover: function( event, jsEvent, view ) {
@@ -631,9 +650,7 @@ angular.module("TourPlanApp")
 			    eventMouseout : function( event, jsEvent, view ) { 
 			    	$(this).css('border-width', '1px');
 			    	$(this).find(".btnDiv").css("display", "none");
-			    },
-			    // 이벤트 변경시
-			    
+			    }
 				
 				
 			});
@@ -809,11 +826,18 @@ angular.module("TourPlanApp")
 			}
 		}
 		
+//		function openDetailTourSpot (contentId) {
+//			// 누를때 http로 디테일 정보 요청(param : contentId)
+//			$scope.detailTourSpot = contentId;
+//			console.log(contentId);
+//			$("#detailTourSpotModal").modal("show");
+//		};
+		
 		// 마커 1초후에 찍어주기
-		function addMarkerWithTimeout(position, timeout) {
+		function addMarkerWithTimeout(event, timeout) {
 			var locationPosition = {
-				lat : Number(position.mapY),
-				lng : Number(position.mapX)
+				lat : Number(event.mapY),
+				lng : Number(event.mapX)
 			}
 			window.setTimeout(function() {
 				// 마커
@@ -822,26 +846,22 @@ angular.module("TourPlanApp")
 					map : map,
 					animation : google.maps.Animation.DROP,
 					label : labels[labelIndex++ % labels.length],
-					title : position.title
+					title : event.title
 				});
 
 				markers.push(marker);
 				
-				// 인포윈도우
-				var content = '<a style="text-decoration: none; font-weight: bold" href="#'
-						+ position.recordNo
-						+ '/'
-						+ position.locationNo
-						+ '">'
-						+ position.title
+				// TODO 인포윈도우 꾸미기
+				var content = '<a style="text-decoration: none; font-weight: bold" href="#1">'
+						+ event.title
 						+ '</a>';
 				infowindow = new google.maps.InfoWindow();
-				marker.addListener('click', function() {
+				marker.addListener('mouseover', function() {
 					infowindow.close();
 					infowindow.setContent(content);
 					infowindow.open(map, marker);
 				})
-				
+				console.log(event)
 			}, timeout);
 		}
 
@@ -862,9 +882,6 @@ angular.module("TourPlanApp")
 			addLocationInfo(currentEventList);
 			drop(currentEventList);
 		}
-		
-		// 지도범위 알맞게 하기 LatLngBounds
-		
 		
 
   })
