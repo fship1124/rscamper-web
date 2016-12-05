@@ -98,8 +98,8 @@
 				<input type="radio" name="trainRadio"value="04" id="a4">누리로 
 				<input type="radio" name="trainRadio" value="09" id="a5">ITX-청춘
 				<input type="radio" name="trainRadio" value="08" id="a6">ITX-새마을 <br> 
-				출발역:<input type="text" id="startInput" name="start"><button class="btn btn-default" id="startButton" onclick="startBtn();">조회</button><br>
-				도착역:<input type="text" id="arriveInput" name="arrive"><button class="btn btn-default" id="arriveButton"onclick="arriveBtn();">조회</button><br> 
+				출발역:<input type="text" class="form-control" id="startInput" name="start" placeholder="출발역선택"><button type="submit" class="btn btn-default" id="startButton" onclick="startBtn();">조회</button><br>
+				도착역:<input type="text" class="form-control" id="arriveInput" name="arrive" placeholder="도착역선택"><button type="submit" class="btn btn-default" id="arriveButton"onclick="arriveBtn();">조회</button><br> 
 				<input type="date" name="calender"> 
 				<input type="hidden" name="numOfRows"> 
 				<input type="hidden" name="pageNo"> 
@@ -121,6 +121,7 @@
 			</thead>
 			<tbody></tbody>
 		</table>
+			<a>※ 본 정보는 한국철도공사의 사정에 따라 변경 될 수 있습니다. 최신정보 확인은 한국철도공사 홈페이지( http://letskorail.com ) 에서 확인하시기 바랍니다.</a>
 
 		<!-- Train Modal(여기모달부분) -->
 
@@ -260,17 +261,37 @@
 		var fail = data.response.body.items;
 		var timeList = $("#timeList");
 		var html = "";
+		
+	//	var depplandtime = depplandtime("yyyy"+년+"MM"+월+"dd"+일+"hh"+시+"mm"+분+"ss"+초);
 		for (var i = 0; i < item.length; i++) {
 			var t = item[i];
+			console.log(t);
+			console.log(t.depplandtime);
+//			2016120119 4 5 0 0
+//			012345678910111213
+			var dyear = t.depplandtime.toString().substring(0,4);
+			var dmonth = t.depplandtime.toString().substring(4,6);
+			var dday = t.depplandtime.toString().substring(6,8);
+			var dhour = t.depplandtime.toString().substring(8,10);
+			var dmin = t.depplandtime.toString().substring(10,12);
+			var dsec = t.depplandtime.toString().substring(12,14);
+			
+			var ayear = t.arrplandtime.toString().substring(0,4);
+			var amonth = t.arrplandtime.toString().substring(4,6);
+			var aday = t.arrplandtime.toString().substring(6,8);
+			var ahour = t.arrplandtime.toString().substring(8,10);
+			var amin = t.arrplandtime.toString().substring(10,12);
+			var asec = t.arrplandtime.toString().substring(12,14);
 			
 			html += "<tr>";
 			html += "	<td>" + t.depplacename + "</td>";
-			html += "	<td>" + t.depplandtime + "</td>";
+			html += "	<td>" + dyear +"년"+dmonth +"월"+dday+"일"+dhour+"시"+dmin+"분"+dsec+"초"+ "</td>";
 			html += "	<td>" + t.arrplacename + "</td>";
-			html += "	<td>" + t.arrplandtime + "</td>";
+			html += "	<td>" + ayear +"년"+amonth +"월"+aday+"일"+ahour+"시"+amin+"분"+asec+"초"+ "</td>";
 			html += "	<td>" + t.traingradename + "</td>";
 			html += "</tr>";
 		}
+		console.log(t.depplandtime);
 		$("tbody").html($("tbody").html() + html);
 		//		timeList.html(html);
 	}
@@ -574,131 +595,13 @@
 		
 		var obj = new Object();
 		obj.data = data;
-//			obj.trainSaemaeul = trainSaemaeul;
-//			obj.trainMugunghwa = trainMugunghwa;
-//			obj.trainTonggeun = trainTonggeun;
-//			obj.trainNuriro = trainNuriro;
-//			obj.trainItxchungchun = trainItxchungchun;
-//			obj.trainItxsaemaeul = trainItxsaemaeul;
+		
 		$.ajax({
 			url : "http://localhost:8081/trainTime/trainSearch",
 			dataType : "json",
 			type : "GET",
 			data : obj,
 			success : function(result) {
-//					console.log(result);
-//					var qwer = $("input[name=trainRadio]:checked").val();
-//					var html = "";
-//					html += "<table>";
-//					console.log(result)
-
-//					var trainVal = "";
-//					switch (qwer) { // 눌럿을때 value값을 넣기
-//					case "01":
-//						trainVal = "trainSaemaeul";
-//						break;
-//					case "02":
-//						trainVal = "trainMugunghwa";
-//						break;
-//					case "03":
-//						trainVal = "trainTonggeun";
-//						break;
-//					case "04":
-//						trainVal = "trainNuriro";
-//						break;
-//					case "09":
-//						trainVal = "trainItxchungchun";
-//						break;
-//					case "08":
-//						trainVal = "trainItxsaemaeul";
-//						break;
-//					}
-				
-//					html = "<div id='sort'>";
-//					html = "<ul style='overflow: hidden; height:25px; padding:8px 0 0 5px; margin-bottom: 20px; border: 1px solid tomato; list-style: none;'>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄱ\")'>가</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄴ\")'>나</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄷ\")'>다</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㄹ\")'>라</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅁ\")'>마</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅂ\")'>바</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅅ\")'>사</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅇ\")'>아</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅈ\")'>자</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅊ\")'>차</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅋ\")'>카</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅌ\")'>타</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅍ\")'>파</div></li>";
-//					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅎ\")'>하</div></li>";
-//					html += "</ul>";
-//					html += "</div>";
-				
-//					for (var j = 0; j < result.length; j++) {
-//						var data = result[j];
-						
-//							if (j % 5 == 0) {
-//								html += "<tr>";
-//							}
-						
-//							switch (trainVal) { // 눌럿을때 value값을 넣기
-//							// 새마을
-//							case "trainSaemaeul":
-//									console.log("case : trainSaemaeul");
-//									html += "<td><a href='#1' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-//								break;
-							
-//							// 무궁화	
-//							case "trainMugunghwa":
-//									console.log("case : trainMugunghwa");
-//									html += "<td><a href='#' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-//								break;
-							
-//							// 통근	
-//							case "trainTonggeun":
-//									console.log("case : trainTonggeun");
-//									html += "<td><a href='#' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-//								break;
-							
-//							// 누리로	
-//							case "trainNuriro":
-//									console.log("case : trainNuriro");
-//									html += "<td><a href='#' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-//								break; 
-							
-//							//	itx청춘
-//							case "trainItxchungchun":
-//									console.log("case : trainItxchungchun");
-//									html += "<td><a href='#' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-							
-//								break;
-							
-//							// itx새마을	
-//							case "trainItxsaemaeul":
-//									console.log("case : trainItxsaemaeul");
-//									html += "<td><a href='#' onClick='stationFn(this)'>"
-//											+ data.stationTitle
-//											+ "</a></td>";
-//								break;
-//							}
-
-//							if (j % 5 == 0) {
-//								html += "</tr>";
-//							}
-//						}
-//					html += "</table>";
-//					$(".modal-footer").html(html);
-
-						
 				var html = "";
 						
 				html = "<div id='sort'>";
@@ -719,125 +622,136 @@
 				html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><div id='sorta' onclick = 'ajaxSort(\"ㅎ\")'>하</div></li>";
 				html += "</ul>";
 				html += "</div>";
-						
-						
-						html += "<table>";
-						console.log(result)
-						var trainSelect = "";
+				
+				var qwer = $("input[name=trainRadio]:checked").val();
+				html += "<table width='90%' border='1' align='center' cellpadding='5' cellspacing='5' style='box-sizing: border-box; border-collapse: collapse; border-spacing: 0px; max-width: 100%; color: rgb(0, 0, 0); font-family: Arial, 돋움, Dotum, AppleGothic, sans-serif; font-size: 16px; line-height: 32px; border: 1px solid grey;'>";
+				console.log("qwer 여기다 :");
+				console.log(qwer);
 
-						for (var j = 0; j < result.length; j++) {
-							var data = result[j];
+				var trainVal = "";
+				switch (qwer) { // 눌럿을때 value값을 넣기
+				case "01":
+					trainVal = "trainSaemaeul";
+					break;
+				case "02":
+					trainVal = "trainMugunghwa";
+					break;
+				case "03":
+					trainVal = "trainTonggeun";
+					break;
+				case "04":
+					trainVal = "trainNuriro";
+					break;
+				case "09":
+					trainVal = "trainItxchungchun";
+					break;
+				case "08":
+					trainVal = "trainItxsaemaeul";
+					break;
+				}
+				
+				for (var j = 0; j < result.length; j++) {
+				var data = result[j];
+					console.log(data);
+					if ((j+1) % 4 == 0) {
+						html += "<tr>";
+					}
+				
+					switch (trainVal) { // 눌럿을때 value값을 넣기
+					// 새마을
+					case "trainSaemaeul":
+						console.log("case : trainSaemaeul");
+						if (data.trainSaemaeul > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a></td>";
+						} else {
+							html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break;
+					// 무궁화	
+					case "trainMugunghwa":
+						console.log("case : trainMugunghwa");
+						if (data.trainMugunghwa > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a></td>";
+						} else {
+							html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break;
+					// 통근	
+					case "trainTonggeun":
+						console.log("case : trainTonggeun");
+						if (data.trainTonggeun > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a align='center'></td>";
+						} else {
+							html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break;
+					// 누리로	
+					case "trainNuriro":
+						console.log("case : trainNuriro");
+						if (data.trainNuriro > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a></td>";
+						} else {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break; 
+					//	itx청춘
+					case "trainItxchungchun":
+						console.log("case : trainItxchungchun");
+						if (data.trainItxchungchun > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a></td>";
+						} else {
+							html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break;
+					// itx새마을	
+					case "trainItxsaemaeul":
+						console.log("case : trainItxsaemaeul");
+						if (data.trainItxsaemaeul > 0) {
+							html += "<td align='center' style='background: #df598e;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</a></td>";
+						} else {
+							html += "<td align='center'><p href='#' onClick='stationFn(this)'>"
+									+ data.stationTitle
+									+ "</p></td>";
+						}
+						break;
+					}
 
-								if (j % 5 == 0) {
-									html += "<tr>";
-								}
-								
-								html += "<td><a href='#1' onclick='stationFn(this)'>"
-										+ data.stationTitle + "</a></td>";
-
-								if (j % 5 == 0) {
-									html += "</tr>";
-								}
-							}
-						
-						html += "</table>";
-						$(".modal-footer").html(html);
-					
+					if ((j+1) % 4 == 0) {
+						html += "</tr>";
+					}
+				}
+			html += "</table>";
+			$(".modal-footer").html(html);
 				
 		},
 		err : function() {
 			alert("오류");
-	}
+		}
 	});
-	}
+}
 
-
-
-	// 역별 조회(예전꺼)	
-//	 	$.ajax({
-//	 				url : "http://localhost:8081/trainTime/trainTimeList",
-//	 				dataType : "json",
-//	 				type : "GET",
-//	 				success : function(result) {
-//	 					var html = "";
-
-//	 					// 주요역
-//	 					html += "<table>";
-//	 					for (var i = 0; i < result.length; i++) {
-//	 						var data = result[i];
-//	 					//	console.log(data.trainSaemaeul);
-
-//	 						if (data.stationVital > 0) {
-//	 							if (i % 5 == 0) {
-//	 								html += "<tr>";
-//	 								//							console.log(data.stationTitle);
-//	 							}
-//	 							if(data.trainSaemaeul > 0){
-
-//	 							html += "<td><a href='#' onClick='stationFn(this)'>"
-//	 									+ data.stationTitle + "</a></td>";
-//	 							} else {
-//	 							html += "<td><p href='#' onClick='stationFn(this)'>"
-//	 									+ data.stationTitle + "</p></td>";
-//	 							}
-
-//	 							//							html += "<td>" + data.stationTitle + "</td>";
-//	 							if (i % 5 == 4) {
-//	 								html += "</tr>";
-//	 							}
-//	 						}
-//	 					}
-//	 					html += "</table>";
-//	 					$(".modal-body").html(html);
-
-//	 					html = "<div id='sort'>";
-//	 					html = "<ul style='overflow: hidden; height:25px; padding:8px 0 0 5px; margin-bottom: 20px; border: 1px solid tomato; list-style: none;'>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>가</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>나</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>다</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>라</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>마</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>바</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>사</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>아</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>자</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>차</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>카</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>타</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>파</a></li>";
-//	 					html += "<li style='margin: 0; padding: 0; border : 0; float: left; width: 7%;'><a href='#'>하</a></li>";
-//	 					html += "</ul>";
-//	 					html += "</div>";
-
-//	 					// 철도역
-//	 					html += "<table>";
-//	 					console.log(result)
-//	 					var trainSelect = "";
-
-//	 					for (var j = 0; j < result.length; j++) {
-//	 						var data = result[j];
-//	 						if (data.stationVital == 0) {
-//	 						//	console.log(data.stationTitle); 들어왓고
-
-//	 							if ((j - 1) % 5 == 0) {
-//	 								html += "<tr>";
-//	 							}
-//	 							
-//	 							html += "<td><a href='#1' class=\"abcde\" data-a=\"1\" data-b=\"2\" onClick='stationFn(this)'>"
-//	 									+ data.stationTitle + "</a></td>";
-
-//	 							if (j % 5 == 0) {
-//	 								html += "</tr>";
-//	 							}
-//	 						}
-//	 					}
-//	 					html += "</table>";
-//	 					$(".modal-footer").html(html);
-//	 				},
-//	 				err : function() {
-//	 					alert("오류");
-//	 				}
-//	 			});
 
 //		   ------ input창에 text넣기 -------
 

@@ -7,7 +7,7 @@
     </style>
   </head>
   <body>
-    <div id="map" style="width: 1000px; height: 800px;"></div>
+    <div id="map_canvas" style="width: 1000px; height: 800px;"></div>
     <script type="text/javascript">
 
 // var map;
@@ -696,47 +696,163 @@
 //   }
 // }
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
-    center: {lat: 36, lng: 128}
-  });
+// function initMap() {
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 10,
+//     center: {lat: 36, lng: 128}
+//   });
 
-  setMarkers(map);
-}
+//   setMarkers(map);
+// }
 
-	var korea = [
-		['용산', 37.52989, 126.9625863, 3],
-		['서울역', 37.52989, 126.9625863, 2],
-		['춘천', 37.88439, 127.7144143, 1 ]
-];
-	function setMarkers(map) {
-		  // Adds markers to the map.
+// 	var korea = [
+// 		['용산', 37.52989, 126.9625863, 3],
+// 		['서울역', 37.52989, 126.9625863, 2],
+// 		['춘천', 37.88439, 127.7144143, 1 ]
+// ];
+// 	function setMarkers(map) {
+// 		  // Adds markers to the map.
 
-		  // Marker sizes are expressed as a Size of X,Y where the origin of the image
-		  // (0,0) is located in the top left of the image.
+// 		  // Marker sizes are expressed as a Size of X,Y where the origin of the image
+// 		  // (0,0) is located in the top left of the image.
 
-		  // Origins, anchor positions and coordinates of the marker increase in the X
-		  // direction to the right and in the Y direction down.
+// 		  // Origins, anchor positions and coordinates of the marker increase in the X
+// 		  // direction to the right and in the Y direction down.
 
-		  // Shapes define the clickable region of the icon. The type defines an HTML
-		  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-		  // The final coordinate closes the poly by connecting to the first coordinate.
-		  var shape = {
-		    coords: [1, 1, 1, 20, 18, 20, 18, 1],
-		    type: 'poly'
-		  };
-		  for (var i = 0; i < korea.length; i++) {
-		    var kor = korea[i];
-		    var marker = new google.maps.Marker({
-		      position: {lat: kor[1], lng: kor[2]},
-		      map: map,
-		      shape: shape,
-		      title: kor[0],
-		      zIndex: kor[3]
-		    });
-		  }
-		}	
+// 		  // Shapes define the clickable region of the icon. The type defines an HTML
+// 		  // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+// 		  // The final coordinate closes the poly by connecting to the first coordinate.
+// 		  var shape = {
+// 		    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+// 		    type: 'poly'
+// 		  };
+// 		  for (var i = 0; i < korea.length; i++) {
+// 		    var kor = korea[i];
+// 		    var marker = new google.maps.Marker({
+// 		      position: {lat: kor[1], lng: kor[2]},
+// 		      map: map,
+// 		      shape: shape,
+// 		      title: kor[0],
+// 		      zIndex: kor[3]
+// 		    });
+// 		  }
+// 		}	
+
+// function initMap() {
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 3,
+//     center: {lat: 0, lng: -180},
+//     mapTypeId: google.maps.MapTypeId.TERRAIN
+//   });
+
+//   var flightPlanCoordinates = [
+//     {lat: 37.772, lng: -122.214},
+//     {lat: 21.291, lng: -157.821},
+//     {lat: -18.142, lng: 178.431},
+//     {lat: -27.467, lng: 153.027}
+//   ];
+//   var flightPath = new google.maps.Polyline({
+//     path: flightPlanCoordinates,
+//     geodesic: true,
+//     strokeColor: '#FF0000',
+//     strokeOpacity: 1.0,
+//     strokeWeight: 2
+//   });
+
+//   flightPath.setMap(map);
+// }
+	// 마크, 동선을 그리고 난 후 해당 위치를 array에 저장합니다.
+
+	
+// var MarkersArray = [];
+// var Coordinates= [];
+// var travelPathArray = [];
+// var map;
+
+// function initialize() {
+//   var myLatlng = new google.maps.LatLng(33.397, 126.65544);
+//   var myOptions = {
+//   zoom: 10,
+//   center: myLatlng,
+//   mapTypeId: google.maps.MapTypeId.ROADMAP
+// }
+// map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+// google.maps.event.addListener(map, 'click', function(event) { 
+//   var marker = new google.maps.Marker({ 
+//   position: event.latLng, 
+//   map: map,
+//   title: '위치마커'
+// });
+// attachMessage(marker, event.latLng); 
+// //선을 그리기 위해 좌표를 넣는다.
+// Coordinates.push( event.latLng ); 
+// //마커 담기
+// MarkersArray.push(marker);
+//         //array에 담은 위도,경도 데이타를 가지고 동선 그리기
+// flightPath();
+// });
+// }
+
+// //해당 위치에 주소를 가져오고, 마크를 클릭시 infowindow에 주소를 표시한다.
+// function attachMessage(marker, latlng) {
+// geocoder = new google.maps.Geocoder();
+//  geocoder.geocode({'latLng': latlng}, function(results, status) {
+//      if (status == google.maps.GeocoderStatus.OK) {
+// if (results[0]) {
+// var address_nm = results[0].formatted_address;
+// var infowindow = new google.maps.InfoWindow(
+//      { content: address_nm,
+// size: new google.maps.Size(50,50)
+//      });
+//  google.maps.event.addListener(marker, 'click', function() {
+//    infowindow.open(map,marker);
+//  });
+// }
+//      } else {
+// alert('주소 가져오기 오류!'); 
+//      }
+// });
+// }
+
+// //동선그리기
+// function flightPath(){
+// for (i in travelPathArray){
+// travelPathArray[i].setMap(null);
+// }
+// var flightPath = new google.maps.Polyline({
+// path: Coordinates,
+// strokeColor: "#FF0000",
+// strokeOpacity: 0.3,
+// strokeWeight: 2
+// });
+// flightPath.setMap(map);
+// travelPathArray.push(flightPath);
+// }
+
+	function initialize() {
+      this.counter = 0;
+      this.map = new GMap2(document.getElementById("map_canvas"));
+      this.map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+      var myEventListener = GEvent.bind(this.map, "click", this, function(overlay, latlng) {
+         if (this.counter == 0) {
+           if (latlng) {
+             this.map.addOverlay(new GMarker(latlng))
+             this.counter++;
+           } else if (overlay instanceof GMarker) {
+             // This code is never executed as the event listener is 
+             // removed the second time this event is triggered
+             this.removeOverlay(marker)
+           }
+         } else {
+           GEvent.removeListener(myEventListener);
+         }
+      }); 
+    }
+
+
+
+
 
     </script>
     <script async defer

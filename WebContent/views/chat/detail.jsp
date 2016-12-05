@@ -214,7 +214,8 @@
 		function socketIo() {
 			console.log("in socketIo");
 			// 소켓서버에 접속
-			var socket = io("http://192.168.0.173:10001");
+// 			var socket = io("http://192.168.0.190:10001");
+			var socket = io(myConfig.nodeServerUrl);
 			
 			 socket.on('connection', function(data) {
 				 // socket 연결 완료
