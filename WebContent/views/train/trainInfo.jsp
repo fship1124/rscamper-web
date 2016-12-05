@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -16,57 +17,105 @@
 <meta name="author" content="rscamper">
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/favicon.ico">
 
 <!-- Web Fonts -->
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+<link rel='stylesheet' type='text/css'
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
 <!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/style.css">
 
 <!-- CSS Header and Footer -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/footers/footer-v3.css">
 
 <!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/animate.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/animate.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/css/style.css">
 
 <!-- CSS Theme -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css" id="style_color">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/theme-colors/default.css"
+	id="style_color">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<style>
-#timeList{
-	border-collapse: separate;
-    border-spacing: 1px;
-    text-align: center;
-    line-height: 1.5;
-    margin: 20px 10px;
+<style type="text/css">
+
+/* 인풋 */
+input[type=radio] {display:none;}
+.radio-label {
+  display:inline-block;
+  width:auto;
+  height:30px;
+  padding:0 20px;
+  border:1px solid rgba(0,0,0,0.08);
+  margin-right:20px;
+  background:#ddd;
+  line-height:30px;
+  cursor:pointer;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
-#timeList tr{
-	width: 155px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #fff;
-    background: #eee;
+.radio-label i {
+  margin-right:10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
-#timeList td{
-	width: 155px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #ce4869;
+.radio:checked + .radio-label {background:rgba(4, 120, 193,0.1);
 }
+.radio:checked + .radio-label i { opacity: 5;}
+.radio + .radio-label span {
+    display:inline-block;
+    font-size:13px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  -webkit-transform:translateX(-13px);
+  -moz-transform:translateX(-13px);
+  -ms-transform:translateX(-13px);
+  -o-transform:translateX(-13px);
+  transform:translateX(-13px);
+}
+.radio:checked + .radio-label span {
+  -webkit-transform:translateX(0);
+  -moz-transform:translateX(0);
+  -ms-transform:translateX(0);
+  -o-transform:translateX(0);
+  transform:translateX(0);
+}
+
 </style>
+
 </head>
 
 <body class="header-fixed header-fixed-space-default">
@@ -80,7 +129,7 @@
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">기차시간표</a></li>
+					<li><a href="javascript:history.back()">기차정보</a></li>
 					<li class="active">New</li>
 				</ul>
 			</div>
@@ -88,16 +137,62 @@
 
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<!--  기차정보 여기부터 -->
-			<div id="selectTrain"
-				style="overflow: hidden; float: left; width: 900px; height: 300px; padding: 17px 20px 0; border: 4px solid #0095cd; background: #ecf1f4">
-				<input type="radio" name="trainRadio" value="01" id="a1">새마을 
-				<input type="radio" name="trainRadio" value="02" id="a2">무궁화
-				<input type="radio" name="trainRadio" value="03" id="a3">통근열차 
-				<input type="radio" name="trainRadio"value="04" id="a4">누리로 
-				<input type="radio" name="trainRadio" value="09" id="a5">ITX-청춘
-				<input type="radio" name="trainRadio" value="08" id="a6">ITX-새마을 <br> 
+	<div class="container content-md">
+		<!-- 노선도 부분 -->
+			<div class="box boxpurple clearfix">
+				<h3>지역별 노선도</h3>
+				<input class="btn-u" type="button" id="mapBtn" value="경부선" data-val="1" onclick="trainLinBtn(this);" data-color="#72c02c"> 
+				<input class="btn-u btn-u-blue" type="button" id="mapBtn" value="경북선" data-val="2" onclick="trainLinBtn(this);" data-color="blue">
+				<input class="btn-u btn-u-red" type="button" id="mapBtn" value="경원선" data-val="3" onclick="trainLinBtn(this);" data-color="red"> 
+				<input class="btn-u btn-u-orange" type="button" id="mapBtn" value="경전선" data-val="4" onclick="trainLinBtn(this);" data-color="orange">
+				<input class="btn-u btn-u-sea" type="button" id="mapBtn" value="경춘선" data-val="5" onclick="trainLinBtn(this);" data-color="#16a085"> 
+				<input class="btn-u btn-u-green" type="button" id="mapBtn" value="광주선" data-val="6" onclick="trainLinBtn(this);" data-color="green">
+				<input class="btn-u btn-u-yellow" type="button" id="mapBtn" value="동해남부선" data-val="7" onclick="trainLinBtn(this);" data-color="yellow"> 
+				<input class="btn-u btn-u-default" type="button" id="mapBtn" value="영동선" data-val="8" onclick="trainLinBtn(this);" data-color="#95a5a6">
+				<input class="btn-u btn-u-dark" type="button" id="mapBtn" value="장항선" data-val="9" onclick="trainLinBtn(this);" data-color="#333"> 
+				<input class="btn-u btn-u-purple" type="button" id="mapBtn" value="전라선" data-val="10" onclick="trainLinBtn(this);" data-color="purple">
+				<input class="btn-u btn-u-aqua" type="button" id="mapBtn" value="중앙선" data-val="11" onclick="trainLinBtn(this);" data-color="#27d7e7"> 
+				<input class="btn-u btn-u-brown" type="button" id="mapBtn" value="충북선" data-val="12" onclick="trainLinBtn(this);" data-color="#9c8061">
+				<input class="btn-u btn-u-dark-blue" type="button" id="mapBtn" value="태백선" data-val="13" onclick="trainLinBtn(this);" data-color="#324c80"> 
+				<input class="btn-u btn-u-light-green" type="button" id="mapBtn" value="호남선" data-val="14" onclick="trainLinBtn(this);" data-color="#59b795">
+
+				<div id="map" style="width: 1028px; height: 700px;"></div>
+			</div>
+			<br>
+		<!-- 시간표 부분 -->
+		<div id="selectTrain">
+			<div class="wrap">
+  				<input name="trainRadio" type="radio" id="radio0" class="radio" value="01">
+  					<label for="radio0" class="radio-label">
+    					<i class="fa fa-check"></i>
+    						<span>새마을</span>
+  					</label>
+  				<input name="trainRadio" type="radio" id="radio1" class="radio" value="02">
+  					<label for="radio1" class="radio-label">
+   						 <i class="fa fa-check"></i>
+    						<span>무궁화</span>
+  					</label>
+  				<input name="trainRadio" type="radio" id="radio2" class="radio" value="03">
+  					<label for="radio2" class="radio-label">
+   						 <i class="fa fa-check"></i>
+    						<span>통근열차</span>
+  					</label>
+  				<input name="trainRadio" type="radio" id="radio3" class="radio" value="04">
+  					<label for="radio3" class="radio-label">
+   						 <i class="fa fa-check"></i>
+    						<span>누리로</span>
+  					</label>
+  				<input name="trainRadio" type="radio" id="radio4" class="radio" value="09">
+  					<label for="radio4" class="radio-label">
+   						 <i class="fa fa-check"></i>
+    						<span>ITX-청춘</span>
+  					</label>
+  				<input name="trainRadio" type="radio" id="radio5" class="radio" value="08">
+  					<label for="radio5" class="radio-label">
+   						 <i class="fa fa-check"></i>
+    						<span>ITX-새마을</span>
+  					</label>
+  					<br>
 				출발역:<input type="text" class="form-control" id="startInput" name="start" placeholder="출발역선택"><button type="submit" class="btn btn-default" id="startButton" onclick="startBtn();">조회</button><br>
 				도착역:<input type="text" class="form-control" id="arriveInput" name="arrive" placeholder="도착역선택"><button type="submit" class="btn btn-default" id="arriveButton"onclick="arriveBtn();">조회</button><br> 
 				<input type="date" name="calender"> 
@@ -105,10 +200,9 @@
 				<input type="hidden" name="pageNo"> 
 				<input type="hidden" name="pageSize">
 				<input type="hidden" name="startPage"> <input type="button" value="조회하기" onclick="joinBtn();" />
-
 			</div>
 		</div>
-
+		
 		<table class="table" id="timeList">
 			<thead>
 				<tr>
@@ -122,9 +216,10 @@
 			<tbody></tbody>
 		</table>
 			<a>※ 본 정보는 한국철도공사의 사정에 따라 변경 될 수 있습니다. 최신정보 확인은 한국철도공사 홈페이지( http://letskorail.com ) 에서 확인하시기 바랍니다.</a>
-
-		<!-- Train Modal(여기모달부분) -->
-
+		
+		
+	<!-- Train Modal(여기모달부분) -->
+		
 		<div class="modal fade" id="trainModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -140,39 +235,52 @@
 					<div class="modal-footer"></div>
 				</div>
 			</div>
-		
 		</div>
-		
-		
+
+	</div>
+
 		<!--=== End Content ===-->
-		
-		
+
+
 		<!-- 푸터 include -->
 		<%@include file="/resources/include/footer.jsp"%>
 
 	</div>
-	
+
 	<!-- 로그인 모달 include -->
 	<%@include file="/resources/include/userModal.jsp"%>
 
 	<!-- JS Global Compulsory -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- JS Implementing Plugins -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/modernizr.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/modernizr.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/smoothScroll.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/modernizr.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/modernizr.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/plugins/login-signup-modal-window/js/main.js"></script>
 
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/app.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/app.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
 
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
@@ -181,22 +289,150 @@
 	<![endif]-->
 
 	<!-- 파이어베이스 -->
-	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
-	
+	<script type="text/javascript"
+		src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
+
 	<!-- 메뉴 -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
-	
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
+
 	<!-- INIT APP -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
-	
-	
-	
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
+
+
+
 	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
-	
+
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript">
+		// TrainMap 부분
+		// 화면에 맵나타나고
+		var map;
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center : {
+					lat : 37.53196, //37.5665350
+					lng : 126.98895   //126.9779690
+				},
+				zoom : 6
+			//mapTypeId: google.maps.MapTypeId.TERRANIN
+			});
+		}
+		var markers = [];
+		var paths = [];
+		// 
+		function trainLinBtn(e) {
+			var trainVal = e.dataset.val;
+			$.ajax({
+				url : "http://localhost:8081/trainMap/trainMapLine",
+				dataType : "json",
+				type : "GET",
+				success : function(result) {
+
+					var latLngArr = [];
+					var count = 0;
+					clearMarkers();
+					clearPaths();
+					for (var i = 0; i < result.length; i++) {
+						var data = result[i];
+						if (data.train_type == trainVal) {
+							var latLng = new google.maps.LatLng(
+									data.mapLatitude, data.mapLongitude);
+							latLngArr[latLngArr.length] = latLng; // latLng 배열에 담기.
+							//		console.log(data.mapLatitude);
+							//		console.log(data.mapLongitude);
+							var contentString = data.mapStationTitle;
+							let infowindow = new google.maps.InfoWindow({
+								content : contentString
+							});
+
+							// 	 function addMarkerWithTimeout(position, timeout){
+							// 	 	window.setTimeout(function() {
+							// 	 		markers.push(marker = new google.mpas.Marker({
+							// 	 			position : {lat: parseFloat(data.mapLatitude), lng: parseFloat(data.mapLongitude)},
+							// 	 			map: map,
+							// 	 			anmation: google.maps.Animation.DROP
+							// 	 		}));
+							//}, timeout);
+						//}
+							var myIcon = new google.maps.MarkerImage(
+									"train3.png", null, null, null,
+									new google.maps.Size(45, 45));
+							
+								
+							let marker = new google.maps.Marker({
+								position : {
+									lat : parseFloat(data.mapLatitude),
+									lng : parseFloat(data.mapLongitude)
+								},
+								draggable : false,
+								icon : myIcon,
+								animation : google.maps.Animation.DROP,
+								//			animation:google.maps.Animation.BOUNCE,
+								map : map,
+								title : data.mapStationTitle
+							});
+						
+							// 	 						marker.setMap(map);
+							markers.push(marker);
+							count++;
+							
+							function drop() {
+								for(var i = 0; i < marker.length; i++) {
+									setTimeout(function() {
+										marker();
+									}, i * 400);
+								}
+							}
+							console.log("www");
+							console.log(drop);
+							
+							marker.addListener('click', function() {
+								infowindow.open(map, marker);
+							});
+
+						}
+						//			console.log(latLngArr.length);
+						console.log(e.dataset.color);
+						var flightPath = new google.maps.Polyline({
+							path : latLngArr,
+							strokeColor : e.dataset.color,
+							strokeOpacity : 1.0,
+							strokeWeight : 6
+						});
+						flightPath.setMap(map);
+						paths.push(flightPath);
+					}
+				},
+				err : function() {
+					alert("에러");
+				}
+			});
+
+		}
+
+		// 마커지우기	
+		function clearMarkers() {
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+			}
+			markers = [];
+		}
+		// 폴리라인지우기
+		function clearPaths() {
+			for (var i = 0; i < paths.length; i++) {
+				paths[i].setMap(null);
+			}
+			paths = [];
+		}
+	
+	// 시간표 부분	
+	
 	function joinBtn() {
 		var trainGradeCode = $("input[name=trainRadio]:checked").val();
 		var depPlaceId = $("input[name=start]").val();
@@ -236,20 +472,6 @@
 				var data = JSON.parse(data);
 				timeList(data);
 
-//	 	function joinBtn() {
-//	 		var trainGradeCodeIsTrue = false;
-//	 		var trainGradeCode = document.getElementsByName('trainRadio');
-//	 		var trainGradeCodeVal = "00";
-//	 		for (var i = 0; i < trainGradeCode.length; i++) {
-//	 			var t = trainGradeCode[i];
-
-//	 			if (t.checked == true) {
-//	 				console.log("ttttt");
-//	 				console.dir(t);
-//	 				trainGradeCodeIsTrue = true;
-//	 				trainGradeCodeVal = t.defaultValue; 
-//	 			}
-//	 		}
 			}
 		});
 	}
@@ -265,10 +487,9 @@
 	//	var depplandtime = depplandtime("yyyy"+년+"MM"+월+"dd"+일+"hh"+시+"mm"+분+"ss"+초);
 		for (var i = 0; i < item.length; i++) {
 			var t = item[i];
-			console.log(t);
-			console.log(t.depplandtime);
-//			2016120119 4 5 0 0
-//			012345678910111213
+//			console.log(t);
+//			console.log(t.depplandtime);
+
 			var dyear = t.depplandtime.toString().substring(0,4);
 			var dmonth = t.depplandtime.toString().substring(4,6);
 			var dday = t.depplandtime.toString().substring(6,8);
@@ -653,7 +874,7 @@
 				for (var j = 0; j < result.length; j++) {
 				var data = result[j];
 					console.log(data);
-					if ((j+1) % 4 == 0) {
+					if (1 % 5 == 0) {
 						html += "<tr>";
 					}
 				
@@ -738,7 +959,7 @@
 						break;
 					}
 
-					if ((j+1) % 4 == 0) {
+					if ((j-1) % 5 == 0) {
 						html += "</tr>";
 					}
 				}
@@ -777,18 +998,14 @@
 
 	}
 
-	
+		
 	</script>
-	<!-- 필요한 js파일 -->
-<!-- 	<script type="text/javascript" -->
-<!-- 		src="../../assets/js/jquery.xdomainajax.js"></script> -->
-<!-- 	<script type="text/javascript" -->
-<!-- 		src="../../assets/js/sendRequest-ajax.js"></script> -->
-<!-- 	<script type="text/javascript" src="../../assets/js/xml2json.js"></script> -->
-<!-- 	<script type="text/javascript" -->
-<!-- 		src="../../assets/js/jquery-3.1.1.min.js"></script> -->
-<!-- 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
-<!-- 	<script -->
-<!-- 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+	<!-- 구글맵KEY -->
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP280f_8sA7GmSMVAXTl9DdUsDGRXTUgM&callback=initMap">
+		
+	</script>
+	<!-- 구글맵지오코딩KEY -->
+
 </body>
 </html>
