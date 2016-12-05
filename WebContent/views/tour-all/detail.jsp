@@ -252,7 +252,7 @@
 						
 						<textarea class="form-control new-comment-textarea"	placeholder="댓글을 남겨주세요." style="width: 91%; height: 40px; float: left;"></textarea>
 						<div class="comment-edit-btns" style="right: 0;">
-							<button class="btn btn-primary save-new-comment" style="height: 40px;" >저장</button>
+							<button class="btn btn-primary save-new-comment" style="height: 40px; color: #ff8000; border: 1px solid #ff8000; background: #fff!important;">저장</button>
 						</div>
 					</div>
 				</div>

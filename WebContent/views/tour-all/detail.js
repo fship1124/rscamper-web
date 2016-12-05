@@ -1,6 +1,7 @@
 console.log(myConfig.imsiServerUrl);
 var user = sessionStorageService.getObject("user");	
 
+console.dir(user);
 
 function apiAjax(obj) {
 	$.ajax({
@@ -216,7 +217,6 @@ function apiAjax(obj) {
 		
 	
 	function commentListSelect() {
-		alert("commentListSelect");
 		var obj = new Object();
 		obj.contentid = $("#contentid").val();
 		obj.userUid = user.userUid;
@@ -232,13 +232,13 @@ function apiAjax(obj) {
 			success : function(result) {
 				console.log("list success");
 				console.dir(result);
-				
 				commentCreate(result);
 			}
 		});
 	}
 	
 	
+	// 댓글 리스트 
 	function commentCreate(result) {
 		$("#like-count").html(result.likeCnt);
 		$("#bookmark-count").html(result.bookmarkCnt);
@@ -249,12 +249,10 @@ function apiAjax(obj) {
 		console.log("bookmarkStatus : " + result.bookmarkStatus);
 		
 		if (result.likeStatus == "on") {
-			alert("on");
 			$("#icon-plan-like").attr('class', 'on');
 			$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
 		}
 		if (result.bookmarkStatus == "on") {
-			alert("on");
 			$("#icon-plan-bookmark").attr('class', 'on');
 			$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-on.png'>";
 		}
@@ -262,29 +260,87 @@ function apiAjax(obj) {
 		var html = "";
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
-			
 			console.dir(item);
+			console.log(item.userUid);
 			
-			html += "<li class='commentRoot'>";
+			var flag = "N";
+			if (user.userUid == item.userUid) {
+				console.log("UID 동일");
+				flag = "Y";
+			}
+			
+			html += "<li class='commentRoot' id=comment-" + item.tourCommentNo + " style='height: 70px;'>";
 			html += "<div><div class='profile-img'>";
 			html += "<a target='_blank' href='/myPage/user/d31f77479e2b4889?active=myPlan' class='user'>";
 			html += "<img src=" + item.photoUrl + " style='width: 40px; height: 40px;'></a></div>";
-			html += "<div class='comment-contents'>";
+			html += "<div class='comment-contents' >";
 			html += "<div class='comment-info'>";
-			html += "<div class='name-date'>";
+			html += "<div class='name-date' style='float: left'>";
 			html += "<a target='_blank' href='/myPage/user/d31f77479e2b4889?active=myPlan' class='user'>";
 			html += "<span class='username'>" + item.displayName + "</span></a>";
-			html += "<span class='update-date'>" + item.regDate + "</span></div></div>";
+			html += "<span class='update-date'>" + item.regDate + "</span></div>";
+			html += "<div class='btn-box' style='float: left';>";
+			html += "<a class='btn-reply' style='margin-left: 800px;'>";
+			if (flag == 'Y') {
+				html += "<a class='btn-edit'><img src='https://www.wishbeen.co.kr/images/btn-note-edit.png' alt=''></a>";
+				html += "<a class='btn-del'><img src='https://www.wishbeen.co.kr/images/btn-note-cncl.png' alt=''></a>";
+			} else {
+				html += "<img src='https://www.wishbeen.co.kr/images/btn-note-reply.png' alt='' onclick='modfyComment(this)' data-no=" + item.tourCommentNo + " data-flag=" + flag + "></a>";
+			}
+			
+			html += "</div>";
+			html += "</div>";
 			html += "<div class='comment-txt'>";
 			html += "<p class='comment-content-for-find'>" + item.content + "</p>";
-			html += "</div></div></div></li>";
+			html += "</div>";
+			html += "</div>";
+			html += "</div></li>";
 			
+		
 		}
 		
 		$(".comment-list").html(html);
-		
 	}
 	
+	
+	
+	function modfyComment(e) {
+		alert("m");
+		console.dir(e);
+		console.log(e.dataset.no);
+		console.log(e.dataset.flag);
+		
+		html = "";
+		html += "<li class='comment-edit comment-reply' id=reply-" + e.dataset.no + " style='height: 80px;'>";
+		html += "<div>";
+		html += "<div class='reply-image'>";
+		html += "<img src='https://www.wishbeen.co.kr/images/icon-reply.png'>";
+		html += "</div>";
+		html += "<div class='profile-img'>";
+		html += "<a class='user'>";
+		html += "<img src=" + user.photoUrl + " alt='userid'></a>";
+		html += "</div>";
+		html += "<div class='comment-edit-mode'>";
+		html += "<textarea class='form-control commentModifyText reply-text' type='text' style='float: left;'></textarea>";
+		html += "<div class='comment-edit-btns'>";
+		html += "<button class='btn btn-primary reply-save' >저장</button>";
+		html += "<a class='btn btn-default reply-cancel' data-id=#reply-" + e.dataset.no + " onclick='reply_cancel(this)'>취소</a>";
+		html += "</div></div></div></li>";
+		
+		var id = "#comment-" + e.dataset.no;;
+		console.log(id);
+				
+		
+		$("#comment-" + e.dataset.no).after(html);
+	}
+	
+	
+	function reply_cancel(e) {
+		alert("aa");
+		console.log(e.dataset.id);
+		
+		$(e.dataset.id).remove();
+	}
 	
 	
 	
@@ -301,7 +357,6 @@ function apiAjax(obj) {
 		for (var i = 0; i < item.length; i++) {
 			var m = item[i];
 			if (i == 0) { mainImg.attr("src", m.originimgurl); }
-			
 			html += "<img src='" + m.originimgurl + "' class='bottom_slider_image' onclick='imageFnc(this)' style='width: 100px; height: 75px; float: left; margin: 5px 5px'>";
 		}
 		
@@ -344,6 +399,7 @@ function apiAjax(obj) {
 	}
 	
 	
+// 댓글 저장	
 $(".save-new-comment").on('click', function() {
 	console.log("btn click");
 	console.log($("#contentid").val());
@@ -385,7 +441,6 @@ $(".save-new-comment").on('click', function() {
 			});
 		}
 	});
-	
 });
 	
 
@@ -429,8 +484,6 @@ $("#icon-plan-like").on("click", function() {
 		success : function(result) {
 			console.log("list success");
 			console.dir(result);
-			
-			
 		}
 	});
 });
@@ -442,8 +495,7 @@ $("#icon-plan-bookmark").on("click", function() {
 	console.log("in icon-plan-bookmark");
 	console.dir($("#icon-plan-bookmark"));
 	console.dir($("#icon-plan-bookmark")[0]);
-	
-	alert($("#bookmark-count").html());
+//	alert($("#bookmark-count").html());
 	var className = "";
 	
 	if ($("#icon-plan-bookmark")[0].className == "off") {
@@ -453,13 +505,12 @@ $("#icon-plan-bookmark").on("click", function() {
 		$("#icon-plan-bookmark").attr('class', 'on');
 		console.log($("#icon-plan-bookmark")[0].className);
 	} else {
-		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-off.png'>";
+		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark.png'>";
 		$("#bookmark-count").html(Number($("#bookmark-count").html()) - 1);
 		className = "off";
 		$("#icon-plan-bookmark").attr('class', 'off');
 		console.log($("#icon-plan-bookmark")[0].className);
 	}
-	
 	
 	var obj = new Object();
 	obj.bookmarkStatus = className;
@@ -487,14 +538,4 @@ $("#icon-plan-bookmark").on("click", function() {
 
 
 
-
-
-
-
-
-
-
-
-
-	
 	
