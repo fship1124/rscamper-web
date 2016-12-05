@@ -8,9 +8,14 @@
 	background: rgba(0, 0, 0, 0.3);
 }
 
+.parallax-quote {
+	background-size: 100% 50%;
+}
+
 #profile_image {
 	width: 100px;
 	height: 100px;
+	color: #3b3b3b;
 /* 	padding: 3px; */
 /* 	border: solid 1px #ccc; */
 }

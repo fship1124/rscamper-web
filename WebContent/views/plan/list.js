@@ -31,10 +31,10 @@ angular.module("TourPlanApp")
 		// 검색 옵션 데이터
 		$scope.optionDatas = {
 			standardList: [
-				{standardValue: "REG_DATE", standardName: "등록날짜"},
-				{standardValue: "LIKE_CNT", standardName: "좋아요수"},
-				{standardValue: "COMMENT_CNT", standardName: "댓글수"},
-				{standardValue: "LOCATION_CNT", standardName: "여행지수"}
+				{standardValue: "REG_DATE", standardName: "등록일"},
+				{standardValue: "LIKE_CNT", standardName: "좋아요 개수"},
+				{standardValue: "COMMENT_CNT", standardName: "댓글 개수"},
+				{standardValue: "LOCATION_CNT", standardName: "여행지 개수"}
 			],
 			orderList: [
 				{orderValue: "DESC", orderName: "내림차순"},
@@ -65,7 +65,6 @@ angular.module("TourPlanApp")
 				data: $.param($scope.searchParams),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 			}).success(function (result) {
-				console.log(result)
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
@@ -77,8 +76,9 @@ angular.module("TourPlanApp")
 		// 페이지 번호 배열 생성 메소드
 		$scope.pageList = function () {
 			var pagerAmount = 10;
+			var pagerStart =  Math.floor(($scope.searchParams.pageNo - 1)/10) * 10 + 1
 			$scope.pageArr = [];
-			for (var i = 1; i <= pagerAmount; i++) {
+			for (var i = pagerStart; i < pagerAmount + pagerStart; i++) {
 				if (i > $scope.totalPages) {
 					break;
 				}
@@ -128,6 +128,12 @@ angular.module("TourPlanApp")
 
 		// 처음에 리스트 가져오기
 		$scope.getPlanList();
+		
+		// TODO 여행일정 삭제하기
+		// 리스트에 버튼달기(자기글만 버튼 보이기)
+		$scope.removeTourPlan = function () {
+			
+		};
 
 		// 여행일정 만들기 폼 열기
 		$scope.createTourPlan = function () {
@@ -138,14 +144,17 @@ angular.module("TourPlanApp")
 				$("#createTourPlanFormModal").modal("show");
 			} else {
 				if ($rootScope.user == null) {
-					var $form_modal = $('.cd-user-modal'), $form_login = $form_modal
-							.find('#cd-login'), $form_signup = $form_modal.find('#cd-signup'), $form_forgot_password = $form_modal
-							.find('#cd-reset-password'), $form_modal_tab = $('.cd-switcher'), $tab_login = $form_modal_tab
-							.children('li').eq(0).children('a'), $tab_signup = $form_modal_tab
-							.children('li').eq(1).children('a'), $forgot_password_link = $form_login
-							.find('.cd-form-bottom-message a'), $back_to_login_link = $form_forgot_password
-							.find('.cd-form-bottom-message a');
+					var $form_modal = $('.cd-user-modal'), 
+					$form_login = $form_modal.find('#cd-login'), 
+					$form_signup = $form_modal.find('#cd-signup'), 
+					$form_forgot_password = $form_modal.find('#cd-reset-password'), 
+					$form_modal_tab = $('.cd-switcher'), 
+					$tab_login = $form_modal_tab.children('li').eq(0).children('a'), 
+					$tab_signup = $form_modal_tab.children('li').eq(1).children('a'), 
+					$forgot_password_link = $form_login.find('.cd-form-bottom-message a'), 
+					$back_to_login_link = $form_forgot_password.find('.cd-form-bottom-message a');
 
+					
 					$form_modal.addClass("is-visible");
 
 					$form_login.removeClass('is-selected');
@@ -167,7 +176,7 @@ angular.module("TourPlanApp")
 			
 			// 사용자 UID 입력
 			$scope.writeTourPlan.userUid = $rootScope.user.userUid; 
-			
+			console.log($scope.writeTourPlan);
 			$http({
 				url: MyConfig.backEndURL + "/tourPlan/insert/tourPlan",
 				method: "POST",

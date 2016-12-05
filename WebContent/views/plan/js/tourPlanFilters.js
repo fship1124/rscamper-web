@@ -1,7 +1,6 @@
 // 필터
 angular.module("TourPlanApp")
 
-
 	// 일정표 필터
 	.filter("convertDate", function() {
 		return convertDate
@@ -9,6 +8,32 @@ angular.module("TourPlanApp")
 			var resultDate = scheduleDate.value.split("T");
 			return resultDate[0];
 		}
+	})
+	
+	// 일정표 이벤트 색상 필터
+	.filter("tourSpotColor", function() {
+		return tourSpotColor
+    	// contenttypeid에 따라 배경색 다르게
+    	function tourSpotColor (contentTypeId) {
+			switch (contentTypeId) {
+			case "12":
+				return "#f29e37"
+			case "14":
+				return "#f29e37"
+			case "15":
+				return "#f29e37"
+			case "25":
+				return "#f29e37"
+			case "28":
+				return "#f29e37"
+			case "38":
+				return "#f29e37"
+			case "39" :
+				return "#46c0fb"
+			case "32" :
+				return "#6bb130"
+			}
+    	}
 	})
 
 	// 여행지정보 카테고리 필터
