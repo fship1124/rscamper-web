@@ -106,7 +106,7 @@
 					<ul class="list-group sidebar-nav-v1" >
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">곳</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length + 1"></span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="allTourSpotEvent.length"></span>
 							<a href="javascript:void(0);"><i class="fa fa-map-marker"></i> 관광지</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -188,6 +188,8 @@
 											<b ng-bind="tourSpot.mapy"></b>
 											<b ng-bind="tourSpot.firstimage"></b>
 											<b ng-bind="tourSpot.contenttypeid | tourSpotColor"></b>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory"></b>
+											<b ng-bind="tourSpot.overview"></b>
 										</div>
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
@@ -302,12 +304,11 @@
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
 										<div class="cbp_tmtime equal-height-column">
-											<span></span>
-											<span></span>
+										<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>{{tourSpotEvent.title}}</h2>
+											<h2 ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</h2>
 											<div class="row">
 												<div class="col-md-4">
 													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
@@ -316,9 +317,11 @@
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>{{}}</p>
-													<p>{{}}</p>
-													<p>{{}}</p>
+													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p>
+													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
+													<p>전화번호 : {{tourSpotEvent.tel}}</p>
+													<p>주소 : {{tourSpotEvent.addr1}}</p>
+													<p>설명 : {{tourSpotEvent.overview}}</p>
 												</div>
 											</div>
 										</div>

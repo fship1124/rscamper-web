@@ -9,10 +9,11 @@ angular.module("TourPlanApp")
 				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
 			}).success(function (response) {
-//				console.log(response);
+				console.log(response);
 				
 				// TODO 공개비공개 확인
 				
+				// 유저 확인
 				if (response.userUid == $rootScope.user.userUid) {
 					$scope.isWriter = true; 
 				}
@@ -22,6 +23,23 @@ angular.module("TourPlanApp")
 				$scope.tourPlan.arriveDate = new Date(response.arriveDate);
 				$scope.tourPlan.period = $scope.convertDate($scope.tourPlan.departureDate, $scope.tourPlan.arriveDate);
 				$scope.tourPlan.regDate = new Date(response.regDate);
+				/** ==================================================== */
+				/** 여행일정 작성자 데이터 불러오기 */
+				/** ==================================================== */
+				$http({
+					url: MyConfig.backEndURL + "/user/select/oneUser?userUid=" + response.userUid,
+					method: "GET"
+				}).success(function (response) {
+					console.log(response);
+					$scope.writer = response;
+				}).error(function (error) {
+					
+				})
+				
+				/** ==================================================== */
+				/** 여행일정 좋아요 북마크 커스터마이징 데이터 불러오기 */
+				/** ==================================================== */
+				$scope.checkTourPlanSet();
 				
 				/** ==================================================== */
 				/** 여행일정 스케쥴 데이터 불러오기 */
@@ -66,18 +84,21 @@ angular.module("TourPlanApp")
 				    		mapX: response[i].mapX,
 				    		mapY: response[i].mapY,
 				    		imageUrl: response[i].imageUrl,
-				    		start: moment(response[i].detailDepartureDate)
+				    		start: moment(response[i].detailDepartureDate),
+				    		overview: response[i].overview,
+				    		homepage: response[i].homepage,
+				    		addr1: response[i].addr1,
+				    		tel: response[i].tel,
 						}
 						if (response[i].detailArriveDate) {
 							event.end = moment(response[i].detailArriveDate);
 						}
-
-						// 일정표 바인딩
-						$scope.getAllCalendarEvents();
-						
 						// 일정표에 이벤트 렌더링
 						calendarObj.fullCalendar("renderEvent", event, true);
 					}
+					
+					// 일정표 바인딩
+					$scope.getAllCalendarEvents();
 					// 구글맵 이니시
 					initMap();
 					// 지도에 이벤트 렌더링
@@ -91,6 +112,165 @@ angular.module("TourPlanApp")
 				// 일정리스트 페이지로 리다이렉트
 				$window.location.href = "list.jsp";
 			});
+		};
+		
+		// 수정하기
+		$scope.modTourPlan = function () {
+			// 일정을 수정하시겠습니까?
+			swal({
+				  title: "일정을 수정하시겠습니까?",
+				  text: "일정수정",
+				  type: "warning",
+				  showCancelButton: true,
+				  closeOnConfirm: false,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+					$window.location.href = "makeplan.jsp?recordNo=" + RequestService.getParameter("recordNo");
+				});
+		};
+		
+		// 일정 공개 비공개
+		$scope.togglePrivateTourPlan = function () {
+			if ($scope.tourPlan.isOpen == 2) {
+				swal({
+					  title: "일정공개",
+					  text: "일정을 공개하시겠습니까",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "네",
+					  cancelButtonText: "아니오",
+					  closeOnConfirm: false,
+					  closeOnCancel: false
+					},
+					function(isConfirm){
+						if (isConfirm) {
+							$http({
+								url: MyConfig.backEndURL + "/tourPlan//update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=1",
+								method: "GET"
+							}).success(function (response) {
+								$scope.tourPlan.isOpen = 1;
+								swal("공개됨!", "당신의 일정에 공개처리 되었습니다.", "success");
+							})
+						} else {
+							swal("취소", "취소되었습니다.", "error");
+						}
+					});
+			} else {
+				swal({
+					  title: "일정비공개",
+					  text: "일정을 비공개하시겠습니까",
+					  type: "warning",
+					  showCancelButton: true,
+					  confirmButtonColor: "#DD6B55",
+					  confirmButtonText: "네",
+					  cancelButtonText: "아니오",
+					  closeOnConfirm: false,
+					  closeOnCancel: false
+					},
+					function(isConfirm){
+						if (isConfirm) {
+							$http({
+								url: MyConfig.backEndURL + "/tourPlan/update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=2",
+								method: "GET"
+							}).success(function (response) {
+								$scope.tourPlan.isOpen = 2;
+								swal("비공개됨!", "당신의 일정에 비공개처리 되었습니다.", "success");
+							})
+						} else {
+							swal("취소", "취소되었습니다.", "error");
+						}
+					});
+			}
+		};
+		
+		// 체크 좋아요 북마크 커스텀
+		$scope.checkTourPlanSet = function () {
+			$http({
+				url: MyConfig.backEndURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+				method: "GET"
+			}).success(function (response) {
+				console.log(response);
+				$scope.tourPlanCheckSet = response;
+			})
+		};
+		
+		// 좋아요
+		$scope.likeTourPlan = function () {
+				if($scope.tourPlanCheckSet.scheduleLike) {
+					$http({
+						url: MyConfig.backEndURL + "/tourPlan/addScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						method: "GET"
+					}).success(function (response) {
+						$scope.tourPlan.likeCnt = response;
+						$scope.checkTourPlanSet();
+					})
+				} else {
+					$http({
+						url: MyConfig.backEndURL + "/tourPlan/cancelScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						method: "GET"
+					}).success(function (response) {
+						$scope.tourPlan.likeCnt = response;
+						$scope.checkTourPlanSet();
+					})
+				}
+		};
+		
+		// 북마크
+		$scope.bookmarkTourPlan = function () {
+			if($scope.tourPlanCheckSet.bookMark) {
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/addScheduleBookmark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					method: "GET"
+				}).success(function (response) {
+					$scope.tourPlan.bookmarkCnt = response;
+					$scope.checkTourPlanSet();
+				})
+			} else {
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/cancelScheduleBookMark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					method: "GET"
+				}).success(function (response) {
+					$scope.tourPlan.bookmarkCnt = response;
+					$scope.checkTourPlanSet();
+				})
+			}
+		};
+		
+		// 일정복사
+		$scope.customizingTourPlan = function () {
+			console.log($scope.tourPlanCheckSet.customizing);
+			if($scope.tourPlanCheckSet.customizing) {
+				// 로딩버튼 달기
+				$http({
+					url: MyConfig.backEndURL + '/tourPlan/addCustomizing',
+					method: 'POST',
+					data: $.param({
+						recordNo : $scope.tourPlan.recordNo,
+						budGet : $scope.tourPlan.budGet,
+						period : $scope.tourPlan.period,
+						strapline : $scope.tourPlan.strapline,
+						title : $scope.tourPlan.title,
+						departureDate : $scope.tourPlan.departureDate,
+						arriveDate : $scope.tourPlan.arriveDate,
+						isOpen : 2,
+						userUid : $rootScope.user.userUid
+					}),
+					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+				}).success(function (response) {
+					$scope.tourPlan.customCnt = response;
+					$scope.checkTourPlanSet();
+				})
+			} else {
+				$http({
+					url: MyConfig.backEndURL + "/tourPlan/cancelCustomizing?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+					method: "GET"
+				}).success(function (response) {
+					$scope.tourPlan.customCnt = response;
+					$scope.checkTourPlanSet();
+				})
+			}
 		};
 		
 		// 기간 표시 메소드
@@ -108,18 +288,6 @@ angular.module("TourPlanApp")
 				response = "시간여행";
 			}
 			return response;
-		};
-		
-		// 수정하기
-		$scope.modTourPlan = function () {
-			// 일정을 수정하시겠습니까?
-			$window.location.href = "makeplan.jsp?recordNo=" + RequestService.getParameter("recordNo");
-		};
-		
-		// 일정 공개 비공개
-		$scope.togglePrivateTourPlan = function () {
-			// 공개여부확인
-			// 공개 비공개 설정을 바꾸시겠습니까?
 		};
 		
 		// TODO 일정 시간 변경시 유효성 체크
@@ -144,11 +312,17 @@ angular.module("TourPlanApp")
 		$scope.getTourPlan();
 		
 		// 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
-		$scope.openDetailTourSpot = function (tourSpot) {
-			// 주소
-			var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot.contentid + "&contenttypeid=" + tourSpot.contenttypeid;
-			$("#tourSpotDetailIframe").attr("src", src);
-			$("#detailTourSpotModal").modal("show");
+		$scope.openDetailTourSpot = function (tourSpot, contenttypeid) {
+			if (contenttypeid) {
+				var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot + "&contenttypeid=" + contenttypeid;
+				$("#tourSpotDetailIframe").attr("src", src);
+				$("#detailTourSpotModal").modal("show");
+			} else {
+				// 주소
+				var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot.contentid + "&contenttypeid=" + tourSpot.contenttypeid;
+				$("#tourSpotDetailIframe").attr("src", src);
+				$("#detailTourSpotModal").modal("show");
+			}
 		}
 
 
@@ -184,22 +358,19 @@ angular.module("TourPlanApp")
 			// 모든 이벤트중 tourSpot만 필터링해서 집어넣기
 			for (var i = 0; i < $scope.allEvents.length; i++) {
 				if ($scope.allEvents[i].category == "tourSpot") {
+					$scope.allEvents[i].tourDate = $scope.allEvents[i].start.diff(moment($scope.tourPlan.departureDate), "days") + 1
 					$scope.allTourSpotEvent.push($scope.allEvents[i]);
 				};
 			}
-			
-			console.log("모든" + $scope.allEvents.length);
-			console.log("이벤트 개수" + $scope.allTourSpotEvent.length);
-			console.log($scope.allTourSpotEvent);
 			
 			// 이벤트 배열 정렬(시간순으로)
 			$scope.allTourSpotEvent.sort(function (a, b) {
 				return a.start.isBefore(b.start) ? -1 : a.start.isAfter(b.start) ? 1 : 0;
 			});
-
 			
 			return $scope.allTourSpotEvent;
 		};
+		
 		
 		// 일정표 이벤트 객체 확인 (선택날짜)
 		$scope.getCurrentDateCalendarEvents = function () {
@@ -210,9 +381,11 @@ angular.module("TourPlanApp")
 					return event;
 				}
 			});
+			
 			// 이벤트중 tourSpot만 필터링해서 집어넣기
 			for (var i = 0; i < $scope.currentDateEvents.length; i++) {
 				if ($scope.currentDateEvents[i].category == "tourSpot") {
+					$scope.currentDateEvents[i].tourDate = $scope.currentDateEvents[i].start.diff(moment($scope.tourPlan.departureDate), "days") + 1
 					$scope.currentDateTourSpotEvents.push($scope.currentDateEvents[i]);
 				};
 			}
@@ -357,6 +530,18 @@ angular.module("TourPlanApp")
 						color: "#ff9f89"
 					}
 				],
+				// 이벤트 렌더시 삭제 버튼 주기
+				eventRender: function(event, element) { 
+					if (event.id != "currentDate" && event.id != "availableDate") {
+						element.find(".fc-bg").css("pointer-events","none");
+					    element.append(
+					    		"<div><img src='"+ event.imageUrl +"' style='margin-left:3px; width:70px; height:50px; float:left;'></div>" +
+					    		"<div style='width: 170px; height: 55px; float:left; margin-left: 5px;'>" +
+					    		"<p style='color:white;'>"+ event.overview +"</p>" +
+					    		"</div>"
+					    );
+					}
+				},
 				// 이벤트 클릭
 			    eventClick: function(calEvent, jsEvent, view) {
 			    	var param = {
@@ -574,7 +759,7 @@ angular.module("TourPlanApp")
 					infowindow.setContent(content);
 					infowindow.open(map, marker);
 				})
-				console.log(event)
+//				console.log(event)
 			}, timeout);
 		}
 

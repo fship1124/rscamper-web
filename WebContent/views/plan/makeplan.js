@@ -34,6 +34,7 @@ angular.module("TourPlanApp")
 					method: "GET"
 				}).success(function (response) {
 //					console.log(response);
+					
 					// 일정표에 불러온 이벤트 추가
 					for (var i = 0; i < response.length ; i++) {
 						switch (response[i].contentTypeId) {
@@ -64,18 +65,21 @@ angular.module("TourPlanApp")
 				    		mapX: response[i].mapX,
 				    		mapY: response[i].mapY,
 				    		imageUrl: response[i].imageUrl,
-				    		start: moment(response[i].detailDepartureDate)
+				    		start: moment(response[i].detailDepartureDate),
+				    		overview: response[i].overview,
+				    		homepage: response[i].homepage,
+				    		addr1: response[i].addr1,
+				    		tel: response[i].tel,
+				    		
 						}
 						if (response[i].detailArriveDate) {
 							event.end = moment(response[i].detailArriveDate);
 						}
-
-						// 일정표 바인딩
-						$scope.getAllCalendarEvents();
-						
-						// 일정표에 이벤트 렌더링
 						calendarObj.fullCalendar("renderEvent", event, true);
 					}
+					
+					// 일정표 바인딩
+					$scope.getAllCalendarEvents();
 					// 구글맵 이니시
 					initMap();
 					// 지도에 이벤트 렌더링
@@ -128,7 +132,6 @@ angular.module("TourPlanApp")
 		
 		// 여행일정 가져오기
 		$scope.getTourPlan();
-
 
 		/** ==================================================== */
 		/** TODO 여행일정 저장/취소  								 */
@@ -303,8 +306,6 @@ angular.module("TourPlanApp")
 	        });
 	    };
 		
-		
-		
 		/** ==================================================== */
 		/** TODO 예산 */
 		/** ==================================================== */
@@ -312,7 +313,6 @@ angular.module("TourPlanApp")
 	    $scope.tourPlanBudget = function () {
 	    	swal("여행예산");
 	    }
-
 		
 		/** ==================================================== */
 		/** 관광지정보 리스트 */
@@ -323,13 +323,18 @@ angular.module("TourPlanApp")
 		 *  숙박업소 : 32
 		 */
 		// 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
-		$scope.openDetailTourSpot = function (tourSpot) {
-			// 주소
-			var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot.contentid + "&contenttypeid=" + tourSpot.contenttypeid;
-			$("#tourSpotDetailIframe").attr("src", src);
-			$("#detailTourSpotModal").modal("show");
+		$scope.openDetailTourSpot = function (tourSpot, contenttypeid) {
+			if (contenttypeid) {
+				var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot + "&contenttypeid=" + contenttypeid;
+				$("#tourSpotDetailIframe").attr("src", src);
+				$("#detailTourSpotModal").modal("show");
+			} else {
+				// 주소
+				var src = "include/tourSpotDetail.jsp?contentid=" + tourSpot.contentid + "&contenttypeid=" + tourSpot.contenttypeid;
+				$("#tourSpotDetailIframe").attr("src", src);
+				$("#detailTourSpotModal").modal("show");
+			}
 		}
-		
 		
 		// 여행 장소 리스트 불러오기 
 		$scope.getSpotList = function () {
@@ -405,6 +410,29 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		/** TODO 북마크 */
 		/** ==================================================== */
+		// 여행 장소 리스트 불러오기 
+		$scope.getBookmarkSpotList = function () {
+			// 무한로딩 방지
+			if ($scope.spotParams.pageNo >= $scope.totalPages) {
+				console.log("리스트 끝");
+				return;
+			}
+			$scope.spotParams.pageNo++;
+			$http({
+				url: MyConfig.backEndURL + "/tourPlan/select/bookmarkSpotList",
+				method: "GET",
+				params: $scope.spotParams
+			}).success(function (response) {
+//				console.log(response);
+				angular.forEach(response.tourSpotList, function (spot) {
+					$scope.tourSpotList.push(spot);
+				})					
+				$scope.totalPages = response.totalPages;
+			}).error(function (error) {
+				console.log(error);
+			});
+		};
+		
 		
 		/** ==================================================== */
 		/** TODO 스토리 */
@@ -413,8 +441,6 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		/** 일정표												 */
 		/** ==================================================== */
-		// TODO 일정표 클릭 이벤트
-		
 		// 일정표 객체 선언
 		var calendarObj = $("#calendar");
 		
@@ -426,9 +452,11 @@ angular.module("TourPlanApp")
 			// 모든 이벤트중 tourSpot만 필터링해서 집어넣기
 			for (var i = 0; i < $scope.allEvents.length; i++) {
 				if ($scope.allEvents[i].category == "tourSpot") {
+					$scope.allEvents[i].tourDate = $scope.allEvents[i].start.diff(moment($scope.tourPlan.departureDate), "days") + 1
 					$scope.allTourSpotEvent.push($scope.allEvents[i]);
 				};
 			}
+			
 			// 이벤트 배열 정렬(시간순으로)
 			$scope.allTourSpotEvent.sort(function (a, b) {
 				return a.start.isBefore(b.start) ? -1 : a.start.isAfter(b.start) ? 1 : 0;
@@ -436,6 +464,7 @@ angular.module("TourPlanApp")
 			
 			return $scope.allTourSpotEvent;
 		};
+		
 		
 		// 일정표 이벤트 객체 확인 (선택날짜)
 		$scope.getCurrentDateCalendarEvents = function () {
@@ -446,9 +475,11 @@ angular.module("TourPlanApp")
 					return event;
 				}
 			});
+			
 			// 이벤트중 tourSpot만 필터링해서 집어넣기
 			for (var i = 0; i < $scope.currentDateEvents.length; i++) {
 				if ($scope.currentDateEvents[i].category == "tourSpot") {
+					$scope.currentDateEvents[i].tourDate = $scope.currentDateEvents[i].start.diff(moment($scope.tourPlan.departureDate), "days") + 1
 					$scope.currentDateTourSpotEvents.push($scope.currentDateEvents[i]);
 				};
 			}
@@ -600,7 +631,11 @@ angular.module("TourPlanApp")
 					    element.append(
 					    		"<div class='btnDiv' style='position:absolute;top:1px;right:1px;z-index:1000;display:none;'>" +
 					    		"<button type='button' id='btnDeleteEvent' class='btn-u btn-u-xs btn-u-red rounded'><i class='fa fa-times' aria-hidden='true'></i></button>" +
-					    		"</div>" 
+					    		"</div>" + 
+					    		"<div><img src='"+ event.imageUrl +"' style='margin-left:3px; width:70px; height:50px; float:left;'></div>" +
+					    		"<div style='width: 170px; height: 55px; float:left; margin-left: 5px;'>" +
+					    		"<p style='color:white;'>"+ event.overview +"</p>" +
+					    		"</div>"
 					    );
 					    element.find("#btnDeleteEvent").click(function(){
 					    	$('#calendar').fullCalendar('removeEvents',event._id);
@@ -651,8 +686,6 @@ angular.module("TourPlanApp")
 			    	$(this).css('border-width', '1px');
 			    	$(this).find(".btnDiv").css("display", "none");
 			    }
-				
-				
 			});
 		};
 		
@@ -676,7 +709,10 @@ angular.module("TourPlanApp")
 	    			spotTitle: $(this).children().first().find("b:eq(2)").text(),
 	    			mapX: $(this).children().first().find("b:eq(3)").text(),
 	    			mapY: $(this).children().first().find("b:eq(4)").text(),
-	    			imageUrl: $(this).children().first().find("b:eq(5)").text()
+	    			imageUrl: $(this).children().first().find("b:eq(5)").text(),
+	    			categoryColor: $(this).children().first().find("b:eq(6)").text(),
+	    			categoryName: $(this).children().first().find("b:eq(7)").text(),
+	    			overview: $(this).children().first().find("b:eq(8)").text()
 	    		});
 	    		
 	    		// JQuery-UI 드래그 이벤트 추가 함수
@@ -861,7 +897,7 @@ angular.module("TourPlanApp")
 					infowindow.setContent(content);
 					infowindow.open(map, marker);
 				})
-				console.log(event)
+//				console.log(event)
 			}, timeout);
 		}
 

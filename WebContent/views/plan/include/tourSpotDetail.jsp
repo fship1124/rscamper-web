@@ -52,7 +52,7 @@
 	<div class="wrapper">
 
 		<!--=== Content ===-->
-		<div class="container content-md content">
+		<div class="container content-md content" style="padding-top: 20px;">
 			<h4></h4>
 			<div class="row">
 					<div class="col-md-6 md-margin-bottom-50">

@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-<title>일정만들기</title>
+<title>일정</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -90,26 +90,65 @@
 				<div id="controllers" ng-show="isWriter">
 					<div class="bg-light">
 						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="modTourPlan();">
-							<i class="fa fa-floppy-o"></i> 수정
+							<i class="fa fa-pencil-square-o"></i> 수정
 						</button>
-						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="togglePrivateTourPlan();">
-							<i class="fa fa-times"></i> 공개/비공개
+						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="togglePrivateTourPlan();" ng-if="tourPlan.isOpen == 2">
+							<i class="fa fa-key"></i> 비공 <i class="fa fa-arrow-right"></i> 공개
+						</button>
+						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="togglePrivateTourPlan();" ng-if="tourPlan.isOpen == 1">
+							<i class="fa fa-key"></i> 공개 <i class="fa fa-arrow-right"></i> 비공
 						</button>
 					</div>
 				</div>
 				
 				<!-- 작성자 프로필 -->
-				<div id="writerProfile">
-					<div class="bg-light">
-						작성자 프로필
-					</div>
+				<div id="writerProfile" style="padding: 20px; text-align: center; background-image:url('{{writer.bgPhotoUrl}}'); background-size: cover; color: lightgray; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" >
+<!-- 					<br><span ng-bind="writer.userUid"></span><br> -->
+					<img class="img-bordered rounded-x" src="{{writer.photoUrl}}" style="width: 60%; height: 50%; margin: 10px; ">
+					<br><br><strong><span ng-bind="writer.displayName" style="font-size: 18px;"></span></strong>
+					<br><br><strong><span ng-bind="writer.introduce"></span></strong>
 				</div>
 				
 				<!-- 추천 / 북마크  -->
 				<div id="writerProfile" ng-hide="isWriter">
-					<div class="bg-light">
-						추천 | 북마크
-					</div>
+					<ul class="list-inline badge-lists badge-box-v2" style="text-align: center;">
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="likeTourPlan();" ng-show="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="likeTourPlan();" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.likeCnt" ></span>
+						</li>
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="bookmarkTourPlan();" ng-show="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="bookmarkTourPlan();" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.bookmarkCnt"></span>
+						</li>
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="customizingTourPlan();" ng-show="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="customizingTourPlan();" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.customCnt"></span>
+						</li>
+					</ul>
+				</div>
+				
+				<!-- 추천 / 북마크  -->
+				<div id="writerProfile" ng-show="isWriter">
+					<ul class="list-inline badge-lists badge-box-v2" style="text-align: center;">
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="likeTourPlan();" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.likeCnt" ></span>
+						</li>
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="bookmarkTourPlan();" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.bookmarkCnt"></span>
+						</li>
+						<li>
+							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="customizingTourPlan();" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.customCnt"></span>
+						</li>
+					</ul>
 				</div>
 				
 				<!-- 일정 정보 -->
@@ -132,8 +171,6 @@
 						</li>
 					</ul>
 				</div>
-				
-
 				
 			</div><!-- left Menu 끝  -->
 			
@@ -220,12 +257,11 @@
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
 										<div class="cbp_tmtime equal-height-column">
-											<span></span>
-											<span></span>
+										<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>{{tourSpotEvent.title}}</h2>
+											<h2 ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</h2>
 											<div class="row">
 												<div class="col-md-4">
 													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
@@ -234,9 +270,11 @@
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>{{}}</p>
-													<p>{{}}</p>
-													<p>{{}}</p>
+													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p>
+													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
+													<p>전화번호 : {{tourSpotEvent.tel}}</p>
+													<p>주소 : {{tourSpotEvent.addr1}}</p>
+													<p>설명 : {{tourSpotEvent.overview}}</p>
 												</div>
 											</div>
 										</div>
