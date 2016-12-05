@@ -104,7 +104,7 @@
 				<!-- 작성자 프로필 -->
 				<div id="writerProfile" style="padding: 20px; text-align: center; background-image:url('{{writer.bgPhotoUrl}}'); background-size: cover; color: lightgray; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" >
 <!-- 					<br><span ng-bind="writer.userUid"></span><br> -->
-					<img class="img-bordered rounded-x" src="{{writer.photoUrl}}" style="width: 60%; height: 50%; margin: 10px; ">
+					<img class="img-bordered rounded-x" src="{{writer.photoUrl}}" style="width: 120px; height: 120px; margin: 10px; ">
 					<br><br><strong><span ng-bind="writer.displayName" style="font-size: 18px;"></span></strong>
 					<br><br><strong><span ng-bind="writer.introduce"></span></strong>
 				</div>
@@ -135,17 +135,17 @@
 					<ul class="list-inline badge-lists badge-box-v2" style="text-align: center;">
 						<li>
 							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="likeTourPlan();" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.likeCnt" ></span>
 						</li>
 						<li>
 							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="bookmarkTourPlan();" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.bookmarkCnt"></span>
 						</li>
 						<li>
 							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="customizingTourPlan();" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.customCnt"></span>
 						</li>
 					</ul>
@@ -270,11 +270,10 @@
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p>
+<!-- 													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p> -->
 													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
 													<p>전화번호 : {{tourSpotEvent.tel}}</p>
 													<p>주소 : {{tourSpotEvent.addr1}}</p>
-													<p>설명 : {{tourSpotEvent.overview}}</p>
 												</div>
 											</div>
 										</div>
@@ -290,8 +289,45 @@
 				</div>
 				
 				<!-- 댓글 -->
-				<div id=tourPlanComment>
-				</div>
+				<div id="tourPlanComment">
+				
+					<div id="writeCommentForm">
+						<form class="sky-form">
+							<fieldset>
+								<section>
+									<strong style="font-size: 18px;">댓글 ({{tourPlan.commentCnt}})</strong>
+									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;">0</strong>
+									<label class="textarea">
+										<textarea rows="2" ng-model="tourPlanComment.content"></textarea>
+										<input type="hidden" ng-model="tourPlanComment.userUid" value="{{user.userUid}}">
+										<button style="float: right;" class="btn btn-success" type="button"><i class="fa fa-tags"></i> 댓글 등록</button>
+									</label>
+								</section>
+							</fieldset>
+						</form>
+					</div>
+					
+					<div id="commentList" style="background-color:#f4f4f4;">
+					
+						<div class="row blog-comments margin-bottom-10">
+							<div class="col-sm-2 sm-margin-bottom-40">
+								<img class="rounded-2x bordered" src="{{writer.photoUrl}}" alt="">
+							</div>
+							<div class="col-sm-10">
+								<div class="comments-itself">
+									<h4>
+										DISPLAYNAME
+										<span style="margin-left: 5px; margin-right: 5px;"><button class="btn rounded btn-xs btn-facebook fa-fixed" style="padding-right:3px;"><i class="fa fa-trash-o"></i></button></span>
+										<span> 5 hours ago </span>
+									</h4>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod..</p>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+				</div><!-- 댓글 끝 -->
 				
 			</div>
 		</div>

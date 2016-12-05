@@ -51,19 +51,19 @@
 <body>
 	<div class="wrapper">
 
+		<!--=== 내용 ===-->
 		<!--=== Content ===-->
-		<div class="container content-md content" style="padding-top: 20px;">
+		<div class="container content-md content"  style="padding-top: 20px;">
 			<h4></h4>
 			<div class="row">
-					<div class="col-md-6 md-margin-bottom-50">
-						<div class="ms-showcase2-template" style="position: relative;">
+				<div class="col-md-6 md-margin-bottom-50" >
+					<div class="ms-showcase2-template" style="position: relative;">
 						<!-- Master Slider -->
 						<div class="master-slider ms-skin-default ms-wk" id="masterslider"
 							style="visibility: visible; opacity: 1; margin: 0px;">
 							<div class="ms-container">
 								<div class="ms-inner-controls-cont" style="max-width: 550px;">
-									<div class="ms-view ms-fade-view ms-grab-cursor"
-										style="width: 550px; height: 367px;">
+									<div class="ms-view ms-fade-view ms-grab-cursor" style="width: 550px; height: 367px;">
 										<div class="ms-slide-container">
 											<div class="ms-slide ms-sl-selected" style="width: 550px; height: 367px; opacity: 1;">
 												<div class="ms-slide-bgcont" style="height: 100%; opacity: 1;">
@@ -75,13 +75,19 @@
 								</div>
 							</div>
 
-							<div class="image_container" style="margin-top: 20px;  width: 550px; height: 130px;">
+							<div class="image_container" style="margin-top: 20px; width: 550px; height: 130px;">
 								<div style="margin: 0 auto; width: 545px; height: 130px;">
-								<button type="button" class="bottom_Move" onclick="bottomMove(1)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">◀</button>
-								<div class="bottom_slider_canvas" style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
-									<div class="bottom_slider_panel" style="float:left; margin: 0 auto; position: relative;"></div>
-								</div>
-								<button type="button" class="bottom_Move" onclick="bottomMove(2)" style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block; ">▶</button>
+									<button type="button" class="bottom_Move"
+										onclick="bottomMove(1)"
+										style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block;">◀</button>
+									<div class="bottom_slider_canvas"
+										style="float: left; width: 445px; height: 100px; margin: 0 auto; display: inline-block; overflow: hidden;">
+										<div class="bottom_slider_panel"
+											style="float: left; margin: 0 auto; position: relative;"></div>
+									</div>
+									<button type="button" class="bottom_Move"
+										onclick="bottomMove(2)"
+										style="margin: 30px 10px; float: left; width: 25px; height: 25px; display: inline-block;">▶</button>
 								</div>
 							</div>
 
@@ -90,32 +96,33 @@
 							
 						</div>
 					</div>
-					</div>
+				</div>
 
 				<div class="col-md-6 content1">
 					<div class="tag-box tag-box-v1">
 						<ul id="ul-info">
-							<li id="li-title">
-								<i class="icon-custom icon-sm rounded-x icon-bg-orange glyphicon glyphicon-flag"></i><h2 id="text-title"></h2>
+							<li id="li-title"><i
+								class="icon-custom icon-sm rounded-x icon-bg-orange glyphicon glyphicon-flag"></i>
+								<h2 id="text-title"></h2></li>
+							<li><i
+								class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-map-marker"></i><strong
+								class="strong-custom"> 주소</strong> <span id="text-address"></span>
 							</li>
-							<li>
-								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-map-marker"></i><strong class="strong-custom"> 주소</strong>
-								<span id="text-address"></span>
-							</li>
-							<li>
-								<i class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-home"></i><strong class="strong-custom"> 홈페이지</strong>
-								<p class='p-custom' id="text-homepage"></p>
-							</li>
+							<li><i
+								class="icon-custom icon-sm rounded-x icon-bg-yellow glyphicon glyphicon-home"></i><strong
+								class="strong-custom"> 홈페이지</strong>
+								<p class='p-custom' id="text-homepage"></p></li>
 						</ul>
 					</div>
-					
-					
+
+
 					<div class="panel-group acc-v1" id="accordion-1">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One">
-										<i class="glyphicon glyphicon-pencil"></i>개요
+									<a class="accordion-toggle" data-toggle="collapse"
+										data-parent="#accordion-1" href="#collapse-One"> <i
+										class="glyphicon glyphicon-pencil"></i>개요
 									</a>
 								</h5>
 							</div>
@@ -127,8 +134,8 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
-										<!-- <i class="icon-custom rounded-x icon-bg-yellow fa fa-info-circle"></i>이용안내 -->
+									<a class="accordion-toggle" data-toggle="collapse"
+										data-parent="#accordion-1" href="#collapse-Two"> <!-- <i class="icon-custom rounded-x icon-bg-yellow fa fa-info-circle"></i>이용안내 -->
 										<i class="fa fa-info-circle"></i>이용안내
 									</a>
 								</h5>
@@ -140,19 +147,124 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h5 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Three">
-										<i class="glyphicon glyphicon-plus-sign"></i>부가정보
+									<a class="accordion-toggle" data-toggle="collapse"
+										data-parent="#accordion-1" href="#collapse-Three"> <i
+										class="glyphicon glyphicon-plus-sign"></i>부가정보
 									</a>
 								</h5>
 							</div>
 							<div id="collapse-Three" class="panel-collapse collapse">
-								<div class="panel-body" id="text-plusInfo">
-								</div>
+								<div class="panel-body" id="text-plusInfo"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<!-- 댓글 & 좋아요 -->
+			<div class="author-info">
+				<div class="spot-like-count" style="display: inline-block;">
+					<a id="icon-plan-like" class="off" style="cursor: pointer;">
+						<img src="https://www.wishbeen.co.kr/images/icon-plan-like-off.png">
+					</a>
+					좋아요
+					<span id="like-count">0</span>
+				</div>
+				
+				<div class="spot-like-count" style="display: inline-block;">
+					<a id="icon-plan-bookmark" class="off" style="cursor: pointer;">
+						<img src="https://www.wishbeen.co.kr/images/bg-btn-bookmark.png">
+					</a>
+					북마크
+					<span id="bookmark-count">0</span>
+				</div>
+				
+				<div class="spot-commont-count" style="display: inline-block;">
+					<a class="show-comments-of-note" style="cursor: pointer;">
+						<img src="https://www.wishbeen.co.kr/images/icon-comment-gry.png">
+					</a>
+					댓글
+					<span id="comment-count">0</span>
+				</div>
+			</div>
+			
+			<input type="hidden" id="contentid">
+
+			<div class="plan-comment">
+				<div class="spot-comment-content">
+					<div class="comment-write">
+						<div class="my-p" style="float: left;">
+							<div class="my-p-img" >
+								<div>
+									<img src="https://wishbeen.akamaized.net/v2.5/images/wb_base_profile.jpg" style="width: 40px; height: 40px;">
+								</div>
+							</div>
+						</div>
+						
+						<textarea class="form-control new-comment-textarea"	placeholder="댓글을 남겨주세요." style="width: 91%; height: 40px; float: left;"></textarea>
+						<div class="comment-edit-btns" style="right: 0;">
+							<button class="btn btn-primary save-new-comment" style="height: 40px; color: #ff8000; border: 1px solid #ff8000; background: #fff!important;">저장</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="spot-comment-list">
+					<ul class="comment-list">
+						<li class="commentRoot">
+							<div>
+								<div class="profile-img">
+									<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
+										<img src="https://img-wishbeen.akamaized.net/profile/1479603117113_108862383047950917579_orgin_.jpg"
+										style="width: 40px; height: 40px;">
+									</a>
+								</div>
+								<div class="comment-contents">
+									<div class="comment-info">
+										<div class="name-date">
+											<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
+												<span class="username">jun heo</span>
+											</a>
+											<span class="update-date">2016-11-20 09:52:00</span>
+										</div>
+									</div>
+									
+									<div class="comment-txt">
+										<p class="comment-content-for-find">태종대공원 등대네요^^</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						
+						<li class="commentRoot">
+							<div>
+								<div class="profile-img">
+									<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
+										<img src="https://img-wishbeen.akamaized.net/profile/1479603117113_108862383047950917579_orgin_.jpg"
+										style="width: 40px; height: 40px;">
+									</a>
+								</div>
+								<div class="comment-contents">
+									<div class="comment-info">
+										<div class="name-date">
+											<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
+												<span class="username">jun heo</span>
+											</a>
+											<span class="update-date">2016-11-20 09:52:00</span>
+										</div>
+									</div>
+									
+									<div class="comment-txt">
+										<p class="comment-content-for-find">태종대공원 등대네요^^</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				
+				</div>
+				
+			</div>
+
 		</div>
 		<!--=== End Content ===-->
 

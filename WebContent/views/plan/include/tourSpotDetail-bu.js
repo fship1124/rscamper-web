@@ -1,47 +1,50 @@
-var user = sessionStorageService.getObject("user");	
-
-function apiAjax(obj) {
-	$.ajax({
-		type : "GET",
-		url : myConfig.serverUrl + "/tour/api/detail",
-		dataType : 'json',
-		data : obj,
-		error : function(err) {
-			alert("에러");
-		},
-		success : function(result) {
-			var data = JSON.parse(result);
-			contentCreate(data);
-		}
-	});
-}
+	function apiAjax(obj) {
+		$.ajax({
+			type : "GET",
+			url : myConfig.serverUrl + "/tour/api/detail",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				var data = JSON.parse(result);
+				contentCreate(data);
+			}
+		});
+	}
 	
+	var getParameter = function(paramName) {
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+
+		for (var i = 0; _tempArray.length; i++) {
+			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+
+			if (_keyValuePair[0] == paramName) { // _keyValuePair[0] : 파라미터 명
+				// _keyValuePair[1] : 파라미터 값
+				return _keyValuePair[1];
+			}
+		}
+	}
 	
 	function contentCreate(data) {
-		console.log("contentCreate");
+//		console.log("contentCreate");
 		var data1 = JSON.parse(data[0]);
 		var data2 = JSON.parse(data[1]);
 		var data3 = JSON.parse(data[2]);
 		var data4 = JSON.parse(data[3]);
 		
-		console.dir(data1);
-		console.dir(data2);
-		console.dir(data3);
-		console.dir(data4);
+//		console.dir(data1);
+//		console.dir(data2);
+//		console.dir(data3);
+//		console.dir(data4);
 		
 		var item1 = data1.response.body.items.item;
 		var item2 = data2.response.body.items.item;
 		var item3 = data3.response.body.items.item;
 		var item4 = data4.response.body.items.item;
 		
-//		var content = $(".content");
-//		content.find("h4").html(item1.title);
-//		
-//		var tab1 = $(".tab1");
-//		var tab2 = $(".tab2");
-//		var tab3 = $(".tab3");
-//		var tab4 = $(".tab4");
-//		var content2 = $(".content2");
 		
 		/////////////////////////////////////
 		
@@ -58,7 +61,7 @@ function apiAjax(obj) {
 		$("#text-homepage").html(item1.homepage);
 		
 		// 개요
-		console.log(item1);
+//		console.log(item1);
 		$("#text-content").html(item1.overview);
 		
 		// 이용안내
@@ -164,7 +167,7 @@ function apiAjax(obj) {
 		$("#ul-info").append(tag);
 		
 		// 부가정보
-		console.log(item3);
+//		console.log(item3);
 		var item3tag = "";
 		switch (item2.contenttypeid) {
 		case 25:
@@ -200,17 +203,66 @@ function apiAjax(obj) {
 		
 		$("#text-plusInfo").html(item3tag);
 		
-		// contentid 저장하기
-		$("#contentid").val(item1.contentid);
-		
-		// 댓글 리스트 생성
-		commentListSelect();
-		
-		
 		// 이미지 동적 생성
 		imageProcess(item4);
-	}
 		
+	}
+	
+	var endpage = 0;
+	
+	function imageProcess(item) {
+		var mainImg = $(".ms-brd");
+		var panel = $(".bottom_slider_panel");
+		var html = "";
+		
+		var widthPx = item.length * 120;
+		panel.css("width", widthPx + "px");
+		
+		for (var i = 0; i < item.length; i++) {
+			var m = item[i];
+			if (i == 0) { mainImg.attr("src", m.originimgurl); }
+			
+			html += "<img src='" + m.originimgurl + "' class='bottom_slider_image' onclick='imageFnc(this)' style='width: 100px; height: 75px; float: left; margin: 5px 5px'>";
+		}
+		
+		var portion = parseInt(item.length / 4);
+		
+		if (item.length % 4 != 0) {
+			portion += 1;
+		}
+		
+		endpage = portion;
+		panel.html(html);
+	}
+	
+	
+	var locationVal = 1;
+	
+	function bottomMove(flag) {
+		var w = 0;
+		if (flag == 1) {
+			if (locationVal == 1) {
+				locationVal = 1;
+			} else {
+				locationVal -= 1;
+			}
+			w = - (locationVal - 1) * 440; 
+		} else {
+			if (locationVal == endpage) {
+				locationVal = endpage;
+			} else {
+				locationVal += 1;
+			}
+			w = - (locationVal - 1) * 440; 
+		}
+		
+		$('.bottom_slider_panel').animate({ left: w}, 'slow');
+	}
+	
+	function imageFnc(e) {
+		 $(".ms-brd").attr("src", e.src); 
+	}
+	
 	
 	function commentListSelect() {
 		var obj = new Object();
@@ -219,11 +271,11 @@ function apiAjax(obj) {
 		
 		$.ajax({
 			type : "GET",
-			url : myConfig.serverUrl + "/tour/comment/list",
+			url : "http://localhost:8081/tour/comment/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
-//				alert("에러");
+				alert("에러");
 			},
 			success : function(result) {
 				console.log("list success");
@@ -301,7 +353,7 @@ function apiAjax(obj) {
 	
 	
 	function modfyComment(e) {
-//		alert("m");
+		alert("m");
 		console.dir(e);
 		console.log(e.dataset.no);
 		console.log(e.dataset.flag);
@@ -332,7 +384,7 @@ function apiAjax(obj) {
 	
 	
 	function reply_cancel(e) {
-//		alert("aa");
+		alert("aa");
 		console.log(e.dataset.id);
 		
 		$(e.dataset.id).remove();
@@ -395,165 +447,145 @@ function apiAjax(obj) {
 	}
 	
 	
-// 댓글 저장	
-$(".save-new-comment").on('click', function() {
-	console.log("btn click");
-	console.log($("#contentid").val());
-	console.log($(".new-comment-textarea").val());
-	console.log(user.userUid);
+	
+	// 댓글 저장	
+	$(".save-new-comment").on('click', function() {
+		console.log("btn click");
+		console.log($("#contentid").val());
+		console.log($(".new-comment-textarea").val());
+		console.log(user.userUid);
+		
+		var obj = new Object();
+		obj.contentid = $("#contentid").val();
+		obj.content = $(".new-comment-textarea").val();
+		obj.userUid = user.userUid;
+		
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8081/tour/comment/insert",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				alert("success");
+				
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:8081/tour/comment/list",
+					dataType : 'json',
+					data : obj,
+					error : function(err) {
+						alert("에러");
+					},
+					success : function(result) {
+						console.log("list success");
+						console.dir(result);
+						
+						$(".new-comment-textarea").val("");
+						
+						commentCreate(result);
+					}
+				});
+			}
+		});
+	});
+		
+
+	// 좋아요
+	$("#icon-plan-like").on("click", function() {
+		console.log("in icon-plan-like");
+		console.dir($("#icon-plan-like"));
+		console.dir($("#icon-plan-like")[0]);
+		
+		alert($("#like-count").html());
+		var className = "";
+		
+		if ($("#icon-plan-like")[0].className == "off") {
+			$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
+			$("#like-count").html(Number($("#like-count").html()) + 1);
+			className = "on";
+			$("#icon-plan-like").attr('class', 'on');
+			console.log($("#icon-plan-like")[0].className);
+		} else {
+			$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-off.png'>";
+			$("#like-count").html(Number($("#like-count").html()) - 1);
+			className = "off";
+			$("#icon-plan-like").attr('class', 'off');
+			console.log($("#icon-plan-like")[0].className);
+		}
+		
+		
+		var obj = new Object();
+		obj.likeStatus = className;
+		obj.contentid = $("#contentid").val();
+		obj.userUid = user.userUid;
+		
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8081/tour/like",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				console.log("list success");
+				console.dir(result);
+			}
+		});
+	});
+		
+
+
+	// 북마크
+	$("#icon-plan-bookmark").on("click", function() {
+		console.log("in icon-plan-bookmark");
+		console.dir($("#icon-plan-bookmark"));
+		console.dir($("#icon-plan-bookmark")[0]);
+//		alert($("#bookmark-count").html());
+		var className = "";
+		
+		if ($("#icon-plan-bookmark")[0].className == "off") {
+			$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-on.png'>";
+			$("#bookmark-count").html(Number($("#bookmark-count").html()) + 1);
+			className = "on";
+			$("#icon-plan-bookmark").attr('class', 'on');
+			console.log($("#icon-plan-bookmark")[0].className);
+		} else {
+			$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark.png'>";
+			$("#bookmark-count").html(Number($("#bookmark-count").html()) - 1);
+			className = "off";
+			$("#icon-plan-bookmark").attr('class', 'off');
+			console.log($("#icon-plan-bookmark")[0].className);
+		}
+		
+		var obj = new Object();
+		obj.bookmarkStatus = className;
+		obj.contentid = $("#contentid").val();
+		obj.userUid = user.userUid;
+		
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:8081/tour/bookmark",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				console.log("list success");
+				console.dir(result);
+			}
+		});
+	});
+
 	
 	var obj = new Object();
-	obj.contentid = $("#contentid").val();
-	obj.content = $(".new-comment-textarea").val();
-	obj.userUid = user.userUid;
+	obj.contentid = getParameter("contentid");
+	obj.contenttypeid = getParameter("contenttypeid");
 	
-	$.ajax({
-		type : "POST",
-		url : myConfig.serverUrl + "/tour/comment/insert",
-		dataType : 'json',
-		data : obj,
-		error : function(err) {
-//			alert("에러");
-		},
-		success : function(result) {
-//			alert("success");
-			
-			$.ajax({
-				type : "GET",
-				url : myConfig.serverUrl + "/tour/comment/list",
-				dataType : 'json',
-				data : obj,
-				error : function(err) {
-//					alert("에러");
-				},
-				success : function(result) {
-					console.log("list success");
-					console.dir(result);
-					
-					$(".new-comment-textarea").val("");
-					
-					commentCreate(result);
-				}
-			});
-		}
-	});
-});
+	apiAjax(obj);
 	
-
-// 좋아요
-$("#icon-plan-like").on("click", function() {
-	console.log("in icon-plan-like");
-	console.dir($("#icon-plan-like"));
-	console.dir($("#icon-plan-like")[0]);
-	
-//	alert($("#like-count").html());
-	var className = "";
-	
-	if ($("#icon-plan-like")[0].className == "off") {
-		$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
-		$("#like-count").html(Number($("#like-count").html()) + 1);
-		className = "on";
-		$("#icon-plan-like").attr('class', 'on');
-		console.log($("#icon-plan-like")[0].className);
-	} else {
-		$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-off.png'>";
-		$("#like-count").html(Number($("#like-count").html()) - 1);
-		className = "off";
-		$("#icon-plan-like").attr('class', 'off');
-		console.log($("#icon-plan-like")[0].className);
-	}
-	
-	
-	var obj = new Object();
-	obj.likeStatus = className;
-	obj.contentid = $("#contentid").val();
-	obj.userUid = user.userUid;
-	
-	$.ajax({
-		type : "POST",
-		url : myConfig.serverUrl + "/tour/like",
-		dataType : 'json',
-		data : obj,
-		error : function(err) {
-//			alert("에러");
-		},
-		success : function(result) {
-			console.log("list success");
-			console.dir(result);
-		}
-	});
-});
-	
-
-
-// 북마크
-$("#icon-plan-bookmark").on("click", function() {
-	console.log("in icon-plan-bookmark");
-	console.dir($("#icon-plan-bookmark"));
-	console.dir($("#icon-plan-bookmark")[0]);
-//	alert($("#bookmark-count").html());
-	var className = "";
-	
-	if ($("#icon-plan-bookmark")[0].className == "off") {
-		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-on.png'>";
-		$("#bookmark-count").html(Number($("#bookmark-count").html()) + 1);
-		className = "on";
-		$("#icon-plan-bookmark").attr('class', 'on');
-		console.log($("#icon-plan-bookmark")[0].className);
-	} else {
-		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark.png'>";
-		$("#bookmark-count").html(Number($("#bookmark-count").html()) - 1);
-		className = "off";
-		$("#icon-plan-bookmark").attr('class', 'off');
-		console.log($("#icon-plan-bookmark")[0].className);
-	}
-	
-	var obj = new Object();
-	obj.bookmarkStatus = className;
-	obj.contentid = $("#contentid").val();
-	obj.userUid = user.userUid;
-	
-	$.ajax({
-		type : "POST",
-		url : myConfig.serverUrl + "/tour/bookmark",
-		dataType : 'json',
-		data : obj,
-		error : function(err) {
-			alert("에러");
-		},
-		success : function(result) {
-			console.log("list success");
-			console.dir(result);
-		}
-	});
-});
-
-
-var getParameter = function(paramName) {
-	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
-	var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
-
-	for (var i = 0; _tempArray.length; i++) {
-		var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-
-		if (_keyValuePair[0] == paramName) { // _keyValuePair[0] : 파라미터 명
-			// _keyValuePair[1] : 파라미터 값
-			return _keyValuePair[1];
-		}
-	}
-}
-
-var obj = new Object();
-obj.contentid = getParameter("contentid");
-obj.contenttypeid = getParameter("contenttypeid");
-
-apiAjax(obj);
-
-
-
-
-
-
-
-
 	
