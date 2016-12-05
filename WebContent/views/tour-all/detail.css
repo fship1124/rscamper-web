@@ -11,3 +11,93 @@
 #text-content, #text-info { padding: 20px; }
 a:hover { color: orange; }
 .info-custom { margin-left: 20px; }
+
+
+
+.plan-comment ul.comment-list {
+    list-style-type: none;
+    display: block;
+    margin: 0;
+}
+
+.plan-comment ul.comment-list li:first-child {
+    border-top: 1px solid #eee;
+}
+.plan-comment ul.comment-list li {
+    padding: 15px 0;
+    display: block;
+    border-bottom: 1px solid #eee;
+    clear: both;
+}
+
+
+.plan-comment ul.comment-list li div.profile-img {
+    display: block;
+    float: left;
+    width: 5%;
+    height: 40px;
+    vertical-align: top;
+}
+
+.author-info {
+    position: relative;
+    height: 50px;
+    padding: 8px 0;
+    margin: -1px 0 0;
+    border-top: 1px solid #eee;
+}
+
+.plan-comment .comment-write {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+
+
+
+.plan-comment ul.comment-list .comment-txt p {
+    overflow: hidden;
+    width: 95%;
+    line-height: 24px;
+    padding: 2px 5% 0 0;
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+    font-weight: 300;
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.plan-comment ul.comment-list li div.profile-img a img {
+    width: 60px;
+    height: 60px;
+    margin-top: 0;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+}
+
+.plan-comment ul.comment-list a.user .username {
+    font-weight: 400;
+}
+
+.plan-comment ul.comment-list .name-date .update-date {
+    font-size: 10px;
+    color: #999;
+}
+
+
+/* .spot-like-count a.on { */
+/*     background: url(https://www.wishbeen.co.kr/images/icon-plan-like-off.png) 0 3px no-repeat; */
+/* } */
+
+
+/* .spot-like-count a.off { */
+/*     background: url(https://www.wishbeen.co.kr/images/icon-plan-like-on.png) 0 3px no-repeat; */
+/* } */
+
+
+
+

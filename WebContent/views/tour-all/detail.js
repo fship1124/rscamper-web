@@ -1,23 +1,23 @@
-		
-	function apiAjax(obj) {
-		$.ajax({
-			type : "GET",
-			url : "http://localhost:8081/tour/api/detail",
-			dataType : 'json',
-			data : obj,
-			error : function(err) {
-				alert("에러");
-			},
-			success : function(result) {
-//				console.log("apiAjax");
-//				console.log(result);
-				
-				var data = JSON.parse(result);
-				console.dir(data);
-				contentCreate(data);
-			}
-		});
-	}
+console.log(myConfig.imsiServerUrl);
+var user = sessionStorageService.getObject("user");	
+
+
+function apiAjax(obj) {
+	$.ajax({
+		type : "GET",
+		url : "http://localhost:8081/tour/api/detail",
+		dataType : 'json',
+		data : obj,
+		error : function(err) {
+			alert("에러");
+		},
+		success : function(result) {
+			var data = JSON.parse(result);
+			console.dir(data);
+			contentCreate(data);
+		}
+	});
+}
 	
 	
 	function contentCreate(data) {
@@ -203,36 +203,90 @@
 		
 		$("#text-plusInfo").html(item3tag);
 		
+		// contentid 저장하기
+		$("#contentid").val(item1.contentid);
 		
-		/////////////////////////////////////
+		// 댓글 리스트 생성
+		commentListSelect();
 		
-//		var html = "";
-//		html += "<li><strong>우편번호 : </strong>" + item1.zipcode + "</li>";
-//		html += "<li><strong>주소 : </strong>" + item1.addr1 + " " + item1.addr2 + "</li>";
-//		tab1.html(html);
-//		
-//		html = "";
-//		html += "<li>" + item2.expguide + "</li>";
-//		html += "<li>" + item2.infocenter + "</li>";
-//		tab2.html(html);
-//		
-//		html = "";
-//		html += "<li>" + item1.homepage + "</li>";
-//		tab3.html(html);
-//		
-//		html = "";
-//		html += "<li>" + item3.infoname + "</li>";
-//		html += "<li>" + item3.infotext + "</li>";
-//		tab4.html(html);
-//		content2.find("h2").html(item1.title);
-//		content2.find("p").html(item1.overview);
-//		content2.find(".panel-body").html(item1.overview);
 		
 		// 이미지 동적 생성
 		imageProcess(item4);
-		
 	}
 		
+	
+	function commentListSelect() {
+		alert("commentListSelect");
+		var obj = new Object();
+		obj.contentid = $("#contentid").val();
+		obj.userUid = user.userUid;
+		
+		$.ajax({
+			type : "GET",
+			url : "http://localhost:8081/tour/comment/list",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				console.log("list success");
+				console.dir(result);
+				
+				commentCreate(result);
+			}
+		});
+	}
+	
+	
+	function commentCreate(result) {
+		$("#like-count").html(result.likeCnt);
+		$("#bookmark-count").html(result.bookmarkCnt);
+		$("#comment-count").html(result.commentCnt);
+		var data = result.list;
+		
+		console.log("likeStatus : " + result.likeStatus);
+		console.log("bookmarkStatus : " + result.bookmarkStatus);
+		
+		if (result.likeStatus == "on") {
+			alert("on");
+			$("#icon-plan-like").attr('class', 'on');
+			$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
+		}
+		if (result.bookmarkStatus == "on") {
+			alert("on");
+			$("#icon-plan-bookmark").attr('class', 'on');
+			$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-on.png'>";
+		}
+		
+		var html = "";
+		for (var i = 0; i < data.length; i++) {
+			var item = data[i];
+			
+			console.dir(item);
+			
+			html += "<li class='commentRoot'>";
+			html += "<div><div class='profile-img'>";
+			html += "<a target='_blank' href='/myPage/user/d31f77479e2b4889?active=myPlan' class='user'>";
+			html += "<img src=" + item.photoUrl + " style='width: 40px; height: 40px;'></a></div>";
+			html += "<div class='comment-contents'>";
+			html += "<div class='comment-info'>";
+			html += "<div class='name-date'>";
+			html += "<a target='_blank' href='/myPage/user/d31f77479e2b4889?active=myPlan' class='user'>";
+			html += "<span class='username'>" + item.displayName + "</span></a>";
+			html += "<span class='update-date'>" + item.regDate + "</span></div></div>";
+			html += "<div class='comment-txt'>";
+			html += "<p class='comment-content-for-find'>" + item.content + "</p>";
+			html += "</div></div></div></li>";
+			
+		}
+		
+		$(".comment-list").html(html);
+		
+	}
+	
+	
+	
 	
 	var endpage = 0;
 	
@@ -288,5 +342,159 @@
 	function imageFnc(e) {
 		 $(".ms-brd").attr("src", e.src); 
 	}
+	
+	
+$(".save-new-comment").on('click', function() {
+	console.log("btn click");
+	console.log($("#contentid").val());
+	console.log($(".new-comment-textarea").val());
+	console.log(user.userUid);
+	
+	var obj = new Object();
+	obj.contentid = $("#contentid").val();
+	obj.content = $(".new-comment-textarea").val();
+	obj.userUid = user.userUid;
+	
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:8081/tour/comment/insert",
+		dataType : 'json',
+		data : obj,
+		error : function(err) {
+			alert("에러");
+		},
+		success : function(result) {
+			alert("success");
+			
+			$.ajax({
+				type : "GET",
+				url : "http://localhost:8081/tour/comment/list",
+				dataType : 'json',
+				data : obj,
+				error : function(err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.log("list success");
+					console.dir(result);
+					
+					$(".new-comment-textarea").val("");
+					
+					commentCreate(result);
+				}
+			});
+		}
+	});
+	
+});
+	
+
+// 좋아요
+$("#icon-plan-like").on("click", function() {
+	console.log("in icon-plan-like");
+	console.dir($("#icon-plan-like"));
+	console.dir($("#icon-plan-like")[0]);
+	
+	alert($("#like-count").html());
+	var className = "";
+	
+	if ($("#icon-plan-like")[0].className == "off") {
+		$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
+		$("#like-count").html(Number($("#like-count").html()) + 1);
+		className = "on";
+		$("#icon-plan-like").attr('class', 'on');
+		console.log($("#icon-plan-like")[0].className);
+	} else {
+		$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-off.png'>";
+		$("#like-count").html(Number($("#like-count").html()) - 1);
+		className = "off";
+		$("#icon-plan-like").attr('class', 'off');
+		console.log($("#icon-plan-like")[0].className);
+	}
+	
+	
+	var obj = new Object();
+	obj.likeStatus = className;
+	obj.contentid = $("#contentid").val();
+	obj.userUid = user.userUid;
+	
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:8081/tour/like",
+		dataType : 'json',
+		data : obj,
+		error : function(err) {
+			alert("에러");
+		},
+		success : function(result) {
+			console.log("list success");
+			console.dir(result);
+			
+			
+		}
+	});
+});
+	
+
+
+// 북마크
+$("#icon-plan-bookmark").on("click", function() {
+	console.log("in icon-plan-bookmark");
+	console.dir($("#icon-plan-bookmark"));
+	console.dir($("#icon-plan-bookmark")[0]);
+	
+	alert($("#bookmark-count").html());
+	var className = "";
+	
+	if ($("#icon-plan-bookmark")[0].className == "off") {
+		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-on.png'>";
+		$("#bookmark-count").html(Number($("#bookmark-count").html()) + 1);
+		className = "on";
+		$("#icon-plan-bookmark").attr('class', 'on');
+		console.log($("#icon-plan-bookmark")[0].className);
+	} else {
+		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark-off.png'>";
+		$("#bookmark-count").html(Number($("#bookmark-count").html()) - 1);
+		className = "off";
+		$("#icon-plan-bookmark").attr('class', 'off');
+		console.log($("#icon-plan-bookmark")[0].className);
+	}
+	
+	
+	var obj = new Object();
+	obj.bookmarkStatus = className;
+	obj.contentid = $("#contentid").val();
+	obj.userUid = user.userUid;
+	
+	$.ajax({
+		type : "POST",
+		url : "http://localhost:8081/tour/bookmark",
+		dataType : 'json',
+		data : obj,
+		error : function(err) {
+			alert("에러");
+		},
+		success : function(result) {
+			console.log("list success");
+			console.dir(result);
+		}
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
