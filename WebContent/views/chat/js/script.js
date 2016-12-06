@@ -67,7 +67,6 @@ d3.json("data/korea.json", function(json) {
 var mapStatus = false;
 
 function click(d) {
-  alert("click");
   var x, y, k;
   
   console.log(d.id);

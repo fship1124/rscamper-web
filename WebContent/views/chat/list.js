@@ -51,7 +51,7 @@ function listRoomCreate(data) {
 		html += item.chatRoomInfoNo;
 		html += " data-loc=";
 		html += item.areacode;
-		html += " data-tle= '";
+		html += " data-tle=";
 		html += item.chatRoomName;
 		html += " style='cursor:pointer;'>" + "Go" + "</td>";
 		html += "</tr>";

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+#li-title { margin-bottom: 15px; }
+#text-title { display: inline-block; padding: 0px 20px; }
+.content1 ul { list-style: none; padding: 0px; }
+.content1 .strong-custom { padding: 0px 20px; }
+.content1 .p-custom { margin-left: 60px; }
+.tag-box-v1, .panel-default { border-top: solid 2px lightgray; }
+/* .panel-default { border-top: solid 1px orange; } */
+
+#text-content, #text-info { padding: 20px; }
+a:hover { color: orange; }
+.info-custom { margin-left: 20px; }
