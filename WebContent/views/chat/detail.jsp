@@ -202,6 +202,7 @@
 		obj.title = "${param.title}";
 		obj.room = "${param.room}";
 		obj.roomNo = "${param.roomNo}";
+		obj.sendRegDate = new Date();
 		
 		console.log("detail.jsp");
 		console.dir(obj);
@@ -230,6 +231,15 @@
 	             }
 	         });
 			 
+			 
+			 // 방 유저 리스트
+			 socket.on('getUserInfo', function(data) {
+				 console.log("in getUserInfo");
+				 console.dir(data);
+				 listUser(data);
+	         });
+			 
+			 
 			 socket.on('system', function(data) {
 				 console.log("system");
  				 console.log("서버에서 전송된 메세지 : " + data.message);
@@ -243,7 +253,7 @@
 				 html += "</div>";
 				 $("#msg-content").append(html);
 				 $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
-				 listUser(data);
+// 				 listUser(data);
 	         });
 			 
 			 socket.on('message', function(data) {
@@ -314,7 +324,8 @@
 				name : user.displayName,
 				message : $("#msg").val(),
 				photoUrl : user.photoUrl,
-				uid : user.userUid
+				uid : user.userUid,
+				sendRegDate : new Date()
 			});
 
 			$("#msg").val("");
@@ -323,44 +334,83 @@
 			$("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 		});
 
-			// 방 퇴장
-	$("#out-room").click(function() {
+		
+		$("#out-room").click(function() {
 			console.log("in out");
-				var obj = new Object();
-				obj.userUid = user.userUid;
-				obj.chatRoomInfoNo = "${param.roomNo}";
-
-				console.log(obj.userUid);
-				console.log(obj.chatRoomInfoNo);
-
-				$.ajax({
-					url : myConfig.imsiServerUrl + '/chat/delete/user/'	
-					+ user.userUid + "/" + obj.chatRoomInfoNo,
-					type : "DELETE",
-					success : function() {
-						socket.emit("out", {
-							name : user.displayName
-						});
-
-						// 방 접속자수가 0일때 방 폐쇄
-						var user_cnt = $("#chat-user-cnt");
-						
-						console.dir(user_cnt);
-						
-						if (user_cnt[0].dataset.cnt == 1) {
-							$.ajax({
-								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
-								type : "DELETE",
-								success : function() {
-// 									alert(obj.chatRoomInfoNo +  "방 삭제");
-								}
-							});				
-						}
-						
-						window.location = myConfig.imsiServerUrl + '/chat/home';
-					}
+			
+			socket.emit("outRoom", {
+				uid : user.userUid
+			});
+			
+			// 방 삭제 - 방 인원 0
+			socket.on("roomList", function(data) {
+				console.log("in roomList");
+				// 채팅 방 목록
+				console.dir(data);
+				
+				socket.emit("exit", {
+					uid : user.userUid
 				});
 			});
+			
+			// 방 인원이 남아있는 경우
+			socket.on("outRoomUser", function(data) {
+				console.log("in roomList");
+				// 채팅 방 목록
+				console.dir(data);
+				
+				socket.emit("exit", {
+					uid : user.userUid
+				});
+			});
+			
+			window.location = myConfig.imsiServerUrl + '/chat/home';
+		});
+		
+		
+		
+		
+		
+		
+		
+	// 방 퇴장 - 이전 코드
+// 	$("#out-room").click(function() {
+// 			console.log("in out");
+// 				var obj = new Object();
+// 				obj.userUid = user.userUid;
+// 				obj.chatRoomInfoNo = "${param.roomNo}";
+
+// 				console.log(obj.userUid);
+// 				console.log(obj.chatRoomInfoNo);
+
+// 				$.ajax({
+// 					url : myConfig.imsiServerUrl + '/chat/delete/user/'	
+// 					+ user.userUid + "/" + obj.chatRoomInfoNo,
+// 					type : "DELETE",
+// 					success : function() {
+// 						socket.emit("out", {
+// 							name : user.displayName
+// 						});
+
+// 						// 방 접속자수가 0일때 방 폐쇄
+// 						var user_cnt = $("#chat-user-cnt");
+						
+// 						console.dir(user_cnt);
+						
+// 						if (user_cnt[0].dataset.cnt == 1) {
+// 							$.ajax({
+// 								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
+// 								type : "DELETE",
+// 								success : function() {
+// 									console.log(obj.chatRoomInfoNo +  "방 삭제");
+// 								}
+// 							});				
+// 						}
+						
+// 						window.location = myConfig.imsiServerUrl + '/chat/home';
+// 					}
+// 				});
+// 			});
 
 			socket.on('out', function(data) {
 				console.log("on out");
