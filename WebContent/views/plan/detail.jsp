@@ -161,7 +161,7 @@
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">10</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="tourPlan.postCnt">0</span>
 							<a href="javascript:void(0);"><i class="fa fa-book"></i> 여행기</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -296,11 +296,10 @@
 							<fieldset>
 								<section>
 									<strong style="font-size: 18px;">댓글 ({{tourPlan.commentCnt}})</strong>
-									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;">0</strong>
+									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;" ng-bind="tourPlanCommentForm.content.length">0</strong>
 									<label class="textarea">
-										<textarea rows="2" ng-model="tourPlanComment.content"></textarea>
-										<input type="hidden" ng-model="tourPlanComment.userUid" value="{{user.userUid}}">
-										<button style="float: right;" class="btn btn-success" type="button"><i class="fa fa-tags"></i> 댓글 등록</button>
+										<textarea rows="2" ng-model="tourPlanCommentForm.content" ng-keyup="commentLengthCheck();"></textarea>
+										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-tags"></i> 댓글 등록</button>
 									</label>
 								</section>
 							</fieldset>
@@ -309,18 +308,27 @@
 					
 					<div id="commentList" style="background-color:#f4f4f4;">
 					
-						<div class="row blog-comments margin-bottom-10">
+						<div class="row blog-comments margin-bottom-10" ng-repeat="tourPlanComment in tourPlanCommentList">
 							<div class="col-sm-2 sm-margin-bottom-40">
-								<img class="rounded-2x bordered" src="{{writer.photoUrl}}" alt="">
+								<img class="rounded-2x bordered" src="{{tourPlanComment.photoUrl}}">
 							</div>
 							<div class="col-sm-10">
 								<div class="comments-itself">
 									<h4>
-										DISPLAYNAME
-										<span style="margin-left: 5px; margin-right: 5px;"><button class="btn rounded btn-xs btn-facebook fa-fixed" style="padding-right:3px;"><i class="fa fa-trash-o"></i></button></span>
-										<span> 5 hours ago </span>
+										{{tourPlanComment.displayName}}
+										<span style="margin-left: 5px; margin-right: 5px;" ng-if="tourPlanComment.userUid == user.userUid">
+											<button class="btn rounded btn-xs btn-evernote-inversed fa-fixed" style="padding-right:2px;" ng-click="removeComment(tourPlanComment.commentNo);">
+												<i class="fa fa-times"></i>
+											</button>
+										</span>
+										<span style="margin-left: 5px;" ng-if="tourPlanComment.userUid == user.userUid">
+											<button class="btn rounded btn-xs btn-evernote-inversed fa-fixed" style="padding-right:1px;" ng-click="modifyComment();">
+												<i class="fa fa-pencil-square-o"></i>
+											</button>
+										</span>
+										<span ng-bind="tourPlanComment.regDate | timesince : 'kr'"></span>
 									</h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod..</p>
+									<pre ng-bind="tourPlanComment.content" style="white-space:pre-wrap;"></pre>
 								</div>
 							</div>
 						</div>

@@ -42,6 +42,11 @@ angular.module("TourPlanApp")
 				$scope.checkTourPlanSet();
 				
 				/** ==================================================== */
+				/** 댓글 불러오기 */
+				/** ==================================================== */
+				$scope.getCommentList();
+				
+				/** ==================================================== */
 				/** 여행일정 스케쥴 데이터 불러오기 */
 				/** ==================================================== */
 				// 일정표 날짜 정보 셋팅
@@ -653,7 +658,7 @@ angular.module("TourPlanApp")
 		
 		
 		/** ==================================================== */
-		/** TODO 구글맵 */
+		/** 구글맵 */
 		/** ==================================================== */
 		// 맵 설정 변수
 		var infowindow;
@@ -724,13 +729,6 @@ angular.module("TourPlanApp")
 			}
 		}
 		
-//		function openDetailTourSpot (contentId) {
-//			// 누를때 http로 디테일 정보 요청(param : contentId)
-//			$scope.detailTourSpot = contentId;
-//			console.log(contentId);
-//			$("#detailTourSpotModal").modal("show");
-//		};
-		
 		// 마커 1초후에 찍어주기
 		function addMarkerWithTimeout(event, timeout) {
 			var locationPosition = {
@@ -781,6 +779,66 @@ angular.module("TourPlanApp")
 			drop(currentEventList);
 		}
 		
+		
+		/** ==================================================== */
+		/** TODO 댓글 */
+		/** ==================================================== */
+		// 댓글 리스트 조회
+		$scope.getCommentList = function () {
+			$http({
+				url: MyConfig.backEndURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
+				method: 'GET'
+			}).success(function (response) {
+				console.log(response);
+	            $scope.tourPlanCommentList = response;
+			}).error(function (){
+				
+			});
+		}
+		
+		// 댓글 등록
+		$scope.writeComment = function () {
+			$http({
+				url: MyConfig.backEndURL + '/tourPlan/insert/tourPlan/comment',
+				method: 'POST',
+				data: $.param({
+					recordNo: RequestService.getParameter("recordNo"),
+					userUid: $rootScope.user.userUid,
+					content: $scope.tourPlanCommentForm.content 
+				}),
+				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
+			}).success(function (response) {
+				$scope.tourPlanCommentForm.content = "";
+				$scope.getCommentList();
+			}).error(function (){
+				
+			});
+		}
+		
+		// 댓글 삭제
+		$scope.removeComment = function (commentNo) {
+			$http({
+				url: MyConfig.backEndURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
+				method: 'GET'
+			}).success(function (response) {
+				$scope.getCommentList();
+			}).error(function (){
+				
+			});
+		}
+		
+		// TODO 댓글 수정
+		$scope.modifyComment = function () {
+			swal("ㅋㅋ");
+		}
+		
+		// 댓글 200자제한
+		$scope.commentLengthCheck = function () {
+			if ($scope.tourPlanCommentForm.content.length >= 200) {
+				$scope.tourPlanCommentForm.content = $scope.tourPlanCommentForm.content.substring(0, 200);
+				swal("그만");
+			}
+		}
 
   })
   
