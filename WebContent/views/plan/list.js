@@ -34,7 +34,8 @@ angular.module("TourPlanApp")
 				{standardValue: "REG_DATE", standardName: "등록일"},
 				{standardValue: "LIKE_CNT", standardName: "좋아요 개수"},
 				{standardValue: "COMMENT_CNT", standardName: "댓글 개수"},
-				{standardValue: "LOCATION_CNT", standardName: "여행지 개수"}
+				{standardValue: "BOOKMARK_CNT", standardName: "북마크 개수"},
+				{standardValue: "CUSTOM_CNT", standardName: "커스터마이징 개수"}
 			],
 			orderList: [
 				{orderValue: "DESC", orderName: "내림차순"},

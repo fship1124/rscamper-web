@@ -86,7 +86,7 @@
 			
 			<!-- 여행장소 디테일 모달 -->
 			<%@include file="include/detailTourSpotModal.jsp"%>
-		
+			
 			<div id="leftMenu">
 			
 				<!-- 저장 / 취소 -->
@@ -188,6 +188,8 @@
 											<b ng-bind="tourSpot.mapy"></b>
 											<b ng-bind="tourSpot.firstimage"></b>
 											<b ng-bind="tourSpot.contenttypeid | tourSpotColor"></b>
+											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory"></b>
+											<b ng-bind="tourSpot.overview"></b>
 										</div>
 										<div class="tourSpotImageDiv">
 											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
@@ -288,15 +290,9 @@
 								<!-- 구글맵 -->
 								<div id="map" style="height: 400px;"></div>
 								
-								<div>
-									<button ng-click="getAllCalendarEvents();">전체 일정</button>
-									<button ng-click="getCurrentDateCalendarEvents();">선택 날짜 일정</button>
-								</div>
-								
 								<!-- Full Calendar -->
 								<div id="calendar">
 								</div>
-								
 								
 							</div><!-- 일정/맵 끝 -->
 							
@@ -307,10 +303,12 @@
 								<ul class="timeline-v2">
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
-										<div class="cbp_tmtime equal-height-column"><span></span> <span></span></div>
+										<div class="cbp_tmtime equal-height-column">
+										<span>DAY {{tourSpotEvent.tourDate}}</span>
+										</div>
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										<div class="cbp_tmlabel equal-height-column">
-											<h2>{{tourSpotEvent.title}}</h2>
+											<h2 ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</h2>
 											<div class="row">
 												<div class="col-md-4">
 													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
@@ -319,9 +317,11 @@
 													</div>
 												</div>
 												<div class="col-md-8">
-													<p>{{}}</p>
-													<p>{{}}</p>
-													<p>{{}}</p>
+													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p>
+													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
+													<p>전화번호 : {{tourSpotEvent.tel}}</p>
+													<p>주소 : {{tourSpotEvent.addr1}}</p>
+													<p>설명 : {{tourSpotEvent.overview}}</p>
 												</div>
 											</div>
 										</div>
@@ -336,10 +336,6 @@
 						</div>
 						
 					</div>
-				</div>
-				
-				<!-- 댓글 -->
-				<div id=tourPlanComment>
 				</div>
 				
 			</div>
@@ -393,6 +389,9 @@
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	
+	<!-- Googla Map API -->
+ 	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4"></script>
+	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
@@ -407,9 +406,5 @@
 	<script type="text/javascript" src="js/tourPlanDirectives.js"></script><!-- 앵귤러 사용자정의 지시자 선언 -->
 	<script type="text/javascript" src="makeplan.js"></script>
 	
-	<!-- Googla Map API -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4&callback=initMap" async defer></script>
-	
-
 </body>
 </html>

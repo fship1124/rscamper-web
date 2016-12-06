@@ -148,6 +148,7 @@
 		<br>
 		 출발역:<input type="text" id="startInput" name="start"><button class="btn btn-default" id="startButton" onclick="startBtn();">조회</button><br>
 		 도착역:<input type="text" id="arriveInput" name="arrive"><button class="btn btn-default" id="arriveButton" onclick="arriveBtn();">조회</button><br>
+		 																
 			   <input type="date" name="calender">
 			   <input type="button" value="조회하기" onclick="joinBtn();" />
 			
@@ -1205,6 +1206,7 @@
 			$("#trainModal").modal('hide');
 
 		}
+	}
 	</script>
 	<!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

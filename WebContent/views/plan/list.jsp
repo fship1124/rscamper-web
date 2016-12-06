@@ -103,9 +103,9 @@
 								<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
 								<ul class="post-shares">
 									<li><a href="#"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
+									<li><a href="#"><i class="rounded-2x fa fa-bookmark-o"></i><span ng-bind="plan.bookmarkCnt"></span></a></li>북마크
+									<li><a href="#"><i class="rounded-2x fa fa fa-clone"></i><span ng-bind="plan.customCnt"></span></a></li>커스텀
 									<li><a href="#"><i class="rounded-2x fa fa-comments-o"></i><span ng-bind="plan.commentCnt"></span></a></li>댓글
-									<li><a href="#"><i class="rounded-2x fa fa-pencil-square-o"></i><span ng-bind="plan.postCnt"></span></a></li>포스트
-									<li><a href="#"><i class="rounded-2x fa fa-map-marker"></i><span ng-bind="plan.locationCnt"></span></a></li>관광지
 								</ul>
 							</div>
 						</div><!-- 여행일정 한개 끝 -->
