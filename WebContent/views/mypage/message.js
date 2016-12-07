@@ -1,7 +1,19 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('MyController', function($scope) {
-	$scope.user = sessionStorageService.getObject("user");
+angular.module("MypageApp")
+.controller("MessageController", function($rootScope, $scope, $http, MyConfig) {
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
 	
 	/** ===========프로필 이미지 관련============================ */
 	// 프로필 사진 업로드 이미지 미리보기 이벤트
@@ -24,7 +36,7 @@ angular.module("myApp", [])
 	$scope.uploadProfileCallBack = function (result) {
         var data = JSON.parse(result);
         var userPhoto = {
-          userUid: $scope.user.userUid,
+          userUid: $rootScope.user.userUid,
           type: data.type,
           path: data.path,
           size: data.size
@@ -52,7 +64,7 @@ angular.module("myApp", [])
 	$scope.uploadBGCallBack = function (result) {
         var data = JSON.parse(result);
         var userPhoto = {
-          userUid: $scope.user.userUid,
+          userUid: $rootScope.user.userUid,
           type: data.type,
           path: data.path,
           size: data.size

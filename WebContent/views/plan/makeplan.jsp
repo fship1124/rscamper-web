@@ -199,10 +199,9 @@
 											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
 											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
 											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
-											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa  fa-file-text-o"></i></button>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa fa-file-text-o"></i></button>
 										</div>
 									</div>
-									
 								</div>
 								
 							</div><!-- 검색 끝 -->
@@ -210,7 +209,12 @@
 							<!-- 북마크 -->
 							<div class="tab-pane fade in" id="bookmarkTab">
 								<!-- 북마크 결과물 -->
-								<div></div>
+								<div>
+								
+								
+								
+								
+								</div>
 							</div><!-- 북마크 끝 -->
 							
 						</div><!-- 탭 내용 끝 -->

@@ -339,6 +339,8 @@ angular.module("TourPlanApp")
 		// 여행 장소 리스트 불러오기 
 		$scope.getSpotList = function () {
 			// 무한로딩 방지
+			console.log($scope.spotParams.pageNo);
+			console.log($scope.totalPages);
 			if ($scope.spotParams.pageNo >= $scope.totalPages) {
 				console.log("리스트 끝");
 				return;
@@ -349,7 +351,7 @@ angular.module("TourPlanApp")
 				method: "GET",
 				params: $scope.spotParams
 			}).success(function (response) {
-//				console.log(response);
+				console.log(response);
 				angular.forEach(response.tourSpotList, function (spot) {
 					$scope.tourSpotList.push(spot);
 				})					
@@ -369,7 +371,11 @@ angular.module("TourPlanApp")
 		// 무한 스크롤 이벤트
 		angular.element("#searchContent").scroll( function() {
 			var elem = angular.element("#searchContent");
-			if ( elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+//			console.log("1 : " +typeof(elem[0].scrollHeight))
+//			console.log("2 : " +typeof(elem.scrollTop()))
+//			console.log("3 : " +elem.outerHeight())
+//			console.log(elem[0].scrollHeight - elem.scrollTop())
+			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()) {
 				$scope.getSpotList();
 			}
 		});

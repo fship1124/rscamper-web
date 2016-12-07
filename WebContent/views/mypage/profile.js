@@ -1,14 +1,25 @@
 // 앵귤러 모듈
-angular.module("myApp", ["ngSimpleUpload"])
-.controller('MyController', function($scope, $http) {
-	// 세션에서 유저정보 가져오기
-	$scope.user = sessionStorageService.getObject("user");
-
+angular.module("MypageApp")
+.controller("ProfileController", function($rootScope, $scope, $http, MyConfig) {
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
+	
 	// 수정 모달에 올라갈 현재 프로필 정보 세팅
 	getLocationList(function (result) {
 		$scope.locations = result;
 		$scope.updateUser = {
-			uid : $scope.user.userUid,
+			uid : $rootScope.user.userUid,
 			displayName : $scope.user.displayName,
 			birthday : new Date($scope.user.birthday),
 			introduce : $scope.user.introduce,

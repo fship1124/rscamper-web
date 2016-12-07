@@ -1,7 +1,91 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('MyController', function($scope) {
-	$scope.user = sessionStorageService.getObject("user");
+angular.module("MypageApp")
+.controller("BookmarkController", function($rootScope, $scope, $http, MyConfig) {
+	/** ==================================================== */
+	/** 내 여행일정 */
+	/** ==================================================== */
+	// 내 여행일정 불러오기
+	$scope.getBookmarkTourPlanList = function () {
+		$http({
+			url: MyConfig.backEndURL + "/tourPlan/select/bookmarkTourPlanList?userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (result) {
+			$scope.planList = result
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
+	
+	$scope.getBookmarkTourPlanList();
+	
+	
+	// 여행일정 북마크 취소
+//	$scope.cancelBookmarkTourPlan = function () {};
+	
+	/** ==================================================== */
+	/** 북마크 여행일정 */
+	/** ==================================================== */
+	// 북마크 여행일정 불러오기
+	$scope.getBookmarkTourPlanList = function () {
+		$http({
+			url: MyConfig.backEndURL + "/tourPlan/select/bookmarkTourPlanList?userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (result) {
+			$scope.planList = result
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
+	
+	$scope.getBookmarkTourPlanList();
+	
+	// 여행일정 북마크 취소
+//	$scope.cancelBookmarkTourPlan = function () {};
+	
+	
+	/** ==================================================== */
+	/** 북마크 포스트 */
+	/** ==================================================== */
+	// 북마크 포스트 불러오기
+	$scope.getMyPostList = function (pageNo) {
+		$http({
+			url: MyConfig.backEndURL + "/community/select/board/bookmark?page="+pageNo+"&userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (response) {
+			console.log(response);
+			$scope.postList = response.boardList;
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
+	
+	$scope.getMyPostList(1);
+	
+	// 포스트 북마크 취소
+//	$scope.cancelBookmarkPost = function () {};
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
 	
 	/** ===========프로필 이미지 관련============================ */
 	// 프로필 사진 업로드 이미지 미리보기 이벤트
