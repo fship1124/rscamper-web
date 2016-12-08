@@ -829,7 +829,10 @@ angular.module("TourPlanApp")
 				data: $.param({
 					recordNo: RequestService.getParameter("recordNo"),
 					userUid: $rootScope.user.userUid,
-					content: $scope.tourPlanCommentForm.content 
+					content: $scope.tourPlanCommentForm.content,
+					recivUserUid: $scope.writer.userUid,
+					title: $scope.tourPlan.title,
+					url: document.location.href
 				}),
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			}).success(function (response) {
