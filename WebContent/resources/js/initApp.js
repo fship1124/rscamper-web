@@ -1,11 +1,8 @@
 // 환경설정
 var myConfig = {
 	// serverUrl: "http://localhost:8081" // 내 컴퓨터
-<<<<<<< HEAD
 ///	serverUrl : "http://14.32.66.104:8081", // 서버 컴퓨터
-=======
 //	serverUrl : "http://14.32.66.104:8081", // 서버 컴퓨터
->>>>>>> a0ba9caf15459bcec584dd34fac0dfd3cc53e902
 	serverUrl : "http://192.168.0.9:8081", // 서버 컴퓨터
 	imsiServerUrl : "http://192.168.0.173:8081", // 호동 스프링 서버 컴퓨터
 	nodeServerUrl : "http://192.168.0.173:10001" // 호동 노드 서버 컴퓨터

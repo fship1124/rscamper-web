@@ -178,7 +178,8 @@
 				<input type="hidden" name="numOfRows"> 
 				<input type="hidden" name="pageNo"> 
 				<input type="hidden" name="pageSize">
-				<input type="hidden" name="startPage"> <input type="button" value="조회하기" onclick="joinBtn();" />
+				<input type="hidden" name="startPage"> 
+				<input type="button" value="조회하기" onclick="joinBtn();" />
 
 			</div>
 		</div>

@@ -215,7 +215,7 @@ input[type=radio] {display:none;}
 			</thead>
 			<tbody></tbody>
 		</table>
-			<a>※ 본 정보는 한국철도공사의 사정에 따라 변경 될 수 있습니다. 최신정보 확인은 한국철도공사 홈페이지( http://letskorail.com ) 에서 확인하시기 바랍니다.</a>
+			<p>※ 본 정보는 한국철도공사의 사정에 따라 변경 될 수 있습니다. 최신정보 확인은 한국철도공사 홈페이지( http://letskorail.com ) 에서 확인하시기 바랍니다.</p>
 		
 		
 	<!-- Train Modal(여기모달부분) -->
@@ -236,6 +236,42 @@ input[type=radio] {display:none;}
 				</div>
 			</div>
 		</div>
+		
+		<!-- 메인에서 조회시 모달창 -->
+		<div class="modal fade" id="mainTraintime" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">열차시간표</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table" id="mainTimeList">
+							<thead>
+								<tr>
+									<td>출발역</td>
+									<td>출발시간</td>
+									<td>도착역</td>
+									<td>도착시간</td>
+									<td>열차종류</td>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<p>※ 본 정보는 한국철도공사의 사정에 따라 변경 될 수 있습니다. 최신정보 확인은 한국철도공사 홈페이지<a href="http://letskorail.com"></a>에서 확인하시기 바랍니다.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
 
 	</div>
 
@@ -997,7 +1033,12 @@ input[type=radio] {display:none;}
 		$("#trainModal").modal('hide');
 
 	}
-
+	
+	// 메인 모달창
+	function mainTraintime() {
+		
+	}
+	
 		
 	</script>
 	<!-- 구글맵KEY -->
