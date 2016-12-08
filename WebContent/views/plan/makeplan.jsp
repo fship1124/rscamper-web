@@ -199,18 +199,77 @@
 											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
 											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
 											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
-											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa  fa-file-text-o"></i></button>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa fa-file-text-o"></i></button>
 										</div>
 									</div>
-									
 								</div>
 								
 							</div><!-- 검색 끝 -->
 							
+							
 							<!-- 북마크 -->
 							<div class="tab-pane fade in" id="bookmarkTab">
-								<!-- 북마크 결과물 -->
-								<div></div>
+								<!-- 검색창 제어 -->
+								<div id="searchHeader">
+									<!-- 검색 -->
+									<div class="bg-light" style="text-align: center;">
+										<!-- 검색 텍스트 -->
+										<input type="text" id="bookmarkSearchText" class="form-control margin-bottom-10" placeholder="검색할 장소명, 주소" ng-model="bookmarkSearchWord">
+										<!-- 검색 카테고리 -->
+										<div class="btn-group" data-toggle="buttons" style="width:100%;">
+										  <label class="btn rounded btn-tumblr" style="width:22%; margin: 3px;" ng-click="initBookmarkSpotList('all')">
+										    <input type="radio">
+										    <i class="fa fa-bars"></i>
+										  </label>
+										  <label class="btn rounded btn-amazon" style="width:22%; margin: 3px;" ng-click="initBookmarkSpotList('tour')">
+										    <input type="radio">
+										    <i class="fa fa-binoculars"></i>
+										  </label>
+										  <label class="btn rounded btn-twitter" style="width:22%; margin: 3px;" ng-click="initBookmarkSpotList('rest')">
+										    <input type="radio">
+										    <i class="fa fa-cutlery"></i>
+										  </label>
+										  <label class="btn rounded btn-evernote" style="width:22%; margin: 3px;" ng-click="initBookmarkSpotList('bed')">
+										    <input type="radio">
+										    <i class="fa fa-bed"></i>
+										  </label>
+										</div>
+									</div>
+								</div>
+								
+								<div id="searchResult">
+									<p>검색 결과</p>
+								</div>
+								
+								<!-- 검색창 결과물 -->
+								<div id="bookmarkContent">
+									<!-- 결과 카드 반복 -->
+									<div class="tourSpot" ng-repeat="bookmarkTourSpot in tourBookmarkSpotList" ng-click="openDetailTourSpot(bookmarkTourSpot);" on-finish-render="ngRepeatFinished">
+										<!-- 전송용 데이터 -->
+										<div id="tourSpotData" ng-hide="true">
+											<b ng-bind="bookmarkTourSpot.contentid"></b>
+											<b ng-bind="bookmarkTourSpot.contenttypeid"></b>
+											<b ng-bind="bookmarkTourSpot.title"></b>
+											<b ng-bind="bookmarkTourSpot.mapx"></b>
+											<b ng-bind="bookmarkTourSpot.mapy"></b>
+											<b ng-bind="bookmarkTourSpot.firstimage"></b>
+											<b ng-bind="bookmarkTourSpot.contenttypeid | tourSpotColor"></b>
+											<b ng-bind="bookmarkTourSpot.contenttypeid | tourSpotCategory"></b>
+											<b ng-bind="bookmarkTourSpot.overview"></b>
+										</div>
+										<div class="tourSpotImageDiv">
+											<img class="tourSpotImage" draggable="false" src="{{bookmarkTourSpot.firstimage2}}" >
+										</div>
+										<div class="tourSpotContent" >
+											<b ng-bind="bookmarkTourSpot.contenttypeid | tourSpotCategory"></b>
+											<b ng-bind="bookmarkTourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
+											<b ng-bind="bookmarkTourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<b ng-bind="bookmarkTourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa fa-file-text-o"></i></button>
+										</div>
+									</div>
+								</div>
+							
 							</div><!-- 북마크 끝 -->
 							
 						</div><!-- 탭 내용 끝 -->

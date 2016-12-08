@@ -339,6 +339,8 @@ angular.module("TourPlanApp")
 		// 여행 장소 리스트 불러오기 
 		$scope.getSpotList = function () {
 			// 무한로딩 방지
+//			console.log($scope.spotParams.pageNo);
+//			console.log($scope.totalPages);
 			if ($scope.spotParams.pageNo >= $scope.totalPages) {
 				console.log("리스트 끝");
 				return;
@@ -349,7 +351,7 @@ angular.module("TourPlanApp")
 				method: "GET",
 				params: $scope.spotParams
 			}).success(function (response) {
-//				console.log(response);
+				console.log(response);
 				angular.forEach(response.tourSpotList, function (spot) {
 					$scope.tourSpotList.push(spot);
 				})					
@@ -369,7 +371,11 @@ angular.module("TourPlanApp")
 		// 무한 스크롤 이벤트
 		angular.element("#searchContent").scroll( function() {
 			var elem = angular.element("#searchContent");
-			if ( elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
+//			console.log("1 : " +typeof(elem[0].scrollHeight))
+//			console.log("2 : " +typeof(elem.scrollTop()))
+//			console.log("3 : " +elem.outerHeight())
+//			console.log(elem[0].scrollHeight - elem.scrollTop())
+			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()) {
 				$scope.getSpotList();
 			}
 		});
@@ -408,35 +414,89 @@ angular.module("TourPlanApp")
 		
 
 		/** ==================================================== */
-		/** TODO 북마크 */
+		/** 북마크 */
 		/** ==================================================== */
 		// 여행 장소 리스트 불러오기 
 		$scope.getBookmarkSpotList = function () {
 			// 무한로딩 방지
-			if ($scope.spotParams.pageNo >= $scope.totalPages) {
+//			console.log($scope.bookmarkSpotParams.pageNo);
+//			console.log($scope.bookmarkTotalPages);
+			if ($scope.bookmarkSpotParams.pageNo >= $scope.bookmarkTotalPages) {
 				console.log("리스트 끝");
 				return;
 			}
-			$scope.spotParams.pageNo++;
+			$scope.bookmarkSpotParams.pageNo++;
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/bookmarkSpotList",
+				url: MyConfig.backEndURL + "/tourPlan/select/spotList/bookmark",
 				method: "GET",
-				params: $scope.spotParams
+				params: $scope.bookmarkSpotParams
 			}).success(function (response) {
-//				console.log(response);
+				console.log(response);
 				angular.forEach(response.tourSpotList, function (spot) {
-					$scope.tourSpotList.push(spot);
+					$scope.tourBookmarkSpotList.push(spot);
 				})					
-				$scope.totalPages = response.totalPages;
+				$scope.bookmarkTotalPages = response.totalPages;
+				
 			}).error(function (error) {
 				console.log(error);
 			});
+			
 		};
 		
+		// 장소리스트 ng-repeat 완료 함수 : 드래그 이벤트 걸어주기
+		$scope.$on("ngRepeatFinished", function(ngRepeatFinishedEvent) {
+			$scope.addBookmarkDragEvent();
+		});
+		
+		// 무한 스크롤 이벤트
+		angular.element("#bookmarkContent").scroll( function() {
+			var elem = angular.element("#bookmarkContent");
+//			console.log("1 : " +typeof(elem[0].scrollHeight))
+//			console.log("2 : " +typeof(elem.scrollTop()))
+//			console.log("3 : " +elem.outerHeight())
+//			console.log(elem[0].scrollHeight - elem.scrollTop())
+			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()) {
+				$scope.getBookmarkSpotList();
+			}
+		});
+		
+		// 검색창 ENTER 이벤트
+		angular.element("#bookmarkSearchText").on("keypress", function (e) {
+			if(e.which === 13){
+				if ($scope.bookmarkSpotParams.category) {
+					$scope.initBookmarkSpotList($scope.bookmarkSpotParams.category);
+				} else {
+					$scope.initBookmarkSpotList("all");
+				}
+			}
+		});
+		
+		// 장소 리스트 가져오기 시작
+		$scope.initBookmarkSpotList = function (category) {
+			// 장소 리스트 선언
+			$scope.tourBookmarkSpotList = [];
+			// 검색 및 검색 디폴트 값
+			$scope.bookmarkSpotParams = {
+					standard: "PUBLIC_DATA_LIST_NO",
+					order: "ASC",
+					word: $scope.bookmarkSearchWord,
+					category: category,
+					amount: 20,
+					pageNo: 0,
+					userUid: $rootScope.user.userUid
+			};
+			$scope.bookmarkTotalPages = 1;
+			// 첫 리스트 불러오기
+			$scope.getBookmarkSpotList();
+		}
+		
+		// 디폴트 리스트 호출 : 전체
+		$scope.initBookmarkSpotList("all");
 		
 		/** ==================================================== */
 		/** TODO 스토리 */
 		/** ==================================================== */
+		
 		
 		/** ==================================================== */
 		/** 일정표												 */
@@ -692,6 +752,45 @@ angular.module("TourPlanApp")
 		// 여행장소리스트 드래그 이벤트 추가 함수
 		$scope.addDragEvent = function () {
 	        angular.element($("#searchContent .tourSpot")).each(function() {
+	    		// 각 이벤트에 들어가야할 데이터
+	    		$(this).data("event", {
+	    			title: $(this).children().first().find("b:eq(2)").text(), // 태그안 택스트를 title 변수로 준다
+	    			stick: true, // 날짜이동해도 일정을 유지시켜줌
+	    			constraint: "availableDate", // availableDate필드에만 일정 추가 가능
+	    			color: $(this).children().first().find("b:eq(6)").text(),
+	    			
+	    			// 필터를 위한
+	    			category: "tourSpot",
+	    			
+	    			// DB에 들어가야할 일정 데이터 
+	    			recordNo: RequestService.getParameter("recordNo"),
+	    			contentId: $(this).children().first().find("b:eq(0)").text(),
+	    			contentTypeId: $(this).children().first().find("b:eq(1)").text(),
+	    			spotTitle: $(this).children().first().find("b:eq(2)").text(),
+	    			mapX: $(this).children().first().find("b:eq(3)").text(),
+	    			mapY: $(this).children().first().find("b:eq(4)").text(),
+	    			imageUrl: $(this).children().first().find("b:eq(5)").text(),
+	    			categoryColor: $(this).children().first().find("b:eq(6)").text(),
+	    			categoryName: $(this).children().first().find("b:eq(7)").text(),
+	    			overview: $(this).children().first().find("b:eq(8)").text()
+	    		});
+	    		
+	    		// JQuery-UI 드래그 이벤트 추가 함수
+	    		$(this).draggable({
+	    			revert: true,
+	    			revertDuration: 0,
+	    			zIndex: 99,
+	    			appendTo: "body",
+	    			containment: "window",
+	    			scroll: false,
+	    			helper: "clone"
+	    		});
+	    	});
+		};
+		
+		// 여행장소 북마크 리스트 드래그 이벤트 추가 함수
+		$scope.addBookmarkDragEvent = function () {
+	        angular.element($("#bookmarkContent .tourSpot")).each(function() {
 	    		// 각 이벤트에 들어가야할 데이터
 	    		$(this).data("event", {
 	    			title: $(this).children().first().find("b:eq(2)").text(), // 태그안 택스트를 title 변수로 준다

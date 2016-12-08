@@ -162,7 +162,7 @@
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" style="padding-top: 20px;" ng-app="myApp" ng-controller="MyController">
+		<div class="container content profile" style="padding-top: 20px;" ng-app="MypageApp" ng-controller="MessageController">
 		
 			<!-- 배경 사진 업로드 모달 -->
 			<%@include file="include/BGUploadFormModal.jsp"%>
@@ -377,6 +377,10 @@
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
+	<script type="text/javascript" src="js/mypageApp.js"></script>
+	<script type="text/javascript" src="js/mypageDirectives.js"></script>
+	<script type="text/javascript" src="js/mypageFilters.js"></script>
+	<script type="text/javascript" src="js/mypageServices.js"></script>
 	<script type="text/javascript" src="message.js"></script>
 	<script type="text/javascript" src="message_sub.js"></script>
 	

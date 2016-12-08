@@ -1,9 +1,127 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('MyController', function($scope) {
-	$scope.user = sessionStorageService.getObject("user");
+angular.module("MypageApp")
+.controller("BookmarkController", function($rootScope, $scope, $http, MyConfig) {
+	/** ==================================================== */
+	/** 내 여행일정 */
+	/** ==================================================== */
+	// 내 여행일정 불러오기
+	$scope.getBookmarkTourPlanList = function () {
+		$http({
+			url: MyConfig.backEndURL + "/tourPlan/select/bookmarkTourPlanList?userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (result) {
+			$scope.planList = result
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
 	
-	/** ===========프로필 이미지 관련============================ */
+	$scope.getBookmarkTourPlanList();
+	
+	
+	// 여행일정 북마크 취소
+//	$scope.cancelBookmarkTourPlan = function () {};
+	
+	/** ==================================================== */
+	/** 북마크 여행일정 */
+	/** ==================================================== */
+	// 북마크 여행일정 불러오기
+	$scope.getBookmarkSpotList = function () {
+		// 무한로딩 방지
+//		console.log($scope.bookmarkSpotParams.pageNo);
+//		console.log($scope.bookmarkTotalPages);
+		if ($scope.bookmarkSpotParams.pageNo >= $scope.bookmarkTotalPages) {
+			console.log("리스트 끝");
+			return;
+		}
+		$scope.bookmarkSpotParams.pageNo++;
+		$http({
+			url: MyConfig.backEndURL + "/tourPlan/select/spotList/bookmark",
+			method: "GET",
+			params: $scope.bookmarkSpotParams
+		}).success(function (response) {
+			console.log(response);
+			angular.forEach(response.tourSpotList, function (spot) {
+				$scope.tourBookmarkSpotList.push(spot);
+			})					
+			$scope.bookmarkTotalPages = response.totalPages;
+			
+		}).error(function (error) {
+			console.log(error);
+		});
+	};
+	
+	// 장소리스트 ng-repeat 완료 함수 : 드래그 이벤트 걸어주기
+	$scope.$on("ngRepeatFinished", function(ngRepeatFinishedEvent) {
+		$scope.addBookmarkDragEvent();
+	});
+	
+	// 장소 리스트 가져오기 시작
+	$scope.initBookmarkSpotList = function (category) {
+		// 장소 리스트 선언
+		$scope.tourBookmarkSpotList = [];
+		// 검색 및 검색 디폴트 값
+		$scope.bookmarkSpotParams = {
+				standard: "PUBLIC_DATA_LIST_NO",
+				order: "ASC",
+				word: $scope.bookmarkSearchWord,
+				category: category,
+				amount: 20,
+				pageNo: 0,
+				userUid: $rootScope.user.userUid
+		};
+		$scope.bookmarkTotalPages = 1;
+		// 첫 리스트 불러오기
+		$scope.getBookmarkSpotList();
+	}
+	
+	// 디폴트 리스트 호출 : 전체
+	$scope.initBookmarkSpotList("all");
+	
+	// TODO 여행일정 북마크 취소
+	$scope.cancelBookmarkTourPlan = function () {};
+	
+	
+	/** ==================================================== */
+	/** 북마크 포스트 */
+	/** ==================================================== */
+	// 북마크 포스트 불러오기
+	$scope.getMyPostList = function (pageNo) {
+		$http({
+			url: MyConfig.backEndURL + "/community/select/board/bookmark?page="+pageNo+"&userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (response) {
+			console.log(response);
+			$scope.postList = response.boardList;
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
+	
+	$scope.getMyPostList(1);
+	
+	// TODO 포스트 북마크 취소
+	$scope.cancelBookmarkPost = function () {};
+	
+	
+	/** ==================================================== */
+	/** 메뉴 카운트 조회 */
+	/** ==================================================== */
+	$scope.getMenuCount = function () {
+		$http({
+			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
+	
+	/** ==================================================== */
+	/** 프로필 이미지 */
+	/** ==================================================== */
 	// 프로필 사진 업로드 이미지 미리보기 이벤트
 	$('#profileImageFile').on('change', function(){
 		if(img_validation(this)) {
@@ -92,9 +210,10 @@ angular.module("myApp", [])
              });
         });
     };
-	/** ===========프로필 이미지 관련============================ */
+    
+    // 왼쪽 메뉴에 액티브 효과주기
+    $(".list-group-item").removeClass("active");
+    $("#bookmark_menu").addClass("active");
 })
 
-// 왼쪽 메뉴에 액티브 효과주기
-$(".list-group-item").removeClass("active");
-$("#bookmark_menu").addClass("active");
+

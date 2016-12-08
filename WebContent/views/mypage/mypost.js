@@ -1,7 +1,68 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('MyController', function($scope) {
-	$scope.user = sessionStorageService.getObject("user");
+angular.module("MypageApp")
+.controller("MyPostController", function($rootScope, $scope, $http, MyConfig) {
+	/** ==================================================== */
+	/** 내 포스트 */
+	/** ==================================================== */
+	// 내 포스트 불러오기
+	$scope.getMyPostList = function () {
+		$http({
+			url: MyConfig.backEndURL + "/community/select/board/user?page=1&userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (response) {
+			console.log(response)
+			$scope.postList = response.boardList;
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
+	
+	$scope.getMyPostList();
+	
+	// 포스트 삭제하기
+	$scope.removePost = function (boardNo) {
+		console.log(boardNo);
+		// 삭제하시겠습니까
+		swal({
+			title : "포스트",
+			text : "해당 포스트를삭제하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonColor : "#DD6B55",
+			confirmButtonText : "네",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				$http({
+					url: MyConfig.backEndURL + "/community/delete/oneBoard?boardNo=" + boardNo,
+					method: "DELETE",
+				}).success(function (){
+					swal("삭제완료!", "해당 포스트가 삭제되었습니다.", "success");
+					$scope.getMyPostList();
+				}).error(function (error){
+					swal("오류발생!", error, "error");
+				})
+			} else {
+				swal("취소됨!", "삭제가 취소되었습니다.", "error");
+			}
+		});
+	};
+	
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
 	
 	/** ===========프로필 이미지 관련============================ */
 	// 프로필 사진 업로드 이미지 미리보기 이벤트
