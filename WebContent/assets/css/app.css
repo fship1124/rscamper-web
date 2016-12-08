@@ -1311,6 +1311,13 @@ i.icon-custom {
 	border: solid 1px #555;
 }
 
+i.icon-xs {
+ width: 25px;
+ height: 25px;
+ font-size: 14px;
+ line-height: 25px;
+}
+
 i.icon-sm {
  width: 35px;
  height: 35px;

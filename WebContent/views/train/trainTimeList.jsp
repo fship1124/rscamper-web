@@ -197,6 +197,7 @@
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript">
+	
 	function joinBtn() {
 		var trainGradeCode = $("input[name=trainRadio]:checked").val();
 		var depPlaceId = $("input[name=start]").val();
@@ -236,20 +237,6 @@
 				var data = JSON.parse(data);
 				timeList(data);
 
-//	 	function joinBtn() {
-//	 		var trainGradeCodeIsTrue = false;
-//	 		var trainGradeCode = document.getElementsByName('trainRadio');
-//	 		var trainGradeCodeVal = "00";
-//	 		for (var i = 0; i < trainGradeCode.length; i++) {
-//	 			var t = trainGradeCode[i];
-
-//	 			if (t.checked == true) {
-//	 				console.log("ttttt");
-//	 				console.dir(t);
-//	 				trainGradeCodeIsTrue = true;
-//	 				trainGradeCodeVal = t.defaultValue; 
-//	 			}
-//	 		}
 			}
 		});
 	}
