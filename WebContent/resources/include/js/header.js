@@ -1,18 +1,16 @@
-var user = sessionStorageService.getObject("user");
 
 
-
-
-/* 알림 */
-window.onload = function() {
+$(document).ready(function(){
+	var user = sessionStorageService.getObject("user");
+	/* 알림 */
 	$('[data-toggle="popover"]').popover({
 		html: true, 
 		content:  function() {
-//          return $('#popover-content').html();
-          return $('.last-noti-list').html();
-        }
+//	      return $('#popovnotier-content').html();
+	      return $('.last-noti-list').html();
+	    }
 	});
-	
+
 	console.log("user");
 	console.dir(user);
 
@@ -65,19 +63,12 @@ window.onload = function() {
 		
 		$("#my-notice-list").html(html);
 	}
-	
-	
-	
-}
+});
 
 
-var hideAllPopovers = function() {
-    $('[data-toggle="popover"]').each(function() {
-         $(this).popover('hide');
-    });  
-};
 
- 
+
+// 알림 닫기 
 $('body').on('click', function (e) {
     //did not click a popover toggle or popover
     if ($(e.target).data('toggle') !== 'popover'
@@ -85,9 +76,15 @@ $('body').on('click', function (e) {
         $('[data-toggle="popover"]').popover('hide');
     }
 });
- /* End 알림 */
 
+//알림 닫기 이벤트
+var hideAllPopovers = function() {
+    $('[data-toggle="popover"]').each(function() {
+         $(this).popover('hide');
+    });  
+};
 
+// 알림 클릭 -> 페이지 이동
 function pageMove(e) {
 	alert("ee");
 	console.dir(e);

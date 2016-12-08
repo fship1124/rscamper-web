@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.js">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.js"> --%>
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
@@ -73,6 +73,80 @@
 	height: 300px;
 }
 
+
+.checkbox[type=radio] {display:none;}
+label.input-label { 
+  display: inline-block;
+  font-size: 13px;
+  cursor: pointer;
+  }
+label.input-label::before {
+  display: inline-block;
+  margin:0 10px;
+  font-family: FontAwesome;
+  font-size: 20px;
+  color: rgba(4, 120, 193,0.2);
+  -webkit-transition: transform 0.2s ease-out, color 0.2s ease;
+  -moz-transition: transform 0.2s ease-out, color 0.2s ease;
+  -ms-transition: transform 0.2s ease-out, color 0.2s ease;
+  -o-transition: transform 0.2s ease-out, color 0.2s ease;
+  transition: transform 0.2s ease-out, color 0.2s ease;
+  -webkit-transform: scale3d(0.8,0.8,1);
+  -moz-transform: scale3d(0.8,0.8,1);
+  -ms-transform: scale3d(0.8,0.8,1);
+  -o-transform: scale3d(0.8,0.8,1);
+  transform: scale3d(0.8,0.8,1);
+}
+label.input-label.checkbox::before {
+  content: "\f0c8";
+}
+label.input-label.radio::before {
+  content: "\f111";
+}
+input.checkbox + label.input-label:hover::before {
+  -webkit-transform: scale3d(1,1,1);
+  -moz-transform: scale3d(1,1,1);
+  -ms-transform: scale3d(1,1,1);
+  -o-transform: scale3d(1,1,1);
+  transform: scale3d(1,1,1);
+}
+
+input.checkbox + label.input-label:active::before {
+  -webkit-transform: scale3d(1.5,1.5,1);
+  -moz-transform: scale3d(1.5,1.5,1);
+  -ms-transform: scale3d(1.5,1.5,1);
+  -o-transform: scale3d(1.5,1.5,1);
+  transform: scale3d(1.5,1.5,1);
+}
+
+input.checkbox:checked + label.input-label::before {
+  display: inline-block; 
+  font-family: FontAwesome; 
+  color:#0478c1;
+  -webkit-transform: scale3d(1,1,1);
+  -moz-transform: scale3d(1,1,1);
+  -ms-transform: scale3d(1,1,1);
+  -o-transform: scale3d(1,1,1);
+  transform: scale3d(1,1,1);
+}
+input.checkbox:checked + label.input-label.checkbox::before {
+    content:"\f14a";
+}
+input.checkbox:checked + label.input-label.radio::before {
+    content:"\f058";
+}
+.time-div div {
+	padding: 0;
+	text-align: left;
+}
+#train-search-btn {
+	background-color: orange;
+}
+#train-search-btn:hover {
+	background-color: #b36b00;
+}
+
+
 </style>
 </head>
 
@@ -115,10 +189,10 @@
 			      <img src="train1.jpg" alt="..." style="width: 100%; height: 300px;">
 			    </div>
 			    <div class="item">
-			      <img src="train55.png" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train66.jpg" alt="..." style="width: 100%; height: 300px;">
 			    </div>
 			    <div class="item">
-			      <img src="train33.png" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train77.png" alt="..." style="width: 100%; height: 300px;">
 			    </div>
 			    <div class="item">
 			      <img src="train44.png" alt="..." style="width: 100%; height: 300px;">
@@ -142,14 +216,50 @@
 		</div>
 		<div class="col col-lg-4">
 			<!-- 시간조회 -->
-			  <form class="shipping-form" style="float: right; width: 340px;">
-				<h3>열차시간조회</h3>
-					<div class="form-group g-mb-20">
-						<input type="text" name="slocation" class="form-control rounded g-mb-20" placeholder="출발역">
-						<input type="text" name="elocation" class="form-control rounded g-mb-20" placeholder="도착역">
-							<input type="date" class="form-control rounded">
+			  <form class="shipping-form" id="mainTimeList" style="padding: 0; float: right; width: 340px;">
+				<div class="wrap">
+					<div class="row time-div" style="width: 100%;">
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio0" value="01" class="checkbox">
+		  						<label for="radio0" class="input-label radio">새마을</label>
+						</div>
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio1" value="02" class="checkbox">
+		  						<label for="radio1" class="input-label radio">무궁화</label>
+						</div>
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio2" value="03" class="checkbox">
+		  						<label for="radio2" class="input-label radio">통근열차</label> 
+						</div>
 					</div>
-					<a href="#" class="btn-u btn-u-lg btn-u-default btn-u-upper rounded">조회하기</a>
+					<div class="row time-div" style="width: 100%;">
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio3" value="04" class="checkbox">
+		  						<label for="radio3" class="input-label radio">누리로</label> 
+						</div>
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio4" value="09" class="checkbox">
+	  							<label for="radio4" class="input-label radio">ITX-청춘</label>
+						</div>
+						<div class="col col-lg-4">
+							<input type="radio" name="radio" id="radio5" value="08" class="checkbox">
+		  						<label for="radio5" class="input-label radio">ITX-새마을</label>
+						</div>
+					</div>
+				</div>
+					
+				<div class="form-group g-mb-20">
+					<input type="text" id="startStation" name="depPlaceId" class="form-control rounded g-mb-20" placeholder="출발역">
+					<input type="hidden" id="startStation-id">
+					<input type="text" id="arriveStation" name="arrPlaceId" class="form-control rounded g-mb-20" placeholder="도착역">
+					<input type="hidden" id="arriveStation-id">
+					<input type="date" class="form-control rounded" name="depPlandTime">
+					<input type="hidden" name="numOfRows"> 
+					<input type="hidden" name="pageNo"> 
+					<input type="hidden" name="startPage"> 
+					<input type="hidden" name="pageSize">
+				</div>
+				<a id="train-search-btn" class="btn-u btn-u-lg btn-u-upper rounded" onclick="mainTimeSearch();">조회하기</a>
 			  </form>
 		</div>
 	</div>
@@ -160,342 +270,45 @@
             	<div class="content-tabs">
             	
             	</div>
-			</div>            	
-		   <div class="col-md-9">
-		   		<div class="row">
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						여기엔 자세한내용?
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
-		   </div> 
-       	<hr class="margin-bottom-30"/>
+			</div>
+
+
+			<div class="col-md-9">
+				<div class="row" id="tourPlanList"></div>
+			</div>
+
+
+			<hr class="margin-bottom-30"/>
 		              	
 		   <!-- 추천콘텐츠 -->
 		   <div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:3px solid black;">
-                	추천콘텐츠
-            	<div class="content-tabs">
-            	
-            	</div>
-            	
+                	전국혜택
+            	<div class="content-tabs"></div>
            </div>
 		   <div class="col-md-9">
-		   		<div class="row">
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						여기엔 자세한내용?
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   			<div class="col-md-4">
-		   				<div class="thumbnails thumbnail-style thumbnail-kenburn">
-		   					<div class="thumbnail-img">
-		   						<div class="overflow-hidden">
-		   							<img class="img-responsive" src="abc.png">
-		   						</div>
-		   						<a class="btn-more hover-effect" href="#">자세히</a>
-		   					</div>
-		   					<div class="caption">
-		   						<h3>
-		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a>
-		   						</h3>
-		   						<p>
-		   						내용들~~~~~~~~
-		   						</p>
-		   					</div>
-		   				</div>
-		   			</div>
-		   		</div>
+		   		<div class="row" id="benefitList"></div>
 		   </div>
 		
-		 <!-- 관광지, 숙소, 맛집-->  
+		
+			<!-- 관광지, 숙소, 맛집-->  
 		   <div class="col-md-5">
 		   		<h2 class="title-v4">관광지</h2>
-		   		<!-- 여기서 밑으로 -->	
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   </div>            	
+		   		<div id="touristList" style="width:350px; height:850px;"></div>
+		   	</div> 
+		   	
+		   <!-- 맛집 -->            	
 		   <div class="col-md-5">
 		   		<h2 class="title-v4">맛집</h2>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   </div>            	
-		   <div class="col-md-5">
+		   		<div id="foodList" style="width:350px; height:850px;"></div>
+		
+		    </div>  
+		          	
+			<!-- 숙소 --> 
+             <div class="col-md-5">
 		   		<h2 class="title-v4">숙소</h2>
-		   		<div class="blog-thumb margin-bottom-20">
-		   			<div class="blog-thumb-hover">
-		   				<img src="abc.png">
-		   				<a class="hover-grad" href="#">
-		   					<i class="fa fa-photo"></i>
-		   				</a>
-		   			</div>
-		   			<div class="blog-thumb-desc">
-		   				<h3>
-		   					<a href="#">내용들~~~~~~~~</a>
-		   				</h3>
-		   			</div>
-		   		</div>
-		   </div>            	
-            
-            
-<!--             <button class="btn-u btn-brd rounded btn-u-sea btn-u-lg" type="button">버튼</button> -->
-            
-		
-<!-- 			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;"> -->
-<!--                 	여행 꿀팁 -->
-<!--             </div> -->
-<!--             <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;"> -->
-<!--             </div> -->
-<!--             <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;"> -->
-<!--             <span>여행 꿀팁</span> 더보기 +</a> -->
-<!-- 			<br><br> -->
-<!-- 			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;"> -->
-<!--                 	커뮤니티 -->
-<!--             </div> -->
-<!--             <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;"> -->
-<!--             </div> -->
-<!--             <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;"> -->
-<!--             <span>커뮤니티</span> 더보기 +</a> -->
-			
-<!-- 			<br><br> -->
-<!-- 			<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:2px solid black;"> -->
-<!--                 	관광지 맛집 숙소 -->
-<!--             </div> -->
-<!--             <div class="conts-box-list" style="margin-top: 20px; height: 500px; border: 1px solid blue;"> -->
-<!--             </div> -->
-<!--             <a class="btn-more" href="/city?serviceType=global&amp;tab=hotdeal" style="margin: 0 auto;"> -->
-<!--             <span>관광지 맛집 숙소</span> 더보기 +</a> -->
-		
-<!-- 		<div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:3px solid black;"> -->
-<!--                 	영역 표시 -->
-<!--             </div> -->
+		   		<div id="lodegeList" style="width:350px; height:850px;"></div> 
               
+               </div>      
 		</div>
 		
 		
@@ -547,13 +360,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
-	<script src="${pageContext.request.contextPath}/resources/include/js/header.js"></script>
-	<script type="text/javascript" src="main.js">
-		$(function() {
-		    $( "#datepicker1" ).datepicker({
-		    });
-		});
-	</script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/resources/include/js/header.js"></script> --%>
+	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="main_sub.js"></script>
 	
 </body>
 </html>
