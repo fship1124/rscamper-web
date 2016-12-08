@@ -46,11 +46,10 @@
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/include/css/header.css">
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <!-- 달력 css -->
-<!--   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<link rel="stylesheet" href="../assets/js/jquery-ui-1.12.1/jquery-ui.js">
 <link rel="stylesheet" href="../assets/css/shiping.style.css">	
 <style>
 .row{
@@ -88,7 +87,6 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Butterfly Train</h1>
 				<ul class="pull-right breadcrumb">
 					<li class="active"><a href="main.jsp">home</a></li>
 				</ul>
@@ -549,11 +547,12 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script src="${pageContext.request.contextPath}/resources/include/js/header.js"></script>
 	<script type="text/javascript" src="main.js">
-	$(function() {
-	    $( "#datepicker1" ).datepicker({
-	    });
-	});
+		$(function() {
+		    $( "#datepicker1" ).datepicker({
+		    });
+		});
 	</script>
 	
 </body>
