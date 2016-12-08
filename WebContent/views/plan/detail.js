@@ -9,7 +9,7 @@ angular.module("TourPlanApp")
 				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 				
 				// TODO 공개비공개 확인
 				
@@ -119,6 +119,10 @@ angular.module("TourPlanApp")
 			});
 		};
 		
+		
+		/** ==================================================== */
+		/** 여행일정 수정, 공개, 좋아요, 북마크, 복사 */
+		/** ==================================================== */
 		// 수정하기
 		$scope.modTourPlan = function () {
 			// 일정을 수정하시겠습니까?
@@ -190,16 +194,36 @@ angular.module("TourPlanApp")
 			}
 		};
 		
+		$scope.myselfAlert = function () {
+			swal("취소", "자신의 일정에는 하실수 없습니다.", "error");
+		};
+		
 		// 체크 좋아요 북마크 커스텀
 		$scope.checkTourPlanSet = function () {
 			$http({
 				url: MyConfig.backEndURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 				method: "GET"
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 				$scope.tourPlanCheckSet = response;
 			})
 		};
+		
+		// 토스트
+		$scope.toast = function (text, heading, icon) {
+			$.toast({
+			    text: text, // Text that is to be shown in the toast
+			    heading: heading, // Optional heading to be shown on the toast
+			    icon: icon, // Type of toast icon
+			    showHideTransition: 'fade', // fade, slide or plain
+			    allowToastClose: false, // Boolean value true or false
+			    hideAfter: 1000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+			    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+			    position: 'mid-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+			    textAlign: 'left',  // Text alignment i.e. left, right or center
+			    loader: false,
+			});
+		}
 		
 		// 좋아요
 		$scope.likeTourPlan = function () {
@@ -210,6 +234,7 @@ angular.module("TourPlanApp")
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
 						$scope.checkTourPlanSet();
+						$scope.toast("이 일정을 추천합니다.", "좋아요", "success");
 					})
 				} else {
 					$http({
@@ -218,6 +243,7 @@ angular.module("TourPlanApp")
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
 						$scope.checkTourPlanSet();
+						$scope.toast("추천을 취소합니다.", "좋아요", "error")
 					})
 				}
 		};
@@ -231,6 +257,7 @@ angular.module("TourPlanApp")
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
 					$scope.checkTourPlanSet();
+					$scope.toast("이 일정을 북마크합니다.", "북마크", "success");
 				})
 			} else {
 				$http({
@@ -239,6 +266,7 @@ angular.module("TourPlanApp")
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
 					$scope.checkTourPlanSet();
+					$scope.toast("북마크를 취소합니다.", "북마크", "error");
 				})
 			}
 		};
@@ -266,6 +294,8 @@ angular.module("TourPlanApp")
 				}).success(function (response) {
 					$scope.tourPlan.customCnt = response;
 					$scope.checkTourPlanSet();
+					
+					$scope.toast("이 일정을 복사합니다.", "커스터마이징", "success");
 				})
 			} else {
 				$http({
@@ -274,6 +304,8 @@ angular.module("TourPlanApp")
 				}).success(function (response) {
 					$scope.tourPlan.customCnt = response;
 					$scope.checkTourPlanSet();
+					
+					$scope.toast("일정복사를 취소합니다.", "커스터마이징", "error");
 				})
 			}
 		};
@@ -340,18 +372,12 @@ angular.module("TourPlanApp")
 	    }
 
 		/** ==================================================== */
-		/** TODO 북마크 */
-		/** ==================================================== */
-		
-		/** ==================================================== */
 		/** TODO 스토리 */
 		/** ==================================================== */
 		
 		/** ==================================================== */
 		/** 일정표												 */
 		/** ==================================================== */
-		// TODO 일정표 클릭 이벤트
-		
 		// 일정표 객체 선언
 		var calendarObj = $("#calendar");
 		
@@ -656,7 +682,6 @@ angular.module("TourPlanApp")
 			}
 		};
 		
-		
 		/** ==================================================== */
 		/** 구글맵 */
 		/** ==================================================== */
@@ -789,13 +814,13 @@ angular.module("TourPlanApp")
 				url: MyConfig.backEndURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
 				method: 'GET'
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 	            $scope.tourPlanCommentList = response;
 			}).error(function (){
 				
 			});
 		}
-		
+//		$scope.tourPlanCommentForm.content = "";
 		// 댓글 등록
 		$scope.writeComment = function () {
 			$http({
@@ -808,8 +833,8 @@ angular.module("TourPlanApp")
 				}),
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			}).success(function (response) {
-				$scope.tourPlanCommentForm.content = "";
 				$scope.getCommentList();
+				$scope.tourPlanCommentForm.content = "";
 			}).error(function (){
 				
 			});
@@ -817,29 +842,47 @@ angular.module("TourPlanApp")
 		
 		// 댓글 삭제
 		$scope.removeComment = function (commentNo) {
-			$http({
-				url: MyConfig.backEndURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
-				method: 'GET'
-			}).success(function (response) {
-				$scope.getCommentList();
-			}).error(function (){
-				
-			});
+			swal({
+				  title: "댓글삭제",
+				  text: "댓글을 삭제하시겠습니까",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "네",
+				  cancelButtonText: "아니오",
+				  closeOnConfirm: false,
+				  closeOnCancel: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						$http({
+							url: MyConfig.backEndURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
+							method: 'GET'
+						}).success(function (response) {
+							$scope.getCommentList();
+							swal("삭제", "삭제되었습니다.", "success");
+						}).error(function (){
+							
+						});
+					} else {
+						swal("취소", "취소되었습니다.", "error");
+					}
+				});
 		}
 		
 		// TODO 댓글 수정
 		$scope.modifyComment = function () {
-			swal("ㅋㅋ");
+			swal("댓글수정");
 		}
 		
 		// 댓글 200자제한
 		$scope.commentLengthCheck = function () {
 			if ($scope.tourPlanCommentForm.content.length >= 200) {
 				$scope.tourPlanCommentForm.content = $scope.tourPlanCommentForm.content.substring(0, 200);
-				swal("그만");
+				swal("댓글수 제한(200자)");
 			}
 		}
+		
 
   })
-  
 	

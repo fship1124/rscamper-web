@@ -105,7 +105,10 @@
 							<div class="tab-content">
 								
 								<div id="tourSpot" class="tab-pane fade in active">
-								1dsfsdfs
+									<div ng-repeat="tourBookmarkSpot in tourBookmarkSpotList">
+										<span ng-bind="tourBookmarkSpot.title"></span><br>
+										<pre ng-bind="tourBookmarkSpot.overview"></pre><br>
+									</div>
 								</div>
 		
 								<div id="tourPlan" class="tab-pane fade">

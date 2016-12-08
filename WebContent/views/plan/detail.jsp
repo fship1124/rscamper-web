@@ -51,7 +51,10 @@
 <link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
 
 <!-- Sweet Alert -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
+
+<!-- Jquery Toast Plugin -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">    
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="makeplan.css">
@@ -134,18 +137,18 @@
 				<div id="writerProfile" ng-show="isWriter">
 					<ul class="list-inline badge-lists badge-box-v2" style="text-align: center;">
 						<li>
-							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="myselfAlert();" ng-show="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="myselfAlert();" ng-hide="tourPlanCheckSet.scheduleLike"><i class="fa fa-thumbs-o-up"></i>좋아요</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.likeCnt" ></span>
 						</li>
 						<li>
-							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="myselfAlert();" ng-show="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="myselfAlert();" ng-hide="tourPlanCheckSet.bookMark"><i class="fa fa-bookmark-o"></i>북마크</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.bookmarkCnt"></span>
 						</li>
 						<li>
-							<a class="rounded-2x" href="javascript:void(0);" ng-show="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
-							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<a class="rounded-2x" href="javascript:void(0);" ng-click="myselfAlert();" ng-show="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
+							<a class="rounded-2x" style="color:#72c02c; border-color:#72c02c;" href="javascript:void(0);" ng-click="myselfAlert();" ng-hide="tourPlanCheckSet.customizing"><i class="fa fa-clone"></i>일정복사</a>
 							<span class="badge badge-dark rounded-x" ng-bind="tourPlan.customCnt"></span>
 						</li>
 					</ul>
@@ -295,10 +298,10 @@
 						<form class="sky-form">
 							<fieldset>
 								<section>
-									<strong style="font-size: 18px;">댓글 ({{tourPlan.commentCnt}})</strong>
+									<strong style="font-size: 18px;">댓글 ({{tourPlanCommentList.length}})</strong>
 									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;" ng-bind="tourPlanCommentForm.content.length">0</strong>
 									<label class="textarea">
-										<textarea rows="2" ng-model="tourPlanCommentForm.content" ng-keyup="commentLengthCheck();"></textarea>
+										<textarea rows="2" ng-model="tourPlanCommentForm.content" ng-keyup="commentLengthCheck();"> </textarea>
 										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-tags"></i> 댓글 등록</button>
 									</label>
 								</section>
@@ -387,6 +390,8 @@
 
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- JQuery Toast Plugin -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	
 	<!-- Googla Map API -->
  	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4"></script>
