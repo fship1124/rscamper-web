@@ -69,8 +69,7 @@
 			<div class="container">
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
-					<li><a href="${pageContext.request.contextPath}/views/community/list.jsp">COMMUNITY</a></li>
-					<li class="active"><a href="${pageContext.request.contextPath}/views/community/list.jsp">FREE</a></li>
+					<li class="active"><a href="${pageContext.request.contextPath}/views/community/list.jsp">COMMUNITY</a></li>
 				</ul>
 			</div>
 		</div>
@@ -83,39 +82,82 @@
 			
 				<!-- 게시판 리스트 -->
 				<div class="col-md-3 md-margin-bottom-40">
+				
+					<!-- 새글 쓰기 -->
+					<div class="bg-light">
+						<h4><i class="fa fa-pencil-square-o"></i>새글 포스트</h4>
+						<button class="btn rounded btn-block btn-bitcoin-inversed" ng-click="">
+							<i class="fa fa-pencil-square-o"></i> 새글 포스트 하기
+						</button>
+					</div>
+				
 					<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-						<li id="profile_menu" class="list-group-item">
-							<a href="#"><i class="fa fa-user"></i> 전체</a>
+						<li id="all_board" class="list-group-item active" ng-click="addActiveCategoryMenu($event);">
+							<a href="javascript:void(0);"><i class="fa fa-user"></i> 전체</a>
 						</li>
-						<li id="notification_menu" class="list-group-item">
+						<li id="tour_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
 							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="#"><i class="fa fa-bell"></i> 여행기</a>
+							<a href="javascript:void(0);"><i class="fa fa-bell"></i> 여행기</a>
 						</li>
-						<li id="message_menu" class="list-group-item">
+						<li id="free_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
 							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="#"><i class="fa fa-envelope"></i> 자유게시판</a>
+							<a href="javascript:void(0);"><i class="fa fa-envelope"></i> 자유게시판</a>
 						</li>
-						<li id="my_tour_plan_menu" class="list-group-item">
+						<li id="qna_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
 							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="#"><i class="fa fa-calendar"></i> 질문과답변</a>
+							<a href="javascript:void(0);"><i class="fa fa-calendar"></i> 질문과답변</a>
 						</li>
-						<li id="my_post_menu" class="list-group-item">
+						<li id="information_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
 							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="#"><i class="fa fa-pencil"></i> 정보</a>
+							<a href="javascript:void(0);"><i class="fa fa-pencil"></i> 정보</a>
 						</li>
-						<li id="bookmark_menu" class="list-group-item">
+						<li id="review_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
 							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="#"><i class="fa fa-bookmark-o"></i> 리뷰</a>
+							<a href="javascript:void(0);"><i class="fa fa-bookmark-o"></i> 리뷰</a>
 						</li>
 					</ul>
+					
 				</div>
 				
 				<!-- Content -->
 				<div class="col-md-9">
-					<div class="row">
-					
-						
+					<div class="row" ng-if="boardList.length > 0">
+						<div class="board-wrapper col-md-12" ng-repeat="board in boardList">
+							<div class="board-image-wrapper">
+								<img class="board-image" src="http://lorempixel.com/218/180/city/{{$index}}" alt="">
+							</div>
+							
+							<div class="board-info">
+								
+								<div class="board-header">
+									<span class="board-category" ng-bind="board.categoryName"></span>
+									<a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{board.boardNo}}" class="board-title" ng-bind="board.title"></a>
+								</div>
+								
+								<div class="board-content" ng-bind-html="board.content"></div>
+								
+								<div class="board-date" ng-bind="board.regDate | timesince : 'kr'"></div>
+								
+								<div class="board-writer"><strong ng-bind="board.displayName"></strong>님이 남긴 포스트입니다.</div>
+								
+								<div class="board-btn">
+									<a href="javascript:void(0);" ng-click="likeBoard(board.boardNo, $index)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b ng-bind="board.likeCnt"></b></a>
+									<a href="javascript:void(0);" ng-click="bookmarkBoard(board.boardNo, $index)"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <b ng-bind="board.bookmarkCnt"></b></a>
+									<a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{board.boardNo}}" ><i class="fa fa-commenting-o" aria-hidden="true"></i> <b ng-bind="board.commentCnt"></b></a>
+								</div>
+							</div>
+						</div>
 					</div>
+					
+					<div class="row" ng-if="boardList.length == 0">
+						<div class="board-wrapper col-md-12">
+							<div style="margin: 0 auto;">
+								<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
+								<span>게시물이 없습니다.</span>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 				
 				
@@ -174,6 +216,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/communityApp.js"></script>
 	<script type="text/javascript" src="js/communityDirectives.js"></script>
