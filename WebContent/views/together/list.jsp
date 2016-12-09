@@ -72,10 +72,10 @@
 		<div id = "list" class="container content-md">
 			<table class="table table-hover">
 				<thead>
-					<th width="10%">번호</th>
-					<th width="10%">지역</th>
-					<th width="*">제목</th>
-					<th width="20%">날짜</th>
+					<th width="10%">no</th>
+					<th width="10%">location</th>
+					<th width="*">title</th>
+					<th width="20%">date</th>
 				</thead>	
 				<tbody>
 				</tbody>

@@ -212,17 +212,17 @@
 		var userName = user.displayName;
 		
 		// nodejs 소켓 통신
-		function socketIo() {
+		function chat_socketIo() {
 			console.log("in socketIo");
 			// 소켓서버에 접속
 // 			var socket = io("http://192.168.0.190:10001");
-			var socket = io(myConfig.nodeServerUrl);
+			var chat_socket = io(myConfig.nodeServerUrl);
 			
-			 socket.on('connection', function(data) {
+			chat_socket.on('connection', function(data) {
 				 // socket 연결 완료
 	             if (data.type == 'connected') {
 	             	 console.log("connected");
-	                 socket.emit('joinRoom', {
+	             	chat_socket.emit('joinRoom', {
 	                     uid : user.userUid,
 	                     name : user.displayName,
 	                     room : obj.roomNo,
@@ -233,14 +233,14 @@
 			 
 			 
 			 // 방 유저 리스트
-			 socket.on('getUserInfo', function(data) {
+			 chat_socket.on('getUserInfo', function(data) {
 				 console.log("in getUserInfo");
 				 console.dir(data);
 				 listUser(data);
 	         });
 			 
 			 
-			 socket.on('system', function(data) {
+			 chat_socket.on('system', function(data) {
 				 console.log("system");
  				 console.log("서버에서 전송된 메세지 : " + data.message);
  				 console.log("서버에서 전송된 방번호 : " + data.roomNo);
@@ -256,7 +256,7 @@
 // 				 listUser(data);
 	         });
 			 
-			 socket.on('message', function(data) {
+			 chat_socket.on('message', function(data) {
 				 console.log("서버에서 전송된 데이터 : " + data.message);
 				 console.log("서버에서 전송된 이름 : " + data.name);
 				 console.log("서버에서 전송된 타입 : " + data.type);
@@ -319,7 +319,7 @@
 
 			$("#msg-content").append(html);
 			// 				$("#msg-content").append($("#msg").val() + "<br>");
-			socket.emit("user", {
+			chat_socket.emit("user", {
 				type : "text",
 				name : user.displayName,
 				message : $("#msg").val(),
@@ -338,28 +338,28 @@
 		$("#out-room").click(function() {
 			console.log("in out");
 			
-			socket.emit("outRoom", {
+			chat_socket.emit("outRoom", {
 				uid : user.userUid
 			});
 			
 			// 방 삭제 - 방 인원 0
-			socket.on("roomList", function(data) {
+			chat_socket.on("roomList", function(data) {
 				console.log("in roomList");
 				// 채팅 방 목록
 				console.dir(data);
 				
-				socket.emit("exit", {
+				chat_socket.emit("exit", {
 					uid : user.userUid
 				});
 			});
 			
 			// 방 인원이 남아있는 경우
-			socket.on("outRoomUser", function(data) {
+			chat_socket.on("outRoomUser", function(data) {
 				console.log("in roomList");
 				// 채팅 방 목록
 				console.dir(data);
 				
-				socket.emit("exit", {
+				chat_socket.emit("exit", {
 					uid : user.userUid
 				});
 			});
@@ -367,111 +367,67 @@
 			window.location = myConfig.imsiServerUrl + '/chat/home';
 		});
 		
-		
-		
-		
-		
-		
-		
-	// 방 퇴장 - 이전 코드
-// 	$("#out-room").click(function() {
-// 			console.log("in out");
-// 				var obj = new Object();
-// 				obj.userUid = user.userUid;
-// 				obj.chatRoomInfoNo = "${param.roomNo}";
 
-// 				console.log(obj.userUid);
-// 				console.log(obj.chatRoomInfoNo);
+		chat_socket.on('out', function(data) {
+			console.log("on out");
+			console.log("서버에서 전송된 데이터 > name : " + data.name);
+			console.log("서버에서 전송된 데이터 > message : " + data.message);
+			console.log("roomNo : " + room);
 
-// 				$.ajax({
-// 					url : myConfig.imsiServerUrl + '/chat/delete/user/'	
-// 					+ user.userUid + "/" + obj.chatRoomInfoNo,
-// 					type : "DELETE",
-// 					success : function() {
-// 						socket.emit("out", {
-// 							name : user.displayName
-// 						});
+			var html = "";
+			html += "<div style='text-align:center;'>";
+			html += "<span>";
+			html += data.message;
+			html += "</span>";
+			html += "</div>";
+			$("#msg-content").append(html);
 
-// 						// 방 접속자수가 0일때 방 폐쇄
-// 						var user_cnt = $("#chat-user-cnt");
-						
-// 						console.dir(user_cnt);
-						
-// 						if (user_cnt[0].dataset.cnt == 1) {
-// 							$.ajax({
-// 								url : myConfig.imsiServerUrl + '/chat/delete/room/' + obj.chatRoomInfoNo,
-// 								type : "DELETE",
-// 								success : function() {
-// 									console.log(obj.chatRoomInfoNo +  "방 삭제");
-// 								}
-// 							});				
-// 						}
-						
-// 						window.location = myConfig.imsiServerUrl + '/chat/home';
-// 					}
-// 				});
-// 			});
-
-			socket.on('out', function(data) {
-				console.log("on out");
-				console.log("서버에서 전송된 데이터 > name : " + data.name);
-				console.log("서버에서 전송된 데이터 > message : " + data.message);
-				console.log("roomNo : " + room);
-
-				var html = "";
-				html += "<div style='text-align:center;'>";
-				html += "<span>";
-				html += data.message;
-				html += "</span>";
+			listUser(room);
+		});
+		
+			
+		function readImage(input) {
+	        if (input.files && input.files[0]) {
+	          var FR= new FileReader();
+	          FR.onload = function(e) {
+	            var data = {
+	              "type" : "image",
+	              "name" : user.displayName,
+	              "imgUrl" : e.target.result,
+	              "uid" : user.userUid
+	            }
+	            chat_socket.emit('user', data);
+	            var imgUrl = e.target.result;
+	            
+        		var html = "";
+				html += "<div style='height: 100%'>";
+				html += "<div class='direct-chat-msg right'>";
+				html += "<div class='direct-chat-info clearfix'>";
+				html += "<span class='direct-chat-name pull-right'>";
+				html += userName + "</span>";
+				html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
 				html += "</div>";
-				$("#msg-content").append(html);
+				html += "<img class='direct-chat-img' src='" + user.photoUrl + "' alt='Message User Image'>";
+				html += "<div>";
+				html += "<img src=" + imgUrl + " style='margin: auto;'>";
+				html += $("#msg").val();
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+	            
+	            $("#msg-content").append(html);
+	            $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
+	          };
+	          FR.readAsDataURL( input.files[0] );
+	        }
+	      }
+		
+		$("#imgSend").change(function () {
+			readImage(this);
+		});
+	}
 
-				listUser(room);
-			});
-			
-			
-			function readImage(input) {
-		        if (input.files && input.files[0]) {
-		          var FR= new FileReader();
-		          FR.onload = function(e) {
-		            var data = {
-		              "type" : "image",
-		              "name" : user.displayName,
-		              "imgUrl" : e.target.result,
-		              "uid" : user.userUid
-		            }
-		            socket.emit('user', data);
-		            var imgUrl = e.target.result;
-		            
-           			var html = "";
-					html += "<div style='height: 100%'>";
-					html += "<div class='direct-chat-msg right'>";
-					html += "<div class='direct-chat-info clearfix'>";
-					html += "<span class='direct-chat-name pull-right'>";
-					html += userName + "</span>";
-					html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
-					html += "</div>";
-					html += "<img class='direct-chat-img' src='" + user.photoUrl + "' alt='Message User Image'>";
-					html += "<div>";
-					html += "<img src=" + imgUrl + " style='margin: auto;'>";
-					html += $("#msg").val();
-					html += "</div>";
-					html += "</div>";
-					html += "</div>";
-		            
-		            $("#msg-content").append(html);
-		            $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
-		          };
-		          FR.readAsDataURL( input.files[0] );
-		        }
-		      }
-			
-			$("#imgSend").change(function () {
-				readImage(this);
-			});
-		}
-
-		socketIo();
+	chat_socketIo();
 	</script>
 </body>
 </html>

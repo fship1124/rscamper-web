@@ -838,6 +838,19 @@ angular.module("TourPlanApp")
 			}).success(function (response) {
 				$scope.getCommentList();
 				$scope.tourPlanCommentForm.content = "";
+				
+				alert("tourplan");
+				var user = sessionStorageService.getObject("user");
+				
+				console.log("noti-count");
+				console.log($(".noti-count").html());
+				
+				notis_socket.emit("commentInfo", {
+					type : "comment",
+					recvId : user.userUid,
+					count : $(".noti-count").html()
+				});
+				
 			}).error(function (){
 				
 			});

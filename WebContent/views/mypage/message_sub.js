@@ -3,7 +3,6 @@ var user = sessionStorageService.getObject("user");
     
 //쪽지 날짜
 function timeSince(date, lang) {
-
 	var langs = {
 		en : {
 			years : " years ago",
@@ -74,11 +73,29 @@ function timeSince(date, lang) {
 }
 
 
-function note_list(e) {
-	console.dir(user);
+
+// 페이지 번호
+var page;
+
+// 페이지 현재 id 셀렉터
+var pageId = ""; 
+
+// 쪽지 리스트
+function note_list(pageNo) {
+	console.log("in note_list");
+	console.dir(pageNo);
+	
+	if(jQuery.type(pageNo) === 'undefined' ) {
+		pageId = "page_1";
+	} else {
+		pageId = "page_" + pageNo;
+	}
+	
+	console.dir($("#" + pageId));	
+	
 	var obj = new Object();
 	obj.uid = user.userUid;
-	obj.page = e;
+	obj.page = pageNo;
 	
 	$.ajax({
 		url : myConfig.imsiServerUrl + '/note/list',
@@ -86,73 +103,27 @@ function note_list(e) {
 		dataType : 'json',
 		data : obj,
 		success : function(result) {
+			console.log("note_list success");
 			console.dir(result);
 			listCreate(result);
 			
-			$.ajax({
-				url : myConfig.imsiServerUrl + '/note/sent-list',
-				method : 'GET',
-				dataType : 'json',
-				data : obj,
-				success : function(result) {
-					console.dir(result);
-					sentListCreate(result);
-				}
-			})
+//			$.ajax({
+//				url : myConfig.imsiServerUrl + '/note/sent-list',
+//				method : 'GET',
+//				dataType : 'json',
+//				data : obj,
+//				success : function(result) {
+//					sentListCreate(result);
+//				}
+//			})
 		}
 	})
 }
 
-function sentListCreate(data) {
-	console.log("in sentListCreate");
-	console.dir(data);
-	
-	var p = data.page;
-	var pageMaker = data.pageMaker;
-	page = pageMaker.endPage;
-	var html = "";
-	
-	for (var i = 0; i < p.length; i++) {
-		var item = p[i];
-	
-		html += "<tr id=note-list-" + item.notesNo + " style='border-top:1px solid gray;'>";
-		html += "<td style='padding: 10px;'>";
-		html += "<input type='checkbox'>";
-		
-		if (item.recvRead == 'N') {
-			html += "<span class='glyphicon glyphicon-envelope' aria-hidden='true' style='margin-left: 30px;'></span>";
-		} else {
-			html += "<span class='glyphicon glyphicon-ok' aria-hidden='true' style='margin-left: 30px;'></span>";
-		}
-		
-		html += "<img src='" + item.photoUrl + "'";
-		html += "alt='...' class='img-thumbnail' style='width: 70px; height: 70px; margin-left: 10px;'>";
-		html += "</td>";
-		html += "<td style='padding: 10px;'>";
-		html += "<a title='displayName' href='#''>";
-		html += "<span class='spr l8'>";
-		html += "<span class='blind'>" + item.displayName + "</span>";
-		html += "</span>";
-		html += "</a>";
-		html += "<br>";
-		html += "<span>" + timeSince(item.dateSent, "kr") + "</span>";
-		html += "</td>";
-		html += "<td style='padding: 10px;'>";
-		html += "<span><strong>" + item.title + "</strong></span>";
-		html += "<br>";
-		html += "<div style='display: inline-block; width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" + item.content + "</div>";
-		html += "</td>";
-		html += "</tr>";
-	
-	}	
-	$("#sent-tbody").html(html);
-}
 
-
-
+// 받은 쪽지함 리스트 만들기
 function listCreate(data) {
 	console.log("in listCreate");
-	console.dir(data);
 	var p = data.page;
 	var pageMaker = data.pageMaker;
 	page = pageMaker.endPage;
@@ -189,16 +160,15 @@ function listCreate(data) {
 		html += "</td>";
 		html += "</tr>";
 	}
-	$("#recv-tbody").html(html);
-	
-	html = "";
-	
+		$("#recv-tbody").html(html);
+		
+		html = "";
 		var pageination = $(".pagination");
-		console.dir(pageMaker.prev);
-		if (pageMaker.prev) {
+//		console.dir(pageMaker.prev);
+	if (pageMaker.prev) {
 		html += "<li class='page-item'>";
-		html += "<a class='page-link' href='#' aria-label='Previous'>";
-		html += "<span aria-hidden='true' onclick=previousNextFn('P') >&laquo;</span>";
+		html += "<a class='page-link' href='javascript:void(0);' aria-label='Previous' onclick=previousNextFn('P')>";
+		html += "<span aria-hidden='true'  >&laquo;</span>";
 		html += "<span class='sr-only'>Previous</span>";
 		html += "</a>";
 		html += "</li>";
@@ -206,21 +176,69 @@ function listCreate(data) {
 
 	for (var i = pageMaker.startPage; i <= pageMaker.endPage; i++) {
 		html += "<li class='page-item'>";
-		html += "<a href='#' onclick= note_list(this.text)>" + i + "</a>";
+		html += "<a href='javascript:void(0);' onclick= note_list(this.text) id=page_" + i + ">" + i + "</a>";
 		html += "</li>";
 	}
 
 	if (pageMaker.next && pageMaker.endPage > 0) {
 		html += "<li class='page-item'>";
-		html += "<a class='page-link' href='#' aria-label='Next'>";
-		html += "<span aria-hidden='true' onclick=previousNextFn('N') >&raquo;</span>";
+		html += "<a class='page-link' href='javascript:void(0);' aria-label='Next' onclick=previousNextFn('N')>";
+		html += "<span aria-hidden='true' >&raquo;</span>";
 		html += "<span class='sr-only'>Next</span>";
 		html += "</a>";
 		html += "</li>";
 	}
 	pageination.html(html);
 	
+	$("#" + pageId).css('color', '#fff');
+	$("#" + pageId).css('background', '#5fb611');
+	$("#" + pageId).css('border-color', '#5fb611');
+}
 
+
+// 보낸쪽지함 리스트 만들기
+function sentListCreate(data) {
+	console.log("in sentListCreate");
+//	console.dir(data);
+	
+	var p = data.page;
+	var pageMaker = data.pageMaker;
+	sent_page = pageMaker.endPage;
+	var html = "";
+	
+	for (var i = 0; i < p.length; i++) {
+		var item = p[i];
+	
+		html += "<tr id=note-list-" + item.notesNo + " style='border-top:1px solid gray;'>";
+		html += "<td style='padding: 10px;'>";
+		html += "<input type='checkbox'>";
+		
+		if (item.recvRead == 'N') {
+			html += "<span class='glyphicon glyphicon-envelope' aria-hidden='true' style='margin-left: 30px;'></span>";
+		} else {
+			html += "<span class='glyphicon glyphicon-ok' aria-hidden='true' style='margin-left: 30px;'></span>";
+		}
+		
+		html += "<img src='" + item.photoUrl + "'";
+		html += "alt='...' class='img-thumbnail' style='width: 70px; height: 70px; margin-left: 10px;'>";
+		html += "</td>";
+		html += "<td style='padding: 10px;'>";
+		html += "<a title='displayName' href='#''>";
+		html += "<span class='spr l8'>";
+		html += "<span class='blind'>" + item.displayName + "</span>";
+		html += "</span>";
+		html += "</a>";
+		html += "<br>";
+		html += "<span>" + timeSince(item.dateSent, "kr") + "</span>";
+		html += "</td>";
+		html += "<td style='padding: 10px;'>";
+		html += "<span><strong>" + item.title + "</strong></span>";
+		html += "<br>";
+		html += "<div style='display: inline-block; width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" + item.content + "</div>";
+		html += "</td>";
+		html += "</tr>";
+	}	
+	$("#sent-tbody").html(html);
 }
 
 
@@ -231,15 +249,21 @@ function prependZero(num, len) {
 	return num;
 }
 
-function previousNextFn(val) {
-	console.log(val);
-	console.log("page : " + page);
 
+// 페이지 10개 단위 이동
+function previousNextFn(val) {
+	console.log("in previousNextFn");
+	console.log(val);
+	console.log("end-page : " + page);
+	
+	page = Math.ceil(page * 0.1) * 10;
+	
 	if (val == 'N') {
 		page = page + 1;
 	} else {
 		page = page - 19;
 	}
+	console.log("page : " + page);
 
 	note_list(page);
 }
@@ -247,39 +271,13 @@ function previousNextFn(val) {
 note_list();
 
 
+// 모달 쪽지 보내기 띄우기
 $('#new_note').on('click', function(){
 	$('#note_send').modal('show');
 });
 
 
-
-function noteCheck(e) {
-	console.dir(e);
-	console.log(e.dataset.val);
-	
-	var v = e.dataset.val;
-	var tbody = $("tbody");
-	
-	switch (v) {
-	case 'Y': 
-		for (var i = 0; i < tbody[0].children.length; i++) {
-			var item = tbody[0].children[i];
-			item.children[0].children[0].checked = true; 
-		}
-		
-		break;
-	case 'N': break;
-	case 'E': 
-		for (var i = 0; i < tbody[0].children.length; i++) {
-			var item = tbody[0].children[i];
-			item.children[0].children[0].checked = false; 
-		}
-		break;
-	}
-};
-
-
-
+// 쪽지 전송
 $('#uploadNote').on('click', function(){
 	var recUid = $("#project-id").val();
 	var title = $("#inputNoteSendTitle").val();
@@ -298,23 +296,23 @@ $('#uploadNote').on('click', function(){
 		data : obj,
 		success : function(result) {
 			$('#note_send').modal('hide');
+			note_list();
 		}
 	})
 });
 
 
-console.log("user-list");
+/* 쪽지 보내기 모달 autocomplete */
+////////////////////////////////////////////////////////////////
 var projects = new Array();
 $.ajax({
 	url : myConfig.imsiServerUrl + '/note/user-list',
 	method : 'GET',
 	success : function(result) {
-		console.log("user-list success");
-		console.dir(result);
-		console.log(result.length);
-		
+//		console.log("user-list success");
+//		console.dir(result);
+//		console.log(result.length);
 		var obj = jQuery.parseJSON(result);
-		console.dir(obj);			
 		
 		for (var i = 0; i < obj.length; i++) {
 			var item = obj[i];
@@ -323,39 +321,15 @@ $.ajax({
 			project.label = item.email;
 			project.desc = item.displayName;
 			project.icon = item.photoUrl;
-			
 			projects.push(project);
 		}
-		
-		console.log("projects : ");
-		console.dir(projects);
+//		console.log("projects : ");
+//		console.dir(projects);
 	}
 });
 
 
-
-
-
 $(function() {
-//	projects = [ {
-//		value : "jquery",
-//		label : "jQuery",
-//		desc : "the write less, do more, JavaScript library",
-//		icon : "jquery_32x32.png"
-//	}, {
-//		value : "jquery-ui",
-//		label : "jQuery UI",
-//		desc : "the official user interface library for jQuery",
-//		icon : "jqueryui_32x32.png"
-//	}, {
-//		value : "sizzlejs",
-//		label : "Sizzle JS",
-//		desc : "a pure-JavaScript CSS selector engine",
-//		icon : "sizzlejs_32x32.png"
-//	} ];
-
-//	console.log("projects : ");
-//	console.dir(projects);
 	$("#project").autocomplete({
 		minLength : 0,
 		source : projects,
@@ -368,7 +342,6 @@ $(function() {
 			$("#project-id").val(ui.item.value);
 			$("#project-description").html(ui.item.desc);
 			$("#project-icon").attr("src", ui.item.icon);
-
 			return false;
 		}
 	}).autocomplete("instance")._renderItem = function(ul, item) {
@@ -377,34 +350,7 @@ $(function() {
 				ul);
 	};
 });    
-
-
-
-
-
-
-
-//
-// $("#inputNoteSendUid").keyup(function(e) {
-// console.dir(e);
-//	
-// var obj = new Object();
-// obj.uid = $("#inputNoteSendUid").val();
-//
-// $.ajax({
-// url : myConfig.imsiServerUrl + '/note/search-modal',
-//		method : 'GET',
-//		data : obj,
-//		success : function(result) {
-//			console.log("success");
-//			console.log(result);
-//			console.dir(result);
-//			console.log(result.length);
-//			  
-//		
-//		}
-//	})
-//});
+////////////////////////////////////////////////////////////////
 
 
 
