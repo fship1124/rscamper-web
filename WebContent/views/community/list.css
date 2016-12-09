@@ -44,6 +44,13 @@
     white-space: nowrap;
 }
 
+.board-deleteBtn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 999;
+}
+
 .board-category {
 	font-size: 18px;
 	color: #ff8000!important;

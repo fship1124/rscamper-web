@@ -56,7 +56,7 @@
 		 nhn.husky.EZCreator.createInIFrame({
 		 oAppRef: oEditors,
 		 elPlaceHolder: "ir1",
-		 sSkinURI: "../../resources/se/SmartEditor2Skin.html",
+		 sSkinURI: "../../resources/plugins/smartEditor/SmartEditor2Skin.html",
 		 fCreator: "createSEditorInIFrame"
 		});
 		

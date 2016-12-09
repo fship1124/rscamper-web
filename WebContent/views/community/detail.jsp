@@ -54,8 +54,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="list.css">
-
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -71,132 +70,127 @@
 				<ul class="pull-left breadcrumb">
 					<li><a href="${pageContext.request.contextPath}/views/main.jsp"><i class="fa fa-home"></i></a></li>
 					<li class="active"><a href="${pageContext.request.contextPath}/views/community/list.jsp">Community</a></li>
+					<li class="active"><a href="#">Detail</a></li>
 				</ul>
 			</div>
 		</div>
 		<!--=== 사이트맵 끝 ===-->
 
 		<!--=== 내용 ===-->
-		<div class="container content profile" style="padding-top: 20px;" ng-app="CommunityApp" ng-controller="ListController">
-		
-			<!--============ 글쓰기 모달 ============-->
-			<div class="modal fade bs-example-modal-lg" id="writeFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 50px;">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<select ng-model="writeBoard.categoryNo" style="height: 30px;" ng-options="category.categoryNo as category.categoryName for category in categories">
-            					<option value=""></option>
-          					</select>
-							<input type="text" ng-model="writeBoard.title" style="width: 800px; height: 30px;" />
-						</div>
-
-						<div class="modal-body">
-							<textarea id="smarteditor" rows="10" cols="100" style="width: 850px; height: 412px;"></textarea>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-primary" ng-click="write();">글쓰기</button>
-						</div> 
-					</div>
+		<div class="container" style="padding-top: 20px;" ng-app="CommunityApp" ng-controller="DetailController">
+			<!-- 작성자 시간 기타등등 -->
+			<div class="row">
+				<img src="{{board.photoUrl}}" style="width: 40px; height: 40px;">
+				<span ng-bind="board.displayName"></span>
+				<span ng-bind="board.regDate | timesince : 'kr'"></span>
+			</div>
+			
+			<!-- 카테고리 제목 -->
+			<div class="row">
+				<span id="board-category" ng-bind="board.categoryName"></span>
+				<span id="board-title" ng-bind="board.title"></span>
+			</div>
+			
+			<!-- 내용 -->
+			<div id="board-content" class="row">
+				<div ng-bind-html="board.content"></div>
+			</div>
+			
+			<!-- 좋아요 북마크  댓글 등등  -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="board-btn"> -->
+<!-- 					<a href="javascript:void(0);" ng-click="likeBoard(board.boardNo, $index)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b ng-bind="board.likeCnt"></b></a> -->
+<!-- 					<a href="javascript:void(0);" ng-click="bookmarkBoard(board.boardNo, $index)"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <b ng-bind="board.bookmarkCnt"></b></a> -->
+<!-- 					<a href="javascript:void(0);" ><i class="fa fa-commenting-o" aria-hidden="true"></i> <b ng-bind="board.commentCnt"></b></a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			
+			<!-- 댓글 & 좋아요 -->
+			<div class="author-info" style="padding-top: 15px;">
+				<div class="spot-like-count" style="display: inline-block;">
+					<a id="icon-plan-like" class="off" style="cursor: pointer;" ng-click="likeBoard(board.boardNo);" >
+						<img src="https://www.wishbeen.co.kr/images/icon-plan-like-off.png" >
+					</a>
+						좋아요
+						<span id="like-count" ng-bind="board.likeCnt"></span>
+				</div>
+				
+				<div class="spot-like-count" style="display: inline-block;">
+					<a id="icon-plan-bookmark" class="off" style="cursor: pointer;" ng-click="bookmarkBoard(board.boardNo);">
+						<img src="https://www.wishbeen.co.kr/images/bg-btn-bookmark.png">
+					</a>
+					북마크
+					<span id="bookmark-count" ng-bind="board.bookmarkCnt"></span>
+				</div>
+				
+				<div class="spot-commont-count" style="display: inline-block;">
+					<a class="show-comments-of-note" style="cursor: pointer;">
+						<img src="https://www.wishbeen.co.kr/images/icon-comment-gry.png">
+					</a>
+					댓글
+					<span id="comment-count" ng-bind="board.commentCnt"></span>
 				</div>
 			</div>
-
-
-			<div class="row" style="margin-top: 30px;">
 			
-				<!-- 리스트 컨트롤러 -->
-				<div class="col-md-3 md-margin-bottom-40">
-					<!-- 새글 쓰기 -->
-					<div class="bg-light">
-						<h4><i class="fa fa-pencil-square-o"></i>새글 포스트</h4>
-						<button class="btn rounded btn-block btn-warning" ng-click="openWriteFormModal();">
-							<i class="fa fa-pencil-square-o"></i> 새글 포스트 하기
-						</button>
+			<div class="plan-comment">
+				<div class="spot-comment-content">
+					<div class="comment-write">
+						<div class="my-p" style="float: left;">
+							<div class="my-p-img" >
+								<div>
+									<img src="{{user.photoUrl}}" style="width: 40px; height: 40px;">
+								</div>
+							</div>
+						</div>
+						
+						<textarea ng-model="commentForm.content" class="form-control new-comment-textarea"	placeholder="댓글을 남겨주세요." style="width: 88%; height: 40px; float: left; margin-right: 3px; margin-left: 3px; resize:none;"></textarea>
+						<div class="comment-edit-btns" style="right: 0;">
+							<button class="btn btn-primary save-new-comment" ng-click="writeComment();" style="height: 40px; color: #ff8000; border: 1px solid #ff8000; background: #fff!important;">등록</button>
+						</div>
 					</div>
+				</div>
+				
+				<div class="spot-comment-list">
+					<ul class="comment-list">
 					
-					<!-- 검색 및 정렬 -->
-					<div class="bg-light">
-						<h4><i class="fa fa-keyboard-o"></i>검색어</h4>
-						<input type="text" class="form-control margin-bottom-20" placeholder="검색어를 입력하세요" ng-model="searchParams.word">
-						<h4><i class="fa fa-th-large"></i>정렬방식</h4>
-						<select class="form-control margin-bottom-20" ng-options="order.orderValue as order.orderName for order in optionDatas.orderList" ng-model="searchParams.order"></select>
-					</div>
-					<!-- 메뉴 -->
-					<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-						<li id="all_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<a href="javascript:void(0);"><i class="fa fa-user"></i> 전체</a>
+						<li class="commentRoot" ng-repeat="comment in commentList | orderBy: 'regDate'">
+							<div>
+								<div class="profile-img">
+									<a href="javascript:void(0);" class="user">
+										<img src="{{comment.photoUrl}}" style="width: 40px; height: 40px;">
+									</a>
+								</div>
+								<div class="comment-contents">
+									<div class="comment-info">
+										<div class="name-date">
+											<a href="javascript:void(0);" class="user">
+												<span class="username" ng-bind="comment.displayName"></span>
+											</a>
+											<span class="update-date" ng-bind="comment.regDate | timesince : 'kr'"></span>
+										</div>
+									</div>
+									
+									<div class="comment-txt">
+										<p class="comment-content-for-find" ng-bind="comment.content"></p>
+									</div>
+									
+									<div class="comment-deleteBtn">
+										<a ng-if="comment.userUid == user.userUid" href="javascript:void(0);" ng-click="deleteComment(comment.commentNo)" ><i style="color:red; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
+									</div>
+									
+								</div>
+							</div>
 						</li>
-						<li id="tour_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="javascript:void(0);"><i class="fa fa-bell"></i> 여행기</a>
-						</li>
-						<li id="free_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="javascript:void(0);"><i class="fa fa-envelope"></i> 자유게시판</a>
-						</li>
-						<li id="qna_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="javascript:void(0);"><i class="fa fa-calendar"></i> 질문과답변</a>
-						</li>
-						<li id="information_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="javascript:void(0);"><i class="fa fa-pencil"></i> 정보</a>
-						</li>
-						<li id="review_board" class="list-group-item" ng-click="addActiveCategoryMenu($event);">
-							<span class="badge badge-u rounded" ng-bind=""></span>
-							<a href="javascript:void(0);"><i class="fa fa-bookmark-o"></i> 리뷰</a>
-						</li>
+						
 					</ul>
 				</div>
 				
-				<!-- Content -->
-				<div class="col-md-9">
-					<div class="row" ng-if="boardList.length > 0">
-						<div class="board-wrapper col-md-12" ng-repeat="board in boardList | filter : searchParams.word | orderBy: searchParams.order">
-							<div class="board-image-wrapper">
-								<img class="board-image" src="http://lorempixel.com/218/180/city/{{$index}}" alt="">
-							</div>
-							
-							<div class="board-info">
-								
-								<div class="board-header">
-									<span class="board-category" ng-bind="board.categoryName"></span>
-									<a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{board.boardNo}}" class="board-title" ng-bind="board.title"></a>
-								</div>
-								
-								<div class="board-deleteBtn">
-									<a ng-if="board.userUid == user.userUid" href="javascript:void(0);" ng-click="deleteBoard(board.boardNo)" ><i style="color:red; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
-								</div>
-								
-								<div class="board-content" ng-bind-html="board.content"></div>
-								
-								<div class="board-date" ng-bind="board.regDate | timesince : 'kr'"></div>
-								
-								<div class="board-writer"><strong ng-bind="board.displayName"></strong>님이 남긴 포스트입니다.</div>
-								
-								<div class="board-btn">
-									<a href="javascript:void(0);" ng-click="likeBoard(board.boardNo, $index)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b ng-bind="board.likeCnt"></b></a>
-									<a href="javascript:void(0);" ng-click="bookmarkBoard(board.boardNo, $index)"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <b ng-bind="board.bookmarkCnt"></b></a>
-									<a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{board.boardNo}}" ><i class="fa fa-commenting-o" aria-hidden="true"></i> <b ng-bind="board.commentCnt"></b></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row" ng-if="boardList.length == 0">
-						<div class="board-wrapper col-md-12">
-							<div style="margin: 0 auto;">
-								<img style="height: 200px;" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png">
-								<span>게시물이 없습니다.</span>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				
-				
-			</div><!--/end row-->
+			</div>
+
+
+			
+			
+						
 		</div>
 		<!--=== 내용 끝 ===-->
 
@@ -260,7 +254,7 @@
 	<script type="text/javascript" src="js/communityDirectives.js"></script>
 	<script type="text/javascript" src="js/communityFilters.js"></script>
 	<script type="text/javascript" src="js/communityServices.js"></script>
-	<script type="text/javascript" src="list.js"></script>
+	<script type="text/javascript" src="detail.js"></script>
 	
 </body>
 </html>
