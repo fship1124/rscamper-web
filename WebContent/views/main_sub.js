@@ -40,7 +40,6 @@
 	});
 		
 	// 광관지, 맛집, 숙소 ajax
-	
 	var touristList = $("#touristList");
 	var foodList = $("#foodList");
 	var lodegeList = $("#lodegeList");
@@ -273,8 +272,6 @@
 		obj.startPage = 1;
 		obj.pageSize = 999;
 
-//		console.dir(obj);
-		
 		$.ajax({
 			url : "http://localhost:8081/trainTime/time",
 			type : "GET",
@@ -286,13 +283,8 @@
 			success : function(result) {
 				console.log("여기로!!!!");
 				console.log(result);
-				 
-		//		var data = JSON.parse(data);
-		//		timeList(data);
-
 			}
 		});
-		
 	}
 		
 //	function mainTimeSearch(e) {

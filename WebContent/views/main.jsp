@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.js">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery-ui-1.12.1/jquery-ui.js"> --%>
 
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/headers/header-default.css">
@@ -46,16 +46,11 @@
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/include/css/header.css">
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-
 <!-- 달력 css -->
-<link rel="stylesheet" href="../assets/js/jquery-ui-1.12.1/jquery-ui.js">
-<link rel="stylesheet" href="../assets/css/shiping.style.css">
-
-<link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/css/sky-forms-rtl.css">
-<link rel="stylesheet" href="../assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms-rtl.css">
+<link rel="stylesheet" href="../assets/css/shiping.style.css">	
 <style>
 .row{
 	width: 1140px;
@@ -150,6 +145,8 @@ input.checkbox:checked + label.input-label.radio::before {
 #train-search-btn:hover {
 	background-color: #b36b00;
 }
+
+
 </style>
 </head>
 
@@ -164,7 +161,6 @@ input.checkbox:checked + label.input-label.radio::before {
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container">
-				<h1 class="pull-left">Butterfly Train</h1>
 				<ul class="pull-right breadcrumb">
 					<li class="active"><a href="main.jsp">home</a></li>
 				</ul>
@@ -274,103 +270,16 @@ input.checkbox:checked + label.input-label.radio::before {
             	<div class="content-tabs">
             	
             	</div>
-			</div>            	
-		   <div class="col-md-9">
-		   		<div class="row" id="tourPlanList">
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/a.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">지금 당장 떠나기 딱인 저렴한 여행지 BEST5</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						호동님 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/b.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">당장가고싶은 여행지 BEST5</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						성주님 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/c.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">겨울에 떠나면 딱맞는 휴양지는 어디?</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						영은님 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/d.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">숲속 데이트 어떠신가요?</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						재홍님 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/e.JPG" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">아기자기한 한국의 유럽여행~</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						대현님 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-		   		</div>
-		   </div> 
-       	<hr class="margin-bottom-30"/>
-		
+			</div>
+
+
+			<div class="col-md-9">
+				<div class="row" id="tourPlanList"></div>
+			</div>
+
+
+			<hr class="margin-bottom-30"/>
+		              	
 		   <!-- 추천콘텐츠 -->
 		   <div class="bigHeader" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:3px solid black;">
                 	전국혜택
@@ -381,407 +290,25 @@ input.checkbox:checked + label.input-label.radio::before {
 		   </div>
 		
 		
-<!-- 		<div class="bigHeader row" style="line-height:37px; font-size: 24px; font-weight: 700; border-bottom:3px solid black;"> -->
-<!--                 	추천콘텐츠 -->
-<!--             	<div class="content-tabs"> -->
-<!--             	</div> -->
-<!-- 			</div>            	 -->
-<!-- 		   <div class="col-md-9"> -->
-<!-- 		   		<div class="row"> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu1.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">구포역 픽업 제공 저렴한 게스트하우스</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 유선게스트하우스(구포역 픽업 제공) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu2.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">구포역 픽업 제공 저렴한 게스트하우스</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 유선게스트하우스(구포역 픽업 제공) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu3.JPG" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">게스트하우스 U</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 울산게스트하우스유(U) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu4.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">서면 롯데백화점 15분 거리, 도심속 힐링사찰 삼광사 무료숙박</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 부산 삼광사 무료숙박(매주 금요일) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu5.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">서면 롯데백화점 15분 거리, 도심속 힐링사찰 삼광사 무료숙박</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 부산 삼광사 무료숙박(매주 금요일) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu6.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">화명역 도보 5분 거리! 1회용 칫솔·샴푸 등 제공</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 오아시스 사우나 찜질방(화명) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu7.JPG" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">4인실 기준 1인 3,000원 할인(15,000원)</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 울산램넌트게스트하우스 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu8.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">화명역 도보 5분 거리, 1회용 칫솔·샴푸 등 제공</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 오아시스 사우나 찜질방(화명) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu9.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">(2인 기준 금액)우리 고유의 한옥생활 체험</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 경남 김해 한옥체험관(주중) -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="col-md-4"> -->
-<!-- 		   				<div class="thumbnails thumbnail-style thumbnail-kenburn"> -->
-<!-- 		   					<div class="thumbnail-img"> -->
-<!-- 		   						<div class="overflow-hidden"> -->
-<!-- 		   							<img class="img-responsive" src="img/cu10.jpg" style="width: 218px; height: 180px;"> -->
-<!-- 		   						</div> -->
-<!-- 		   						<a class="btn-more hover-effect" href="#">자세히</a> -->
-<!-- 		   					</div> -->
-<!-- 		   					<div class="caption"> -->
-<!-- 		   						<h3> -->
-<!-- 		   							<a class="hover-effect" href="#">낙동강의 자연환경과 역사문화 투어</a> -->
-<!-- 		   						</h3> -->
-<!-- 		   						<p> -->
-<!-- 		   						[부산경남] 낙동강 생태탐방선 -->
-<!-- 		   						</p> -->
-<!-- 		   					</div> -->
-<!-- 		   				</div> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   </div> -->
-
-		 <!-- 관광지, 숙소, 맛집-->  
+			<!-- 관광지, 숙소, 맛집-->  
 		   <div class="col-md-5">
 		   		<h2 class="title-v4">관광지</h2>
 		   		<div id="touristList" style="width:350px; height:850px;"></div>
-		   		<!-- 여기서 밑으로 -->	
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/tour1.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">전라도</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/tour2.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">경상도</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/tour3.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">강원도</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/tour4.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">부산</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/tour5.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">세종특별시</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
- 		   	</div> 
-		  
+		   	</div> 
+		   	
 		   <!-- 맛집 -->            	
 		   <div class="col-md-5">
 		   		<h2 class="title-v4">맛집</h2>
 		   		<div id="foodList" style="width:350px; height:850px;"></div>
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/food1.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">소고기먹어보아요</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/food2.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">해물찜</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/food3.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">오징어순대</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/food4.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">깔끔한 밥상</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/food5.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">먹고싶다 16첩밥상</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-		   </div>            	
-		   <div class="col-md-5">
+		
+		    </div>  
+		          	
+			<!-- 숙소 --> 
+             <div class="col-md-5">
 		   		<h2 class="title-v4">숙소</h2>
-		   		<div id="lodegeList" style="width:350px; height:850px;"></div>
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/room1.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">리조트호텔</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/room2.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">샌즈호텔</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/room3.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">드림즈호텔</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/room4.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">소넨호프펜션</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-<!-- 		   		<div class="blog-thumb margin-bottom-20"> -->
-<!-- 		   			<div class="blog-thumb-hover"> -->
-<!-- 		   				<img src="img/room5.jpg" style="width: 160px; height: 150px;"> -->
-<!-- 		   				<a class="hover-grad" href="#"> -->
-<!-- 		   					<i class="fa fa-photo"></i> -->
-<!-- 		   				</a> -->
-<!-- 		   			</div> -->
-<!-- 		   			<div class="blog-thumb-desc"> -->
-<!-- 		   				<h3> -->
-<!-- 		   					<a href="#">그랜드호텔</a> -->
-<!-- 		   				</h3> -->
-<!-- 		   			</div> -->
-<!-- 		   		</div> -->
-		   </div>            	             
+		   		<div id="lodegeList" style="width:350px; height:850px;"></div> 
+              
+               </div>      
 		</div>
 		
 		
@@ -834,7 +361,9 @@ input.checkbox:checked + label.input-label.radio::before {
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+<%-- 	<script src="${pageContext.request.contextPath}/resources/include/js/header.js"></script> --%>
 	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="main_sub.js"></script>
+	
 </body>
 </html>
