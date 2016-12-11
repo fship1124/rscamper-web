@@ -3,7 +3,7 @@ var user = sessionStorageService.getObject("user");
 function apiAjax(obj) {
 	$.ajax({
 		type : "GET",
-		url : myConfig.serverUrl + "/tour/api/detail",
+		url : myConfig.serverURL + "/tour/api/detail",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -219,7 +219,7 @@ function apiAjax(obj) {
 		
 		$.ajax({
 			type : "GET",
-			url : myConfig.serverUrl + "/tour/comment/list",
+			url : myConfig.serverURL + "/tour/comment/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -409,7 +409,7 @@ $(".save-new-comment").on('click', function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.serverUrl + "/tour/comment/insert",
+		url : myConfig.serverURL + "/tour/comment/insert",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -420,7 +420,7 @@ $(".save-new-comment").on('click', function() {
 			
 			$.ajax({
 				type : "GET",
-				url : myConfig.serverUrl + "/tour/comment/list",
+				url : myConfig.serverURL + "/tour/comment/list",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
@@ -471,7 +471,7 @@ $("#icon-plan-like").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.serverUrl + "/tour/like",
+		url : myConfig.serverURL + "/tour/like",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -515,7 +515,7 @@ $("#icon-plan-bookmark").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.serverUrl + "/tour/bookmark",
+		url : myConfig.serverURL + "/tour/bookmark",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {

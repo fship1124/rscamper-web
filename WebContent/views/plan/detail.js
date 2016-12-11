@@ -374,6 +374,23 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		/** TODO 스토리 */
 		/** ==================================================== */
+	    // 스토리 리스트 불러오기
+	    $scope.getWriteTourSpotMemoList = function () {
+	    	$scope.tourSpotMemoList = [];
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/tourSpotMemoList?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				console.log(response);
+				$scope.tourSpotMemoList = response;
+			}).error(function (error) {
+				
+			});
+	    } 
+	    
+	    $scope.getWriteTourSpotMemoList();
+	    
+	    
 		
 		/** ==================================================== */
 		/** 일정표												 */

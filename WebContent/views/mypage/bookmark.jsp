@@ -98,20 +98,20 @@
 					<div class="margin-bottom-20">
 						<div class="tab-v1">
 							<ul class="nav nav-justified nav-tabs">
-								<li class="active"><a data-toggle="tab" href="#tourSpot">여행지  <span class="badge badge-u rounded" ng-bind="menuCount.bookmarkTourSpotCnt"></span></a></li>
-								<li><a data-toggle="tab" href="#tourPlan">여행일정 <span class="badge badge-u rounded" ng-bind="menuCount.bookmarkTourPlanCnt"></span></a></li>
+								<li class="active"><a data-toggle="tab" href="#tourPlan">여행일정 <span class="badge badge-u rounded" ng-bind="menuCount.bookmarkTourPlanCnt"></span></a></li>
 								<li><a data-toggle="tab" href="#post">포스트  <span class="badge badge-u rounded" ng-bind="menuCount.bookmarkPostCnt"></span></a></li>
+								<li><a data-toggle="tab" href="#tourSpot">여행지  <span class="badge badge-u rounded" ng-bind="menuCount.bookmarkTourSpotCnt"></span></a></li>
 							</ul>
 							<div class="tab-content">
 								
-								<div id="tourSpot" class="tab-pane fade in active">
+								<div id="tourSpot" class="tab-pane fade">
 									<div ng-repeat="tourBookmarkSpot in tourBookmarkSpotList">
 										<span ng-bind="tourBookmarkSpot.title"></span><br>
-										<pre ng-bind="tourBookmarkSpot.overview"></pre><br>
+										<pre ng-bind-html="tourBookmarkSpot.overview" style="display: flex; white-space: normal; word-break: break-word; border: none;"></pre><br>
 									</div>
 								</div>
 		
-								<div id="tourPlan" class="tab-pane fade">
+								<div id="tourPlan" class="tab-pane fade in active">
 									<!-- 여행일정 리스트 DIV -->
 									<div class="row">
 				
@@ -255,6 +255,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/mypageApp.js"></script>
 	<script type="text/javascript" src="js/mypageDirectives.js"></script>

@@ -1,6 +1,19 @@
 // 필터
 angular.module("TourPlanApp")
 
+	// 여행기 필터
+	.filter("memoTypeName", function() {
+		return memoTypeName
+		function memoTypeName (memoType) {
+			switch (memoType) {
+			case 1:
+				return "메모"
+			case 2:
+				return "여행기"
+			}
+		}
+	})
+
 	// 일정표 필터
 	.filter("convertDate", function() {
 		return convertDate

@@ -87,6 +87,30 @@
 			<!-- 여행장소 디테일 모달 -->
 			<%@include file="include/detailTourSpotModal.jsp"%>
 			
+			<!-- 스토리 여행기 글쓰기 모달 -->
+			<div class="modal fade bs-example-modal-lg" id="writeTourSpotMemoFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 50px;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<select ng-model="writeTourSpotMemoData.memoType" style="height: 30px;" ng-options="memoType.memoNo as memoType.memoName for memoType in memoTypes">
+            					<option value=""></option>
+          					</select>
+							<input type="text" ng-model="writeTourSpotMemoData.title" style="width: 800px; height: 30px;" />
+						</div>
+
+						<div class="modal-body">
+							<textarea id="smarteditor" rows="10" cols="100" style="width: 850px; height: 412px;"></textarea>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+							<button type="button" class="btn btn-primary" ng-click="writeTourSpotMemo();">글쓰기</button>
+						</div> 
+					</div>
+				</div>
+			</div>
+			
+			
 			<div id="leftMenu">
 			
 				<!-- 저장 / 취소 -->
@@ -111,7 +135,7 @@
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">10</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="tourSpotMemoList.length"></span>
 							<a href="javascript:void(0);"><i class="fa fa-book"></i> 여행기</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
@@ -363,35 +387,71 @@
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
 										<div class="cbp_tmtime equal-height-column">
-										<span>DAY {{tourSpotEvent.tourDate}}</span>
+<!-- 											<span>{{tourSpotEvent.start}}</span> -->
+											<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
+										
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
+										
 										<div class="cbp_tmlabel equal-height-column">
-											<h2 ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</h2>
-											<div class="row">
-												<div class="col-md-4">
-													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
-													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
-													<div class="md-margin-bottom-20">
+										
+											<div class="panel-group acc-v1" id="accordion-{{$index}}">
+											
+												<div class="panel panel-default">
+												
+													<div class="panel-heading" style="position: relative;">
+														<h4 class="panel-title">
+															<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-{{$index}}" href="#collapse-{{$index}}" aria-expanded="false">
+																<b ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</b>
+															</a>
+														</h4>
+														<div style="position: absolute; right: 20px; top: 7px;">
+															<i class="fa fa-expand" style="right: 10px;"></i>
+														</div>
 													</div>
-												</div>
-												<div class="col-md-8">
-													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p>
-													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
-													<p>전화번호 : {{tourSpotEvent.tel}}</p>
-													<p>주소 : {{tourSpotEvent.addr1}}</p>
-													<p>설명 : {{tourSpotEvent.overview}}</p>
+													
+													<div id="collapse-{{$index}}" class="panel-collapse collapse" aria-expanded="false">
+														<div class="panel-body">
+															<div class="row">
+																<div class="col-md-4">
+																	<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
+																	<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
+																</div>
+																<div class="col-md-8">
+																	<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
+																	<p>전화번호 : {{tourSpotEvent.tel}}</p>
+																	<p>주소 : {{tourSpotEvent.addr1}}</p>
+																	<pre style="display: flex; white-space: normal; word-break: break-word;" ng-bind-html="tourSpotEvent.overview"></pre>
+																</div>
+															</div>
+														</div>
+													</div>
+													
 												</div>
 											</div>
 										</div>
+										
+										<!-- 여행기 / 메모 -->
+										<div class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
+											<div class="memo-deleteBtn" style="position: absolute; right: 20px; top:10px;">
+												<a href="javascript:void(0);" ng-click="deleteTourSpotMemo(tourSpotMemo.locationMemoNo)"><i style="color:green; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
+											</div>
+											<h2><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="display: flex; white-space: normal; word-break: break-word; border: none;">여행기 내용</pre>
+											<p ng-bind="tourSpotMemo.regDate | timesince : 'kr'" style="float:right; color: gray; font-weight: bold;"></p>
+										</div>
+										
+										<!-- 여행기 / 메모 작성버튼 -->
+										<div class="row" ng-if="tourSpotEvent.locationNo">
+											<button class="btn rounded btn-evernote-inversed" ng-click="openWriteTourSpotMemoFormModal(tourSpotEvent.locationNo)" type="button" style="margin-left: 228px; margin-bottom: 40px;"><i class="fa fa-pencil-square-o"></i> {{tourSpotEvent.title}} 여행기 작성</button>
+										</div>
+										
 									</li>
 									
 								</ul>
 								
 							</div><!-- 스토리 끝 -->
-							
-							
-							
+					
 						</div>
 						
 					</div>
@@ -447,6 +507,8 @@
 
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- 스마트에디터 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 	<!-- Googla Map API -->
  	<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDIb6fCe7x5lHU_GJozbyb2WjS293g6eY4"></script>
@@ -458,6 +520,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
