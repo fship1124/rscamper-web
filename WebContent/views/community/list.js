@@ -1,8 +1,23 @@
 // 앵귤러 모듈
 angular.module("CommunityApp")
-.controller("ListController", function($rootScope, $scope, $http, MyConfig, RequestService) {
-	// TODO 좋아요 북마크 알림 효과 주기
+.controller("ListController", function($rootScope, $scope, $http, RequestService) {
 	// TODO 왼쪽 컨트롤러 화면에 따라다니게 하기
+
+	// TODO 토스트 왜안되지?
+	$scope.toast = function (text, heading, icon) {
+		$.toast({
+		    text: text, // Text that is to be shown in the toast
+		    heading: heading, // Optional heading to be shown on the toast
+		    icon: icon, // Type of toast icon
+		    showHideTransition: 'fade', // fade, slide or plain
+		    allowToastClose: false, // Boolean value true or false
+		    hideAfter: 1000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+		    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+		    position: 'mid-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+		    textAlign: 'left',  // Text alignment i.e. left, right or center
+		    loader: false,
+		});
+	}
 	
     // 게시판 리스트 불러오기
     $scope.getBoardList = function () {
@@ -13,9 +28,9 @@ angular.module("CommunityApp")
       
 		// 카테고리가 있는지 없는지 판단
 		if ($scope.boardParam.categoryNo == 0) {
-			var url = MyConfig.backEndURL + "/community/select/board?page=" + $scope.boardParam.page + "&count=" + $scope.boardParam.count;
+			var url = myConfig.serverURL + "/community/select/board?page=" + $scope.boardParam.page + "&count=" + $scope.boardParam.count;
 		} else {
-			var url = MyConfig.backEndURL + "/community/select/boardByCategory?page=" + $scope.boardParam.page + "&count=" + $scope.boardParam.count + "&categoryNo=" + $scope.boardParam.categoryNo;
+			var url = myConfig.serverURL + "/community/select/boardByCategory?page=" + $scope.boardParam.page + "&count=" + $scope.boardParam.count + "&categoryNo=" + $scope.boardParam.categoryNo;
 		}
 		$http({
 			url: url,
@@ -97,7 +112,7 @@ angular.module("CommunityApp")
 		}, function(isConfirm) {
 			if (isConfirm) {
 	            $http({
-	                url: MyConfig.backEndURL + "/community/delete/oneBoard?boardNo=" + boardNo,
+	                url: myConfig.serverURL + "/community/delete/oneBoard?boardNo=" + boardNo,
 	                method: "DELETE",
 	            }).success(function(response) {
 	            	swal("삭제완료!", "삭제완료 하였습니다.", "success");
@@ -136,7 +151,7 @@ angular.module("CommunityApp")
 		}
 		// 카테고리 리스트 가져오기
 		$http({
-			url : MyConfig.backEndURL + "/community/select/category",
+			url : myConfig.serverURL + "/community/select/category",
 			method : "GET"
 		})
 		.success(function(response) {
@@ -191,7 +206,7 @@ angular.module("CommunityApp")
     	}
     	
     	$http({
-    		url: MyConfig.backEndURL + "/community/insert/board",
+    		url: myConfig.serverURL + "/community/insert/board",
     		method: "POST",
 			data: $.param({
 				categoryNo: $scope.writeBoard.categoryNo,
@@ -261,7 +276,7 @@ angular.module("CommunityApp")
     // 좋아요
     $scope.likeBoard = function (boardNo, index) {
       $http({
-        url: MyConfig.backEndURL + "/community/like",
+        url: myConfig.serverURL + "/community/like",
         method: "POST",
         data: $.param({
           targetNo: boardNo,
@@ -272,8 +287,10 @@ angular.module("CommunityApp")
       }).success(function (response) {
         if (response == true) {
           $scope.boardList[index].likeCnt--;
+          $scope.toast("추천을 취소합니다.", "좋아요", "error");
         } else {
           $scope.boardList[index].likeCnt++;
+          $scope.toast("이 게시글을 추천합니다.", "좋아요", "success");
         }
       }).error(function (error) {
         swal("에러", error, "error");
@@ -283,7 +300,7 @@ angular.module("CommunityApp")
     // 북마크 추가 삭제
     $scope.bookmarkBoard = function (boardNo, index) {
       $http({
-        url: MyConfig.backEndURL + "/community/bookMark",
+        url: myConfig.serverURL + "/community/bookMark",
         method: "POST",
         data: $.param({
            targetNo: boardNo,
@@ -295,8 +312,10 @@ angular.module("CommunityApp")
         $scope.bookMark = response;
         if (response == true) {
         	$scope.boardList[index].bookmarkCnt--;
+        	$scope.toast("북마크 취소합니다.", "좋아요", "error");
         } else {
         	$scope.boardList[index].bookmarkCnt++;
+        	$scope.toast("이 게시글을 북마크합니다.", "좋아요", "success");
         }
       }).error(function (error) {
     	  swal("에러", error, "error");

@@ -115,37 +115,38 @@
 									<!-- 여행일정 리스트 DIV -->
 									<div class="row">
 				
-										<!-- 여행일정 한개 -->
-										<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
-											<img style="width: 100%; height: 170px;" ng-show="plan.filePath" ng-src="{{plan.filePath}}" >
-											<img style="width: 100%; height: 170px;" ng-hide="plan.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
-											<div style="position: absolute; top:10px; left: 20px;" >
-												<img class="rounded-x" ng-src="{{plan.photoUrl}}" style="width: 30px; hegiht: 30px;">
-												<span style="color: white; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;" ng-bind="plan.displayName"></span>
-											</div>
-											<div style="position: absolute; top:5px; right: 20px;" ng-if="plan.userUid == user.userUid">
-												<a href="javascript:void(0);" ng-click="removeTourPlan(plan.recordNo);">
-													<i class="icon-custom icon-xs rounded icon-bg-u fa fa-trash-o"></i>
-												</a>
-											</div>
-											<div style="position: absolute; top: 50px; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;">
-											<a style="color: white;" ng-bind="plan.title" href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}"></a>
-											</div>
-											<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
-												<ul class="list-inline posted-info">
-													<li ng-bind="plan.period"></li>
-													<li ng-bind="plan.regDate | timesince : 'kr'"></li>
-												</ul>
-												<h2><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.strapline"></a></h2>
-												<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
-												<ul class="post-shares">
-													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
-													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-bookmark-o"></i><span ng-bind="plan.bookmarkCnt"></span></a></li>북마크
-													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa fa-clone"></i><span ng-bind="plan.customCnt"></span></a></li>커스텀
-													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-comments-o"></i><span ng-bind="plan.commentCnt"></span></a></li>댓글
-												</ul>
-											</div>
-										</div><!-- 여행일정 한개 끝 -->
+									<!-- 여행일정 한개 -->
+									<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="plan in planList">
+										<img style="width: 100%; height: 170px; margin-bottom:0px;" ng-show="plan.filePath" ng-src="{{plan.filePath}}" >
+										<img style="width: 100%; height: 170px; margin-bottom:0px;" ng-hide="plan.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
+										<div style="position: absolute; top:10px; left: 20px;" >
+											<img class="rounded-x" ng-src="{{plan.photoUrl}}" style="width: 30px; hegiht: 30px;">
+											<span style="color: white; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;" ng-bind="plan.displayName"></span>
+										</div>
+										<div style="position: absolute; top:5px; right: 20px;" ng-if="plan.userUid == user.userUid">
+											<a href="javascript:void(0);" ng-click="removeTourPlan(plan.recordNo);">
+												<i class="icon-custom icon-xs rounded icon-bg-u fa fa-trash-o"></i>
+											</a>
+										</div>
+										<div style="position: absolute; top: 50px; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;">
+										<a style="color: white; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"  ng-bind="plan.title" href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}"></a>
+										</div>
+										<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
+											<ul class="list-inline posted-info">
+												<li ng-bind="plan.period"></li>
+												<li ng-bind="plan.regDate | timesince : 'kr'"></li>
+											</ul>
+											<h2 ng-if="plan.strapline.length > 0"><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.strapline"></a></h2>
+											<h2 ng-if="plan.strapline.length == 0"><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">소제목이 없습니다</a></h2>
+											<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
+											<ul class="post-shares">
+												<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
+												<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-bookmark-o"></i><span ng-bind="plan.bookmarkCnt"></span></a></li>북마크
+												<li><a href="javascript:void(0);"><i class="rounded-2x fa fa fa-clone"></i><span ng-bind="plan.customCnt"></span></a></li>커스텀
+												<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-comments-o"></i><span ng-bind="plan.commentCnt"></span></a></li>댓글
+											</ul>
+										</div>
+									</div><!-- 여행일정 한개 끝 -->
 				
 									</div><!-- 여행일정 리스트 DIV -->
 								</div>
@@ -157,10 +158,10 @@
 				
 										<!-- 포스트 한개 -->
 										<div class="col-sm-6 news-v3" style="padding:10px; padding-top: 0px; padding-bottom: 30px;" ng-repeat="post in postList">
-											<img style="width: 100%; height: 170px;" ng-show="post.filePath" ng-src="{{post.filePath}}" >
-											<img style="width: 100%; height: 170px;" ng-hide="post.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
+											<img style="width: 100%; height: 170px; margin-bottom: 0px;" ng-show="post.filePath" ng-src="{{post.filePath}}">
+											<img style="width: 100%; height: 170px; margin-bottom: 0px;" ng-hide="post.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
 											<div style="position: absolute; top:10px; left: 20px;" >
-												<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; hegiht: 30px;">
+												<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; height: 30px;">
 												<span style="color: white; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;" ng-bind="post.displayName"></span>
 											</div>
 											<div style="position: absolute; top:10px; right: 20px;" ng-if="post.userUid == user.userUid">
@@ -176,7 +177,8 @@
 													<li ng-bind="post.categoryName"></li>
 													<li ng-bind="post.regDate | timesince : 'kr'"></li>
 												</ul>
-												<h2><a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{post.boardNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="post.title"></a></h2>
+												<h2 ng-if="post.title"><a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{post.boardNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="post.title"></a></h2>
+												<h2 ng-if="!post.title"><a href="javascript:void(0);" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">지워진 게시물입니다.</a></h2>
 												<div style="height:100px; overflow:hidden;" ng-bind="post.introduce"></div>
 												<ul class="post-shares">
 													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="post.likeCnt"></span></a></li>좋아요

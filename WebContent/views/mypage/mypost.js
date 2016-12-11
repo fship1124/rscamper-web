@@ -1,13 +1,13 @@
 // 앵귤러 모듈
 angular.module("MypageApp")
-.controller("MyPostController", function($rootScope, $scope, $http, MyConfig) {
+.controller("MyPostController", function($rootScope, $scope, $http) {
 	/** ==================================================== */
 	/** 내 포스트 */
 	/** ==================================================== */
 	// 내 포스트 불러오기
 	$scope.getMyPostList = function () {
 		$http({
-			url: MyConfig.backEndURL + "/community/select/board/user?page=1&userUid=" + $rootScope.user.userUid,
+			url: myConfig.serverURL + "/community/select/board/user?page=1&userUid=" + $rootScope.user.userUid,
 			method: "GET",
 		}).success(function (response) {
 			console.log(response)
@@ -36,7 +36,7 @@ angular.module("MypageApp")
 		}, function(isConfirm) {
 			if (isConfirm) {
 				$http({
-					url: MyConfig.backEndURL + "/community/delete/oneBoard?boardNo=" + boardNo,
+					url: myConfig.serverURL + "/community/delete/oneBoard?boardNo=" + boardNo,
 					method: "DELETE",
 				}).success(function (){
 					swal("삭제완료!", "해당 포스트가 삭제되었습니다.", "success");
@@ -54,7 +54,7 @@ angular.module("MypageApp")
 	//	메뉴 카운트 조회
 	$scope.getMenuCount = function () {
 		$http({
-			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			url : myConfig.serverURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
 			method : "GET"
 		}).success(function(response) {
 			$scope.menuCount = response;
@@ -76,7 +76,7 @@ angular.module("MypageApp")
 	});
 	// 프로필 사진 변경 모달창 열기
 	$scope.updateProfileImage = function () {
-		$scope.uploadProfileUrl = myConfig.serverUrl + "/user/upload/profileImage"
+		$scope.uploadProfileUrl = myConfig.serverURL + "/user/upload/profileImage"
 		$("#profileImage").val("");
 		$("#profileImageFile").val("");
 		$('#profileImageUploadFormModal').modal('show');
@@ -104,7 +104,7 @@ angular.module("MypageApp")
 	});
 	// 배경 사진 변경 모달창 열기
 	$scope.updateBGImage = function () {
-		$scope.uploadBGUrl = myConfig.serverUrl + "/user/upload/bgImage"
+		$scope.uploadBGUrl = myConfig.serverURL + "/user/upload/bgImage"
 		$("#BGImageFile").val("");
 		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 		$('#BGImageUploadFormModal').modal('show');
@@ -124,7 +124,7 @@ angular.module("MypageApp")
 	// 사진 데이터베이스 업데이트
     $scope.updateImage = function (userPhoto, url) {
         $http({
-          url: myConfig.serverUrl + url,
+          url: myConfig.serverURL + url,
           method: "POST",
           data: $.param({
             userUid: userPhoto.userUid,
@@ -138,7 +138,7 @@ angular.module("MypageApp")
         })
         .success(function () {
          	 $http({
-                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 url: myConfig.serverURL + "/user/select/oneUser?userUid=" + $scope.user.userUid,
                  method: "GET"
              })
              .success(function (result) {

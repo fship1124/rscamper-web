@@ -1,13 +1,13 @@
 // 앵귤러 모듈
 angular.module("MypageApp")
-.controller("BookmarkController", function($rootScope, $scope, $http, MyConfig) {
+.controller("BookmarkController", function($rootScope, $scope, $http) {
 	/** ==================================================== */
 	/** 내 여행일정 */
 	/** ==================================================== */
 	// 내 여행일정 불러오기
 	$scope.getBookmarkTourPlanList = function () {
 		$http({
-			url: MyConfig.backEndURL + "/tourPlan/select/bookmarkTourPlanList?userUid=" + $rootScope.user.userUid,
+			url: myConfig.serverURL + "/tourPlan/select/bookmarkTourPlanList?userUid=" + $rootScope.user.userUid,
 			method: "GET",
 		}).success(function (result) {
 			$scope.planList = result
@@ -36,7 +36,7 @@ angular.module("MypageApp")
 		}
 		$scope.bookmarkSpotParams.pageNo++;
 		$http({
-			url: MyConfig.backEndURL + "/tourPlan/select/spotList/bookmark",
+			url: myConfig.serverURL + "/tourPlan/select/spotList/bookmark",
 			method: "GET",
 			params: $scope.bookmarkSpotParams
 		}).success(function (response) {
@@ -88,7 +88,7 @@ angular.module("MypageApp")
 	// 북마크 포스트 불러오기
 	$scope.getMyPostList = function (pageNo) {
 		$http({
-			url: MyConfig.backEndURL + "/community/select/board/bookmark?page="+pageNo+"&userUid=" + $rootScope.user.userUid,
+			url: myConfig.serverURL + "/community/select/board/bookmark?page="+pageNo+"&userUid=" + $rootScope.user.userUid,
 			method: "GET",
 		}).success(function (response) {
 			console.log(response);
@@ -109,7 +109,7 @@ angular.module("MypageApp")
 	/** ==================================================== */
 	$scope.getMenuCount = function () {
 		$http({
-			url : MyConfig.backEndURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			url : myConfig.serverURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
 			method : "GET"
 		}).success(function(response) {
 			$scope.menuCount = response;
@@ -133,7 +133,7 @@ angular.module("MypageApp")
 	});
 	// 프로필 사진 변경 모달창 열기
 	$scope.updateProfileImage = function () {
-		$scope.uploadProfileUrl = myConfig.serverUrl + "/user/upload/profileImage"
+		$scope.uploadProfileUrl = myConfig.serverURL + "/user/upload/profileImage"
 		$("#profileImage").val("");
 		$("#profileImageFile").val("");
 		$('#profileImageUploadFormModal').modal('show');
@@ -161,7 +161,7 @@ angular.module("MypageApp")
 	});
 	// 배경 사진 변경 모달창 열기
 	$scope.updateBGImage = function () {
-		$scope.uploadBGUrl = myConfig.serverUrl + "/user/upload/bgImage"
+		$scope.uploadBGUrl = myConfig.serverURL + "/user/upload/bgImage"
 		$("#BGImageFile").val("");
 		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 		$('#BGImageUploadFormModal').modal('show');
@@ -181,7 +181,7 @@ angular.module("MypageApp")
 	// 사진 데이터베이스 업데이트
     $scope.updateImage = function (userPhoto, url) {
         $http({
-          url: myConfig.serverUrl + url,
+          url: myConfig.serverURL + url,
           method: "POST",
           data: $.param({
             userUid: userPhoto.userUid,
@@ -195,7 +195,7 @@ angular.module("MypageApp")
         })
         .success(function () {
          	 $http({
-                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 url: myConfig.serverURL + "/user/select/oneUser?userUid=" + $scope.user.userUid,
                  method: "GET"
              })
              .success(function (result) {

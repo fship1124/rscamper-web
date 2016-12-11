@@ -81,29 +81,24 @@
 			<!-- 작성자 시간 기타등등 -->
 			<div class="row">
 				<img src="{{board.photoUrl}}" style="width: 40px; height: 40px;">
-				<span ng-bind="board.displayName"></span>
-				<span ng-bind="board.regDate | timesince : 'kr'"></span>
+				<span ng-bind="board.displayName" style="font-size: 14px; font-weight: bold;"></span>
+				<span ng-bind="board.regDate | timesince : 'kr'" style="color:gray;"></span>
 			</div>
 			
 			<!-- 카테고리 제목 -->
 			<div class="row">
 				<span id="board-category" ng-bind="board.categoryName"></span>
-				<span id="board-title" ng-bind="board.title"></span>
+				<a id="board-title" href="javascript:void(0);" ng-bind="board.title"></a>
 			</div>
 			
 			<!-- 내용 -->
-			<div id="board-content" class="row">
+			<div id="board-content" class="row" style="position: relative;">
+				<div id="board-content-btn" ng-if="board.userUid == user.userUid" style="position: absolute; top:10px; right: 10px;">
+					<a href="javascript:void(0);" ng-click="modifyBoard(board.boardNo);"><i style="color:gray; font-size:24px; margin-right: 10px;" class="fa  fa-pencil-square-o"></i></a>
+					<a href="javascript:void(0);" ng-click="removeBoard(board.boardNo);"><i style="color:gray; font-size:24px;" class="fa  fa-trash-o"></i></a>
+				</div>
 				<div ng-bind-html="board.content"></div>
 			</div>
-			
-			<!-- 좋아요 북마크  댓글 등등  -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="board-btn"> -->
-<!-- 					<a href="javascript:void(0);" ng-click="likeBoard(board.boardNo, $index)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <b ng-bind="board.likeCnt"></b></a> -->
-<!-- 					<a href="javascript:void(0);" ng-click="bookmarkBoard(board.boardNo, $index)"><i class="fa fa-bookmark-o" aria-hidden="true"></i> <b ng-bind="board.bookmarkCnt"></b></a> -->
-<!-- 					<a href="javascript:void(0);" ><i class="fa fa-commenting-o" aria-hidden="true"></i> <b ng-bind="board.commentCnt"></b></a> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
 			
 			<!-- 댓글 & 좋아요 -->
 			<div class="author-info" style="padding-top: 15px;">
@@ -123,7 +118,7 @@
 					<span id="bookmark-count" ng-bind="board.bookmarkCnt"></span>
 				</div>
 				
-				<div class="spot-commont-count" style="display: inline-block;">
+				<div class="spot-commont-count" style="display: inline-block;" ng-click="toggleComment();">
 					<a class="show-comments-of-note" style="cursor: pointer;">
 						<img src="https://www.wishbeen.co.kr/images/icon-comment-gry.png">
 					</a>
@@ -132,7 +127,7 @@
 				</div>
 			</div>
 			
-			<div class="plan-comment">
+			<div class="plan-comment" ng-show="commentToggleStatus">
 				<div class="spot-comment-content">
 					<div class="comment-write">
 						<div class="my-p" style="float: left;">
@@ -237,7 +232,8 @@
 	
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
-	
+	<!-- JQuery Toast Plugin -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!-- 스마트에디터 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 	

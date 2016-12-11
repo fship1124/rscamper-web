@@ -204,9 +204,14 @@ a, button {
 }
 
 #board-category {
-	
+	font-size: 18px;
+	color: #ff8000!important;
 }
 
 #board-title {
-	
+	font-size: 24px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: black;
 }

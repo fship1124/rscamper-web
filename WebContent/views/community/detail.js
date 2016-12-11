@@ -1,12 +1,83 @@
 // 앵귤러 모듈
 angular.module("CommunityApp")
-.controller("DetailController", function($rootScope, $scope, $http, MyConfig, RequestService) {
-	// TODO 좋아요 북마크 알림
+.controller("DetailController", function($rootScope, $scope, $http, $window, RequestService) {
+	// TODO 토스트 왜안되지?
+	$scope.toast = function (text, heading, icon) {
+		$.toast({
+		    text: text, // Text that is to be shown in the toast
+		    heading: heading, // Optional heading to be shown on the toast
+		    icon: icon, // Type of toast icon
+		    showHideTransition: 'fade', // fade, slide or plain
+		    allowToastClose: false, // Boolean value true or false
+		    hideAfter: 1000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+		    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+		    position: 'mid-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+		    textAlign: 'left',  // Text alignment i.e. left, right or center
+		    loader: false,
+		});
+	}
+
+	
+	// TODO 게시글수정
+	$scope.modifyBoard = function (boardNo) {
+		swal({
+			title : "게시글 수정",
+			text : "해당 게시글을 수정하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonColor : "#DD6B55",
+			confirmButtonText : "네",
+			cancelButtonText : "아니오",
+			closeOnConfirm : true,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				// TODO
+			} else {
+				swal("취소됨!", "취소되었습니다.", "error");
+			}
+		});
+	}
+	
+	// 게시글삭제
+	$scope.removeBoard = function (boardNo) {
+		swal({
+			title : "게시글 삭제",
+			text : "해당 게시글을삭제하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonColor : "#DD6B55",
+			confirmButtonText : "네",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+	            $http({
+	                url: myConfig.serverURL + "/community/delete/oneBoard?boardNo=" + boardNo,
+	                method: "DELETE",
+	            }).success(function(response) {
+	            	swal("삭제완료!", "삭제완료 하였습니다.", "success");
+	            	$window.location.href = "list.jsp?categoryNo=0";
+	            }).error(function(error) {
+	                console.log(error);
+	            })
+			} else {
+				swal("취소됨!", "삭제가 취소되었습니다.", "error");
+			}
+		});
+	};
+	
+	// 댓글창 토글
+	$scope.commentToggleStatus = true;
+	$scope.toggleComment = function () {
+		$scope.commentToggleStatus = !$scope.commentToggleStatus;
+	};
 	
     // 게시글 불러오기
 	$scope.getBoard = function () {
 		$http({
-			url: MyConfig.backEndURL + "/community/select/oneBoard?boardNo=" + RequestService.getParameter("boardNo"),
+			url: myConfig.serverURL + "/community/select/oneBoard?boardNo=" + RequestService.getParameter("boardNo"),
 			method: "GET",
 		})
 		.success(function (response) {
@@ -15,14 +86,14 @@ angular.module("CommunityApp")
 		.error(function (error) {
 			swal("에러", "서버접속불가");
 		})
-	}
+	};
 	
     
 	// 댓글 리스트 불러오기
 	$scope.getCommentList = function () {
 		$scope.page++;
 		$http({
-			url: MyConfig.backEndURL + "/community/select/comment?page=" + $scope.page + "&boardNo=" + RequestService.getParameter("boardNo"),
+			url: myConfig.serverURL + "/community/select/comment?page=" + $scope.page + "&boardNo=" + RequestService.getParameter("boardNo"),
 			method: "GET"
 		}).success(function (response) {
 			angular.forEach(response.commentList, function (comment) {
@@ -52,7 +123,7 @@ angular.module("CommunityApp")
 	    $scope.targetCommentNo = null;
 	    $scope.getBoard();
 	    $scope.getCommentList();
-	}
+	};
 	
 	$scope.load();
 	
@@ -62,7 +133,7 @@ angular.module("CommunityApp")
 		$scope.commentForm = {
 			content : displayName + "에게 : "
 		};
-	}
+	};
     
     // 댓글 작성
     $scope.writeComment = function() {
@@ -72,7 +143,7 @@ angular.module("CommunityApp")
             return false;
         }
         $http({
-            url: MyConfig.backEndURL + "/community/insert/comment",
+            url: myConfig.serverURL + "/community/insert/comment",
             method: "POST",
             data: $.param({
                 targetCommentNo: $scope.targetCommentNo,
@@ -93,8 +164,8 @@ angular.module("CommunityApp")
     $scope.deleteComment = function (commentNo) {
     	console.log(commentNo);
 		swal({
-			title : "게시글 삭제",
-			text : "해당 게시글을삭제하시겠습니까?",
+			title : "댓글 삭제",
+			text : "해당 댓글을삭제하시겠습니까?",
 			type : "warning",
 			showCancelButton : true,
 			confirmButtonColor : "#DD6B55",
@@ -105,7 +176,7 @@ angular.module("CommunityApp")
 		}, function(isConfirm) {
 			if (isConfirm) {
 				$http({
-					url : MyConfig.backEndURL + "/community/delete/oneComment?commentNo=" + commentNo,
+					url : myConfig.serverURL + "/community/delete/oneComment?commentNo=" + commentNo,
 					method : "DELETE"
 				})
 				.success(function(response) {
@@ -124,7 +195,7 @@ angular.module("CommunityApp")
     // 좋아요
     $scope.likeBoard = function (boardNo) {
       $http({
-        url: MyConfig.backEndURL + "/community/like",
+        url: myConfig.serverURL + "/community/like",
         method: "POST",
         data: $.param({
           targetNo: boardNo,
@@ -135,8 +206,10 @@ angular.module("CommunityApp")
       }).success(function (response) {
         if (response == true) {
           $scope.board.likeCnt--;
+      	$scope.toast("추천을 취소합니다.", "좋아요", "error");
         } else {
           $scope.board.likeCnt++;
+          $scope.toast("이 게시글을 추천합니다.", "좋아요", "success");
         }
       }).error(function (error) {
         swal("에러", error, "error");
@@ -146,7 +219,7 @@ angular.module("CommunityApp")
     // 북마크 추가 삭제
     $scope.bookmarkBoard = function (boardNo) {
       $http({
-        url: MyConfig.backEndURL + "/community/bookMark",
+        url: myConfig.serverURL + "/community/bookMark",
         method: "POST",
         data: $.param({
            targetNo: boardNo,
@@ -158,8 +231,10 @@ angular.module("CommunityApp")
         $scope.bookMark = response;
         if (response == true) {
         	$scope.board.bookmarkCnt--;
+        	$scope.toast("북마크 취소합니다.", "좋아요", "error");
         } else {
         	$scope.board.bookmarkCnt++;
+        	$scope.toast("이 게시글을 북마크합니다.", "좋아요", "success");
         }
       }).error(function (error) {
     	  swal("에러", error, "error");

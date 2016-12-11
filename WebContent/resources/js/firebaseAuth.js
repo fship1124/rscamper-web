@@ -235,7 +235,7 @@ function resignAccount() {
 				// DB회원정보 삭제
 				$.ajax({
 					type: "DELETE",
-					url: myConfig.serverUrl + "/user/delete/oneUser?userUid=" + user.uid,
+					url: myConfig.serverURL + "/user/delete/oneUser?userUid=" + user.uid,
 					dataType : 'json',
 		            error : function(err) {
 		            	alert("에러발생");
@@ -256,7 +256,7 @@ function resignAccount() {
 function getLocationList (successCB) {
   $.ajax({
 	  type: "GET",
-	  url: myConfig.serverUrl + "/user/select/locations",
+	  url: myConfig.serverURL + "/user/select/locations",
 	  dataType: "json",
 	  error : function (err) {
 		  
@@ -273,7 +273,7 @@ function initApp() {
         if (user) {
         	$.ajax({
         		type: "GET",
-        		url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + user.uid,
+        		url: myConfig.serverURL + "/user/select/oneUser?userUid=" + user.uid,
         		dataType : 'json',
         	    error : function(err) {
         		},
@@ -308,6 +308,6 @@ function initApp() {
 };
 
 // 시작
-window.onload = function() {
-    initApp();
-};
+jQuery(document).ready(function() {
+	initApp();
+});

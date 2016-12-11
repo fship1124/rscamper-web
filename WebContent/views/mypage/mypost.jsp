@@ -103,7 +103,7 @@
 								<img style="width: 100%; height: 170px;" ng-show="post.filePath" ng-src="{{post.filePath}}" >
 								<img style="width: 100%; height: 170px;" ng-hide="post.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
 								<div style="position: absolute; top:10px; left: 20px;" >
-									<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; hegiht: 30px;">
+									<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; height: 30px;">
 									<span style="color: white; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;" ng-bind="post.displayName"></span>
 								</div>
 								<div style="position: absolute; top:5px; right: 20px;" ng-if="post.userUid == user.userUid">

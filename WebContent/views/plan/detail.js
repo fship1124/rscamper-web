@@ -1,12 +1,12 @@
 angular.module("TourPlanApp")
-	.controller("DetailController", function ($rootScope, $scope, $http, $window, $timeout, MyConfig, RequestService) {
+	.controller("DetailController", function ($rootScope, $scope, $http, $window, $timeout, RequestService) {
 		/** ==================================================== */
 		/** 여행일정 기본 데이터 불러오기 */
 		/** ==================================================== */
 		// recordNo로 파라미터 받은 값으로 일정 정보 불러옴
 		$scope.getTourPlan = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
+				url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
 			}).success(function (response) {
 //				console.log(response);
@@ -27,7 +27,7 @@ angular.module("TourPlanApp")
 				/** 여행일정 작성자 데이터 불러오기 */
 				/** ==================================================== */
 				$http({
-					url: MyConfig.backEndURL + "/user/select/oneUser?userUid=" + response.userUid,
+					url: myConfig.serverURL + "/user/select/oneUser?userUid=" + response.userUid,
 					method: "GET"
 				}).success(function (response) {
 					console.log(response);
@@ -55,7 +55,7 @@ angular.module("TourPlanApp")
 				$scope.initCalendar();
 				// 포함된 일정 불러오기
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					url: myConfig.serverURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET"
 				}).success(function (response) {
 //					console.log(response);
@@ -156,7 +156,7 @@ angular.module("TourPlanApp")
 					function(isConfirm){
 						if (isConfirm) {
 							$http({
-								url: MyConfig.backEndURL + "/tourPlan//update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=1",
+								url: myConfig.serverURL + "/tourPlan//update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=1",
 								method: "GET"
 							}).success(function (response) {
 								$scope.tourPlan.isOpen = 1;
@@ -181,7 +181,7 @@ angular.module("TourPlanApp")
 					function(isConfirm){
 						if (isConfirm) {
 							$http({
-								url: MyConfig.backEndURL + "/tourPlan/update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=2",
+								url: myConfig.serverURL + "/tourPlan/update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=2",
 								method: "GET"
 							}).success(function (response) {
 								$scope.tourPlan.isOpen = 2;
@@ -201,7 +201,7 @@ angular.module("TourPlanApp")
 		// 체크 좋아요 북마크 커스텀
 		$scope.checkTourPlanSet = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+				url: myConfig.serverURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 				method: "GET"
 			}).success(function (response) {
 //				console.log(response);
@@ -229,7 +229,7 @@ angular.module("TourPlanApp")
 		$scope.likeTourPlan = function () {
 				if($scope.tourPlanCheckSet.scheduleLike) {
 					$http({
-						url: MyConfig.backEndURL + "/tourPlan/addScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						url: myConfig.serverURL + "/tourPlan/addScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 						method: "GET"
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
@@ -238,7 +238,7 @@ angular.module("TourPlanApp")
 					})
 				} else {
 					$http({
-						url: MyConfig.backEndURL + "/tourPlan/cancelScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						url: myConfig.serverURL + "/tourPlan/cancelScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 						method: "GET"
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
@@ -252,7 +252,7 @@ angular.module("TourPlanApp")
 		$scope.bookmarkTourPlan = function () {
 			if($scope.tourPlanCheckSet.bookMark) {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/addScheduleBookmark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					url: myConfig.serverURL + "/tourPlan/addScheduleBookmark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
@@ -261,7 +261,7 @@ angular.module("TourPlanApp")
 				})
 			} else {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/cancelScheduleBookMark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					url: myConfig.serverURL + "/tourPlan/cancelScheduleBookMark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
@@ -277,7 +277,7 @@ angular.module("TourPlanApp")
 			if($scope.tourPlanCheckSet.customizing) {
 				// 로딩버튼 달기
 				$http({
-					url: MyConfig.backEndURL + '/tourPlan/addCustomizing',
+					url: myConfig.serverURL + '/tourPlan/addCustomizing',
 					method: 'POST',
 					data: $.param({
 						recordNo : $scope.tourPlan.recordNo,
@@ -299,7 +299,7 @@ angular.module("TourPlanApp")
 				})
 			} else {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/cancelCustomizing?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+					url: myConfig.serverURL + "/tourPlan/cancelCustomizing?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.customCnt = response;
@@ -811,7 +811,7 @@ angular.module("TourPlanApp")
 		// 댓글 리스트 조회
 		$scope.getCommentList = function () {
 			$http({
-				url: MyConfig.backEndURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
+				url: myConfig.serverURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
 				method: 'GET'
 			}).success(function (response) {
 //				console.log(response);
@@ -824,7 +824,7 @@ angular.module("TourPlanApp")
 		// 댓글 등록
 		$scope.writeComment = function () {
 			$http({
-				url: MyConfig.backEndURL + '/tourPlan/insert/tourPlan/comment',
+				url: myConfig.serverURL + '/tourPlan/insert/tourPlan/comment',
 				method: 'POST',
 				data: $.param({
 					recordNo: RequestService.getParameter("recordNo"),
@@ -859,7 +859,7 @@ angular.module("TourPlanApp")
 				function(isConfirm){
 					if (isConfirm) {
 						$http({
-							url: MyConfig.backEndURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
+							url: myConfig.serverURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
 							method: 'GET'
 						}).success(function (response) {
 							$scope.getCommentList();

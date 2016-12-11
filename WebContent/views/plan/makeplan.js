@@ -1,12 +1,12 @@
 angular.module("TourPlanApp")
-	.controller("MakePlanController", function ($rootScope, $scope, $http, $window, $timeout, MyConfig, RequestService) {
+	.controller("MakePlanController", function ($rootScope, $scope, $http, $window, $timeout, RequestService) {
 		/** ==================================================== */
 		/** 여행일정 기본 데이터 불러오기 */
 		/** ==================================================== */
 		// recordNo로 파라미터 받은 값으로 일정 정보 불러옴
 		$scope.getTourPlan = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
+				url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
 			}).success(function (response) {
 //				console.log(response);
@@ -30,7 +30,7 @@ angular.module("TourPlanApp")
 				$scope.initCalendar();
 				// 포함된 일정 불러오기
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					url: myConfig.serverURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET"
 				}).success(function (response) {
 //					console.log(response);
@@ -147,14 +147,14 @@ angular.module("TourPlanApp")
 			var tourPlanScheduleList = $scope.getAllCalendarEvents()
 			// 전체정보 입력
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/update/tourPlan",
+				url: myConfig.serverURL + "/tourPlan/update/tourPlan",
 				method: "POST",
 				data: $.param($scope.tourPlan),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 			}).success(function (response) {
 				// 스케줄 정보 삭제
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/delete/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					url: myConfig.serverURL + "/tourPlan/delete/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET",
 				}).success(function (response) {
 					// 스케쥴 정보 입력
@@ -175,7 +175,7 @@ angular.module("TourPlanApp")
 						if (tps.locationNo) { tourPlanSchedule.locationNo = tps.locationNo }
 //						console.log(tourPlanSchedule);
 						$http({
-							url: MyConfig.backEndURL + "/tourPlan/insert/tourPlanSchedule",
+							url: myConfig.serverURL + "/tourPlan/insert/tourPlanSchedule",
 							method: "POST",
 							data: $.param(tourPlanSchedule),
 							headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
@@ -210,7 +210,7 @@ angular.module("TourPlanApp")
 		// 제목바꾸기 완료 이벤트
 		$scope.updateTitle = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/update/tourPlanTitle",
+				url: myConfig.serverURL + "/tourPlan/update/tourPlanTitle",
 				method: "POST",
 				data: $.param({
 					recordNo: RequestService.getParameter("recordNo"),
@@ -239,7 +239,7 @@ angular.module("TourPlanApp")
 		
 		// 배경 사진 변경 모달창 열기
 		$scope.changeTourPlanBGImage = function () {
-			$scope.uploadBGUrl = MyConfig.backEndURL + "/tourPlan/upload/coverImage"
+			$scope.uploadBGUrl = myConfig.serverURL + "/tourPlan/upload/coverImage"
 			$("#BGImageFile").val("");
 			$("#BGImage").attr("src", "/rscamper-web/resources/img/default/default-image.png");
 			$("#BGImageUploadFormModal").modal("show");
@@ -262,7 +262,7 @@ angular.module("TourPlanApp")
 		// 사진 데이터베이스 업데이트
 	    $scope.updateImage = function (TourPlanCover, url) {
 	        $http({
-	          url: MyConfig.backEndURL + url,
+	          url: myConfig.serverURL + url,
 	          method: "POST",
 	          data: $.param({
 	        		recordNo: RequestService.getParameter("recordNo"),
@@ -278,7 +278,7 @@ angular.module("TourPlanApp")
 	        })
 	        .success(function () {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
+					url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET",
 				}).success(function (response) {
 					// 불러온 일정정보 uid값이 $rootScope.user와 같은지 확인 : 같으면 진행, 아니면 오류 메세지 띄우고 일정 리스트 페이지로 이동
@@ -347,7 +347,7 @@ angular.module("TourPlanApp")
 			}
 			$scope.spotParams.pageNo++;
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/spotList",
+				url: myConfig.serverURL + "/tourPlan/select/spotList",
 				method: "GET",
 				params: $scope.spotParams
 			}).success(function (response) {
@@ -427,7 +427,7 @@ angular.module("TourPlanApp")
 			}
 			$scope.bookmarkSpotParams.pageNo++;
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/spotList/bookmark",
+				url: myConfig.serverURL + "/tourPlan/select/spotList/bookmark",
 				method: "GET",
 				params: $scope.bookmarkSpotParams
 			}).success(function (response) {

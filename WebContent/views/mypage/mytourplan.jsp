@@ -112,14 +112,15 @@
 								</a>
 							</div>
 							<div style="position: absolute; top: 50px; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray; font-size: 25px; width: 100%; overflow: hidden; text-align: center; padding-right: 20px;">
-							<a style="color: white;" ng-bind="plan.title" href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}"></a>
+							<a style="color: white; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"  ng-bind="plan.title" href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}"></a>
 							</div>
 							<div class="news-v3-in-sm" style="border: 1px solid #e2e2e2;">
 								<ul class="list-inline posted-info">
 									<li ng-bind="plan.period"></li>
 									<li ng-bind="plan.regDate | timesince : 'kr'"></li>
 								</ul>
-								<h2><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.strapline"></a></h2>
+								<h2 ng-if="plan.strapline.length > 0"><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="plan.strapline"></a></h2>
+								<h2 ng-if="plan.strapline.length == 0"><a href="${pageContext.request.contextPath}/views/plan/detail.jsp?recordNo={{plan.recordNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">소제목이 없습니다</a></h2>
 								<div style="height:100px; overflow:hidden;" ng-bind="plan.introduce"></div>
 								<ul class="post-shares">
 									<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="plan.likeCnt"></span></a></li>좋아요
