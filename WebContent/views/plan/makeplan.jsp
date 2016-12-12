@@ -110,6 +110,9 @@
 				</div>
 			</div>
 			
+			<!-- 예산창 보기 모달 -->
+			
+			
 			
 			<div id="leftMenu">
 			
@@ -140,7 +143,7 @@
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="totalBudget | currency : '' : 0"></span>
 							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
 						</li>
 					</ul>
@@ -385,7 +388,7 @@
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent" ng-init="tourSpotEventIndex = $index">
 										<div class="cbp_tmtime equal-height-column">
 											<span>{{tourSpotEvent.start | convertISO : 'YYYY-MM-DD HH:mm'}}</span>
 											<span>DAY {{tourSpotEvent.tourDate}}</span>
@@ -433,18 +436,73 @@
 										
 										<!-- 여행기 / 메모 -->
 										<div style="margin-bottom: 10px;" class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
-											<div class="memo-deleteBtn" style="position: absolute; right: 20px; top:10px;">
-												<a href="javascript:void(0);" ng-click="deleteTourSpotMemo(tourSpotMemo.locationMemoNo)"><i style="color:green; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
+											<div style="position:absolute; right: 50px; top: 20px; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</div>
+											<div class="memo-deleteBtn" style="position: absolute; right: 20px; top:15px;">
+												<a href="javascript:void(0);" ng-click="deleteTourSpotMemo(tourSpotMemo.scheduleMemoNo)"><i style="color:green; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
 											</div>
 											<h2 ng-if="tourSpotMemo.memoType == 1"><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
 											<h2 ng-if="tourSpotMemo.memoType == 2"><b style="color: #ff8000; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
-											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none;">여행기 내용</pre>
-											<p style="float:right; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</p>
+											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none; white-space: pre-wrap">여행기 내용</pre>
+
+
+											<!-- 예산 리스트 반복돌자 -->
+											<div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px;" ng-repeat="tourPlanBudget in tourPlanBudgetList" ng-if="tourPlanBudget.scheduleMemoNo == tourSpotMemo.scheduleMemoNo">
+												<p style="margin-bottom: 0px; font-size:16px; color:gray; font-weight:bold;">
+													<i style="margin:0px; width:20px; height:20px; font-size:12px; line-height:20px;" class="icon-custom icon-sm rounded-x icon-color-orange fa fa-krw"></i>
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.priceType | budgetType"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.content"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.travelPrice | currency : '' : 0"></span><span>원</span>
+													<a style="margin-left: 10px;" href="javascript:void(0);" ng-click="delTourPlanBudget(tourPlanBudget.travelPriceNo);"><i style="color:orange; font-size:20px;" class="fa fa-minus" aria-hidden="true"></i></a>
+												</p>
+											</div>
+
+											
+											<!-- 예산 입력 폼 -->
+											<form id="sky-form4" class="sky-form" novalidate="novalidate">
+												<div class="row" style="margin-right: 3px; margin-left: 3px;">
+													<!-- 카테고리 -->
+													<section class="col col-2" style="margin:0px; padding: 3px;">												
+														<label class="select">
+															<select ng-model="tourPlanBudgetData.priceType">
+																<option value="1" selected>교통</option>
+																<option value="2">음식</option>
+																<option value="3">엑티비티</option>
+																<option value="4">쇼핑</option>
+																<option value="5">숙박</option>
+																<option value="6">기타</option>
+															</select>
+															<i></i>
+														</label>
+													</section>
+													<!-- 타이틀 -->
+													<section class="col col-5" style="margin:0px; padding: 3px;">
+														<label class="input">
+															<i class="icon-prepend fa fa-suitcase"></i>
+															<input type="text" placeholder="예)점심값" ng-model="tourPlanBudgetData.content">
+														</label>
+													</section>
+													<!-- 금액 -->
+													<section class="col col-4" style="margin:0px; padding: 3px;">
+														<label class="input">
+															<i class="icon-prepend fa fa-krw"></i>
+															<input type="number" min="0" step="100" placeholder="금액" ng-model="tourPlanBudgetData.travelPrice">
+														</label>
+													</section>
+													<!-- 입력버튼 -->
+													<section class="col col-1" style="margin:0px; padding: 3px;">
+														<button class="btn btn-block btn-android-inversed rounded" ng-click="writeTourPlanBudget(tourSpotMemo.scheduleMemoNo, tourPlanBudgetData, tourSpotEvent.contentId, tourSpotEvent.locationNo);">
+															<i class="fa fa-check"></i>
+														</button>
+													</section>
+												</div>
+											</form>
 										</div>
 										
 										<!-- 여행기 / 메모 작성버튼 -->
 										<div class="row" ng-if="tourSpotEvent.locationNo">
-											<button class="btn rounded btn-evernote-inversed" ng-click="openWriteTourSpotMemoFormModal(tourSpotEvent.locationNo)" type="button" style="margin-left: 228px; margin-bottom: 20px;"><i class="fa fa-pencil-square-o"></i> {{tourSpotEvent.title}} 여행기 작성</button>
+											<button class="btn rounded btn-evernote-inversed" ng-click="openWriteTourSpotMemoFormModal(tourSpotEvent.locationNo, tourSpotEvent.contentId)" type="button" style="margin-left: 228px; margin-bottom: 20px;"><i class="fa fa-pencil-square-o"></i> {{tourSpotEvent.title}} 여행기 작성</button>
 										</div>
 										
 									</li>

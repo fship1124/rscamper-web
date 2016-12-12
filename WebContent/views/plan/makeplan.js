@@ -308,7 +308,7 @@ angular.module("TourPlanApp")
 	    };
 	    
 		/** ==================================================== */
-		/** TODO 스토리 */
+		/** 스토리 */
 		/** ==================================================== */
 	    // 스마트에디터 선언
 	    $scope.writeTourSpotMemoFormModal = $("#writeTourSpotMemoFormModal");
@@ -332,7 +332,8 @@ angular.module("TourPlanApp")
 	    	$scope.writeTourSpotMemoData = {
 	    		title: "",
 	    		memoType: 1,
-	    		locationNo: 0
+	    		locationNo: 0,
+	    		contentId: 0
 	    	} 
 	    };
 	    
@@ -355,8 +356,9 @@ angular.module("TourPlanApp")
 	    $scope.getWriteTourSpotMemoList();
 	    
 	    // 스토리 작성(모달창 열기)
-	    $scope.openWriteTourSpotMemoFormModal = function (locationNo) {
+	    $scope.openWriteTourSpotMemoFormModal = function (locationNo, contentId) {
 	    	$scope.writeTourSpotMemoData.locationNo = locationNo;
+	    	$scope.writeTourSpotMemoData.contentId = contentId;
 	    	$scope.memoTypes = [{
 	    		memoNo: 1,
 	    		memoName: "메모"
@@ -413,7 +415,8 @@ angular.module("TourPlanApp")
 					userUid: $rootScope.user.userUid,
 	    			locationNo: $scope.writeTourSpotMemoData.locationNo,
 	    			recordNo: RequestService.getParameter("recordNo"),
-					content: content
+					content: content,
+					contentId: $scope.writeTourSpotMemoData.contentId
 				}),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 			})
@@ -428,7 +431,7 @@ angular.module("TourPlanApp")
 	    }
 	    
 	    // 스토리 삭제
-	    $scope.deleteTourSpotMemo = function (locationMemoNo) {
+	    $scope.deleteTourSpotMemo = function (scheduleMemoNo) {
 			swal({
 				title : "여행기 삭제",
 				text : "해당 여행기를 삭제하시겠습니까?",
@@ -442,7 +445,7 @@ angular.module("TourPlanApp")
 			}, function(isConfirm) {
 				if (isConfirm) {
 		            $http({
-		                url: myConfig.serverURL + "/tourPlan/delete/tourSpotMemo?locationMemoNo=" + locationMemoNo,
+		                url: myConfig.serverURL + "/tourPlan/delete/tourSpotMemo?scheduleMemoNo=" + scheduleMemoNo,
 		                method: "DELETE",
 		            }).success(function(response) {
 		            	swal("삭제완료!", "삭제완료 하였습니다.", "success");
@@ -473,7 +476,95 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		// TODO 예산창 모달 폼 구성
 	    $scope.tourPlanBudget = function () {
-	    	swal("여행예산");
+	    	console.log($scope.tourPlanBudgetList);
+	    }
+	    
+	    // 예산 리스트 가져오기
+	    $scope.getTourPlanBudgetList = function () {
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/budgetListByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				$scope.tourPlanBudgetList = response;
+				$scope.getTotalBudget();
+			}).error(function (error) {
+				
+			});
+	    }
+	    
+	    $scope.getTourPlanBudgetList();
+	    
+	    // 예산 작성하기
+	    $scope.writeTourPlanBudget = function (scheduleMemoNo, tourPlanBudgetData, contentId, locationNo) {
+	    	if (!tourPlanBudgetData) { swal("놉!"); return; };
+	    	if (!tourPlanBudgetData.content) { swal("놉!"); return; };
+	    	if (!tourPlanBudgetData.travelPrice) { swal("놉!"); return; };
+	    	if (!tourPlanBudgetData.priceType) { swal("놉!"); return; };
+	    	
+	    	$http({
+	    		url: myConfig.serverURL + "/tourPlan/insert/budget",
+	    		method: "POST",
+				data: $.param({
+					scheduleMemoNo: scheduleMemoNo,
+					recordNo: RequestService.getParameter("recordNo"),
+					userUid: $rootScope.user.userUid,
+					content: tourPlanBudgetData.content,
+					travelPrice: tourPlanBudgetData.travelPrice,
+					priceType: tourPlanBudgetData.priceType,
+					contentId: contentId,
+					locationNo: locationNo 
+				}),
+				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
+			})
+			.success(function (response) {
+			    $scope.getTourPlanBudgetList();
+			    tourPlanBudgetData.content = "";
+			    tourPlanBudgetData.travelPrice = 0;
+			    tourPlanBudgetData.priceType = "";
+			})
+			.error(function (error) {
+				swal("에러", "서버접속불가");
+			})
+	    }
+	    
+	    // 예산 지우기
+	    $scope.delTourPlanBudget = function (travelPriceNo) {
+	    	swal({
+				title : "예산 삭제",
+				text : "해당 예산을 삭제하시겠습니까?",
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonColor : "#DD6B55",
+				confirmButtonText : "네",
+				cancelButtonText : "아니오",
+				closeOnConfirm : false,
+				closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+		            $http({
+		                url: myConfig.serverURL + "/tourPlan/delete/budgetByTravelPriceNo?travelPriceNo=" + travelPriceNo,
+		                method: "DELETE",
+		            }).success(function(response) {
+		            	swal("삭제완료!", "삭제완료 하였습니다.", "success");
+		            	$scope.getTourPlanBudgetList();
+		            }).error(function(error) {
+		                console.log(error);
+		            })
+				} else {
+					swal("취소됨!", "삭제가 취소되었습니다.", "error");
+				}
+			});
+	    }
+	   
+	    $scope.totalBudget;
+	    
+	    // 예산합계 구하는 메소드
+	    $scope.getTotalBudget = function () {
+	    	 // 예산 총합
+	    	$scope.totalBudget = 0;
+	    	for (var i = 0; i< $scope.tourPlanBudgetList.length; i++) {
+	    		$scope.totalBudget += $scope.tourPlanBudgetList[i].travelPrice;
+	    	}
 	    }
 	    
 		
@@ -485,20 +576,6 @@ angular.module("TourPlanApp")
 		 *  음식점 : 39
 		 *  숙박업소 : 32
 		 */
-		// 무한 스크롤 이벤트
-	    angular.element(document).scroll( function() {
-//	    	var leftBottom = $("#leftNav").height() + $(window).scrollTop() + 120
-//	    	var rightBottom = $("#rightContent").position().top + $("#rightContent").height();
-	    	
-	    	// 따라다니는 메뉴
-//	    	if (rightBottom < leftBottom) {
-//	    		$("#leftNav").animate({"top": rightBottom - $("#leftNav").height()}, {duration:"fast", easing:"linear", queue:false});
-//	    	} else {
-//	    		$("#leftNav").animate({"top": $(window).scrollTop()}, {duration:"fast", easing:"linear", queue:false});
-//	    	}
-		});
-	    
-	    
 		// 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
 		$scope.openDetailTourSpot = function (tourSpot, contenttypeid) {
 			if (contenttypeid) {
@@ -1189,8 +1266,6 @@ angular.module("TourPlanApp")
 			searchHeight: $("#searchContent").height(),
 			bookMarkHeight: $("#bookmarkContent").height()
 		}
-		
-		console.log(scrollVarObj.attbTop);
 		
 	    angular.element(document).scroll( function() {
 	    	if ($(window).scrollTop() > 709) {

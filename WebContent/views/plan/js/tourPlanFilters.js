@@ -1,6 +1,27 @@
 // 필터
 angular.module("TourPlanApp")
 
+	// 예산 타입 필터
+	.filter("budgetType", function() {
+		return budgetType
+		function budgetType (priceType) {
+			switch (priceType) {
+			case 1:
+				return "교통"
+			case 2:
+				return "음식"
+			case 3:
+				return "엑티비티"
+			case 4:
+				return "쇼핑"
+			case 5:
+				return "숙박"
+			case 6:
+				return "기타"
+			}
+		}
+	})
+	
 	// 여행기 필터
 	.filter("memoTypeName", function() {
 		return memoTypeName
