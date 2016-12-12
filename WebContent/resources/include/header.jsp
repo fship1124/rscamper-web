@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-
-
-
 <!--=== Header ===-->
 <div class="header header-sticky">
 
@@ -64,9 +61,6 @@
 		</div>
 
 		<!-- End 알림 팝오버 -->
-
-
-
 
 		<!-- Logo -->
 		<a class="logo"

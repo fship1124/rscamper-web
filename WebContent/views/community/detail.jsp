@@ -80,9 +80,9 @@
 		<div class="container" style="padding-top: 20px;" ng-app="CommunityApp" ng-controller="DetailController">
 			<!-- 작성자 시간 기타등등 -->
 			<div class="row">
-				<img src="{{board.photoUrl}}" style="width: 40px; height: 40px;">
+				<img class="rounded-2x" src="{{board.photoUrl}}" style="width: 40px; height: 40px;">
 				<span ng-bind="board.displayName" style="font-size: 14px; font-weight: bold;"></span>
-				<span ng-bind="board.regDate | timesince : 'kr'" style="color:gray;"></span>
+				<span ng-bind="board.regDate | timesince : 'kr'" style="color:gray; float:right; font-size: 14px;"></span>
 			</div>
 			
 			<!-- 카테고리 제목 -->
@@ -152,7 +152,7 @@
 							<div>
 								<div class="profile-img">
 									<a href="javascript:void(0);" class="user">
-										<img src="{{comment.photoUrl}}" style="width: 40px; height: 40px;">
+										<img class="" src="{{comment.photoUrl}}" style="width: 40px; height: 40px;">
 									</a>
 								</div>
 								<div class="comment-contents">

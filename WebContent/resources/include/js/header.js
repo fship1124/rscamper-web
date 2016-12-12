@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
 	var user = sessionStorageService.getObject("user");
 	/* 알림 */

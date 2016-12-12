@@ -85,9 +85,6 @@ angular.module("TourPlanApp")
 					// 지도에 이벤트 렌더링
 					renderingEventToMap();
 					
-					
-					// TODO 메모 리스트 가져오기
-					
 				}).error(function (error) {
 					console.log(error);
 				});
@@ -461,14 +458,14 @@ angular.module("TourPlanApp")
 	    }
 	    
 	    // TODO 스토리 수정(모달창 열기)
+	    $scope.updateTourSpotMemoForm = function () {
+	    	
+	    }
 	    
 	    // TODO 스토리 수정
 	    $scope.updateTourSpotMemo = function (locationNo) {
 	    	
 	    }
-	    
-	    
-	    
 	    
 		
 		/** ==================================================== */
@@ -488,6 +485,20 @@ angular.module("TourPlanApp")
 		 *  음식점 : 39
 		 *  숙박업소 : 32
 		 */
+		// 무한 스크롤 이벤트
+	    angular.element(document).scroll( function() {
+//	    	var leftBottom = $("#leftNav").height() + $(window).scrollTop() + 120
+//	    	var rightBottom = $("#rightContent").position().top + $("#rightContent").height();
+	    	
+	    	// 따라다니는 메뉴
+//	    	if (rightBottom < leftBottom) {
+//	    		$("#leftNav").animate({"top": rightBottom - $("#leftNav").height()}, {duration:"fast", easing:"linear", queue:false});
+//	    	} else {
+//	    		$("#leftNav").animate({"top": $(window).scrollTop()}, {duration:"fast", easing:"linear", queue:false});
+//	    	}
+		});
+	    
+	    
 		// 장소 클릭 -> 디테일 정보(디테일 모달 CSS)
 		$scope.openDetailTourSpot = function (tourSpot, contenttypeid) {
 			if (contenttypeid) {
@@ -541,7 +552,7 @@ angular.module("TourPlanApp")
 //			console.log("2 : " +typeof(elem.scrollTop()))
 //			console.log("3 : " +elem.outerHeight())
 //			console.log(elem[0].scrollHeight - elem.scrollTop())
-			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()) {
+			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) < elem.outerHeight()) {
 				$scope.getSpotList();
 			}
 		});
@@ -621,7 +632,7 @@ angular.module("TourPlanApp")
 //			console.log("2 : " +typeof(elem.scrollTop()))
 //			console.log("3 : " +elem.outerHeight())
 //			console.log(elem[0].scrollHeight - elem.scrollTop())
-			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) == elem.outerHeight()) {
+			if (Math.floor(elem[0].scrollHeight - elem.scrollTop()) < elem.outerHeight()) {
 				$scope.getBookmarkSpotList();
 			}
 		});
@@ -658,17 +669,6 @@ angular.module("TourPlanApp")
 		
 		// 디폴트 리스트 호출 : 전체
 		$scope.initBookmarkSpotList("all");
-		
-		/** ==================================================== */
-		/** 스토리 - 여행기 / 메모 */
-		/** ==================================================== */
-		// 스토리 여행기 리스트 가져오기
-		
-
-		// 스토리 여행기 작성
-		
-		// 스토리 여행기 삭제
-		
 		
 		/** ==================================================== */
 		/** 일정표												 */
@@ -1182,6 +1182,33 @@ angular.module("TourPlanApp")
 			addLocationInfo(currentEventList);
 			drop(currentEventList);
 		}
+		
+		// 여행지 메뉴 스크롤 컨트롤
+		var scrollVarObj = {
+			attbHeight: $("#attractionTab").height(),
+			searchHeight: $("#searchContent").height(),
+			bookMarkHeight: $("#bookmarkContent").height()
+		}
+		
+		console.log(scrollVarObj.attbTop);
+		
+	    angular.element(document).scroll( function() {
+	    	if ($(window).scrollTop() > 709) {
+    			$("#attractionTab").animate({"top": $(window).scrollTop() - 709 + 125.46875}, {duration:"fast", easing:"linear", queue:false});
+    			$("#attractionTab").animate({"height": scrollVarObj.attbHeight - ($(window).scrollTop() - 709)}, {duration:"fast", easing:"linear", queue:false});
+    			$("#searchContent").animate({"height": scrollVarObj.searchHeight - ($(window).scrollTop() - 709)}, {duration:"fast", easing:"linear", queue:false});
+    			$("#bookmarkContent").animate({"height": scrollVarObj.bookMarkHeight - ($(window).scrollTop() - 709)}, {duration:"fast", easing:"linear", queue:false});
+    			$("#searchContent").css("overflow", "scroll");
+    			$("#bookmarkContent").css("overflow", "scroll");
+	    	} else {
+				$("#attractionTab").animate({"top": 125.46875}, {duration:"fast", easing:"linear", queue:false});
+	    		$("#attractionTab").animate({"height": scrollVarObj.attbHeight}, {duration:"fast", easing:"linear", queue:false});
+	    		$("#searchContent").animate({"height": scrollVarObj.searchHeight}, {duration:"fast", easing:"linear", queue:false});
+	    		$("#bookmarkContent").animate({"height": scrollVarObj.bookMarkHeight}, {duration:"fast", easing:"linear", queue:false});
+	    		$("#searchContent").css("overflow", "scroll");
+	    		$("#bookmarkContent").css("overflow", "scroll");
+	    	}
+		});
 		
 
   })

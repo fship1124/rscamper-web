@@ -106,7 +106,6 @@
 				
 				<!-- 작성자 프로필 -->
 				<div id="writerProfile" style="padding: 20px; text-align: center; background-image:url('{{writer.bgPhotoUrl}}'); background-size: cover; color: lightgray; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" >
-<!-- 					<br><span ng-bind="writer.userUid"></span><br> -->
 					<img class="img-bordered rounded-x" src="{{writer.photoUrl}}" style="width: 120px; height: 120px; margin: 10px; ">
 					<br><br><strong><span ng-bind="writer.displayName" style="font-size: 18px;"></span></strong>
 					<br><br><strong><span ng-bind="writer.introduce"></span></strong>
@@ -259,13 +258,13 @@
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
 										<div class="cbp_tmtime equal-height-column">
-<!-- 											<span>{{tourSpotEvent.start}}</span> -->
+											<span>{{tourSpotEvent.start | convertISO : 'YYYY-MM-DD HH:mm'}}</span>
 											<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
 										
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										
-										<div class="cbp_tmlabel equal-height-column">
+										<div class="cbp_tmlabel equal-height-column" style="margin-bottom: 10px; padding: 5px;">
 										
 											<div class="panel-group acc-v1" id="accordion-{{$index}}">
 											
@@ -304,10 +303,11 @@
 										</div>
 										
 										<!-- 여행기 / 메모 -->
-										<div class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
-											<h2 ng-bind="tourSpotMemo.title"></h2>
-											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="display: flex; white-space: normal; word-break: break-word; border: none;">여행기 내용</pre>
-											{{tourSpotMemo.regDate}}
+										<div style="margin-bottom: 10px;" class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
+											<h2 ng-if="tourSpotMemo.memoType == 1"><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<h2 ng-if="tourSpotMemo.memoType == 2"><b style="color: #ff8000; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none;"></pre>
+											<p style="float:right; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</p>
 										</div>
 										
 									</li>
@@ -332,7 +332,7 @@
 									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;" ng-bind="tourPlanCommentForm.content.length">0</strong>
 									<label class="textarea">
 										<textarea rows="2" ng-model="tourPlanCommentForm.content" ng-keyup="commentLengthCheck();"> </textarea>
-										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-tags"></i> 댓글 등록</button>
+										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-check"></i> 댓글 등록</button>
 									</label>
 								</section>
 							</fieldset>

@@ -387,13 +387,13 @@
 									
 									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
 										<div class="cbp_tmtime equal-height-column">
-<!-- 											<span>{{tourSpotEvent.start}}</span> -->
+											<span>{{tourSpotEvent.start | convertISO : 'YYYY-MM-DD HH:mm'}}</span>
 											<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
 										
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
 										
-										<div class="cbp_tmlabel equal-height-column">
+										<div class="cbp_tmlabel equal-height-column" style="margin-bottom: 10px; padding: 5px;">
 										
 											<div class="panel-group acc-v1" id="accordion-{{$index}}">
 											
@@ -432,18 +432,19 @@
 										</div>
 										
 										<!-- 여행기 / 메모 -->
-										<div class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
+										<div style="margin-bottom: 10px;" class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
 											<div class="memo-deleteBtn" style="position: absolute; right: 20px; top:10px;">
 												<a href="javascript:void(0);" ng-click="deleteTourSpotMemo(tourSpotMemo.locationMemoNo)"><i style="color:green; font-size:20px;" class="fa fa-times" aria-hidden="true"></i></a>
 											</div>
-											<h2><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
-											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="display: flex; white-space: normal; word-break: break-word; border: none;">여행기 내용</pre>
-											<p ng-bind="tourSpotMemo.regDate | timesince : 'kr'" style="float:right; color: gray; font-weight: bold;"></p>
+											<h2 ng-if="tourSpotMemo.memoType == 1"><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<h2 ng-if="tourSpotMemo.memoType == 2"><b style="color: #ff8000; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none;">여행기 내용</pre>
+											<p style="float:right; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</p>
 										</div>
 										
 										<!-- 여행기 / 메모 작성버튼 -->
 										<div class="row" ng-if="tourSpotEvent.locationNo">
-											<button class="btn rounded btn-evernote-inversed" ng-click="openWriteTourSpotMemoFormModal(tourSpotEvent.locationNo)" type="button" style="margin-left: 228px; margin-bottom: 40px;"><i class="fa fa-pencil-square-o"></i> {{tourSpotEvent.title}} 여행기 작성</button>
+											<button class="btn rounded btn-evernote-inversed" ng-click="openWriteTourSpotMemoFormModal(tourSpotEvent.locationNo)" type="button" style="margin-left: 228px; margin-bottom: 20px;"><i class="fa fa-pencil-square-o"></i> {{tourSpotEvent.title}} 여행기 작성</button>
 										</div>
 										
 									</li>

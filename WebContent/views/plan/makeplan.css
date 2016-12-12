@@ -55,7 +55,9 @@
 }
 
 #attractionTab {
-	height: 100%;
+	position: relative;
+	height: 1290px;
+	top: 125.46875px;
 }
 
 #attractionTab > div {
@@ -77,12 +79,19 @@
 
 /* 검색 결과 창 */
 #searchContent {
-    height: 1235px;
+    height: 1110px;
     width: 275px;
-    overflow-y: auto;
+    overflow-y: scroll;
     position: relative;
-/*     position:fixed; */
-/*     top:200px; */
+    
+}
+
+/* 검색 결과 창 */
+#bookmarkContent {
+    height: 1110px;
+    width: 275px;
+    overflow-y: scroll;
+    position: relative;
     
 }
 

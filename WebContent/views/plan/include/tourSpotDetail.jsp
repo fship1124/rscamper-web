@@ -260,8 +260,6 @@
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
-	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
-	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="tourSpotDetail.js"></script>

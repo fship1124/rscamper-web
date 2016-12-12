@@ -16,34 +16,16 @@ function apiAjax(obj) {
 	});
 }
 	
-	
 	function contentCreate(data) {
-		console.log("contentCreate");
 		var data1 = JSON.parse(data[0]);
 		var data2 = JSON.parse(data[1]);
 		var data3 = JSON.parse(data[2]);
 		var data4 = JSON.parse(data[3]);
 		
-		console.dir(data1);
-		console.dir(data2);
-		console.dir(data3);
-		console.dir(data4);
-		
 		var item1 = data1.response.body.items.item;
 		var item2 = data2.response.body.items.item;
 		var item3 = data3.response.body.items.item;
 		var item4 = data4.response.body.items.item;
-		
-//		var content = $(".content");
-//		content.find("h4").html(item1.title);
-//		
-//		var tab1 = $(".tab1");
-//		var tab2 = $(".tab2");
-//		var tab3 = $(".tab3");
-//		var tab4 = $(".tab4");
-//		var content2 = $(".content2");
-		
-		/////////////////////////////////////
 		
 		// 제목
 		$("#text-title").html($("#text-title").html() + item1.title);
@@ -58,7 +40,6 @@ function apiAjax(obj) {
 		$("#text-homepage").html(item1.homepage);
 		
 		// 개요
-		console.log(item1);
 		$("#text-content").html(item1.overview);
 		
 		// 이용안내
@@ -164,7 +145,6 @@ function apiAjax(obj) {
 		$("#ul-info").append(tag);
 		
 		// 부가정보
-		console.log(item3);
 		var item3tag = "";
 		switch (item2.contenttypeid) {
 		case 25:
@@ -223,16 +203,12 @@ function apiAjax(obj) {
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
-//				alert("에러");
 			},
 			success : function(result) {
-				console.log("list success");
-				console.dir(result);
 				commentCreate(result);
 			}
 		});
 	}
-	
 	
 	// 댓글 리스트 
 	function commentCreate(result) {
@@ -240,10 +216,6 @@ function apiAjax(obj) {
 		$("#bookmark-count").html(result.bookmarkCnt);
 		$("#comment-count").html(result.commentCnt);
 		var data = result.list;
-		
-		console.log("likeStatus : " + result.likeStatus);
-		console.log("bookmarkStatus : " + result.bookmarkStatus);
-		
 		if (result.likeStatus == "on") {
 			$("#icon-plan-like").attr('class', 'on');
 			$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-on.png'>";
@@ -256,12 +228,9 @@ function apiAjax(obj) {
 		var html = "";
 		for (var i = 0; i < data.length; i++) {
 			var item = data[i];
-			console.dir(item);
-			console.log(item.userUid);
 			
 			var flag = "N";
 			if (user.userUid == item.userUid) {
-				console.log("UID 동일");
 				flag = "Y";
 			}
 			
@@ -301,11 +270,6 @@ function apiAjax(obj) {
 	
 	
 	function modfyComment(e) {
-//		alert("m");
-		console.dir(e);
-		console.log(e.dataset.no);
-		console.log(e.dataset.flag);
-		
 		html = "";
 		html += "<li class='comment-edit comment-reply' id=reply-" + e.dataset.no + " style='height: 80px;'>";
 		html += "<div>";
@@ -324,17 +288,12 @@ function apiAjax(obj) {
 		html += "</div></div></div></li>";
 		
 		var id = "#comment-" + e.dataset.no;;
-		console.log(id);
-				
 		
 		$("#comment-" + e.dataset.no).after(html);
 	}
 	
 	
 	function reply_cancel(e) {
-//		alert("aa");
-		console.log(e.dataset.id);
-		
 		$(e.dataset.id).remove();
 	}
 	
@@ -397,11 +356,6 @@ function apiAjax(obj) {
 	
 // 댓글 저장	
 $(".save-new-comment").on('click', function() {
-	console.log("btn click");
-	console.log($("#contentid").val());
-	console.log($(".new-comment-textarea").val());
-	console.log(user.userUid);
-	
 	var obj = new Object();
 	obj.contentid = $("#contentid").val();
 	obj.content = $(".new-comment-textarea").val();
@@ -424,14 +378,9 @@ $(".save-new-comment").on('click', function() {
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
-//					alert("에러");
 				},
 				success : function(result) {
-					console.log("list success");
-					console.dir(result);
-					
 					$(".new-comment-textarea").val("");
-					
 					commentCreate(result);
 				}
 			});
@@ -442,11 +391,6 @@ $(".save-new-comment").on('click', function() {
 
 // 좋아요
 $("#icon-plan-like").on("click", function() {
-	console.log("in icon-plan-like");
-	console.dir($("#icon-plan-like"));
-	console.dir($("#icon-plan-like")[0]);
-	
-//	alert($("#like-count").html());
 	var className = "";
 	
 	if ($("#icon-plan-like")[0].className == "off") {
@@ -454,13 +398,11 @@ $("#icon-plan-like").on("click", function() {
 		$("#like-count").html(Number($("#like-count").html()) + 1);
 		className = "on";
 		$("#icon-plan-like").attr('class', 'on');
-		console.log($("#icon-plan-like")[0].className);
 	} else {
 		$("#icon-plan-like")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/icon-plan-like-off.png'>";
 		$("#like-count").html(Number($("#like-count").html()) - 1);
 		className = "off";
 		$("#icon-plan-like").attr('class', 'off');
-		console.log($("#icon-plan-like")[0].className);
 	}
 	
 	
@@ -475,11 +417,8 @@ $("#icon-plan-like").on("click", function() {
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
-//			alert("에러");
 		},
 		success : function(result) {
-			console.log("list success");
-			console.dir(result);
 		}
 	});
 });
@@ -488,10 +427,6 @@ $("#icon-plan-like").on("click", function() {
 
 // 북마크
 $("#icon-plan-bookmark").on("click", function() {
-	console.log("in icon-plan-bookmark");
-	console.dir($("#icon-plan-bookmark"));
-	console.dir($("#icon-plan-bookmark")[0]);
-//	alert($("#bookmark-count").html());
 	var className = "";
 	
 	if ($("#icon-plan-bookmark")[0].className == "off") {
@@ -499,13 +434,11 @@ $("#icon-plan-bookmark").on("click", function() {
 		$("#bookmark-count").html(Number($("#bookmark-count").html()) + 1);
 		className = "on";
 		$("#icon-plan-bookmark").attr('class', 'on');
-		console.log($("#icon-plan-bookmark")[0].className);
 	} else {
 		$("#icon-plan-bookmark")[0].innerHTML = "<img src='https://www.wishbeen.co.kr/images/bg-btn-bookmark.png'>";
 		$("#bookmark-count").html(Number($("#bookmark-count").html()) - 1);
 		className = "off";
 		$("#icon-plan-bookmark").attr('class', 'off');
-		console.log($("#icon-plan-bookmark")[0].className);
 	}
 	
 	var obj = new Object();
@@ -522,8 +455,6 @@ $("#icon-plan-bookmark").on("click", function() {
 			alert("에러");
 		},
 		success : function(result) {
-			console.log("list success");
-			console.dir(result);
 		}
 	});
 });

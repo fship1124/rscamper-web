@@ -104,9 +104,8 @@
 
 
 			<div class="row" style="margin-top: 30px;">
-			
 				<!-- 리스트 컨트롤러 -->
-				<div class="col-md-3 md-margin-bottom-40">
+				<div id="leftNav" class="col-md-3 md-margin-bottom-40">
 					<!-- 새글 쓰기 -->
 					<div class="bg-light">
 						<h4><i class="fa fa-pencil-square-o"></i>새글 포스트</h4>
@@ -114,7 +113,6 @@
 							<i class="fa fa-pencil-square-o"></i> 새글 포스트 하기
 						</button>
 					</div>
-					
 					<!-- 검색 및 정렬 -->
 					<div class="bg-light">
 						<h4><i class="fa fa-keyboard-o"></i>검색어</h4>
@@ -151,7 +149,7 @@
 				</div>
 				
 				<!-- Content -->
-				<div class="col-md-9">
+				<div id="rightContent" class="col-md-9">
 					<div class="row" ng-if="boardList.length > 0">
 						<div class="board-wrapper col-md-12" ng-repeat="board in boardList | filter : searchParams.word | orderBy: searchParams.order">
 							<div class="board-image-wrapper">

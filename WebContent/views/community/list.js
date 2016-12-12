@@ -1,7 +1,6 @@
 // 앵귤러 모듈
 angular.module("CommunityApp")
 .controller("ListController", function($rootScope, $scope, $http, RequestService) {
-	// TODO 왼쪽 컨트롤러 화면에 따라다니게 하기
 
 	// TODO 토스트 왜안되지?
 	$scope.toast = function (text, heading, icon) {
@@ -271,6 +270,16 @@ angular.module("CommunityApp")
     	if (maxHeight <= currentScroll) {
     		$scope.getBoardList();
     	};
+    	
+    	var leftBottom = $("#leftNav").height() + $(window).scrollTop() + 120
+    	var rightBottom = $("#rightContent").position().top + $("#rightContent").height();
+    	
+    	// 따라다니는 메뉴
+    	if (rightBottom < leftBottom) {
+//    		$("#leftNav").animate({"top": rightBottom - $("#leftNav").height()}, {duration:"fast", easing:"linear", queue:false});
+    	} else {
+    		$("#leftNav").animate({"top": $(window).scrollTop()}, {duration:"fast", easing:"linear", queue:false});
+    	}
 	});
     
     // 좋아요

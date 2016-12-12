@@ -125,6 +125,13 @@ angular.module("TourPlanApp")
 			}
 		}
 	})
+	
+	// ISO timezone filter
+	.filter("convertISO", function () {
+		return function (isoDate, dateformat) {
+			return moment(isoDate).format(dateformat);
+		}
+	})
 
 	// timesince 필터
 	.filter('timesince', function() {
