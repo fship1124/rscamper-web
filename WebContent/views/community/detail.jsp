@@ -53,6 +53,9 @@
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
 
+<!-- Jquery Toast Plugin -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">
+
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="detail.css">
 

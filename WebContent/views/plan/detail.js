@@ -364,11 +364,233 @@ angular.module("TourPlanApp")
 
 
 		/** ==================================================== */
-		/** TODO 예산 */
+		/** 예산 */
 		/** ==================================================== */
-		// TODO 예산창 모달 폼 구성
-	    $scope.tourPlanBudget = function () {
-	    	swal("여행예산");
+		// 파라미터 기본값
+	    $scope.chartParam = {
+	    	type: "1",
+	    	chart: "1"
+	    }
+	    
+	    // 예산 모달 열기
+	    $scope.openTourPlanBudget = function () {
+	    	$("#tourPlanBudgetModal").modal("show");
+	    	$scope.selectChart($scope.chartParam.type, $scope.chartParam.chart);
+	    };
+	    
+	    // 차트 선택
+	    $scope.selectChart = function () {
+	    	$("#chart").html("");
+	    	var data;
+	    	
+	    	switch ($scope.chartParam.type) {
+	    	case 1:
+		    	data = $scope.makeDataForDate();
+	    		break;
+	    	case 2:
+	    		data = $scope.makeDataForType();
+	    		break;
+	    	case 3:
+	    		data = $scope.makeDataForTourSpot();
+	    		break;
+	    	case "1":
+	    		data = $scope.makeDataForDate();
+	    		break;
+	    	case "2":
+	    		data = $scope.makeDataForType();
+	    		break;
+	    	case "3":
+	    		data = $scope.makeDataForTourSpot();
+	    		break;
+	    	}
+	    	
+	    	switch ($scope.chartParam.chart) {
+	    	case 1:
+	    		$scope.pieChart(data);
+	    		break;
+	    	case 2:
+	    		$scope.discreteBarChart(data);
+	    		break;
+	    	case "1":
+	    		$scope.pieChart(data);
+	    		break;
+	    	case "2":
+	    		$scope.discreteBarChart(data);
+	    		break;
+	    	}
+	    }
+	    
+	    // 여행 장소별로
+	    $scope.makeDataForTourSpot = function () {
+	    	var data = [];
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == $scope.budgetDataForChart[i].title) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: $scope.budgetDataForChart[i].title, value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    }
+	    
+	    // 여행 일차별로
+	    $scope.makeDataForDate = function () {
+	    	var DateString = function (dateNo) {
+	    		return dateNo + "일차";
+	    	}
+	    	var data = [];
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == DateString($scope.budgetDataForChart[i].dateArray)) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: DateString($scope.budgetDataForChart[i].dateArray), value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    };
+	    
+	    // 지출 종류별로
+	    $scope.makeDataForType = function () {
+			var budgetType = function (priceType) {
+				switch (priceType) {
+				case 1:
+					return "교통"
+				case 2:
+					return "음식"
+				case 3:
+					return "엑티비티"
+				case 4:
+					return "쇼핑"
+				case 5:
+					return "숙박"
+				case 6:
+					return "기타"
+				}
+			}
+			
+	    	var data = [];
+	    	
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == budgetType($scope.budgetDataForChart[i].priceType)) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: budgetType($scope.budgetDataForChart[i].priceType), value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    }
+	    
+	    // 원형 그래프 그리기
+	    $scope.pieChart = function (data) {
+	        var width = 868;
+	        var chart;
+			nv.addGraph(function() {
+			    var chart = nv.models.pieChart()
+			        .x(function(d) { return d.label })
+			        .y(function(d) { return d.value })
+			        .donut(true)
+			        .width(width)
+			        .padAngle(.08)
+			        .cornerRadius(5)
+			        .duration(700)
+			        .labelSunbeamLayout(true)
+			        .showTooltipPercent(true)
+			        .labelType("value")
+				chart.title("TOTAL : " + $scope.totalBudget + "원");
+				chart.pie.labelsOutside(false).donut(true);
+				chart.valueFormat(function (d) { return d3.format(",.0")(d)+"원" });
+				d3.select("#chart")
+					.datum(data)
+					.transition().duration(700)
+					.call(chart);
+				return chart;
+			});
+	    }
+	    
+	    // 막대 그래프 그리기
+	    $scope.discreteBarChart = function (data) {
+	    	thisData = [{ key: "Budget", values: data}]
+	    	var width = 868;
+	    	var chart;
+			nv.addGraph(function() {
+			    var chart = nv.models.discreteBarChart()
+			        .x(function(d) { return d.label })
+			        .y(function(d) { return d.value })
+			        .staggerLabels(false)
+			        .width(width)
+			        .showValues(true)
+			        .valueFormat(function(d) { return d3.format(",.0")(d)+"원" })
+			        .duration(700);
+	            chart.yAxis
+	            	.tickFormat(function(d) { return d3.format(",.0")(d)+"원" });
+			d3.select("#chart")
+			        .datum(thisData)
+			        .call(chart);
+			    nv.utils.windowResize(chart.update);
+			    return chart;
+			});
+	    }
+	                
+		// 필요 칼럼 : 예산명(content), 예산(travelPrice), 예산종류(priceType), 일차(dateArray), 예산사용일정(tourPlanTitle)
+		$scope.budgetDataForChart = [];
+		
+		// D3용 예산 데이터 가져오기
+	    $scope.getBudgetListForChart = function () {
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/budgetListForChartByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				$scope.budgetDataForChart = response;
+//				console.log(response);
+			}).error(function (error) {
+				swal("에러", erorr, "error");
+			});
+	    };
+	    
+	    $scope.getBudgetListForChart();
+	    
+	    // 예산 리스트 가져오기
+	    $scope.getTourPlanBudgetList = function () {
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/budgetListByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				$scope.tourPlanBudgetList = response;
+//				console.log($scope.tourPlanBudgetList);
+				
+				// 예산합
+				$scope.getTotalBudget();
+			}).error(function (error) {
+				swal("에러", erorr, "error");
+			});
+	    };
+	    
+	    $scope.getTourPlanBudgetList();
+	    
+	    $scope.totalBudget;
+	    
+	    // 예산합계 구하는 메소드
+	    $scope.getTotalBudget = function () {
+	    	 // 예산 총합
+	    	$scope.totalBudget = 0;
+	    	for (var i = 0; i< $scope.tourPlanBudgetList.length; i++) {
+	    		$scope.totalBudget += $scope.tourPlanBudgetList[i].travelPrice;
+	    	}
 	    }
 
 		/** ==================================================== */

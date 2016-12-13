@@ -49,6 +49,8 @@
 
 <!-- Full Calendar -->
 <link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
+<!-- NV D3 -->
+<link rel='stylesheet' href="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.css" />
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
@@ -57,7 +59,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">    
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="makeplan.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -86,6 +88,35 @@
 			
 			<!-- 여행장소 디테일 모달 -->
 			<%@include file="include/detailTourSpotModal.jsp"%>
+			
+			<!-- 예산창 보기 모달 -->
+			<div class="modal fade bs-example-modal-lg" id="tourPlanBudgetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 50px;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h5 class="modal-title">여행 예산</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.type" ng-change="selectChart();">
+									<option value="1" selected>일차별</option>
+									<option value="2">지출종류별</option>
+									<option value="3">지출장소별</option>
+								</select>
+							</div>
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.chart" ng-change="selectChart();">
+									<option value="1" selected>원형차트</option>
+									<option value="2">막대차트</option>
+								</select>
+							</div>
+							<svg id="chart" style="height: 400px; width:100%;"></svg>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			<div id="leftMenu">
 			
@@ -168,8 +199,8 @@
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
-							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="totalBudget | currency : '' : 0"></span>
+							<a href="javascript:void(0);" ng-click="openTourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
 						</li>
 					</ul>
 				</div>
@@ -256,7 +287,7 @@
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent" ng-init="tourSpotEventIndex = $index">
 										<div class="cbp_tmtime equal-height-column">
 											<span>{{tourSpotEvent.start | convertISO : 'YYYY-MM-DD HH:mm'}}</span>
 											<span>DAY {{tourSpotEvent.tourDate}}</span>
@@ -304,10 +335,23 @@
 										
 										<!-- 여행기 / 메모 -->
 										<div style="margin-bottom: 10px;" class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
+											<div style="position:absolute; right: 50px; top: 20px; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</div>
 											<h2 ng-if="tourSpotMemo.memoType == 1"><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
 											<h2 ng-if="tourSpotMemo.memoType == 2"><b style="color: #ff8000; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
 											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none; white-space: pre-wrap">여행기 내용</pre>
-											<p style="float:right; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</p>
+
+											<!-- 예산 리스트 반복돌자 -->
+											<div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px;" ng-repeat="tourPlanBudget in tourPlanBudgetList" ng-if="tourPlanBudget.scheduleMemoNo == tourSpotMemo.scheduleMemoNo">
+												<p style="margin-bottom: 0px; font-size:16px; color:gray; font-weight:bold;">
+													<i style="margin:0px; width:20px; height:20px; font-size:12px; line-height:20px;" class="icon-custom icon-sm rounded-x icon-color-orange fa fa-krw"></i>
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.priceType | budgetType"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.content"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.travelPrice | currency : '' : 0"></span><span>원</span>
+												</p>
+											</div>
+
 										</div>
 										
 									</li>
@@ -413,6 +457,11 @@
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
+	
+	<!-- D3 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+	<!-- NVD3 -->
+	<script src="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.js"></script>
 	
 	<!-- Full Calendar -->
 	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>

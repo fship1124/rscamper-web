@@ -47,8 +47,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/theme-skins/dark.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
+<!-- NV D3 -->
+<link rel='stylesheet' href="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.css" />
+
 <!-- Full Calendar -->
-<link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
+<link rel='stylesheet' href="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css" />
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">    
@@ -111,7 +114,33 @@
 			</div>
 			
 			<!-- 예산창 보기 모달 -->
-			
+			<div class="modal fade bs-example-modal-lg" id="tourPlanBudgetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 50px;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h5 class="modal-title">여행 예산</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.type" ng-change="selectChart();">
+									<option value="1" selected>일차별</option>
+									<option value="2">지출종류별</option>
+									<option value="3">지출장소별</option>
+								</select>
+							</div>
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.chart" ng-change="selectChart();">
+									<option value="1" selected>원형차트</option>
+									<option value="2">막대차트</option>
+								</select>
+							</div>
+							<svg id="chart" style="height: 400px;"></svg>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			
 			<div id="leftMenu">
@@ -144,13 +173,13 @@
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
 							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="totalBudget | currency : '' : 0"></span>
-							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
+							<a href="javascript:void(0);" ng-click="openTourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
 						</li>
 					</ul>
 				</div>
 				
 				<!-- 일정 클릭시 나오는 장소 탭  -->
-				<div id="attractionTab">
+				<div id="attractionTab" ng-show="isPlanAndMap">
 					
 					<div class="tab-v2">
 					
@@ -360,10 +389,10 @@
 						<!-- 탭 버튼 -->
 						<ul class="nav nav-tabs">
 							<li class="active" style="width:50%; text-align: center; font-size: 16px;">
-								<a href="#tourPlanTab" data-toggle="tab"><span class="fa fa-map-o"></span> 일정/맵</a>
+								<a href="#tourPlanTab" data-toggle="tab"  ng-click="showTourSpotList();"><span class="fa fa-map-o"></span> 일정/맵</a>
 							</li>
 							<li style="width:50%; text-align: center; font-size: 16px;">
-								<a href="#tourStoryTab" data-toggle="tab"><span class="fa fa-book"></span> 스토리</a>
+								<a href="#tourStoryTab" data-toggle="tab"  ng-click="hideTourSpotList();"><span class="fa fa-book"></span> 스토리</a>
 							</li>
 						</ul>
 						
@@ -560,9 +589,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
+	<!-- D3 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+	<!-- NVD3 -->
+	<script src="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.js"></script>
+	
 	<!-- Full Calendar -->
-	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>
-	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js'></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js"></script>
 
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
