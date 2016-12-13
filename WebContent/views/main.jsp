@@ -46,7 +46,7 @@
 
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" href="main.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/include/css/header.css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/include/css/header.css"> --%>
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <!-- 달력 css -->
@@ -342,6 +342,7 @@ input.checkbox:checked + label.input-label.radio::before {
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/html5shiv.js"></script>

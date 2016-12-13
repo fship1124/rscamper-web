@@ -597,7 +597,7 @@
 			
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8081/travelog/detail",
+				url : myConfig.homeUrl + "/travelog/detail",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
@@ -690,7 +690,7 @@
 		function commentList() {
 			var boardNo = ${param.boardNo};
 			$.ajax({
-				url : 'http://localhost:8081/travelog/commentList/' + boardNo,
+				url : myConfig.homeUrl + '/travelog/commentList/' + boardNo,
 				method : 'PUT',
 				dataType : 'json',
 				success : function(result) {
@@ -713,7 +713,7 @@
 				$("#inputComment").focus(); return;
 			}
 			$.ajax({
-				url : 'http://localhost:8081/travelog/commentRegister',
+				url : myConfig.homeUrl + '/travelog/commentRegister',
 				method : 'POST',
 				dataType : 'json',
 				data : {

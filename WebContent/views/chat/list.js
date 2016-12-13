@@ -47,13 +47,13 @@ function listRoomCreate(data) {
 		html += "<td>" + item.areaName + "</td>";
 		html += "<td>" + item.chatRoomName + "</td>";
 		html += "<td>" + item.roomUserCnt + "</td>";
-		html += "<td onclick='intoRoom(this)' data-room=";
+		html += "<td class='glyphicon glyphicon-share-alt' onclick='intoRoom(this)' data-room=";
 		html += item.chatRoomInfoNo;
 		html += " data-loc=";
 		html += item.areacode;
 		html += " data-tle=";
 		html += item.chatRoomName;
-		html += " style='cursor:pointer;'>" + "Go" + "</td>";
+		html += " style='cursor:pointer;'></td>";
 		html += "</tr>";
 	}
 	$("tbody").html(html);

@@ -44,12 +44,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet"
-	href="../../assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
-<link rel="stylesheet"
-	href="../../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
-<link rel="stylesheet"
-	href="list.css">
+<link rel="stylesheet" 	href="../../assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+<link rel="stylesheet"	href="../../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+<link rel="stylesheet"	href="list.css">
 
 
 </head>
@@ -159,10 +156,9 @@
 		</div>
 		<!--=== End Content ===-->
 
-		<!-- 푸터 include -->
-		<%@include file="/resources/include/footer.jsp"%>
 
-	</div>
+	<!-- 푸터 include -->
+	<%@include file="/resources/include/footer.jsp"%>
 
 	<!-- 로그인 모달 include -->
 	<%@include file="/resources/include/userModal.jsp"%>

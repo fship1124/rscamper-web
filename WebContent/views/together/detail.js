@@ -5,7 +5,7 @@ function contentCreate(no) {
 
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/together/detail",
+		url : myConfig.homeUrl + "/together/detail",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {

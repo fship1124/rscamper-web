@@ -6,7 +6,7 @@ console.dir(user);
 function apiAjax(obj) {
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8081/tour/api/detail",
+		url : myConfig.homeUrl + "/tour/api/detail",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -37,17 +37,6 @@ function apiAjax(obj) {
 		var item2 = data2.response.body.items.item;
 		var item3 = data3.response.body.items.item;
 		var item4 = data4.response.body.items.item;
-		
-//		var content = $(".content");
-//		content.find("h4").html(item1.title);
-//		
-//		var tab1 = $(".tab1");
-//		var tab2 = $(".tab2");
-//		var tab3 = $(".tab3");
-//		var tab4 = $(".tab4");
-//		var content2 = $(".content2");
-		
-		/////////////////////////////////////
 		
 		// 제목
 		$("#text-title").html($("#text-title").html() + item1.title);
@@ -223,7 +212,7 @@ function apiAjax(obj) {
 		
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/tour/comment/list",
+			url : myConfig.homeUrl + "/tour/comment/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -413,7 +402,7 @@ $(".save-new-comment").on('click', function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/comment/insert",
+		url : myConfig.homeUrl + "/tour/comment/insert",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -424,7 +413,7 @@ $(".save-new-comment").on('click', function() {
 			
 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/tour/comment/list",
+				url : myConfig.homeUrl + "/tour/comment/list",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
@@ -475,7 +464,7 @@ $("#icon-plan-like").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/like",
+		url : myConfig.homeUrl + "/tour/like",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -519,7 +508,7 @@ $("#icon-plan-bookmark").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/bookmark",
+		url : myConfig.homeUrl + "/tour/bookmark",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
