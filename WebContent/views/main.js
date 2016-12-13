@@ -2,7 +2,7 @@ var user = sessionStorageService.getObject("user");
 
 function commentList() {
 	$.ajax({
-		url : myConfig.homeUrl + '/main/all',
+		url : myConfig.serverUrl + '/main/all',
 		method : 'GET',
 		dataType : 'json',
 		success : function(result) {
@@ -16,7 +16,7 @@ $("#commentBtn").click(function() {
 	var comment = $("#inputComment").val();
 
 	$.ajax({
-		url : myConfig.homeUrl + '/main/' + uid + '/' + comment,
+		url : myConfig.serverUrl + '/main/' + uid + '/' + comment,
 		method : 'PUT',
 		dataType : 'json',
 		success : function(result) {
@@ -55,20 +55,16 @@ commentList();
 		
 		// 추천콘텐츠 ajax
 		var benefitList = $("#benefitList");
-		//console.log("#benefitList :");
-		//console.dir(benefitList);
 		var html4 = "";
 		$.ajax({
-			url : myConfig.homeUrl + "/main/benefitList",
+			url : myConfig.serverUrl + "/main/benefitList",
 			dataType : "json",
 			type : "GET",
 			success: function(result) {
-				console.log("여기는뭘까");
 				console.log(result); // 다들어왓고
 				for(var i = 0; i < 15; i++) {
 					var data = result[i];
 					console.log(data);
-		//			console.log(i); // 찍히고
 					html4 += "<div class='col-md-4' style='height: 300px; margin-top: 10px; padding: 0 5px;'>";
 					html4 += "<div class='thumbnails thumbnail-style thumbnail-kenburn' style='border: 1px solid #F0F0F0;'>";
 					html4 += "	<div class='thumbnail-img'>";
@@ -104,7 +100,7 @@ commentList();
 		var html2 = "";
 		var html3 = "";
 		$.ajax({
-			url : myConfig.homeUrl + "/main/touristList",
+			url : myConfig.serverUrl + "/main/touristList",
 			dataType : "json",
 			type : "GET",
 			success : function(result) {
@@ -202,7 +198,7 @@ commentList();
 		var tourPlanList = $("#tourPlanList");
 		var html5 = "";
 		$.ajax({
-			url : myConfig.homeUrl + "/tourPlan/select/tourPlanList/likeCnt",
+			url : myConfig.serverUrl + "/tourPlan/select/tourPlanList/likeCnt",
 			dataType : "json",
 			type : "GET",
 			success : function(result) {
@@ -248,7 +244,7 @@ commentList();
 	var projects = new Array();
 	
 		$.ajax({
-			url : myConfig.homeUrl + "/main/mainTrainList",
+			url : myConfig.serverUrl + "/main/mainTrainList",
 			dataType : "json",
 			type : "GET",
 			success: function(result) {
@@ -323,35 +319,30 @@ commentList();
 		});
 
 // 조회버튼  
-		function mainTimeSearch(dd) {
-			var trainGradeCode = $("input[name=trainGradeCode]:checked").val();
-			var depPlaceId = $("input[name=depPlaceId]").val();
-			var arrPlaceId = $("input[name=arrPlaceId]").val();
-			var depPlandTime = $("input[name=depPlandTime]").val();
-			var numOfRows = $("input[name=numofRows]").val();
-			var pageNo = $("input[name=pageNo]").val();
-			var startPage = $("input[name=startPage]").val();
-			var pageSize = $("input[name=pageSize]").val();
-			var depPlandTime = depPlandTime.split('-');
-			var depPlandTime = depPlandTime[0] + depPlandTime[1]
-					+ depPlandTime[2];
-			
-			var obj = new Object();
-			obj.trainGradeCode = trainGradeCode;
-			obj.depPlaceId = depPlaceId;
-			obj.arrPlaceId = arrPlaceId;
-			obj.depPlandTime = depPlandTime;
-			obj.numOfRows = 999;
-			obj.pageNo = 1;
-			obj.startPage = 1;
-			obj.pageSize = 999;
-			
-			location.href = "http://localhost/rscamper-web/views/train/trainInfo.jsp?trainGradeCode="+ obj.trainGradeCode +"&depPlaceId="+ obj.depPlaceId +"&arrPlaceId="+ obj.arrPlaceId +"&depPlandTime="+ obj.depPlandTime +"&numOfRows="+ obj.numOfRows +"&pageNo="+ obj.pageNo +"&startPage="+ obj.startPage +"&pageSize="+ obj.pageSize +"";
-		//	?trainGradeCode=09&depPlaceId=ㄹ&arrPlaceId=ㅎ&depPlandTime=2016-12-09&=
-			
+	function mainTimeSearch(dd) {
+		var trainGradeCode = $("input[name=trainGradeCode]:checked").val();
+		var depPlaceId = $("input[name=depPlaceId]").val();
+		var arrPlaceId = $("input[name=arrPlaceId]").val();
+		var depPlandTime = $("input[name=depPlandTime]").val();
+		var numOfRows = $("input[name=numofRows]").val();
+		var pageNo = $("input[name=pageNo]").val();
+		var startPage = $("input[name=startPage]").val();
+		var pageSize = $("input[name=pageSize]").val();
+		var depPlandTime = depPlandTime.split('-');
+		var depPlandTime = depPlandTime[0] + depPlandTime[1]
+				+ depPlandTime[2];
+		
+		var obj = new Object();
+		obj.trainGradeCode = trainGradeCode;
+		obj.depPlaceId = depPlaceId;
+		obj.arrPlaceId = arrPlaceId;
+		obj.depPlandTime = depPlandTime;
+		obj.numOfRows = 999;
+		obj.pageNo = 1;
+		obj.startPage = 1;
+		obj.pageSize = 999;
+		
+		location.href = myConfig.webServerUrl + "/rscamper-web/views/train/trainInfo.jsp?trainGradeCode="+ obj.trainGradeCode +"&depPlaceId="+ obj.depPlaceId +"&arrPlaceId="+ obj.arrPlaceId +"&depPlandTime="+ obj.depPlandTime +"&numOfRows="+ obj.numOfRows +"&pageNo="+ obj.pageNo +"&startPage="+ obj.startPage +"&pageSize="+ obj.pageSize +"";
 	}
-
-
-
 
 

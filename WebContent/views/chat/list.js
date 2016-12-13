@@ -23,7 +23,7 @@ if (user == null) {
 
 function chat_room_list() {
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/chat/room_list',
+		url : myConfig.serverUrl + '/chat/room_list',
 		method : 'GET',
 		dataType : 'json',
 		success : function(result) {
@@ -62,13 +62,11 @@ function listRoomCreate(data) {
 
 function listRoomCreateByArea(area) {
 	console.log("in listRoomCreateByArea");
-	console.log(area);
-	
 	var obj = new Object();
 	obj.area = area;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/chat/area_room_list',
+		url : myConfig.serverUrl + '/chat/area_room_list',
 		method : 'GET',
 		data : obj,
 		dataType : 'json',
@@ -89,19 +87,15 @@ function intoRoom(e) {
 	obj.chatRoomInfoNo = e.getAttribute("data-room");
 	chatRoomInfoNo = obj.chatRoomInfoNo; 
 	
-	console.log(obj.userUid);
-	console.log(obj.chatRoomInfoNo);
-	console.log(chatRoomInfoNo);
-	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/chat/insert_user',
+		url : myConfig.serverUrl + '/chat/insert_user',
 		method : 'POST',
 		dataType : 'json',
 		data : obj,
 		success : function(result) {
 			console.log("success");
 			console.dir(result);
-			window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
+			window.location = myConfig.serverUrl + '/chat/detail?room=' + e.getAttribute("data-room") + "&location=" + e.getAttribute("data-loc") + "&title=" + e.getAttribute("data-tle");
 		}
 	});
 }
@@ -116,23 +110,14 @@ function createRoom() {
 	obj.chatRoomName = $("#inputRoomTitle").val();
 	obj.userUid = user.userUid;
 	
-	console.log(obj.areacode);
-	console.log(obj.chatRoomName);
-	console.log(obj.userUid);
-	console.log(myConfig.imsiServerUrl);
-	
 	// 1. 방 생성 -> 디비 입력 -> 디비 방 정보 가져오기
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/chat/detail',
+		url : myConfig.serverUrl + '/chat/detail',
 		method : 'POST',
 		dataType : 'json',
 		data : obj,
 		success : function(result) {
-			console.dir(result);
-			
 			var userObj = new Object();
-			
-			console.log(result);
 			
 			var s1 = result.split("&");
 			console.log(s1[3]);
@@ -140,17 +125,16 @@ function createRoom() {
 			var s2 = s1[3].split("=");
 			console.log(s2[1]);
 			
-			
-			console.log(user.userUid);
 			userObj.userUid = user.userUid;
 			userObj.chatRoomInfoNo = s2[1];
+			
 			$.ajax({
-				url : myConfig.imsiServerUrl + '/chat/insert_user',
+				url : myConfig.serverUrl + '/chat/insert_user',
 				method : 'POST',
 				dataType : 'json',
 				data : userObj,
 				success : function() {
-					window.location = myConfig.imsiServerUrl + '/chat/detail?room=' + userObj.chatRoomInfoNo + "&location=" + obj.areacode + "&title=" + obj.chatRoomName;
+					window.location = myConfig.serverUrl + '/chat/detail?room=' + userObj.chatRoomInfoNo + "&location=" + obj.areacode + "&title=" + obj.chatRoomName;
 				}
 			});
 		}

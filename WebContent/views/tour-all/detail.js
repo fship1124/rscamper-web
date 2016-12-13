@@ -1,25 +1,21 @@
-console.log(myConfig.imsiServerUrl);
-var user = sessionStorageService.getObject("user");	
-
-console.dir(user);
-
-function apiAjax(obj) {
-	$.ajax({
-		type : "GET",
-		url : myConfig.homeUrl + "/tour/api/detail",
-		dataType : 'json',
-		data : obj,
-		error : function(err) {
-			alert("에러");
-		},
-		success : function(result) {
-			var data = JSON.parse(result);
-			console.dir(data);
-			contentCreate(data);
-		}
-	});
-}
+	var user = sessionStorageService.getObject("user");	
 	
+	function apiAjax(obj) {
+		$.ajax({
+			type : "GET",
+			url : myConfig.serverUrl + "/tour/api/detail",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+				alert("에러");
+			},
+			success : function(result) {
+				var data = JSON.parse(result);
+				contentCreate(data);
+			}
+		});
+	}
+		
 	
 	function contentCreate(data) {
 		console.log("contentCreate");
@@ -27,11 +23,6 @@ function apiAjax(obj) {
 		var data2 = JSON.parse(data[1]);
 		var data3 = JSON.parse(data[2]);
 		var data4 = JSON.parse(data[3]);
-		
-		console.dir(data1);
-		console.dir(data2);
-		console.dir(data3);
-		console.dir(data4);
 		
 		var item1 = data1.response.body.items.item;
 		var item2 = data2.response.body.items.item;
@@ -199,7 +190,6 @@ function apiAjax(obj) {
 		// 댓글 리스트 생성
 		commentListSelect();
 		
-		
 		// 이미지 동적 생성
 		imageProcess(item4);
 	}
@@ -212,7 +202,7 @@ function apiAjax(obj) {
 		
 		$.ajax({
 			type : "GET",
-			url : myConfig.homeUrl + "/tour/comment/list",
+			url : myConfig.serverUrl + "/tour/comment/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -233,9 +223,6 @@ function apiAjax(obj) {
 		$("#bookmark-count").html(result.bookmarkCnt);
 		$("#comment-count").html(result.commentCnt);
 		var data = result.list;
-		
-		console.log("likeStatus : " + result.likeStatus);
-		console.log("bookmarkStatus : " + result.bookmarkStatus);
 		
 		if (result.likeStatus == "on") {
 			$("#icon-plan-like").attr('class', 'on');
@@ -284,21 +271,12 @@ function apiAjax(obj) {
 			html += "</div>";
 			html += "</div>";
 			html += "</div></li>";
-			
-		
 		}
-		
 		$(".comment-list").html(html);
 	}
 	
 	
-	
 	function modfyComment(e) {
-		alert("m");
-		console.dir(e);
-		console.log(e.dataset.no);
-		console.log(e.dataset.flag);
-		
 		html = "";
 		html += "<li class='comment-edit comment-reply' id=reply-" + e.dataset.no + " style='height: 80px;'>";
 		html += "<div>";
@@ -317,20 +295,13 @@ function apiAjax(obj) {
 		html += "</div></div></div></li>";
 		
 		var id = "#comment-" + e.dataset.no;;
-		console.log(id);
-				
-		
 		$("#comment-" + e.dataset.no).after(html);
 	}
 	
 	
 	function reply_cancel(e) {
-		alert("aa");
-		console.log(e.dataset.id);
-		
 		$(e.dataset.id).remove();
 	}
-	
 	
 	
 	var endpage = 0;
@@ -391,9 +362,6 @@ function apiAjax(obj) {
 // 댓글 저장	
 $(".save-new-comment").on('click', function() {
 	console.log("btn click");
-	console.log($("#contentid").val());
-	console.log($(".new-comment-textarea").val());
-	console.log(user.userUid);
 	
 	var obj = new Object();
 	obj.contentid = $("#contentid").val();
@@ -402,29 +370,23 @@ $(".save-new-comment").on('click', function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.homeUrl + "/tour/comment/insert",
+		url : myConfig.serverUrl + "/tour/comment/insert",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
 			alert("에러");
 		},
 		success : function(result) {
-			alert("success");
-			
 			$.ajax({
 				type : "GET",
-				url : myConfig.homeUrl + "/tour/comment/list",
+				url : myConfig.serverUrl + "/tour/comment/list",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
 					alert("에러");
 				},
 				success : function(result) {
-					console.log("list success");
-					console.dir(result);
-					
 					$(".new-comment-textarea").val("");
-					
 					commentCreate(result);
 				}
 			});
@@ -439,7 +401,6 @@ $("#icon-plan-like").on("click", function() {
 	console.dir($("#icon-plan-like"));
 	console.dir($("#icon-plan-like")[0]);
 	
-	alert($("#like-count").html());
 	var className = "";
 	
 	if ($("#icon-plan-like")[0].className == "off") {
@@ -456,7 +417,6 @@ $("#icon-plan-like").on("click", function() {
 		console.log($("#icon-plan-like")[0].className);
 	}
 	
-	
 	var obj = new Object();
 	obj.likeStatus = className;
 	obj.contentid = $("#contentid").val();
@@ -464,7 +424,7 @@ $("#icon-plan-like").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.homeUrl + "/tour/like",
+		url : myConfig.serverUrl + "/tour/like",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -478,13 +438,11 @@ $("#icon-plan-like").on("click", function() {
 });
 	
 
-
 // 북마크
 $("#icon-plan-bookmark").on("click", function() {
 	console.log("in icon-plan-bookmark");
 	console.dir($("#icon-plan-bookmark"));
 	console.dir($("#icon-plan-bookmark")[0]);
-//	alert($("#bookmark-count").html());
 	var className = "";
 	
 	if ($("#icon-plan-bookmark")[0].className == "off") {
@@ -508,23 +466,15 @@ $("#icon-plan-bookmark").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : myConfig.homeUrl + "/tour/bookmark",
+		url : myConfig.serverUrl + "/tour/bookmark",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
 			alert("에러");
 		},
 		success : function(result) {
-			console.log("list success");
-			console.dir(result);
 		}
 	});
 });
 
 
-
-
-
-
-
-	
