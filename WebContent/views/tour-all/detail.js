@@ -38,17 +38,6 @@ function apiAjax(obj) {
 		var item3 = data3.response.body.items.item;
 		var item4 = data4.response.body.items.item;
 		
-//		var content = $(".content");
-//		content.find("h4").html(item1.title);
-//		
-//		var tab1 = $(".tab1");
-//		var tab2 = $(".tab2");
-//		var tab3 = $(".tab3");
-//		var tab4 = $(".tab4");
-//		var content2 = $(".content2");
-		
-		/////////////////////////////////////
-		
 		// 제목
 		$("#text-title").html($("#text-title").html() + item1.title);
 		

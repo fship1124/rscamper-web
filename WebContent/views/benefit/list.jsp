@@ -63,15 +63,15 @@
 		</div>
 
 		<!--=== 내용 ===-->
-		<div class="container content-md">
+		<div class="container content-md" style="padding: 0px; margin-top: 30px;">
 			<div class="row">
 				<ul id="myTab" class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a data-target="#home"
-						id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
-						aria-expanded="true">전체 지역</a></li>
-					<li role="presentation" class=""><a data-target="#profile"
-						role="tab" id="profile-tab" data-toggle="tab"
-						aria-controls="profile" aria-expanded="false">서울</a></li>
+					<li role="presentation" class="active">
+						<a data-target="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">전체 지역</a>
+					</li>
+					<li role="presentation" class="">
+						<a data-target="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">서울</a>
+					</li>
 					<li role="presentation" class=""><a data-target="#profile"
 						role="tab" id="profile-tab" data-toggle="tab"
 						aria-controls="profile" aria-expanded="false">강원</a></li>
@@ -121,8 +121,8 @@
 				</ul>
 			</div>
 
-			
-			<div class="title-v1" id="list"></div>
+			<!-- 리스트 출력 -->
+			<div class="title-v1" id="list" style="margin-top: 20px;"></div>
 			<div class="text-center">
 			<ul class="pagination pagination-lg"></ul>
 		</div>

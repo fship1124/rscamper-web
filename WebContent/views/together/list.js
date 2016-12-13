@@ -40,7 +40,7 @@ function listCreate(data) {
 		var d = new Date(v.regDate);
 		var mon = d.getMonth() + 1;
 		html += "<tr>";
-		html += "<td>" + v.togetherlNo + "</td>";
+		html += "<td style='margin: auto; text-align: center;'>" + v.togetherlNo + "</td>";
 		html += "<td>" + v.title1 + "</td>";
 		html += "<td>";
 		html += "<a href='http://localhost:8081/together/" + v.togetherlNo + "'>";

@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
-
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">
 
 <!--=== Header ===-->
 <div class="header header-sticky">
-
-
 	<div class="container">
 
 		<!-- 알림 팝오버 -->
@@ -77,3 +74,4 @@
 <%-- <script	src="${pageContext.request.contextPath}/resources/include/js/header.js"></script> --%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/include/css/header.css">
 <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+

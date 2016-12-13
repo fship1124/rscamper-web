@@ -296,7 +296,42 @@ $('#uploadNote').on('click', function(){
 		data : obj,
 		success : function(result) {
 			$('#note_send').modal('hide');
+			
 			note_list();
+			
+			console.log("쪽지 보내기 성공");
+			
+			var nObj = new Object();
+			
+			nObj.recivUserUid = recUid;
+			nObj.targetUserUid = sendUid;
+			nObj.title = title;
+			nObj.type = '4';
+			nObj.contentId = '1';
+			nObj.message = content;
+			nObj.url = document.location.href;
+			
+			console.dir(nObj);
+			
+			
+			$.ajax({
+				type : "POST",
+				url : "http://localhost:8081/notisfication/insert",
+				dataType : 'json',
+				data : nObj,
+				error : function(err) {
+					alert("에러");
+				},
+				success : function(result) {
+					console.log("알림 insert success");
+					
+					notis_socket.emit("commentInfo", {
+						type : "message",
+						recvId : recUid,
+						count : $(".noti-count").html()
+					});
+				}
+			});
 		}
 	})
 });

@@ -342,6 +342,7 @@ input.checkbox:checked + label.input-label.radio::before {
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/html5shiv.js"></script>

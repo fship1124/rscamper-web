@@ -100,20 +100,20 @@
 		<!-- end 모달 -->
 
 		<div class="container content-md">
-			<div>
-				<table class="table" style="width: 100%; background: #EEEEEE;">
+			<div style="width: 100%;">
+				<table class="table" style="margin: 0 auto; width: 80%; background: #EEEEEE;">
 					<thead>
-						<tr>
+						<tr style="">
 							<th id="locationName" class="locationName"></th>
 							<th id="roomTitle" class="roomTitle"></th>
 						</tr>
 						<tr>
 							<th colspan="2">
-							<button id="clean-screen" class='btn'>화면비우기</button>
-							<button id="nickname-modfy" class='btn'>방제목변경</button>
-							<button id="room-background" class='btn'>방테마변경</button>
-							<button id="room-save" class='btn'>저장하기</button>
-							<button id="out-room" class='btn'>퇴장</button>
+							<button id="clean-screen" class='btn btn-u btn-u-blue'>화면비우기</button>
+							<button id="nickname-modfy" class='btn btn-u btn-u-purple' style='margin-left: 5px;'>방제목변경</button>
+							<button id="room-background" class='btn btn-u btn-u-yellow' style='margin-left: 5px;'>방테마변경</button>
+							<button id="room-save" class='btn btn-u btn-u-sea' style='margin-left: 5px;'>저장하기</button>
+							<button id="out-room" class='btn btn-u btn-u-red' style='margin-left: 5px;'>퇴장</button>
 							</th>
 						</tr>
 					</thead>
@@ -123,7 +123,7 @@
 								<div id="msg-content" style="height: 500px; background: #FFFFFF; overflow: auto;">
 								</div>
 							</td>
-							<td id="chat-user-cnt" data-cnt="" style="height: 30px;">접속자</td>
+							<td id="chat-user-cnt" class="glyphicon glyphicon-user" data-cnt="" style="height: 30px;">접속자</td>
 						</tr>
 						<tr>
 							<td id="chat-user-info" style="height: 400px;"></td>
@@ -133,8 +133,9 @@
 						</tr>
 						<tr style="height: 30px; ">
 							<td colspan="4" style="weight: 90%; ">
-								<input type="text" id="msg" style="width: 90%">
-								<button id="msg-btn" type="button">입력</button>
+								<span id="spanStrWidth" style="visibility:hidden; position:absolute; top:-10000; font-size:9pt;"></span>
+								<input type="text" id="msg" style="width: 90%; height: 35px;">
+								<button id="msg-btn" type="button" class="btn-u">입력</button>
 								<input type="file" id="imgSend" />
 							</td>
 						</tr>
@@ -196,6 +197,7 @@
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>	
 	<script type="text/javascript" src="detail.js"></script>
+	<script type="text/javascript" src="js/moment.js"></script>
 	<script type="text/javascript">
 		var obj = new Object();
 		obj.loc = "${param.location}";
@@ -253,15 +255,11 @@
 				 html += "</div>";
 				 $("#msg-content").append(html);
 				 $("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
-// 				 listUser(data);
+				 listUser(data);
 	         });
 			 
 			 chat_socket.on('message', function(data) {
-				 console.log("서버에서 전송된 데이터 : " + data.message);
-				 console.log("서버에서 전송된 이름 : " + data.name);
-				 console.log("서버에서 전송된 타입 : " + data.type);
-				 console.log("서버에서 전송된 포토 : " + data.photoUrl);
-				
+				 				
 				 var html = "";
 				 switch (data.type) {
 			    	case 'text' :
@@ -270,7 +268,7 @@
 					      html += "<div class='direct-chat-info clearfix'>";
 					      html += "<span class='direct-chat-name pull-left'>";
 					      html += data.name + "</span>";
-					      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
+					      html += "<span class='direct-chat-timestamp pull-right'>:</span>";
 					      html += "</div>";
 					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
 					      html += "<div class='direct-chat-text'>";
@@ -302,18 +300,32 @@
 			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
 			console.log("서버로 전송함");
 
+			var s = $("#msg").val();
+			console.log(s.length);
+			
+// 			var msgMgn = 1012 - (20 * s.length); 
+			
+// 			var strMsgMgn = "" + msgMgn + "px";
+			var msgLength = s.length;
+			
+			if (s.length <= 4) {
+				msgLength = s.length + 3;
+			}
+			var msgMgn = "" + (18 * msgLength) + "px"; 
+			
+			
 			var html = "";
 			html += "<div class='direct-chat-messages'>";
 			html += "<div class='direct-chat-msg right'>";
 			html += "<div class='direct-chat-info clearfix'>";
 			html += "<span class='direct-chat-name pull-right'>";
 			html += userName + "</span>";
-			html += "<span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span>";
 			html += "</div>";
 			html += "<img class='direct-chat-img' src='" + user.photoUrl + "' alt='Message User Image'>";
-			html += "<div class='direct-chat-text'>";
+			html += "<div class='direct-chat-text' style='margin-left: auto; width: " + msgMgn + "'>";
 			html += $("#msg").val();
 			html += "</div>";
+			html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 680px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
 			html += "</div>";
 			html += "</div>";
 
@@ -327,19 +339,34 @@
 				uid : user.userUid,
 				sendRegDate : new Date()
 			});
-
+			
+			
+			
 			$("#msg").val("");
 			$("#msg").focus();
+			
+			
+			
 			
 			$("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 		});
 
 		
+	
+		
+		
+		
+		
+		
+		
+		
 		$("#out-room").click(function() {
 			console.log("in out");
 			
 			chat_socket.emit("outRoom", {
-				uid : user.userUid
+				uid : user.userUid,
+				name : user.displayName,
+				room : obj.roomNo
 			});
 			
 			// 방 삭제 - 방 인원 0
@@ -368,11 +395,11 @@
 		});
 		
 
-		chat_socket.on('out', function(data) {
+		chat_socket.on('outMsg', function(data) {
 			console.log("on out");
 			console.log("서버에서 전송된 데이터 > name : " + data.name);
 			console.log("서버에서 전송된 데이터 > message : " + data.message);
-			console.log("roomNo : " + room);
+			console.log("roomNo : " + data.roomNo);
 
 			var html = "";
 			html += "<div style='text-align:center;'>";
@@ -382,7 +409,7 @@
 			html += "</div>";
 			$("#msg-content").append(html);
 
-			listUser(room);
+			listUser(data);
 		});
 		
 			

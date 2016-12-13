@@ -44,7 +44,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" 	href="../../assets/plugins/cube-portfolio/cubeportfolio/css/cubeportfolio.min.css">
+<link rel="stylesheet"	href="../../assets/plugins/cube-portfolio/cubeportfolio/custom/custom-cubeportfolio.css">
+<link rel="stylesheet"	href="list.css">
 
 </head>
 
@@ -59,93 +61,105 @@
 			<div class="container">
 				<ul class="breadcrumb pull-left">
 					<li><a href="http://localhost:8081"><i class="fa fa-home"></i></a></li>
-					<li><a href="javascript:history.back()">tour-lodge</a></li>
+					<li><a href="javascript:history.back()">숙박</a></li>
 				</ul>
 			</div>
 		</div>
 
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
-		<div class="container content-md">
-			<div class="table">
-				<table class="table bbsSearch">
-					<tbody>
-
-
-						<tr>
-							<th scope="row">서비스분류</th>
-							<td class="dataSearch">
-								<div>
-									<span>
-									<select name="cat3" style="width: 308px;" title="소분류">
-											<option	value="">소분류</option>
-											<option value="B02010100">관광호텔</option>
-											<option value="B02010200">수상관광호텔</option>
-											<option value="B02010300">전통호텔</option>
-											<option value="B02010400">가족호텔</option>
-											<option value="B02010500">콘도미니엄</option>
-											<option value="B02010600">유스호스텔</option>
-											<option value="B02010700">펜션</option>
-											<option value="B02010800">여관</option>
-											<option value="B02010900">모텔</option>
-											<option value="B02011000">민박</option>
-											<option value="B02011100">게스트하우스</option>
-											<option value="B02011200">홈스테이</option>
-											<option value="B02011300">서비스드레지던스</option>
-											<option value="B02011400">의료관광호텔</option>
-											<option value="B02011500">소형호텔</option>
-											<option value="B02011600">한옥스테이</option></select>
-									</span>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">지역</th>
-							<td>
-								<select title="지역선택" name="areacode" onchange="getSigunguList(this.value);">
-									<option value="" selected="selected">지역선택</option>
-									<option value="1">서울</option>
-									<option value="2">인천</option>
-									<option value="3">대전</option>
-									<option value="4">대구</option>
-									<option value="5">광주</option>
-									<option value="6">부산</option>
-									<option value="7">울산</option>
-									<option value="8">세종특별자치시</option>
-									<option value="31">경기도</option>
-									<option value="32">강원도</option>
-									<option value="33">충청북도</option>
-									<option value="34">충청남도</option>
-									<option value="35">경상북도</option>
-									<option value="36">경상남도</option>
-									<option value="37">전라북도</option>
-									<option value="38">전라남도</option>
-									<option value="39">제주도</option>
-								</select> 
-								<select name="sigungucode" title="시군구선택">
-									<option value="" selected="selected">시군구 선택</option>
-								</select>
-						</td>
-						</tr>
-					</tbody>
-				</table>
-				<button type="button" onclick="tourList()">검색</button>
+		<div class="container content-md" style="padding: 0px; margin-top: 10px;">
+			<div class="row">
+				<section class="col-lg-12">
+					<button class="btn-u rounded" type="button" value="B02010100" onclick="typeChange(this)"><i class="fa fa-bookmark-o"></i> 관광호텔</button>
+					<button class="btn-u btn-u-orange rounded" type="button" value="B02010400" onclick="typeChange(this)"><i class="fa fa-plane"></i> 가족호텔</button>
+					<button class="btn-u btn-u-blue rounded" type="button" value="B02010500" onclick="typeChange(this)"><i class="fa fa-soccer-ball-o"></i> 콘도미니엄</button>
+					<button class="btn-u btn-u-brown rounded" type="button" value="B02010600" onclick="typeChange(this)"><i class="fa fa-home"></i> 유스호스텔</button>
+					<button class="btn-u btn-u-green rounded" type="button" value="B02010700" onclick="typeChange(this)"><i class="fa fa-shopping-cart"></i> 펜션</button>
+					<button class="btn-u rounded" type="button" value="B02010900" onclick="typeChange(this)"><i class="fa fa-bookmark-o"></i> 모텔</button>
+					<button class="btn-u btn-u-red rounded" type="button" value="B02011100" onclick="typeChange(this)"><i class="fa fa-child"></i> 게스트하우스</button>
+					<button class="btn-u btn-u-blue rounded" type="button" value="B02011300" onclick="typeChange(this)"><i class="fa fa-soccer-ball-o"></i> 서비스드레지던스</button>
+					<button class="btn-u rounded" type="button" value="B02011500" onclick="typeChange(this)"><i class="fa fa-bookmark-o"></i> 소형호텔</button>
+					<button class="btn-u btn-u-purple rounded" type="button" value="B02011600" onclick="typeChange(this)"><i class="fa fa-coffee"></i> 한옥스테이</button>
+				</section>
 			</div>
-
-			<div class="title-v1" id="list"></div>
+			
+			<div id="category-div">
+				<div class="col-lg-11">
+					<div class="row" id="cat2-list">
+						<section class="col-lg-8">
+							<select class="form-control rounded" name="cat3" style="width: 308px;" title="소분류">
+								<option	value="">소분류</option>
+								<option value="B02010100">관광호텔</option>
+								<option value="B02010200">수상관광호텔</option>
+								<option value="B02010300">전통호텔</option>
+								<option value="B02010400">가족호텔</option>
+								<option value="B02010500">콘도미니엄</option>
+								<option value="B02010600">유스호스텔</option>
+								<option value="B02010700">펜션</option>
+								<option value="B02010800">여관</option>
+								<option value="B02010900">모텔</option>
+								<option value="B02011000">민박</option>
+								<option value="B02011100">게스트하우스</option>
+								<option value="B02011200">홈스테이</option>
+								<option value="B02011300">서비스드레지던스</option>
+								<option value="B02011400">의료관광호텔</option>
+								<option value="B02011500">소형호텔</option>
+								<option value="B02011600">한옥스테이</option></select>
+						</section>
+					</div>
+					
+					<div class="row" id="sigungu-list">
+						<section class="col-lg-6">
+							<select class="form-control rounded" title="지역선택" name="areacode" onchange="getSigunguList(this.value);">
+								<option value="" selected="selected">지역선택</option>
+								<option value="1">서울</option>
+								<option value="2">인천</option>
+								<option value="3">대전</option>
+								<option value="4">대구</option>
+								<option value="5">광주</option>
+								<option value="6">부산</option>
+								<option value="7">울산</option>
+								<option value="8">세종특별자치시</option>
+								<option value="31">경기도</option>
+								<option value="32">강원도</option>
+								<option value="33">충청북도</option>
+								<option value="34">충청남도</option>
+								<option value="35">경상북도</option>
+								<option value="36">경상남도</option>
+								<option value="37">전라북도</option>
+								<option value="38">전라남도</option>
+								<option value="39">제주도</option>
+							</select> 
+						</section>
+						<section class="col-lg-6">
+							<select class="form-control rounded" name="sigungucode" title="시군구선택">
+								<option value="" selected="selected">시군구 선택</option>
+							</select>
+						</section>
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<button class="btn-u rounded btn-u-yellow" type="button" onclick="tourList()"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
+			</div>
+			
+			<div class="cube-portfolio container margin-bottom-60" id="list">
+				<div id="js-grid-masonry-projects" class="cbp cbp-l-grid-masonry-projects">
+				</div>
+			</div>
 
 			<div class="text-center">
 				<ul class="pagination pagination-lg"></ul>
 			</div>
 
 		</div>
-		<!--=== End Content ===-->
-
-		<!-- 푸터 include -->
-		<%@include file="/resources/include/footer.jsp"%>
-
-	</div>
-
+		<!--=== End Content ===-->	
+			
+	<!-- 푸터 include -->
+	<%@include file="/resources/include/footer.jsp"%>	
+			
 	<!-- 로그인 모달 include -->
 	<%@include file="/resources/include/userModal.jsp"%>
 

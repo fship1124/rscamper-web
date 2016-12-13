@@ -1,79 +1,17 @@
-	function typeChange(contenttypeid, cat1Value){
-			var index =$("select[name=contenttypeid]").index(contenttypeid);
-			var typeid = $(contenttypeid).val();	
-		    var params = {"contenttypeid":typeid ,"langtype":"KOR"};
-			
-		    $.ajax({
-		    	url : "http://api.visitkorea.or.kr/guide/typeServiceCodeAjax.do",
-		        type: "post",
-		        dataType: "json",
-		        data : params,
-		        success:function(data){
-		    		console.dir(data);
-		        	$("select[name=cat1]:eq("+index+")").empty();	        	
-		        	$("select[name=cat1]:eq("+index+")").append("<option value=''>대분류</option>");
-		        	
-		        	for(var  i = 0;  i < data.list.length; i ++){	        		
-		        		if(cat1Value == data.list[i].cat1){
-		        			$("select[name=cat1]:eq("+index+")").append("<option value='"+data.list[i].cat1+"' selected>"+ data.list[i].catname1 +"</option>");
-		        		}else{
-		        			$("select[name=cat1]:eq("+index+")").append("<option value='"+data.list[i].cat1+"'>"+ data.list[i].catname1 +"</option>");
-		        		}
-		        	}
-		        },
-				error:function(args){
-					alert("dateserviceCodeAjax:error:"+request+"status:"+status+"error:"+error);
-				}
-		    });
-		}
+	// 버튼으로 바꿔버려서 전역변수로 뺏어요!!
+	var typeid = "";	
+
+	function typeChange(contenttypeid) {
+		// 버튼 눌린 상태로 보이게 하려고 클래스에 active 추가/삭제
+		$('button[onclick="typeChange(this)"]').removeClass('active');
+		$(contenttypeid).addClass('active');
 		
-		
-		
-		function getCat2List(cat1 , initFlag, cat2Value, cat3Value){
-			var index = $("select[name=cat1]").index(cat1);		
-		    var params = {"cat1":$(cat1).val() ,"langtype":"KOR"};	    
-		    
-		    if( $(cat1).val() == ""){
-		    	$("select[name=cat2]:eq("+index+")").empty();	        	
-	        	$("select[name=cat2]:eq("+index+")").append("<option value=''>중분류</option>");
-	        	
-	        	$("select[name=cat3]:eq("+index+")").empty();
-	        	$("select[name=cat3]:eq("+index+")").append("<option value=''>소분류</option>");
-		    	return;
-		    }
-		    
-		    $.ajax({
-		    	url : "http://api.visitkorea.or.kr/guide/serviceCodeAjax.do",
-		        type: "post",
-		        dataType: "json",
-		        data : params,
-		        success:function(data){	        	
-		        	$("select[name=cat2]:eq("+index+")").empty();	        	
-		        	$("select[name=cat2]:eq("+index+")").append("<option value=''>중분류</option>");
-		        	
-		        	$("select[name=cat3]:eq("+index+")").empty();
-		        	$("select[name=cat3]:eq("+index+")").append("<option value=''>소분류</option>");
-		        	
-		        	
-		        	for(var  i = 0;  i < data.list.length; i ++){	        		
-		        		if(cat2Value == data.list[i].cat2){
-		        			$("select[name=cat2]:eq("+index+")").append("<option value='"+data.list[i].cat2+"' selected>"+ data.list[i].catname2 +"</option>");
-		        		}else{
-		        			$("select[name=cat2]:eq("+index+")").append("<option value='"+data.list[i].cat2+"'>"+ data.list[i].catname2 +"</option>");
-		        		}
-		        	}
-		        		    
-		        	if( initFlag == "N") {	        		
-			    		getCat3List(	$("select[name=cat2]:eq("+index+")") , initFlag, cat3Value);
-		        	}else{
-		        		getCat3List(	$("select[name=cat2]:eq("+index+")") , initFlag, cat3Value);
-		        	}
-		        },
-				error:function(args){
-					   alert("serviceCodeAjax:error:"+request+"status:"+status+"error:"+error);
-				}
-		    });
-		}
+		typeid = $(contenttypeid).val();
+
+    	$("select[name=cat3]:eq(0)").empty();	        	
+		$("select[name=cat3]:eq(0)").append("<option value='"+typeid+"' selected>"+ contenttypeid.innerText +"</option>");
+	}
+	
 		
 		
 		// 서비스 분류 소분류
@@ -160,7 +98,10 @@
 				}
 		    });
 		};
+
 		
+		// 페이지 로딩과 동시에 리스트 출력
+		tourList();
 		
 		function pageing(data) {
 			var body = data.response.body;
@@ -261,28 +202,51 @@
 			
 			var item = data.response.body.items.item;
 			var list = $("#list");
-			
-			
 			var html = "";
 			for (var i = 0; i < item.length; i++) {
 				var v = item[i];
+				
 				if (i % 4 == 0) {
-					console.log(i);
-					html += "<ul class='list-unstyled row'>";
+					html += "<div id='grid-container' class='cbp-caption-active cbp-caption-zoom cbp-l-grid-agency cbp-ready'>";
 				}
 				
-				html += "<li class='col-sm-3 col-xs-6 md-margin-bottom-30'>";
-				html += "<div class='team-img'>";
-				html += "<a href='#' onclick='goDetail(this)' data-value1='" + v.contentid + "' data-value2='" + v.contenttypeid + "'>";
-				html += "<img class='img-responsive' src='" + v.firstimage2 + "' alt=''  style='width:263px; height:174px'>";
-				html += "</a>";
-				html += "</div>";
-				html += "<h3>" + v.title + "</h3>";
-				html += "<h4>" + v.addr1 + "</h4>";
-				html += "</li>";
+				var sAddr = v.addr1.split(" ");
+				var addr = sAddr[0] + " " + sAddr[1];
 				
-				if (i % 4 == 3) { html += "</ul>";}
-			}
+				html += "<div class='cbp-item graphic'>";
+				html += "<div class='cbp-caption margin-bottom-20'>";
+				html += "<div class='cbp-caption-defaultWrap'>";
+				if (v.firstimage2) {
+					html += "<img src='" + v.firstimage2 + "' alt='' style='width:263px; height:174px;'>";
+				} else {
+					html += "<img src='/rscamper-web/resources/img/default/default-image.png' alt='' style='width:263px; height:174px;'>";
+				}
+				html += "</div>";
+				html += "<div id='list-div-" + v.contentid + "' class='cbp-caption-activeWrap'>";
+				html += "<div class='cbp-l-caption-alignCenter'>";
+				html += "<div class='cbp-l-caption-body'>";
+				html += "<ul class='link-captions no-bottom-space'>";
+				html += "<li><a href='#' onclick='goDetail(this)' data-value1='" + v.contentid + "' data-value2='" + v.contenttypeid + "'><i class='rounded-x fa fa-link'></i></a></li>";
+				if (v.firstimage2) {
+					html += "<li><a href='" + v.firstimage2 + "' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				} else {
+					html += "<li><a href='/rscamper-web/resources/img/default/default-image.png' class='cbp-lightbox' data-title='Design Object'><i class='rounded-x fa fa-search'></i></a></li>";
+				}
+				html += "</ul>";
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+				html += "</div>";
+				html += "<div class='cbp-title-dark'>";
+				html += "<div id='list-title-" + v.contentid + "' class='cbp-l-grid-agency-title'>" + v.title + "</div>";
+				html += "<div class='cbp-l-grid-agency-desc'>" + addr + "</div>";
+				html += "</div>";
+				html += "</div>";
+				
+				if (i % 4 == 3) {
+					html += "</div>";
+				}
+			}	
 			
 			list.html(html);
 		}

@@ -856,6 +856,7 @@ angular.module("TourPlanApp")
 			});
 		}
 		
+		
 		// 댓글 삭제
 		$scope.removeComment = function (commentNo) {
 			swal({
