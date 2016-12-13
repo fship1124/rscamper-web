@@ -1,5 +1,5 @@
 angular.module("TourPlanApp")
-	.controller("ListController", function ($rootScope, $scope, $http, $window, MyConfig) {
+	.controller("ListController", function ($rootScope, $scope, $http, $window) {
 		// 여행기간 레인지 슬라이더 함수
 		$(function() {
 			$("#day-range").slider({
@@ -60,7 +60,7 @@ angular.module("TourPlanApp")
 		// 파라미터 : searchParams{검색어, 표시개수, 등록일자범위, 여행기간최소, 여행기간최대}, {정렬기준, 정렬방법}
 		$scope.getPlanList = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/tourPlanList",
+				url: myConfig.serverURL + "/tourPlan/select/tourPlanList",
 				method: "POST",
 				data: $.param($scope.searchParams),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
@@ -68,6 +68,8 @@ angular.module("TourPlanApp")
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
+				
+				console.log($scope.planList[0].strapline.length);
 			}).error(function (error) {
 				console.log(error);
 			});
@@ -145,7 +147,7 @@ angular.module("TourPlanApp")
 			}, function(isConfirm) {
 				if (isConfirm) {
 					$http({
-						url: MyConfig.backEndURL + "/tourPlan/delete/tourPlan?recordNo=" + recordNo,
+						url: myConfig.serverURL + "/tourPlan/delete/tourPlan?recordNo=" + recordNo,
 						method: "GET",
 					}).success(function (){
 						swal("삭제완료!", "해당 일정이 삭제되었습니다.", "success");
@@ -202,7 +204,7 @@ angular.module("TourPlanApp")
 			$scope.writeTourPlan.userUid = $rootScope.user.userUid; 
 			console.log($scope.writeTourPlan);
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/insert/tourPlan",
+				url: myConfig.serverURL + "/tourPlan/insert/tourPlan",
 				method: "POST",
 				data: $.param($scope.writeTourPlan),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }

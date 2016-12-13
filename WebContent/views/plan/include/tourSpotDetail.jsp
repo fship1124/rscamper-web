@@ -210,57 +210,7 @@
 				
 				<div class="spot-comment-list">
 					<ul class="comment-list">
-						<li class="commentRoot">
-							<div>
-								<div class="profile-img">
-									<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
-										<img src="https://img-wishbeen.akamaized.net/profile/1479603117113_108862383047950917579_orgin_.jpg"
-										style="width: 40px; height: 40px;">
-									</a>
-								</div>
-								<div class="comment-contents">
-									<div class="comment-info">
-										<div class="name-date">
-											<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
-												<span class="username">jun heo</span>
-											</a>
-											<span class="update-date">2016-11-20 09:52:00</span>
-										</div>
-									</div>
-									
-									<div class="comment-txt">
-										<p class="comment-content-for-find">태종대공원 등대네요^^</p>
-									</div>
-								</div>
-							</div>
-						</li>
-						
-						<li class="commentRoot">
-							<div>
-								<div class="profile-img">
-									<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
-										<img src="https://img-wishbeen.akamaized.net/profile/1479603117113_108862383047950917579_orgin_.jpg"
-										style="width: 40px; height: 40px;">
-									</a>
-								</div>
-								<div class="comment-contents">
-									<div class="comment-info">
-										<div class="name-date">
-											<a target="_blank" href="/myPage/user/d31f77479e2b4889?active=myPlan" class="user">
-												<span class="username">jun heo</span>
-											</a>
-											<span class="update-date">2016-11-20 09:52:00</span>
-										</div>
-									</div>
-									
-									<div class="comment-txt">
-										<p class="comment-content-for-find">태종대공원 등대네요^^</p>
-									</div>
-								</div>
-							</div>
-						</li>
 					</ul>
-				
 				</div>
 				
 			</div>
@@ -309,8 +259,6 @@
 	
 	<!-- INIT APP -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
-	
-	<!---------------------여기서부터수정------------------------------------------------------------------------------------>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>

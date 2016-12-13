@@ -103,7 +103,7 @@
 								<img style="width: 100%; height: 170px;" ng-show="post.filePath" ng-src="{{post.filePath}}" >
 								<img style="width: 100%; height: 170px;" ng-hide="post.filePath" ng-src="http://lorempixel.com/400/200/city/{{$index}}">
 								<div style="position: absolute; top:10px; left: 20px;" >
-									<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; hegiht: 30px;">
+									<img class="rounded-x" ng-src="{{post.photoUrl}}" style="width: 30px; height: 30px;">
 									<span style="color: white; text-shadow:-1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray;" ng-bind="post.displayName"></span>
 								</div>
 								<div style="position: absolute; top:5px; right: 20px;" ng-if="post.userUid == user.userUid">
@@ -190,6 +190,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/mypageApp.js"></script>
 	<script type="text/javascript" src="js/mypageDirectives.js"></script>

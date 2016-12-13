@@ -49,6 +49,8 @@
 
 <!-- Full Calendar -->
 <link rel='stylesheet' href='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.css' />
+<!-- NV D3 -->
+<link rel='stylesheet' href="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.css" />
 
 <!-- Sweet Alert -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.css">
@@ -57,7 +59,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.css">    
 
 <!-- 사용자 정의 CSS -->
-<link rel="stylesheet" href="makeplan.css">
+<link rel="stylesheet" href="detail.css">
 
 </head>
 
@@ -87,6 +89,35 @@
 			<!-- 여행장소 디테일 모달 -->
 			<%@include file="include/detailTourSpotModal.jsp"%>
 			
+			<!-- 예산창 보기 모달 -->
+			<div class="modal fade bs-example-modal-lg" id="tourPlanBudgetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="top: 50px;">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h5 class="modal-title">여행 예산</h5>
+						</div>
+
+						<div class="modal-body">
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.type" ng-change="selectChart();">
+									<option value="1" selected>일차별</option>
+									<option value="2">지출종류별</option>
+									<option value="3">지출장소별</option>
+								</select>
+							</div>
+							<div class="select-style" style="float:left; margin: 10px;">
+								<select ng-model="chartParam.chart" ng-change="selectChart();">
+									<option value="1" selected>원형차트</option>
+									<option value="2">막대차트</option>
+								</select>
+							</div>
+							<svg id="chart" style="height: 400px; width:100%;"></svg>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div id="leftMenu">
 			
 				<!-- 저장 / 취소 -->
@@ -106,7 +137,6 @@
 				
 				<!-- 작성자 프로필 -->
 				<div id="writerProfile" style="padding: 20px; text-align: center; background-image:url('{{writer.bgPhotoUrl}}'); background-size: cover; color: lightgray; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" >
-<!-- 					<br><span ng-bind="writer.userUid"></span><br> -->
 					<img class="img-bordered rounded-x" src="{{writer.photoUrl}}" style="width: 120px; height: 120px; margin: 10px; ">
 					<br><br><strong><span ng-bind="writer.displayName" style="font-size: 18px;"></span></strong>
 					<br><br><strong><span ng-bind="writer.introduce"></span></strong>
@@ -164,13 +194,13 @@
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">개</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="tourPlan.postCnt">0</span>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="tourSpotMemoList.length">0</span>
 							<a href="javascript:void(0);"><i class="fa fa-book"></i> 여행기</a>
 						</li>
 						<li id="notification_menu" class="list-group-item">
 							<span class="badge" style="background: white; color: gray; font-size: 12px;">원</span>
-							<span class="badge badge-u rounded" style="font-size: 12px;">100,000,000</span>
-							<a href="javascript:void(0);" ng-click="tourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
+							<span class="badge badge-u rounded" style="font-size: 12px;" ng-bind="totalBudget | currency : '' : 0"></span>
+							<a href="javascript:void(0);" ng-click="openTourPlanBudget();"><i class="fa fa-money"></i> 여행 예산</a>
 						</li>
 					</ul>
 				</div>
@@ -252,34 +282,78 @@
 								
 							</div><!-- 일정/맵 끝 -->
 							
-							
 							<!-- 스토리 -->
 							<div class="tab-pane fade in" id="tourStoryTab">
 							
 								<ul class="timeline-v2">
 									
-									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent">
+									<li class="equal-height-columns" ng-repeat="tourSpotEvent in allTourSpotEvent" ng-init="tourSpotEventIndex = $index">
 										<div class="cbp_tmtime equal-height-column">
-										<span>DAY {{tourSpotEvent.tourDate}}</span>
+											<span>{{tourSpotEvent.start | convertISO : 'YYYY-MM-DD HH:mm'}}</span>
+											<span>DAY {{tourSpotEvent.tourDate}}</span>
 										</div>
+										
 										<i class="cbp_tmicon rounded-x hidden-xs"></i>
-										<div class="cbp_tmlabel equal-height-column">
-											<h2 ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</h2>
-											<div class="row">
-												<div class="col-md-4">
-													<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
-													<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
-													<div class="md-margin-bottom-20">
+										
+										<div class="cbp_tmlabel equal-height-column" style="margin-bottom: 10px; padding: 5px;">
+										
+											<div class="panel-group acc-v1" id="accordion-{{$index}}">
+											
+												<div class="panel panel-default">
+												
+													<div class="panel-heading" style="position: relative;">
+														<h4 class="panel-title">
+															<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-{{$index}}" href="#collapse-{{$index}}" aria-expanded="false">
+																<b ng-click="openDetailTourSpot(tourSpotEvent.contentId, tourSpotEvent.contentTypeId);">{{tourSpotEvent.title}}</b>
+															</a>
+														</h4>
+														<div style="position: absolute; right: 20px; top: 7px;">
+															<i class="fa fa-expand" style="right: 10px;"></i>
+														</div>
 													</div>
-												</div>
-												<div class="col-md-8">
-<!-- 													<p>일정시작시간 : {{tourSpotEvent.start | date: "yyyy-MM-dd HH:mm:ss" }}</p> -->
-													<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
-													<p>전화번호 : {{tourSpotEvent.tel}}</p>
-													<p>주소 : {{tourSpotEvent.addr1}}</p>
+													
+													<div id="collapse-{{$index}}" class="panel-collapse collapse" aria-expanded="false">
+														<div class="panel-body">
+															<div class="row">
+																<div class="col-md-4">
+																	<img class="img-responsive" src="{{tourSpotEvent.imageUrl}}" alt="{{tourSpotEvent.title}}" ng-show="tourSpotEvent.imageUrl">
+																	<img class="img-responsive" src="${pageContext.request.contextPath}/resources/img/404/yaoming.png" alt="{{tourSpotEvent.title}}" ng-hide="tourSpotEvent.imageUrl">
+																</div>
+																<div class="col-md-8">
+																	<p>카테고리 : {{tourSpotEvent.contentTypeId | tourSpotCategory }}</p>
+																	<p>전화번호 : {{tourSpotEvent.tel}}</p>
+																	<p>주소 : {{tourSpotEvent.addr1}}</p>
+																	<pre style="display: flex; white-space: normal; word-break: break-word;" ng-bind-html="tourSpotEvent.overview"></pre>
+																</div>
+															</div>
+														</div>
+													</div>
+													
 												</div>
 											</div>
 										</div>
+										
+										<!-- 여행기 / 메모 -->
+										<div style="margin-bottom: 10px;" class="cbp_tmlabel equal-height-column" ng-repeat="tourSpotMemo in tourSpotMemoList" ng-if="tourSpotMemo.locationNo == tourSpotEvent.locationNo">
+											<div style="position:absolute; right: 50px; top: 20px; color: gray; font-weight: bold;">{{tourSpotMemo.regDate | timesince : 'kr'}} 작성</div>
+											<h2 ng-if="tourSpotMemo.memoType == 1"><b style="color: green; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<h2 ng-if="tourSpotMemo.memoType == 2"><b style="color: #ff8000; font-size: 16px;">{{tourSpotMemo.memoType | memoTypeName}}</b> {{tourSpotMemo.title}}</h2>
+											<pre id="memo-content" ng-bind-html="tourSpotMemo.content" style="border: none; white-space: pre-wrap">여행기 내용</pre>
+
+											<!-- 예산 리스트 반복돌자 -->
+											<div style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 5px;" ng-repeat="tourPlanBudget in tourPlanBudgetList" ng-if="tourPlanBudget.scheduleMemoNo == tourSpotMemo.scheduleMemoNo">
+												<p style="margin-bottom: 0px; font-size:16px; color:gray; font-weight:bold;">
+													<i style="margin:0px; width:20px; height:20px; font-size:12px; line-height:20px;" class="icon-custom icon-sm rounded-x icon-color-orange fa fa-krw"></i>
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.priceType | budgetType"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.content"></span>
+													<span style="margin-left: 10px;">|</span> 
+													<span style="margin-left: 10px;" ng-bind="tourPlanBudget.travelPrice | currency : '' : 0"></span><span>원</span>
+												</p>
+											</div>
+
+										</div>
+										
 									</li>
 									
 								</ul>
@@ -302,7 +376,7 @@
 									<strong style="float: right; font-size: 18px;">/200</strong><strong style="float: right; font-size: 18px;" ng-bind="tourPlanCommentForm.content.length">0</strong>
 									<label class="textarea">
 										<textarea rows="2" ng-model="tourPlanCommentForm.content" ng-keyup="commentLengthCheck();"> </textarea>
-										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-tags"></i> 댓글 등록</button>
+										<button style="float: right;" class="btn btn-evernote-inversed" type="button" ng-click="writeComment();"><i class="fa fa-check"></i> 댓글 등록</button>
 									</label>
 								</section>
 							</fieldset>
@@ -384,6 +458,11 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseAuth.js"></script>
 	
+	<!-- D3 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+	<!-- NVD3 -->
+	<script src="${pageContext.request.contextPath}/resources/plugins/novus-nvd3-v1.8.5/build/nv.d3.min.js"></script>
+	
 	<!-- Full Calendar -->
 	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js'></script>
 	<script src='${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js'></script>
@@ -403,6 +482,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/initApp.js"></script>
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-sanitize.min.js"></script>
 	<script type="text/javascript" src="js/ng-simple-upload.js"></script>
 	<script type="text/javascript" src="js/tourPlanApp.js"></script><!-- 앵귤러 모듈 및 라우터 선언 -->
 	<script type="text/javascript" src="js/tourPlanFilters.js"></script><!-- 앵귤러 사용자정의 필터 선언 -->
