@@ -2,6 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-	response.sendRedirect("http://localhost:8081");
+	response.sendRedirect("http://14.32.66.104:8083/rscamper-web/views/main.jsp");
 %>
 
