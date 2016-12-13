@@ -251,7 +251,7 @@
 				
 				$.ajax({
 					type : "POST",
-					url : "http://localhost:8081/travelog/detail",
+					url : myConfig.homeUrl + "/travelog/detail",
 					dataType : 'json',
 					data : obj,
 					error : function(err) {
@@ -319,7 +319,7 @@
 		    	
 		    	$.ajax ({
 		    		type : "POST",
-		    		url : "http://localhost:8081/travelog/update",
+		    		url : myConfig.homeUrl + "/travelog/update",
 		    		dataType : 'json',
 		    		data : {
 		    			"boardNo" : boardNo,
@@ -343,7 +343,7 @@
 				
 				$.ajax({
 					type : "POST",
-					url : "http://localhost:8081/travelog/delete",
+					url : myConfig.homeUrl + "/travelog/delete",
 					dataType : 'json',
 					data : obj,
 					error : function(err) {
@@ -394,7 +394,7 @@
 			var boardNo = ${param.boardNo};
 			page = 1;
 			$.ajax({
-				url : 'http://localhost:8081/travelog/commentList',
+				url : myConfig.homeUrl + '/travelog/commentList',
 				type : 'GET',
 				dataType : 'json',
 				data : {
@@ -422,7 +422,7 @@
 				$("#inputComment").focus(); return;
 			}
 			$.ajax({
-				url : 'http://localhost:8081/travelog/commentRegister',
+				url : myConfig.homeUrl + '/travelog/commentRegister',
 				type : 'POST',
 				data : {
 					"userUid" : uid,
@@ -479,7 +479,7 @@
 			function commentDelete(){
 				var commentNo = $("#commentNo").val();
 				$.ajax({
-					url : 'http://localhost:8081/travelog/commentDelete',
+					url : myConfig.homeUrl + '/travelog/commentDelete',
 					type : 'GET',
 					dataType : 'JSON',
 					data : {
@@ -517,7 +517,7 @@
 					$("#modalComment").focus(); return;
 				}
 				$.ajax({
-					url : 'http://localhost:8081/travelog/commentUpdate',
+					url : myConfig.homeUrl + '/travelog/commentUpdate',
 					type : 'POST',
 					data : {
 						"userUid" : uid,
@@ -552,7 +552,7 @@
 			var boardNo = ${param.boardNo};
 			
 			$.ajax({
-				url : 'http://localhost:8081/travelog/like',
+				url : myConfig.homeUrl + '/travelog/like',
 				type : 'POST',
 				data : {
 					"userUid" : uid,

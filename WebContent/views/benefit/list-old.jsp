@@ -516,7 +516,7 @@
  			
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/benefit/list",
+				url : myConfig.homeUrl + "/benefit/list",
 				dataType : 'json',
 				data : obj,
 				error : function (err) {

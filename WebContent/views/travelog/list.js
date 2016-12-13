@@ -33,7 +33,7 @@
 		    	
 		    	$.ajax ({
 		    		type : "POST",
-		    		url : "http://localhost:8081/travelog/register",
+		    		url : myConfig.homeUrl + "/travelog/register",
 		    		dataType : 'json',
 		    		data : {
 		    			"userUid" : uid,
@@ -72,7 +72,7 @@
  			
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/travelog/list",
+				url : myConfig.homeUrl + "/travelog/list",
 				dataType : 'json',
 				data : obj,
 				error : function (err) {
@@ -88,7 +88,7 @@
 		
  		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/menu/list",
+			url : myConfig.homeUrl + "/menu/list",
 			dataType : 'json',
 			error : function (err) {
 				alert("에러");

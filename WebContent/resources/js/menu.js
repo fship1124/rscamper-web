@@ -2,7 +2,7 @@
 function menuCreate() {
 	$.ajax({
 		type : "GET",
-		url : myConfig.imsiServerUrl + "/menu/list",
+		url : myConfig.homeUrl + "/menu/list",
 		dataType : 'json',
 		error : function (err) {
 			alert("에러");
@@ -86,7 +86,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/notisfication/list",
+			url : myConfig.homeUrl + "/notisfication/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {

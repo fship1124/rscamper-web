@@ -13,7 +13,7 @@
  			
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/together/list",
+				url : myConfig.homeUrl + "/together/list",
 				dataType : 'json',
 				data : obj,
 				error : function (err) {
