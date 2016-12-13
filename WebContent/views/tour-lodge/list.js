@@ -65,10 +65,6 @@ function typeChange(contenttypeid, cat1Value){
 		var cat3 = $("select[name=cat3]").val();
 		var pageNo = e;
 		
-		console.log(areaCode);
-		console.log(sigunguCode);
-		
-		
 		var params = new Object();
 		params.contentTypeid = contenttypeid;
 		params.areaCode = areaCode;
@@ -79,13 +75,11 @@ function typeChange(contenttypeid, cat1Value){
 		params.pageNo = pageNo;
 		
 	    $.ajax({
-	    	url : "http://localhost:8081/tour/api/list",
+	    	url : myConfig.serverUrl + "/tour/api/list",
 	        type: "get",
 	        dataType: "json",
 	        data : params,
 	        success:function(data){
-	        	console.dir(data);
-	        	
 	        	var data = JSON.parse(data);
 	        	listPrint(data)
 	        	
@@ -102,8 +96,6 @@ function typeChange(contenttypeid, cat1Value){
 	function pageing(data) {
 		var body = data.response.body;
 		var totalCount = body.totalCount;
-		console.log("totalCount : " + totalCount);
-		
 		var displayPageNum = 10;
 		var page = body.pageNo;
 		var numOfRows = body.numOfRows;
@@ -118,14 +110,9 @@ function typeChange(contenttypeid, cat1Value){
 		
 		var prev = startPage == 1? false : true;
 		var next = endPage * numOfRows >= totalCount ? false : true;
-		console.log("displayPageNum : " + displayPageNum);
-		console.log("page : " + page);
-		console.log("endPage : " + endPage);
-		console.log("prev : " + prev);
-		console.log("next : " + next);
+		var pageination = $(".pagination");
 		
 		html = "";
-		var pageination = $(".pagination");
 		
 		if (prev) {
 			html += "<li class='page-item'>";
@@ -183,7 +170,6 @@ function typeChange(contenttypeid, cat1Value){
 		    			}	    			
 		    		});
 	        	}
-	        	
 	        },
 			error:function(args){
 				//alert('error' + args);
@@ -194,7 +180,6 @@ function typeChange(contenttypeid, cat1Value){
 	
 	function listPrint(data) {
 		console.log("in listPrint");
-		console.dir(data);
 		
 		var item = data.response.body.items.item;
 		var list = $("#list");
@@ -206,7 +191,6 @@ function typeChange(contenttypeid, cat1Value){
 				console.log(i);
 				html += "<div id='grid-container' class='cbp-caption-active cbp-caption-zoom cbp-l-grid-agency cbp-ready'>";
 			}
-			console.log(v.addr1);
 			
 			var sAddr = v.addr1.split(" ");
 			var addr = sAddr[0] + " " + sAddr[1];
@@ -245,7 +229,6 @@ function typeChange(contenttypeid, cat1Value){
 				html += "</div>";
 			}
 		}
-		
 		list.html(html);
 	}
 
@@ -254,7 +237,7 @@ function typeChange(contenttypeid, cat1Value){
 		console.log(e.getAttribute("data-value1"));
 		console.log(e.getAttribute("data-value2"));
 		
-		var url = "http://localhost:80/rscamper-web/views/tour-lodge/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+		var url = myConfig.serverUrl + "/rscamper-web/views/tour-lodge/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 		$(e).attr('href', url);
 	}
 	

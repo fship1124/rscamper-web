@@ -12,7 +12,7 @@ function listUser(obj) {
 	obj2.roomNo = obj.roomNo;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/chat/list_user',
+		url : myConfig.serverUrl + "/chat/list_user",
 		method : 'GET',
 		dataType : 'json',
 		data : obj2,
@@ -53,9 +53,6 @@ function roomHeadHandler(obj) {
 	
 function nickNameMod() {
 	var nick = $("#nickname");
-	
-	console.log(nick.val());
-	console.log(user.userUid);
 	$("#" + user.userUid).text(nick.val());
 	userName = nick.val();
 }
@@ -69,6 +66,3 @@ function on_key_down() {
 	}
 }
 	
-
-
-

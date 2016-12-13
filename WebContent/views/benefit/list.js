@@ -9,7 +9,7 @@
 		
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/benefit/list",
+			url : myConfig.serverUrl + "/benefit/list",
 			dataType : 'json',
 			data : obj,
 			error : function (err) {
@@ -25,13 +25,9 @@
 		
 	function listPrint(data) {
 		console.log("in listPrint");
-		console.dir(data);
-		
 		var item = data.page;
 		var pageMaker = data.pageMaker;
 		page = pageMaker.endPage;
-		console.log("item.length : " + item.length);
-		console.log("page : " + page);
 					
 		var list = $("#list");
 		var html = "";
@@ -64,7 +60,6 @@
 		
 		
 	function goDetail(e) {
-		alert("a");
 		console.log(e.getAttribute("data-value"));
 		
 		var benefitno = e.getAttribute("data-value");

@@ -4,7 +4,7 @@ var user;
 function menuCreate() {
 	$.ajax({
 		type : "GET",
-		url : myConfig.serverURL + "/menu/list",
+		url : myConfig.serverUrl + "/menu/list",
 		dataType : 'json',
 		error : function (err) {
 			alert("에러");
@@ -55,7 +55,6 @@ function menuCreate() {
 var notis_socket;
 
 
-//////////////////////////////////////
 // 헤더 알림 팝오버
 $(document).ready(function() {
 	user = sessionStorageService.getObject("user");
@@ -67,8 +66,6 @@ $(document).ready(function() {
 	    }
 	});
 
-	console.log("user");
-	console.dir(user);
 
 	if (user) {
 		var obj = new Object();
@@ -76,7 +73,7 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type : "GET",
-			url : myConfig.homeUrl + "/notisfication/list",
+			url : myConfig.serverUrl + "/notisfication/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -102,6 +99,7 @@ $(document).ready(function() {
 //		var user = sessionStorageService.getObject("user");
 		console.log("in notis socketIo");
 		
+<<<<<<< HEAD
 		// 소켓서버에 접속
 		notis_socket = io("http://192.168.0.173:10002");
 		notis_socket.emit("notis", user.userUid);
@@ -110,20 +108,32 @@ $(document).ready(function() {
 		notis_socket.on("notification", function(data) {
 			console.log("in notification");
 //			alert("알림");
+=======
+		if (user) {
+			// 소켓서버에 접속
+//			notis_socket = io("http://192.168.0.173:10002");
+			notis_socket = io(myConfig.nodeNotisServerUrl);
+			notis_socket.emit("notis", user.userUid);
+>>>>>>> master
 			
-			console.log(data.message);
-			console.log(data.count);
-			
-			$.toast({
-			    heading: 'Information',
-			    text: data.message,
-			    icon: 'info',
-			    loader: true,        // Change it to false to disable loader
-			    loaderBg: '#9EC600'  // To change the background
-			})
-			
-			$(".noti-count").html(data.count);
-		});
+			notis_socket.on("notification", function(data) {
+				console.log("in notification");
+				alert("알림");
+				
+				console.log(data.message);
+				console.log(data.count);
+				
+				$.toast({
+				    heading: 'Information',
+				    text: data.message,
+				    icon: 'info',
+				    loader: true,        // Change it to false to disable loader
+				    loaderBg: '#9EC600'  // To change the background
+				})
+				
+				$(".noti-count").html(data.count);
+			});
+		}
 	};
 
 	// 소켓 실행
@@ -150,16 +160,18 @@ var hideAllPopovers = function() {
 
 // 알림 클릭 -> 페이지 이동
 function pageMove(e) {
+<<<<<<< HEAD
 //	alert("ee");
 	console.log("페이지 이동 메서드");
 	console.dir(e);
 	
+=======
+>>>>>>> master
 	var obj = new Object();
-	console.log(e.dataset.no);
 	
 	$.ajax({
 		type : "DELETE",
-		url : "http://localhost:8081/notisfication/delete/" + e.dataset.no,
+		url : myConfig.serverUrl + "/notisfication/delete/" + e.dataset.no,
 		dataType : 'json',
 		error : function(err) {
 //			alert("에러");
@@ -171,7 +183,6 @@ function pageMove(e) {
 	});
 }
 // End 헤더 알림 팝오버
-//////////////////////////////////////
 
 
 
@@ -185,7 +196,7 @@ $('[data-toggle="popover"]').on('click', function() {
 		obj.userUid = user.userUid;
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/notisfication/list",
+			url : myConfig.serverUrl + "/notisfication/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {

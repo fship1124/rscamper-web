@@ -225,7 +225,6 @@
 		var obj = new Object();
 		obj.contentid = ${param.contentid};
 		obj.contenttypeid = ${param.contenttypeid};
-		
 		apiAjax(obj);
 	</script>
 </body>

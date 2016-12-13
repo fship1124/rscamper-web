@@ -218,7 +218,7 @@
 			console.log("in socketIo");
 			// 소켓서버에 접속
 // 			var socket = io("http://192.168.0.190:10001");
-			var chat_socket = io(myConfig.nodeServerUrl);
+			var chat_socket = io(myConfig.nodeChatServerUrl);
 			
 			chat_socket.on('connection', function(data) {
 				 // socket 연결 완료
@@ -299,20 +299,13 @@
 		$("#msg-btn").click(function() {
 			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
 			console.log("서버로 전송함");
-
 			var s = $("#msg").val();
-			console.log(s.length);
-			
-// 			var msgMgn = 1012 - (20 * s.length); 
-			
-// 			var strMsgMgn = "" + msgMgn + "px";
 			var msgLength = s.length;
 			
 			if (s.length <= 4) {
 				msgLength = s.length + 3;
 			}
 			var msgMgn = "" + (18 * msgLength) + "px"; 
-			
 			
 			var html = "";
 			html += "<div class='direct-chat-messages'>";
@@ -330,7 +323,6 @@
 			html += "</div>";
 
 			$("#msg-content").append(html);
-			// 				$("#msg-content").append($("#msg").val() + "<br>");
 			chat_socket.emit("user", {
 				type : "text",
 				name : user.displayName,
@@ -341,24 +333,11 @@
 			});
 			
 			
-			
 			$("#msg").val("");
 			$("#msg").focus();
-			
-			
-			
-			
 			$("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 		});
 
-		
-	
-		
-		
-		
-		
-		
-		
 		
 		$("#out-room").click(function() {
 			console.log("in out");

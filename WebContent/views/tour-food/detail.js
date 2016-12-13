@@ -1,11 +1,9 @@
-console.log(myConfig.imsiServerUrl);
-var user = sessionStorageService.getObject("user");	
+	var user = sessionStorageService.getObject("user");	
 
-console.dir(user);		
 	function apiAjax(obj) {
 		$.ajax({
 			type : "GET",
-			url : myConfig.homeUrl + "/tour/api/detail",
+			url : myConfig.serverUrl + "/tour/api/detail",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -27,17 +25,11 @@ console.dir(user);
 		var data3 = JSON.parse(data[2]);
 		var data4 = JSON.parse(data[3]);
 		
-		console.dir(data1);
-		console.dir(data2);
-		console.dir(data3);
-		console.dir(data4);
-		
 		var item1 = data1.response.body.items.item;
 		var item2 = data2.response.body.items.item;
 		var item3 = data3.response.body.items.item;
 		var item4 = data4.response.body.items.item;
 		
-
 		// 제목
 		$("#text-title").html($("#text-title").html() + item1.title);
 		
@@ -254,5 +246,4 @@ console.dir(user);
 	function imageFnc(e) {
 		 $(".ms-brd").attr("src", e.src); 
 	}
-	
 	
