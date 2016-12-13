@@ -2,7 +2,7 @@
 			
 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/benefit/detail",
+				url : myConfig.homeUrl + "/benefit/detail",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {

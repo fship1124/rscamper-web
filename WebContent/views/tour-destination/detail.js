@@ -4,7 +4,7 @@ var user = sessionStorageService.getObject("user");
 	function apiAjax(obj) {
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/tour/api/detail",
+			url : myConfig.homeUrl + "/tour/api/detail",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {

@@ -6,7 +6,7 @@ console.dir(user);
 function apiAjax(obj) {
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8081/tour/api/detail",
+		url : myConfig.homeUrl + "/tour/api/detail",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -212,7 +212,7 @@ function apiAjax(obj) {
 		
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/tour/comment/list",
+			url : myConfig.homeUrl + "/tour/comment/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -402,7 +402,7 @@ $(".save-new-comment").on('click', function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/comment/insert",
+		url : myConfig.homeUrl + "/tour/comment/insert",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -413,7 +413,7 @@ $(".save-new-comment").on('click', function() {
 			
 			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/tour/comment/list",
+				url : myConfig.homeUrl + "/tour/comment/list",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {
@@ -464,7 +464,7 @@ $("#icon-plan-like").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/like",
+		url : myConfig.homeUrl + "/tour/like",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -508,7 +508,7 @@ $("#icon-plan-bookmark").on("click", function() {
 	
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/tour/bookmark",
+		url : myConfig.homeUrl + "/tour/bookmark",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {

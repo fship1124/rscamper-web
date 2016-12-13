@@ -43,6 +43,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery/css/ui-lightness/jquery.ui.all.css">
+
+
 <style>
 #timeList{
 	border-collapse: separate;
@@ -105,7 +108,8 @@
 				<input type="hidden" name="pageNo"> 
 				<input type="hidden" name="pageSize">
 				<input type="hidden" name="startPage"> <input type="button" value="조회하기" onclick="joinBtn();" />
-
+				
+				<input type="text" id="test33" name="test33">
 			</div>
 		</div>
 
@@ -763,10 +767,18 @@
 		$("#trainModal").modal('hide');
 
 	}
-
+	
+	$(function() {
+	    $("#test33").datepicker({dateFormat:"yy-mm-dd"});
+	    console.log("달력");
+	});
 	
 	</script>
 	<!-- 필요한 js파일 -->
+	<script src="assets/js/jquery/js/jquery-1.7.2.js"></script>
+	<script src="assets/js/jquery/js/jquery.ui.core.js"></script>
+	<script src="../jquery/js/jquery.ui.widget.js"></script>
+	<script src="../jquery/js/jquery.ui.datepicker.js"></script>
 <!-- 	<script type="text/javascript" -->
 <!-- 		src="../../assets/js/jquery.xdomainajax.js"></script> -->
 <!-- 	<script type="text/javascript" -->

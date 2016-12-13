@@ -536,7 +536,7 @@
  			
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/community/select/categoryBoard",
+				url : myConfig.homeUrl + "/community/select/categoryBoard",
 				dataType : 'json',
 				data : obj,
 				error : function (err) {
@@ -552,7 +552,7 @@
 		
  		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/menu/list",
+			url : myConfig.homeUrl + "/menu/list",
 			dataType : 'json',
 			error : function (err) {
 				alert("에러");

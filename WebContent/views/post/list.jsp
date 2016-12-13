@@ -477,7 +477,7 @@
 		
  			$.ajax({
 				type : "GET",
-				url : "http://localhost:8081/post/list",
+				url : myConfig.homeUrl + "/post/list",
 				dataType : 'json',
 				data : {"obj":obj, "uid":uid}, 
 				error : function (err) {

@@ -516,7 +516,7 @@
 			
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8081/travelog/detail",
+				url : myConfig.homeUrl + "/travelog/detail",
 				dataType : 'json',
 				data : obj,
 				error : function(err) {

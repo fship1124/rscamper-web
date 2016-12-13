@@ -81,7 +81,7 @@
 			params.pageNo = pageNo;
 			
 		    $.ajax({
-		    	url : "http://localhost:8081/tour/api/list",
+		    	url : myConfig.homeUrl + "/tour/api/list",
 		        type: "get",
 		        dataType: "json",
 		        data : params,
