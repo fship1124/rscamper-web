@@ -5,7 +5,7 @@ var myConfig = {
 //	serverURL : "http://192.168.0.9:8081", // 서버 컴퓨터
 	imsiServerUrl : "http://192.168.0.173:8081", // 호동 스프링 서버 컴퓨터
 	nodeServerUrl : "http://192.168.0.173:10001", // 호동 노드 서버 컴퓨터
-	homeUrl : "http://localhost:8081" // localhost 서버 	
+	homeUrl : "http://14.32.66.104:8081" // localhost 서버 	
 };
 
 //이미지 유효성 체크

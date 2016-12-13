@@ -4,7 +4,7 @@ var user;
 function menuCreate() {
 	$.ajax({
 		type : "GET",
-		url : myConfig.homeUrl + "/menu/list",
+		url : myConfig.serverURL + "/menu/list",
 		dataType : 'json',
 		error : function (err) {
 			alert("에러");
@@ -34,17 +34,6 @@ function menuCreate() {
 			html += "	<li onclick='logout();'><a href='javascript:void(0);'><i class='fa fa-unlock'></i> 로그아웃</a></li>";
 			html += "</ul>";
 			html += "</li>";
-				
-				// 검색창 보류
-//				html += "<li><i class='search fa fa-search search-btn'></i>";
-//				html +=	"<div class='search-open'>";
-//				html +=	"	<div class='input-group animated fadeInDown'>";
-//				html +=	"		<input type='text' class='form-control' placeholder='Search'>";
-//				html +=	"		<span class='input-group-btn'>";
-//				html +=	"			<button class='btn-u' type='button'>Go</button>";
-//				html +=	"		</span>";
-//				html +=	"	</div>";
-//				html += "</div></li>";
 				
 			$("#start").html($("#start").html() + html);
 			
@@ -91,7 +80,7 @@ $(document).ready(function() {
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
-				alert("에러");
+//				alert("에러");
 			},
 			success : function(result) {
 				console.log("알림 success");
@@ -120,7 +109,7 @@ $(document).ready(function() {
 		
 		notis_socket.on("notification", function(data) {
 			console.log("in notification");
-			alert("알림");
+//			alert("알림");
 			
 			console.log(data.message);
 			console.log(data.count);
@@ -161,7 +150,7 @@ var hideAllPopovers = function() {
 
 // 알림 클릭 -> 페이지 이동
 function pageMove(e) {
-	alert("ee");
+//	alert("ee");
 	console.log("페이지 이동 메서드");
 	console.dir(e);
 	
@@ -173,7 +162,7 @@ function pageMove(e) {
 		url : "http://localhost:8081/notisfication/delete/" + e.dataset.no,
 		dataType : 'json',
 		error : function(err) {
-			alert("에러");
+//			alert("에러");
 		},
 		success : function(result) {
 			console.log("삭제 success");
@@ -200,7 +189,7 @@ $('[data-toggle="popover"]').on('click', function() {
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
-				alert("에러");
+//				alert("에러");
 			},
 			success : function(result) {
 				console.log("알림 success");
