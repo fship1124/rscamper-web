@@ -148,7 +148,7 @@
 				<!-- 저장 / 취소 -->
 				<div id="controllers">
 					<div class="bg-light">
-						<button class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="saveTourPlan();">
+						<button id="saveBtn" class="btn rounded btn-evernote-inversed" style="width: 49%;" ng-click="saveTourPlan();">
 							<i class="fa fa-floppy-o"></i> 저장하기
 						</button>
 						<button class="btn rounded btn-evernote" style="width: 49%;" ng-click="cancelTourPlan();">

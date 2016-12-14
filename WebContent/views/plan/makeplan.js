@@ -158,6 +158,7 @@ angular.module("TourPlanApp")
 					url: myConfig.serverURL + "/tourPlan/delete/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET",
 				}).success(function (response) {
+					$.isLoading();
 					// 스케쥴 정보 입력
 					for (var i = 0, len = tourPlanScheduleList.length; i < len; i++) {
 						var tps = tourPlanScheduleList[i]
@@ -181,12 +182,16 @@ angular.module("TourPlanApp")
 							data: $.param(tourPlanSchedule),
 							headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
 						}).success(function (response) {
-							swal("일정 저장이 완료되었습니다.");
-							$window.location.reload();
+
 						}).error(function (error) {
 							console.log(error);
 						})
 					}
+			        setTimeout( function(){
+			        	$.isLoading( "hide" );
+						swal("일정 저장이 완료되었습니다.");
+						$window.location.reload();
+			        }, 1000 );
 				}).error(function (error) {
 					console.log(error);
 				})
