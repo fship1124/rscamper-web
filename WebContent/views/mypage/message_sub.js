@@ -312,10 +312,9 @@ $('#uploadNote').on('click', function(){
 			
 			console.dir(nObj);
 			
-			
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8081/notisfication/insert",
+				url : myConfig.serverURL + "/notisfication/insert",
 				dataType : 'json',
 				data : nObj,
 				error : function(err) {

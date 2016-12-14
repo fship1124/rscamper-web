@@ -43,7 +43,7 @@ function listCreate(data) {
 		html += "<td style='margin: auto; text-align: center;'>" + v.togetherlNo + "</td>";
 		html += "<td>" + v.title1 + "</td>";
 		html += "<td>";
-		html += "<a href='http://localhost:8081/together/" + v.togetherlNo + "'>";
+		html += "<a href='"+ myConfig.serverUrl +"/together/" + v.togetherlNo + "'>";
 		html += v.title2 + "</a>";
 		html += "<td>" + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2) + "</td>";
 		html += "</tr>";

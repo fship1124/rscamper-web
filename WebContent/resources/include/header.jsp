@@ -20,10 +20,10 @@
 
 
 		<!-- Logo -->
-		<a class="logo"
-			href="${pageContext.request.contextPath}/views/main.jsp"> <img
-			src="${pageContext.request.contextPath}/resources/img/logo/catbuslogo.png"
-			style="width: 70px; height: 40px;" alt="Logo"></a>
+		<a class="logo"	href="${pageContext.request.contextPath}/views/main.jsp"> 
+		<img src="${pageContext.request.contextPath}/resources/img/logo/catbuslogo.png" style="width: 70px; height: 40px;" alt="Logo">
+		<img src="${pageContext.request.contextPath}/resources/img/logo/z.png" style="width: 70px; height: 40px;" alt="Logo">
+		</a>
 		<!-- End Logo -->
 
 		<!-- Topbar -->

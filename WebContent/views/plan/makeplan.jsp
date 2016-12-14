@@ -598,6 +598,7 @@
 	<script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/lib/moment.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/plugins/fullcalendar-3.0.1/fullcalendar.js"></script>
 
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
 	<!-- isLoading -->

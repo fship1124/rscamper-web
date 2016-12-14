@@ -1092,7 +1092,7 @@ angular.module("TourPlanApp")
 				
 				notis_socket.emit("commentInfo", {
 					type : "comment",
-					recvId : user.userUid,
+					recvId : $scope.writer.userUid,
 					count : $(".noti-count").html()
 				});
 				

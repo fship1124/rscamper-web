@@ -69,7 +69,7 @@ commentList();
 					html4 += "<div class='thumbnails thumbnail-style thumbnail-kenburn' style='border: 1px solid #F0F0F0;'>";
 					html4 += "	<div class='thumbnail-img'>";
 					html4 += "		<div class='overflow-hidden'>";
-					html4 += "			<img class='img-responsive' src='http://lorempixel.com/218/180/city/"+(i+1)+"'>";
+					html4 += "			<img class='img-responsive' src='" + data.imageUrl + "'>";
 					html4 += "		</div>";
 					html4 += "			<a class='btn-more hover-effect' href='http://localhost/rscamper-web/views/benefit/detail.jsp?benefitno="+ data.benefitNo +"'>자세히</a>";
 					html4 += "	</div>";
@@ -204,6 +204,7 @@ commentList();
 			success : function(result) {
 				console.log("here~~~~");
 				console.dir(result);
+				var count=0;
 				for(var i = 0; i < result.length; i++) {
 					var data = result[i];
 					html5 += "<div class='col-md-4' style='height: 300px; margin-top: 10px; padding: 0 5px;'>";
@@ -215,7 +216,7 @@ commentList();
 					if (data.filePath) {
 						html5 += "			<img class='img-responsive' src="+ data.filePath +" style='width: 218px; height: 180px;'>";
 					} else {
-						html5 += "			<img class='img-responsive' src='http://lorempixel.com/218/180/city/"+(i+1)+"' style='width: 218px; height: 180px;'>";
+						html5 += "			<img class='img-responsive' src='http://lorempixel.com/218/180/city/"+ (count++) +"' style='width: 218px; height: 180px;'>";
 					}
 					html5 += "		</div>";
 					html5 += "			<a class='btn-more hover-effect' href='#'>자세히</a>";
