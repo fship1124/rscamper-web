@@ -65,9 +65,9 @@
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
 			<div class="container" style="padding-left: 0px;">
-				<img src="mainImgs.png">
+<!-- 				<img src="mainImgs.png"> -->
 				<ul class="pull-right breadcrumb">
-					<li class="active"><a href="main.jsp">home</a></li>
+					<li class="active"><a href="main.jsp">HOME</a></li>
 				</ul>
 			</div>
 		</div>
@@ -75,7 +75,7 @@
 		<!--=== Content ===-->
 		<!-- 광고 부분 -->
 		
-		<div class="container content-md">
+		<div class="container content-md" style="padding-top: 20px;">
 		<div class="row" style="padding: 15px; background-color: rgba(153, 153, 153, 0.2); border: 4px double lightgray; border-radius: 10px;">
 		<div class="col col-lg-8">
 			<div id="carousel-example-generic" style="width: 100%; height: 324px;" class="carousel slide" data-ride="carousel">

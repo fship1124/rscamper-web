@@ -1085,7 +1085,6 @@ angular.module("TourPlanApp")
 				$scope.getCommentList();
 				$scope.tourPlanCommentForm.content = "";
 				
-				alert("tourplan");
 				var user = sessionStorageService.getObject("user");
 				
 				console.log("noti-count");

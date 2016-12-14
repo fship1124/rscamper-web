@@ -1,4 +1,3 @@
-console.log(myConfig.imsiServerUrl);
 var user = sessionStorageService.getObject("user");
     
 //쪽지 날짜
@@ -98,7 +97,7 @@ function note_list(pageNo) {
 	obj.page = pageNo;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/note/list',
+		url : myConfig.serverURL + '/note/list',
 		method : 'GET',
 		dataType : 'json',
 		data : obj,
@@ -291,7 +290,7 @@ $('#uploadNote').on('click', function(){
 	obj.sentUserUid = sendUid;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/note/send',
+		url : myConfig.serverURL + '/note/send',
 		method : 'POST',
 		data : obj,
 		success : function(result) {
@@ -341,7 +340,7 @@ $('#uploadNote').on('click', function(){
 ////////////////////////////////////////////////////////////////
 var projects = new Array();
 $.ajax({
-	url : myConfig.imsiServerUrl + '/note/user-list',
+	url : myConfig.serverURL + '/note/user-list',
 	method : 'GET',
 	success : function(result) {
 //		console.log("user-list success");
