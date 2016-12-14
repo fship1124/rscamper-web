@@ -469,6 +469,8 @@
 
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- isLoading -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/isLoading/jquery.isloading.min.js"></script>
 	<!-- JQuery Toast Plugin -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	

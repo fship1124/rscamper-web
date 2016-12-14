@@ -5,6 +5,7 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		// recordNo로 파라미터 받은 값으로 일정 정보 불러옴
 		$scope.getTourPlan = function () {
+			
 			$http({
 				url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"

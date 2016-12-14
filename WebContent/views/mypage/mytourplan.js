@@ -38,7 +38,7 @@ angular.module("MypageApp")
 					method: "GET",
 				}).success(function (){
 					swal("삭제완료!", "해당 일정이 삭제되었습니다.", "success");
-					$scope.getPlanList();
+					$scope.getMyTourPlanList();
 				}).error(function (error){
 					swal("오류발생!", error, "error");
 				})

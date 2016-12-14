@@ -5,6 +5,11 @@ angular.module("TourPlanApp")
 		/** ==================================================== */
 		// recordNo로 파라미터 받은 값으로 일정 정보 불러옴
 		$scope.getTourPlan = function () {
+//			$.isLoading({
+//				position: "overlay",
+//				text: "Loading"
+//			});
+			
 			$http({
 				url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
@@ -108,6 +113,8 @@ angular.module("TourPlanApp")
 					initMap();
 					// 지도에 이벤트 렌더링
 					renderingEventToMap();
+					
+//					$.isLoading("hide");
 					
 				}).error(function (error) {
 					console.log(error);

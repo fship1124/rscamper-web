@@ -600,6 +600,8 @@
 
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- isLoading -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/isLoading/jquery.isloading.min.js"></script>
 	<!-- 스마트에디터 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
