@@ -51,103 +51,7 @@
 <link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <!-- 달력 css -->
 <link rel="stylesheet" href="../assets/css/shiping.style.css">	
-<style>
-.row{
-	width: 1140px;
-}
-.col-md-4{
-	width: 228px;
-}
-.col-md-5{
-	width: 380px;
-}
-.title-v4{
-	width: 370px;
-}
-#carousel-example-generic{
-	width: 650px;
-	height: 300px;
-}
-.form-inline{
-	width: 100%;
-	height: 300px;
-}
 
-
-.checkbox[type=radio] {display:none;}
-label.input-label { 
-  display: inline-block;
-  font-size: 13px;
-  cursor: pointer;
-  }
-label.input-label::before {
-  display: inline-block;
-  margin:0 10px;
-  font-family: FontAwesome;
-  font-size: 20px;
-  color: rgba(4, 120, 193,0.2);
-  -webkit-transition: transform 0.2s ease-out, color 0.2s ease;
-  -moz-transition: transform 0.2s ease-out, color 0.2s ease;
-  -ms-transition: transform 0.2s ease-out, color 0.2s ease;
-  -o-transition: transform 0.2s ease-out, color 0.2s ease;
-  transition: transform 0.2s ease-out, color 0.2s ease;
-  -webkit-transform: scale3d(0.8,0.8,1);
-  -moz-transform: scale3d(0.8,0.8,1);
-  -ms-transform: scale3d(0.8,0.8,1);
-  -o-transform: scale3d(0.8,0.8,1);
-  transform: scale3d(0.8,0.8,1);
-}
-label.input-label.checkbox::before {
-  content: "\f0c8";
-}
-label.input-label.radio::before {
-  content: "\f111";
-}
-input.checkbox + label.input-label:hover::before {
-  -webkit-transform: scale3d(1,1,1);
-  -moz-transform: scale3d(1,1,1);
-  -ms-transform: scale3d(1,1,1);
-  -o-transform: scale3d(1,1,1);
-  transform: scale3d(1,1,1);
-}
-
-input.checkbox + label.input-label:active::before {
-  -webkit-transform: scale3d(1.5,1.5,1);
-  -moz-transform: scale3d(1.5,1.5,1);
-  -ms-transform: scale3d(1.5,1.5,1);
-  -o-transform: scale3d(1.5,1.5,1);
-  transform: scale3d(1.5,1.5,1);
-}
-
-input.checkbox:checked + label.input-label::before {
-  display: inline-block; 
-  font-family: FontAwesome; 
-  color:#0478c1;
-  -webkit-transform: scale3d(1,1,1);
-  -moz-transform: scale3d(1,1,1);
-  -ms-transform: scale3d(1,1,1);
-  -o-transform: scale3d(1,1,1);
-  transform: scale3d(1,1,1);
-}
-input.checkbox:checked + label.input-label.checkbox::before {
-    content:"\f14a";
-}
-input.checkbox:checked + label.input-label.radio::before {
-    content:"\f058";
-}
-.time-div div {
-	padding: 0;
-	text-align: left;
-}
-#train-search-btn {
-	background-color: orange;
-}
-#train-search-btn:hover {
-	background-color: #b36b00;
-}
-
-
-</style>
 </head>
 
 <body class="header-fixed header-fixed-space-default">
@@ -160,7 +64,8 @@ input.checkbox:checked + label.input-label.radio::before {
 
 		<!--=== 사이트맵 ===-->
 		<div class="breadcrumbs">
-			<div class="container">
+			<div class="container" style="padding-left: 0px;">
+				<img src="mainImgs.png">
 				<ul class="pull-right breadcrumb">
 					<li class="active"><a href="main.jsp">home</a></li>
 				</ul>
@@ -171,9 +76,9 @@ input.checkbox:checked + label.input-label.radio::before {
 		<!-- 광고 부분 -->
 		
 		<div class="container content-md">
-		<div class="row">
+		<div class="row" style="padding: 15px; background-color: rgba(153, 153, 153, 0.2); border: 4px double lightgray; border-radius: 10px;">
 		<div class="col col-lg-8">
-			<div id="carousel-example-generic" style="width: 100%;" class="carousel slide" data-ride="carousel">
+			<div id="carousel-example-generic" style="width: 100%; height: 324px;" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ol class="carousel-indicators">
 			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -186,19 +91,19 @@ input.checkbox:checked + label.input-label.radio::before {
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" style="width: 100%;" role="listbox">
 			    <div class="item active">
-			      <img src="train1.jpg" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train1.jpg" alt="..." style="width: 100%; height: 324px;">
 			    </div>
 			    <div class="item">
-			      <img src="train66.jpg" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train66.jpg" alt="..." style="width: 100%; height: 324px;">
 			    </div>
 			    <div class="item">
-			      <img src="train77.png" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train77.png" alt="..." style="width: 100%; height: 324px;">
 			    </div>
 			    <div class="item">
-			      <img src="train44.png" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train44.png" alt="..." style="width: 100%; height: 324px;">
 			    </div>
 			    <div class="item">
-			      <img src="train2.jpg" alt="..." style="width: 100%; height: 300px;">
+			      <img src="train2.jpg" alt="..." style="width: 100%; height: 324px;">
 			    </div>
 			  </div>
 			
@@ -216,33 +121,33 @@ input.checkbox:checked + label.input-label.radio::before {
 		</div>
 		<div class="col col-lg-4">
 			<!-- 시간조회 -->
-			  <form class="shipping-form" id="mainTimeList" style="padding: 0; float: right; width: 340px;">
+			  <form class="shipping-form" id="mainTimeList" style="padding: 0; float: right; width: 340px; border: 1px solid lightgray;">
 				<div class="wrap">
 					<div class="row time-div" style="width: 100%;">
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio0" value="01" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio0" value="01" class="checkbox">
 		  						<label for="radio0" class="input-label radio">새마을</label>
 						</div>
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio1" value="02" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio1" value="02" class="checkbox">
 		  						<label for="radio1" class="input-label radio">무궁화</label>
 						</div>
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio2" value="03" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio2" value="03" class="checkbox">
 		  						<label for="radio2" class="input-label radio">통근열차</label> 
 						</div>
 					</div>
 					<div class="row time-div" style="width: 100%;">
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio3" value="04" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio3" value="04" class="checkbox">
 		  						<label for="radio3" class="input-label radio">누리로</label> 
 						</div>
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio4" value="09" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio4" value="09" class="checkbox">
 	  							<label for="radio4" class="input-label radio">ITX-청춘</label>
 						</div>
 						<div class="col col-lg-4">
-							<input type="radio" name="radio" id="radio5" value="08" class="checkbox">
+							<input type="radio" name="trainGradeCode" id="radio5" value="08" class="checkbox">
 		  						<label for="radio5" class="input-label radio">ITX-새마을</label>
 						</div>
 					</div>
@@ -259,7 +164,8 @@ input.checkbox:checked + label.input-label.radio::before {
 					<input type="hidden" name="startPage"> 
 					<input type="hidden" name="pageSize">
 				</div>
-				<a id="train-search-btn" class="btn-u btn-u-lg btn-u-upper rounded" onclick="mainTimeSearch();">조회하기</a>
+<!-- 				<a id="train-search-btn" class="btn-u btn-u-lg btn-u-upper rounded" onclick="mainTimeSearch();">조회하기</a> -->
+					<input type="button" id="train-search-btn" class="btn-u btn-u-lg btn-u-upper rounded" value="조회하기" onclick="mainTimeSearch();">
 			  </form>
 		</div>
 	</div>
@@ -364,7 +270,5 @@ input.checkbox:checked + label.input-label.radio::before {
 	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
 <%-- 	<script src="${pageContext.request.contextPath}/resources/include/js/header.js"></script> --%>
 	<script type="text/javascript" src="main.js"></script>
-	<script type="text/javascript" src="main_sub.js"></script>
-	
 </body>
 </html>

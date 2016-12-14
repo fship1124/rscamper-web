@@ -3,14 +3,14 @@ var myConfig = {
 //	serverUrl: "http://localhost:8081" // 내 컴퓨터
 	serverUrl : "http://14.32.66.104:8081", // 서버 컴퓨터
 	serverURL : "http://14.32.66.104:8081", // 서버 컴퓨터
-	webServerUrl : "http://14.32.66.104:8083", // 서버 컴퓨터
+	webServerUrl : "http://14.32.66.104:8083", // 서버 웹 URL
 //	serverUrl : "http://192.168.0.9:8081", // 서버 컴퓨터
 //	serverUrl : "http://192.168.0.173:8081", // 호동 서버 컴퓨터
-//	nodeChatServerUrl : "http://14.32.66.104:10001", // 노드 채팅 서버 컴퓨터
-//	nodeNotisServerUrl : "http://14.32.66.104:10002", // 노드 알림 서버 컴퓨터
+//	nodeChatServerUrl : "http://14.32.66.104:8084", // 노드 채팅 서버 컴퓨터
+//	nodeNotisServerUrl : "http://14.32.66.104:8085", // 노드 알림 서버 컴퓨터
 	nodeChatServerUrl : "http://192.168.0.173:10001", // 호동 노드 채팅 서버
 	nodeNotisServerUrl : "http://192.168.0.173:10002", // 호동 노드 알림 서버
-	homeUrl : "http://14.32.66.104:8081" // localhost 서버 	
+	homeUrl : "http://14.32.66.104:8081"
 };
 
 //이미지 유효성 체크

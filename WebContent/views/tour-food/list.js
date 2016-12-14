@@ -246,6 +246,6 @@
 		console.log(e.getAttribute("data-value1"));
 		console.log(e.getAttribute("data-value2"));
 		
-		var url = myConfig.serverUrl + "/rscamper-web/views/tour-food/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+		var url = myConfig.webServerUrl + "/rscamper-web/views/tour-food/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 		$(e).attr('href', url);
 	}

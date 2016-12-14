@@ -370,7 +370,7 @@
 				});
 			});
 			
-			window.location = myConfig.imsiServerUrl + '/chat/home';
+			window.location = myConfig.serverURL + '/chat/home';
 		});
 		
 
