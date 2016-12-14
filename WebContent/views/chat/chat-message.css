@@ -281,7 +281,7 @@ body{
     -o-transform: translate(0,  0);
     transform: translate(0,  0);
     padding: 10px 10px 0px 10px;
-    height: 80px;
+    height: 100px;
     overflow: auto;
 }
 .direct-chat-msg, .direct-chat-text {

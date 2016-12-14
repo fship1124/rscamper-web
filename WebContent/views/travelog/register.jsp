@@ -465,7 +465,7 @@
 		
  		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/menu/list",
+			url : myConfig.homeUrl + "/menu/list",
 			dataType : 'json',
 			error : function (err) {
 				alert("에러");
@@ -526,7 +526,7 @@
  		
  		function travelogList() {
 			$.ajax({
-				url : 'http://localhost:8081/travelog/list',
+				url : myConfig.homeUrl + '/travelog/list',
 				method : 'GET',
 				dataType : 'json',
 				success : function(result) {

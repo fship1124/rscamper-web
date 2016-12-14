@@ -5,7 +5,7 @@ function contentCreate(no) {
 
 	$.ajax({
 		type : "POST",
-		url : "http://localhost:8081/together/detail",
+		url : myConfig.serverUrl + "/together/detail",
 		dataType : 'json',
 		data : obj,
 		error : function(err) {
@@ -21,29 +21,9 @@ function contentCreate(no) {
 			var d = new Date(result.regDate);
 			var mon = d.getMonth() + 1;
 
-//			var html = "";
-//			html += "<th colspan='2'>";
-//			html += result.title2;
-//			html += "</th>";
-//			html += "<th>";
-//			html += d.getFullYear() + "-" + prependZero(mon, 2) + "-"
-//					+ prependZero(d.getDate(), 2);
-//			html += "</th>";
-//
-//			$("thead").html(html);
-//
-//			html = "";
-//			html += "<td colspan='3' style='height:300px;'>";
-//			html += result.content;
-//			html += "</td>";
-//			$("tbody").html(html);
-			
-			
-			/////////////////////////////////////////////////////
 			$("#together-title").html("<h2>" + result.title2 + "</h2>");
 			$("#together-regdate").html("작성일 : " + d.getFullYear() + "-" + prependZero(mon, 2) + "-" + prependZero(d.getDate(), 2));
 			$("#together-content").html(result.content);
-			/////////////////////////////////////////////////////
 		}
 	});
 }

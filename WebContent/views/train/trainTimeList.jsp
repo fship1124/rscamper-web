@@ -43,6 +43,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/custom.css">
 
 <!-- 사용자 정의 CSS -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/jquery/css/ui-lightness/jquery.ui.all.css">
+
+
 <style>
 #timeList{
 	border-collapse: separate;
@@ -105,7 +108,8 @@
 				<input type="hidden" name="pageNo"> 
 				<input type="hidden" name="pageSize">
 				<input type="hidden" name="startPage"> <input type="button" value="조회하기" onclick="joinBtn();" />
-
+				
+				<input type="text" id="test33" name="test33">
 			</div>
 		</div>
 
@@ -197,6 +201,7 @@
 	
 	<!-- 사용자 정의 Java Script 작성이 완료되면 외부파일로 뺄것 -->
 	<script type="text/javascript">
+	
 	function joinBtn() {
 		var trainGradeCode = $("input[name=trainRadio]:checked").val();
 		var depPlaceId = $("input[name=start]").val();
@@ -236,20 +241,6 @@
 				var data = JSON.parse(data);
 				timeList(data);
 
-//	 	function joinBtn() {
-//	 		var trainGradeCodeIsTrue = false;
-//	 		var trainGradeCode = document.getElementsByName('trainRadio');
-//	 		var trainGradeCodeVal = "00";
-//	 		for (var i = 0; i < trainGradeCode.length; i++) {
-//	 			var t = trainGradeCode[i];
-
-//	 			if (t.checked == true) {
-//	 				console.log("ttttt");
-//	 				console.dir(t);
-//	 				trainGradeCodeIsTrue = true;
-//	 				trainGradeCodeVal = t.defaultValue; 
-//	 			}
-//	 		}
 			}
 		});
 	}
@@ -776,10 +767,18 @@
 		$("#trainModal").modal('hide');
 
 	}
-
+	
+	$(function() {
+	    $("#test33").datepicker({dateFormat:"yy-mm-dd"});
+	    console.log("달력");
+	});
 	
 	</script>
 	<!-- 필요한 js파일 -->
+	<script src="assets/js/jquery/js/jquery-1.7.2.js"></script>
+	<script src="assets/js/jquery/js/jquery.ui.core.js"></script>
+	<script src="../jquery/js/jquery.ui.widget.js"></script>
+	<script src="../jquery/js/jquery.ui.datepicker.js"></script>
 <!-- 	<script type="text/javascript" -->
 <!-- 		src="../../assets/js/jquery.xdomainajax.js"></script> -->
 <!-- 	<script type="text/javascript" -->

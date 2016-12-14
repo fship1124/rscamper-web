@@ -67,18 +67,15 @@
 			</div>
 		</div>
 		
-		
-		
-		
 		<!--=== 내용 ===-->
 		<!--=== Content ===-->
 		<!-- 채팅방 팝업 -->
 		<div class="modal fade shipping-form modal-dialog modal-center" id="layerpop" style="width: 500px;">
-			<h3>Create Room</h3>
+			<h3 style="color: #72c02c;">Create Room</h3>
 			<div class="form-group g-mb-20">
-				<input type="text" id="inputRoomTitle" class="form-control rounded g-mb-20" placeholder="∮ Title">
+				<input type="text" id="inputRoomTitle" class="form-control rounded g-mb-20" placeholder="방제목">
 				<select class="form-control rounded" name="locationid">
-					<option>▒ Area</option>
+					<option>지역</option>
 					<option value="15">서울특별시</option>
 					<option value="14">부산광역시</option>
 					<option value="13">대구광역시</option>
@@ -97,7 +94,7 @@
 					<option value="0">제주도</option>
 				</select>
 				<select class="form-control rounded" name="locationid">
-					<option>＋ Max</option>
+					<option>최대인원</option>
 					<option value="1">2</option>
 					<option value="1">3</option>
 					<option value="1">4</option>
@@ -108,48 +105,6 @@
 					<option value="1">9</option>
 					<option value="1">10+</option>
 				</select>
-				<select class="form-control rounded" name="locationid">
-					<option>♫ Mugic</option>
-					<option value="Red Monkey - Pussy Pussy">Red Monkey - Pussy Pussy (Original Mix).mp3 (8.14MB)</option>
-					<option value="Eminem - The Real Slim Shady">Eminem - The Real Slim Shady (DNF & Vnalogic Bootleg).mp3 (12.25MB)</option>
-					<option value="1">SCNDL - Wave Your Hands (Original Mix).mp3 (8.45MB)</option>
-					<option value="1">Anthem Kingz - Louder (SCNDL vs. Fatman Scoop Make Some Noise Rework).mp3 (7.42MB)</option>
-					<option value="1">Myo - Boom Shake (Original Mix).mp3 (8.30MB)</option>
-					<option value="1">Turbotronic - Borumdal (Original Mix).mp3 (10.36MB)</option>
-					<option value="1">Reece Low - Nuclear (Original Mix).mp3 (8.53MB)</option>
-					<option value="1">Taio Cruz - Dynamite (Jack Mazzoni Remix).mp3 (9.02MB)</option>
-					<option value="1">Will Sparks feat. Luciana - Stay Up Till The Mornin (Original Mix).mp3 (7.67MB)</option>
-					<option value="1">Jason Risk & Jacob Rodi - JUMP, JUMP! (Original Mix).mp3 (8.29MB)</option>
-					<option value="1">Holl & Rush - Lift Me Up (P!LO Bootleg).mp3 (8.36MB)</option>
-					<option value="1">CABS - Fvking Ready (Original Mix).mp3 (10.20MB)</option>
-					<option value="1">Carnage x Timmy Trumpet - Psy Or Die (Extended Mix).mp3 (10.28MB)</option>
-					<option value="1">Topic feat. Nico Santos - Home (Slice N Dice Bootleg).mp3 (10.92MB)</option>
-					<option value="1">SRS - Nasty Bass (Original Mix).mp3 (8.20MB)</option>
-					<option value="1">Recovery Mafia - Hot Step (Original Mix).mp3 (10.23MB)</option>
-					<option value="1">Nikola Kara - Flow (Paski Remix).mp3 (10.09MB)</option>
-					<option value="1">Sia feat. Sean Paul - Cheap Thrills (Rudy Zensky x Blvckprint Remix).mp3 (10.96MB)</option>
-					<option value="1">Kungs vs. Cookin' On 3 Burners - This Girl (P!LO Bootleg).mp3 (9.62MB)</option>
-					<option value="1">DJ Mesta feat. Fatman Scoop, Shalli, B&L - Let Loose (Extended).mp3 (12.52MB)</option>
-					<option value="1">W&W & Hardwell & Lil Jon x Dirty Palm - Live The Ounce (Istii Mashup).mp3 (9.16MB)</option>
-					<option value="1">Kungs vs. Cookin' On 3 Burners - This Girl (Jack Mazzoni Remix).mp3 (10.46MB)</option>
-					<option value="1">djkimc mix 오.mp3 (76.37MB)</option>
-				</select>
-			</div>
-
-			<div class="form-group g-mb-20">
-				<div class="row">
-					<div class="col-sm-4 g-xs-mb-20">
-						<input type="name" name="height" class="form-control rounded" placeholder="Height">
-					</div>
-
-					<div class="col-sm-4 g-xs-mb-20">
-						<input type="text" name="width" class="form-control rounded" placeholder="Width">
-					</div>
-
-					<div class="col-sm-4 g-xs-mb-20">
-						<input type="text" name="length" class="form-control rounded" placeholder="Length">
-					</div>
-				</div>
 			</div>
 
 			<div class="form-group g-mb-20">
@@ -164,15 +119,17 @@
 				</div>
 			</div>
 			<button type="button" class="btn-u btn-u-lg btn-u-default btn-u-upper rounded" data-dismiss="modal" 
-			onclick="createRoom()" style="width: 100%; background: #f00;">Create</button>
+			onclick="createRoom()" style="width: 100%; background: #72c02c;">생성</button>
+			<button type="button" class="btn-u btn-u-lg btn-u-default btn-u-upper rounded" data-dismiss="modal" 
+			style="width: 100%; background: #95a5a6;">취소</button>
 		</div>
 		
 		
-		<div class="container content-md" style="padding: 20px;">
-			<div class="row">
+		<div class="container content-md" style="">
+			<div class="row" style="padding: 0px;">
 				<!-- map -->
-				<div class="col-md-6">
-					<div id="container" class="container" style="margin-top: 100px;">
+				<div class="col-md-6" style="margin-top: 100px;">
+					<div id="container" class="container" >
 						<div id="control" class="ui-widget-header ui-corner-all"
 							style="top: 140px;">
 							<button id="zoomin">확대</button>
@@ -183,21 +140,19 @@
 
 				<!-- 채팅방 -->
 				<div class="col-md-6">
-					<div class="call-action-v1-in inner-btn page-scroll" style="margin-top: 50px;">
-						<a href="#" class="btn-u btn-u-lg btn-u-default btn-u-upper rounded"
-						data-target="#layerpop" data-toggle="modal"
-						style="height: 40px; background: gray; margin-left: 450px;">create</a>
-
-
-						<div class="wrap" style="height: 500px;overflow: hidden;">
-							<div style="height: 500px;overflow: auto;">
-								<table class="table table-striped invoice-table">
+					<div class="call-action-v1-in inner-btn page-scroll" >
+						<button type="button" data-target="#layerpop" data-toggle="modal" class="btn-u btn-u-sea-shop btn-u-lg"
+						style="margin-right: 0;">Add to Room</button>
+						
+						<div class="wrap" style="height: 700px; overflow: hidden;">
+							<div style="height: 700px; overflow: auto;">
+								<table class="table table-hover table-striped invoice-table">
 									<thead style="height: 30px; background-color: #DEDEDE;">
 										<tr>
 											<th>Area</th>
 											<th>Name</th>
-											<th>Count</th>
-											<th>#</th>
+											<th class="glyphicon glyphicon-user"></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody style="height: 500px;"></tbody>

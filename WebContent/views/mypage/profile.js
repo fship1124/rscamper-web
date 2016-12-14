@@ -1,14 +1,25 @@
 // 앵귤러 모듈
-angular.module("myApp", ["ngSimpleUpload"])
-.controller('MyController', function($scope, $http) {
-	// 세션에서 유저정보 가져오기
-	$scope.user = sessionStorageService.getObject("user");
-
+angular.module("MypageApp")
+.controller("ProfileController", function($rootScope, $scope, $http) {
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : myConfig.serverURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
+	
 	// 수정 모달에 올라갈 현재 프로필 정보 세팅
 	getLocationList(function (result) {
 		$scope.locations = result;
 		$scope.updateUser = {
-			uid : $scope.user.userUid,
+			uid : $rootScope.user.userUid,
 			displayName : $scope.user.displayName,
 			birthday : new Date($scope.user.birthday),
 			introduce : $scope.user.introduce,
@@ -35,7 +46,7 @@ angular.module("myApp", ["ngSimpleUpload"])
 		
 	    // DB에 업데이트
         $http({
-            url: myConfig.serverUrl + "/user/update/oneUser",
+            url: myConfig.serverURL + "/user/update/oneUser",
             method: "POST",
             data: $.param({
                 userUid: $scope.updateUser.uid,
@@ -53,7 +64,7 @@ angular.module("myApp", ["ngSimpleUpload"])
         })
         .success(function () {
         	 $http({
-                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 url: myConfig.serverURL + "/user/select/oneUser?userUid=" + $scope.user.userUid,
                  method: "GET"
              })
              .success(function (result) {
@@ -78,7 +89,7 @@ angular.module("myApp", ["ngSimpleUpload"])
 	});
 	// 프로필 사진 변경 모달창 열기
 	$scope.updateProfileImage = function () {
-		$scope.uploadProfileUrl = myConfig.serverUrl + "/user/upload/profileImage"
+		$scope.uploadProfileUrl = myConfig.serverURL + "/user/upload/profileImage"
 		$("#profileImage").val("");
 		$("#profileImageFile").val("");
 		$('#profileImageUploadFormModal').modal('show');
@@ -106,7 +117,7 @@ angular.module("myApp", ["ngSimpleUpload"])
 	});
 	// 배경 사진 변경 모달창 열기
 	$scope.updateBGImage = function () {
-		$scope.uploadBGUrl = myConfig.serverUrl + "/user/upload/bgImage"
+		$scope.uploadBGUrl = myConfig.serverURL + "/user/upload/bgImage"
 		$("#BGImageFile").val("");
 		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 		$('#BGImageUploadFormModal').modal('show');
@@ -126,7 +137,7 @@ angular.module("myApp", ["ngSimpleUpload"])
 	// 사진 데이터베이스 업데이트
     $scope.updateImage = function (userPhoto, url) {
         $http({
-          url: myConfig.serverUrl + url,
+          url: myConfig.serverURL + url,
           method: "POST",
           data: $.param({
             userUid: userPhoto.userUid,
@@ -140,7 +151,7 @@ angular.module("myApp", ["ngSimpleUpload"])
         })
         .success(function () {
          	 $http({
-                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 url: myConfig.serverURL + "/user/select/oneUser?userUid=" + $scope.user.userUid,
                  method: "GET"
              })
              .success(function (result) {

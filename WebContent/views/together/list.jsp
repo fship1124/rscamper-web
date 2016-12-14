@@ -70,15 +70,14 @@
 
 		<!--=== Content ===-->
 		<div id = "list" class="container content-md">
-			<table class="table table-hover">
-				<thead>
-					<th width="10%">번호</th>
-					<th width="10%">지역</th>
-					<th width="*">제목</th>
-					<th width="20%">날짜</th>
+			<table class="table table-hover table-striped invoice-table" style="">
+				<thead style="height: 30px; background-color: #DEDEDE; margin: auto; text-align: center;">
+					<th style="width:10%; margin: auto; text-align: center;">No</th>
+					<th style="width:10%">Location</th>
+					<th style="width:*; margin: auto; text-align: center;" >Title</th>
+					<th style="width:10%">Date</th>
 				</thead>	
-				<tbody>
-				</tbody>
+				<tbody></tbody>
 			</table>
 		<div class="text-center">
 			<ul class="pagination pagination-lg"></ul>

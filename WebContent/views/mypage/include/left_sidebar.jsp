@@ -5,20 +5,23 @@
 			<a href="profile.jsp"><i class="fa fa-user"></i> 프로필</a>
 		</li>
 		<li id="notification_menu" class="list-group-item">
-			<span class="badge badge-u rounded">1</span>
+			<span class="badge badge-u rounded" ng-bind="menuCount.notificationCnt"></span>
 			<a href="notification.jsp"><i class="fa fa-bell"></i> 알림</a>
 		</li>
 		<li id="message_menu" class="list-group-item">
-			<span class="badge badge-u rounded">1</span>
+			<span class="badge badge-u rounded" ng-bind="menuCount.messageCnt"></span>
 			<a href="message.jsp"><i class="fa fa-envelope"></i> 쪽지함</a>
 		</li>
 		<li id="my_tour_plan_menu" class="list-group-item">
-			<a href="mytourplan.jsp"><i class="fa fa-calendar"></i> 여행일정</a>
+			<span class="badge badge-u rounded" ng-bind="menuCount.myTourPlanCnt"></span>
+			<a href="mytourplan.jsp"><i class="fa fa-calendar"></i> 내 여행일정</a>
 		</li>
 		<li id="my_post_menu" class="list-group-item">
-			<a href="mypost.jsp"><i class="fa fa-pencil"></i> 포스트</a>
+			<span class="badge badge-u rounded" ng-bind="menuCount.myPostCnt"></span>
+			<a href="mypost.jsp"><i class="fa fa-pencil"></i> 내 포스트</a>
 		</li>
 		<li id="bookmark_menu" class="list-group-item">
+			<span class="badge badge-u rounded" ng-bind="menuCount.bookmarkPostCnt + menuCount.bookmarkTourPlanCnt + menuCount.bookmarkTourSpotCnt"></span>
 			<a href="bookmark.jsp"><i class="fa fa-bookmark-o"></i> 북마크</a>
 		</li>
 	</ul>

@@ -1,15 +1,20 @@
 angular.module("TourPlanApp")
-	.controller("DetailController", function ($rootScope, $scope, $http, $window, $timeout, MyConfig, RequestService) {
+	.controller("DetailController", function ($rootScope, $scope, $http, $window, $timeout, RequestService) {
 		/** ==================================================== */
 		/** 여행일정 기본 데이터 불러오기 */
 		/** ==================================================== */
 		// recordNo로 파라미터 받은 값으로 일정 정보 불러옴
 		$scope.getTourPlan = function () {
+//			$.isLoading({
+//				position: "overlay",
+//				text: "Loading"
+//			});
+			
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
+				url: myConfig.serverURL + "/tourPlan/select/oneTourPlan?recordNo=" + RequestService.getParameter("recordNo"),
 				method: "GET"
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 				
 				// TODO 공개비공개 확인
 				
@@ -27,7 +32,7 @@ angular.module("TourPlanApp")
 				/** 여행일정 작성자 데이터 불러오기 */
 				/** ==================================================== */
 				$http({
-					url: MyConfig.backEndURL + "/user/select/oneUser?userUid=" + response.userUid,
+					url: myConfig.serverURL + "/user/select/oneUser?userUid=" + response.userUid,
 					method: "GET"
 				}).success(function (response) {
 					console.log(response);
@@ -55,7 +60,7 @@ angular.module("TourPlanApp")
 				$scope.initCalendar();
 				// 포함된 일정 불러오기
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+					url: myConfig.serverURL + "/tourPlan/select/tourPlanScheduleByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
 					method: "GET"
 				}).success(function (response) {
 //					console.log(response);
@@ -109,6 +114,8 @@ angular.module("TourPlanApp")
 					// 지도에 이벤트 렌더링
 					renderingEventToMap();
 					
+//					$.isLoading("hide");
+					
 				}).error(function (error) {
 					console.log(error);
 				});
@@ -119,6 +126,10 @@ angular.module("TourPlanApp")
 			});
 		};
 		
+		
+		/** ==================================================== */
+		/** 여행일정 수정, 공개, 좋아요, 북마크, 복사 */
+		/** ==================================================== */
 		// 수정하기
 		$scope.modTourPlan = function () {
 			// 일정을 수정하시겠습니까?
@@ -152,7 +163,7 @@ angular.module("TourPlanApp")
 					function(isConfirm){
 						if (isConfirm) {
 							$http({
-								url: MyConfig.backEndURL + "/tourPlan//update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=1",
+								url: myConfig.serverURL + "/tourPlan//update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=1",
 								method: "GET"
 							}).success(function (response) {
 								$scope.tourPlan.isOpen = 1;
@@ -177,7 +188,7 @@ angular.module("TourPlanApp")
 					function(isConfirm){
 						if (isConfirm) {
 							$http({
-								url: MyConfig.backEndURL + "/tourPlan/update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=2",
+								url: myConfig.serverURL + "/tourPlan/update/tourPlanOpen?recordNo=" + RequestService.getParameter("recordNo") + "&isOpen=2",
 								method: "GET"
 							}).success(function (response) {
 								$scope.tourPlan.isOpen = 2;
@@ -190,34 +201,56 @@ angular.module("TourPlanApp")
 			}
 		};
 		
+		$scope.myselfAlert = function () {
+			swal("취소", "자신의 일정에는 하실수 없습니다.", "error");
+		};
+		
 		// 체크 좋아요 북마크 커스텀
 		$scope.checkTourPlanSet = function () {
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+				url: myConfig.serverURL + "/tourPlan/checkScheduleSet?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 				method: "GET"
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 				$scope.tourPlanCheckSet = response;
 			})
 		};
+		
+		// 토스트
+		$scope.toast = function (text, heading, icon) {
+			$.toast({
+			    text: text, // Text that is to be shown in the toast
+			    heading: heading, // Optional heading to be shown on the toast
+			    icon: icon, // Type of toast icon
+			    showHideTransition: 'fade', // fade, slide or plain
+			    allowToastClose: false, // Boolean value true or false
+			    hideAfter: 1000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+			    stack: false, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+			    position: 'mid-center', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+			    textAlign: 'left',  // Text alignment i.e. left, right or center
+			    loader: false,
+			});
+		}
 		
 		// 좋아요
 		$scope.likeTourPlan = function () {
 				if($scope.tourPlanCheckSet.scheduleLike) {
 					$http({
-						url: MyConfig.backEndURL + "/tourPlan/addScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						url: myConfig.serverURL + "/tourPlan/addScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 						method: "GET"
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
 						$scope.checkTourPlanSet();
+						$scope.toast("이 일정을 추천합니다.", "좋아요", "success");
 					})
 				} else {
 					$http({
-						url: MyConfig.backEndURL + "/tourPlan/cancelScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+						url: myConfig.serverURL + "/tourPlan/cancelScheduleLike?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 						method: "GET"
 					}).success(function (response) {
 						$scope.tourPlan.likeCnt = response;
 						$scope.checkTourPlanSet();
+						$scope.toast("추천을 취소합니다.", "좋아요", "error")
 					})
 				}
 		};
@@ -226,19 +259,21 @@ angular.module("TourPlanApp")
 		$scope.bookmarkTourPlan = function () {
 			if($scope.tourPlanCheckSet.bookMark) {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/addScheduleBookmark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					url: myConfig.serverURL + "/tourPlan/addScheduleBookmark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
 					$scope.checkTourPlanSet();
+					$scope.toast("이 일정을 북마크합니다.", "북마크", "success");
 				})
 			} else {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/cancelScheduleBookMark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
+					url: myConfig.serverURL + "/tourPlan/cancelScheduleBookMark?targetNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid + "&targetType=3",
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.bookmarkCnt = response;
 					$scope.checkTourPlanSet();
+					$scope.toast("북마크를 취소합니다.", "북마크", "error");
 				})
 			}
 		};
@@ -249,7 +284,7 @@ angular.module("TourPlanApp")
 			if($scope.tourPlanCheckSet.customizing) {
 				// 로딩버튼 달기
 				$http({
-					url: MyConfig.backEndURL + '/tourPlan/addCustomizing',
+					url: myConfig.serverURL + '/tourPlan/addCustomizing',
 					method: 'POST',
 					data: $.param({
 						recordNo : $scope.tourPlan.recordNo,
@@ -266,14 +301,18 @@ angular.module("TourPlanApp")
 				}).success(function (response) {
 					$scope.tourPlan.customCnt = response;
 					$scope.checkTourPlanSet();
+					
+					$scope.toast("이 일정을 복사합니다.", "커스터마이징", "success");
 				})
 			} else {
 				$http({
-					url: MyConfig.backEndURL + "/tourPlan/cancelCustomizing?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
+					url: myConfig.serverURL + "/tourPlan/cancelCustomizing?recordNo="+ RequestService.getParameter("recordNo") + "&userUid=" + $rootScope.user.userUid,
 					method: "GET"
 				}).success(function (response) {
 					$scope.tourPlan.customCnt = response;
 					$scope.checkTourPlanSet();
+					
+					$scope.toast("일정복사를 취소합니다.", "커스터마이징", "error");
 				})
 			}
 		};
@@ -332,26 +371,259 @@ angular.module("TourPlanApp")
 
 
 		/** ==================================================== */
-		/** TODO 예산 */
+		/** 예산 */
 		/** ==================================================== */
-		// TODO 예산창 모달 폼 구성
-	    $scope.tourPlanBudget = function () {
-	    	swal("여행예산");
+		// 파라미터 기본값
+	    $scope.chartParam = {
+	    	type: "1",
+	    	chart: "1"
+	    }
+	    
+	    // 예산 모달 열기
+	    $scope.openTourPlanBudget = function () {
+	    	$("#tourPlanBudgetModal").modal("show");
+	    	$scope.selectChart($scope.chartParam.type, $scope.chartParam.chart);
+	    };
+	    
+	    // 차트 선택
+	    $scope.selectChart = function () {
+	    	$("#chart").html("");
+	    	var data;
+	    	
+	    	switch ($scope.chartParam.type) {
+	    	case 1:
+		    	data = $scope.makeDataForDate();
+	    		break;
+	    	case 2:
+	    		data = $scope.makeDataForType();
+	    		break;
+	    	case 3:
+	    		data = $scope.makeDataForTourSpot();
+	    		break;
+	    	case "1":
+	    		data = $scope.makeDataForDate();
+	    		break;
+	    	case "2":
+	    		data = $scope.makeDataForType();
+	    		break;
+	    	case "3":
+	    		data = $scope.makeDataForTourSpot();
+	    		break;
+	    	}
+	    	
+	    	switch ($scope.chartParam.chart) {
+	    	case 1:
+	    		$scope.pieChart(data);
+	    		break;
+	    	case 2:
+	    		$scope.discreteBarChart(data);
+	    		break;
+	    	case "1":
+	    		$scope.pieChart(data);
+	    		break;
+	    	case "2":
+	    		$scope.discreteBarChart(data);
+	    		break;
+	    	}
+	    }
+	    
+	    // 여행 장소별로
+	    $scope.makeDataForTourSpot = function () {
+	    	var data = [];
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == $scope.budgetDataForChart[i].title) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: $scope.budgetDataForChart[i].title, value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    }
+	    
+	    // 여행 일차별로
+	    $scope.makeDataForDate = function () {
+	    	var DateString = function (dateNo) {
+	    		return dateNo + "일차";
+	    	}
+	    	var data = [];
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == DateString($scope.budgetDataForChart[i].dateArray)) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: DateString($scope.budgetDataForChart[i].dateArray), value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    };
+	    
+	    // 지출 종류별로
+	    $scope.makeDataForType = function () {
+			var budgetType = function (priceType) {
+				switch (priceType) {
+				case 1:
+					return "교통"
+				case 2:
+					return "음식"
+				case 3:
+					return "엑티비티"
+				case 4:
+					return "쇼핑"
+				case 5:
+					return "숙박"
+				case 6:
+					return "기타"
+				}
+			}
+			
+	    	var data = [];
+	    	
+	    	for (var i = 0; i < $scope.budgetDataForChart.length ; i++) {
+	    		var really = false;
+	    		for (var j = 0; j < data.length; j++) {
+	    			if (data[j].label == budgetType($scope.budgetDataForChart[i].priceType)) {
+	    				data[j].value += $scope.budgetDataForChart[i].travelPrice;
+	    				really = true;
+	    			}
+	    		}
+	    		if (really == false) {
+	    			data.push({label: budgetType($scope.budgetDataForChart[i].priceType), value: $scope.budgetDataForChart[i].travelPrice})
+	    		}
+	    	}
+	    	return data;
+	    }
+	    
+	    // 원형 그래프 그리기
+	    $scope.pieChart = function (data) {
+	        var width = 868;
+	        var chart;
+			nv.addGraph(function() {
+			    var chart = nv.models.pieChart()
+			        .x(function(d) { return d.label })
+			        .y(function(d) { return d.value })
+			        .donut(true)
+			        .width(width)
+			        .padAngle(.08)
+			        .cornerRadius(5)
+			        .duration(700)
+			        .labelSunbeamLayout(true)
+			        .showTooltipPercent(true)
+			        .labelType("value")
+				chart.title("TOTAL : " + $scope.totalBudget + "원");
+				chart.pie.labelsOutside(false).donut(true);
+				chart.valueFormat(function (d) { return d3.format(",.0")(d)+"원" });
+				d3.select("#chart")
+					.datum(data)
+					.transition().duration(700)
+					.call(chart);
+				return chart;
+			});
+	    }
+	    
+	    // 막대 그래프 그리기
+	    $scope.discreteBarChart = function (data) {
+	    	thisData = [{ key: "Budget", values: data}]
+	    	var width = 868;
+	    	var chart;
+			nv.addGraph(function() {
+			    var chart = nv.models.discreteBarChart()
+			        .x(function(d) { return d.label })
+			        .y(function(d) { return d.value })
+			        .staggerLabels(false)
+			        .width(width)
+			        .showValues(true)
+			        .valueFormat(function(d) { return d3.format(",.0")(d)+"원" })
+			        .duration(700);
+	            chart.yAxis
+	            	.tickFormat(function(d) { return d3.format(",.0")(d)+"원" });
+			d3.select("#chart")
+			        .datum(thisData)
+			        .call(chart);
+			    nv.utils.windowResize(chart.update);
+			    return chart;
+			});
+	    }
+	                
+		// 필요 칼럼 : 예산명(content), 예산(travelPrice), 예산종류(priceType), 일차(dateArray), 예산사용일정(tourPlanTitle)
+		$scope.budgetDataForChart = [];
+		
+		// D3용 예산 데이터 가져오기
+	    $scope.getBudgetListForChart = function () {
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/budgetListForChartByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				$scope.budgetDataForChart = response;
+//				console.log(response);
+			}).error(function (error) {
+				swal("에러", erorr, "error");
+			});
+	    };
+	    
+	    $scope.getBudgetListForChart();
+	    
+	    // 예산 리스트 가져오기
+	    $scope.getTourPlanBudgetList = function () {
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/budgetListByRecordNo?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				$scope.tourPlanBudgetList = response;
+//				console.log($scope.tourPlanBudgetList);
+				
+				// 예산합
+				$scope.getTotalBudget();
+			}).error(function (error) {
+				swal("에러", erorr, "error");
+			});
+	    };
+	    
+	    $scope.getTourPlanBudgetList();
+	    
+	    $scope.totalBudget;
+	    
+	    // 예산합계 구하는 메소드
+	    $scope.getTotalBudget = function () {
+	    	 // 예산 총합
+	    	$scope.totalBudget = 0;
+	    	for (var i = 0; i< $scope.tourPlanBudgetList.length; i++) {
+	    		$scope.totalBudget += $scope.tourPlanBudgetList[i].travelPrice;
+	    	}
 	    }
 
 		/** ==================================================== */
-		/** TODO 북마크 */
+		/** 스토리 */
 		/** ==================================================== */
-		
-		/** ==================================================== */
-		/** TODO 스토리 */
-		/** ==================================================== */
+	    // 스토리 리스트 불러오기
+	    $scope.getWriteTourSpotMemoList = function () {
+	    	$scope.tourSpotMemoList = [];
+	    	$http({
+				url: myConfig.serverURL + "/tourPlan/select/tourSpotMemoList?recordNo=" + RequestService.getParameter("recordNo"),
+				method: "GET",
+			}).success(function (response) {
+				console.log(response);
+				$scope.tourSpotMemoList = response;
+			}).error(function (error) {
+				
+			});
+	    } 
+	    
+	    $scope.getWriteTourSpotMemoList();
+	    
+	    
 		
 		/** ==================================================== */
 		/** 일정표												 */
 		/** ==================================================== */
-		// TODO 일정표 클릭 이벤트
-		
 		// 일정표 객체 선언
 		var calendarObj = $("#calendar");
 		
@@ -656,7 +928,6 @@ angular.module("TourPlanApp")
 			}
 		};
 		
-		
 		/** ==================================================== */
 		/** 구글맵 */
 		/** ==================================================== */
@@ -786,60 +1057,95 @@ angular.module("TourPlanApp")
 		// 댓글 리스트 조회
 		$scope.getCommentList = function () {
 			$http({
-				url: MyConfig.backEndURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
+				url: myConfig.serverURL + '/tourPlan/select/tourPlan/commentList?recordNo=' + RequestService.getParameter("recordNo"),
 				method: 'GET'
 			}).success(function (response) {
-				console.log(response);
+//				console.log(response);
 	            $scope.tourPlanCommentList = response;
 			}).error(function (){
 				
 			});
 		}
-		
+//		$scope.tourPlanCommentForm.content = "";
 		// 댓글 등록
 		$scope.writeComment = function () {
 			$http({
-				url: MyConfig.backEndURL + '/tourPlan/insert/tourPlan/comment',
+				url: myConfig.serverURL + '/tourPlan/insert/tourPlan/comment',
 				method: 'POST',
 				data: $.param({
 					recordNo: RequestService.getParameter("recordNo"),
 					userUid: $rootScope.user.userUid,
-					content: $scope.tourPlanCommentForm.content 
+					content: $scope.tourPlanCommentForm.content,
+					recivUserUid: $scope.writer.userUid,
+					title: $scope.tourPlan.title,
+					url: document.location.href
 				}),
 				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
 			}).success(function (response) {
-				$scope.tourPlanCommentForm.content = "";
 				$scope.getCommentList();
+				$scope.tourPlanCommentForm.content = "";
+				
+				alert("tourplan");
+				var user = sessionStorageService.getObject("user");
+				
+				console.log("noti-count");
+				console.log($(".noti-count").html());
+				
+				notis_socket.emit("commentInfo", {
+					type : "comment",
+					recvId : user.userUid,
+					count : $(".noti-count").html()
+				});
+				
 			}).error(function (){
 				
 			});
 		}
 		
+		
 		// 댓글 삭제
 		$scope.removeComment = function (commentNo) {
-			$http({
-				url: MyConfig.backEndURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
-				method: 'GET'
-			}).success(function (response) {
-				$scope.getCommentList();
-			}).error(function (){
-				
-			});
+			swal({
+				  title: "댓글삭제",
+				  text: "댓글을 삭제하시겠습니까",
+				  type: "warning",
+				  showCancelButton: true,
+				  confirmButtonColor: "#DD6B55",
+				  confirmButtonText: "네",
+				  cancelButtonText: "아니오",
+				  closeOnConfirm: false,
+				  closeOnCancel: false
+				},
+				function(isConfirm){
+					if (isConfirm) {
+						$http({
+							url: myConfig.serverURL + '/tourPlan/delete/tourPlan/comment?commentNo=' + commentNo,
+							method: 'GET'
+						}).success(function (response) {
+							$scope.getCommentList();
+							swal("삭제", "삭제되었습니다.", "success");
+						}).error(function (){
+							
+						});
+					} else {
+						swal("취소", "취소되었습니다.", "error");
+					}
+				});
 		}
 		
 		// TODO 댓글 수정
 		$scope.modifyComment = function () {
-			swal("ㅋㅋ");
+			swal("댓글수정");
 		}
 		
 		// 댓글 200자제한
 		$scope.commentLengthCheck = function () {
 			if ($scope.tourPlanCommentForm.content.length >= 200) {
 				$scope.tourPlanCommentForm.content = $scope.tourPlanCommentForm.content.substring(0, 200);
-				swal("그만");
+				swal("댓글수 제한(200자)");
 			}
 		}
+		
 
   })
-  
 	

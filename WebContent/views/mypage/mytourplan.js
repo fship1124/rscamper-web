@@ -1,9 +1,71 @@
 // 앵귤러 모듈
-angular.module("myApp", [])
-.controller('MyController', function($scope) {
-	$scope.user = sessionStorageService.getObject("user");
+angular.module("MypageApp")
+.controller("MyTourPlanController", function($rootScope, $scope, $http) {
+	/** ==================================================== */
+	/** 내 여행일정 */
+	/** ==================================================== */
+	// 내 여행일정 불러오기
+	$scope.getMyTourPlanList = function () {
+		$http({
+			url: myConfig.serverURL + "/tourPlan/select/myTourPlanList?userUid=" + $rootScope.user.userUid,
+			method: "GET",
+		}).success(function (result) {
+			$scope.planList = result
+		}).error(function (error) {
+			console.log(error);
+		});
+	}
 	
-	/** ===========프로필 이미지 관련============================ */
+	$scope.getMyTourPlanList();
+	
+	// 여행일정 삭제하기
+	$scope.removeTourPlan = function (recordNo) {
+		// 삭제하시겠습니까
+		swal({
+			title : "일정삭제",
+			text : "해당 일정을삭제하시겠습니까?",
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonColor : "#DD6B55",
+			confirmButtonText : "네",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : false
+		}, function(isConfirm) {
+			if (isConfirm) {
+				$http({
+					url: myConfig.serverURL + "/tourPlan/delete/tourPlan?recordNo=" + recordNo,
+					method: "GET",
+				}).success(function (){
+					swal("삭제완료!", "해당 일정이 삭제되었습니다.", "success");
+					$scope.getMyTourPlanList();
+				}).error(function (error){
+					swal("오류발생!", error, "error");
+				})
+			} else {
+				swal("취소됨!", "삭제가 취소되었습니다.", "error");
+			}
+		});
+	};
+	
+	// TODO 내 여행일정 페이징
+	
+	//	메뉴 카운트 조회
+	$scope.getMenuCount = function () {
+		$http({
+			url : myConfig.serverURL + "/mypage/select/menuCount?userUid=" + $rootScope.user.userUid,
+			method : "GET"
+		}).success(function(response) {
+			$scope.menuCount = response;
+		}).error(function(error) {
+		
+		})
+	}
+	$scope.getMenuCount();
+	
+	/** ==================================================== */
+	/** 프로필 이미지 관련 */
+	/** ==================================================== */
 	// 프로필 사진 업로드 이미지 미리보기 이벤트
 	$('#profileImageFile').on('change', function(){
 		if(img_validation(this)) {
@@ -15,7 +77,7 @@ angular.module("myApp", [])
 	});
 	// 프로필 사진 변경 모달창 열기
 	$scope.updateProfileImage = function () {
-		$scope.uploadProfileUrl = myConfig.serverUrl + "/user/upload/profileImage"
+		$scope.uploadProfileUrl = myConfig.serverURL + "/user/upload/profileImage"
 		$("#profileImage").val("");
 		$("#profileImageFile").val("");
 		$('#profileImageUploadFormModal').modal('show');
@@ -43,7 +105,7 @@ angular.module("myApp", [])
 	});
 	// 배경 사진 변경 모달창 열기
 	$scope.updateBGImage = function () {
-		$scope.uploadBGUrl = myConfig.serverUrl + "/user/upload/bgImage"
+		$scope.uploadBGUrl = myConfig.serverURL + "/user/upload/bgImage"
 		$("#BGImageFile").val("");
 		$('#BGImage').attr('src', '/rscamper-web/resources/img/default/default-image.png');
 		$('#BGImageUploadFormModal').modal('show');
@@ -63,7 +125,7 @@ angular.module("myApp", [])
 	// 사진 데이터베이스 업데이트
     $scope.updateImage = function (userPhoto, url) {
         $http({
-          url: myConfig.serverUrl + url,
+          url: myConfig.serverURL + url,
           method: "POST",
           data: $.param({
             userUid: userPhoto.userUid,
@@ -77,7 +139,7 @@ angular.module("myApp", [])
         })
         .success(function () {
          	 $http({
-                 url: myConfig.serverUrl + "/user/select/oneUser?userUid=" + $scope.user.userUid,
+                 url: myConfig.serverURL + "/user/select/oneUser?userUid=" + $scope.user.userUid,
                  method: "GET"
              })
              .success(function (result) {
@@ -92,7 +154,6 @@ angular.module("myApp", [])
              });
         });
     };
-	/** ===========프로필 이미지 관련============================ */
 })
 
 // 왼쪽 메뉴에 액티브 효과주기

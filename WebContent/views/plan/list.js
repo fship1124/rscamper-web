@@ -1,5 +1,5 @@
 angular.module("TourPlanApp")
-	.controller("ListController", function ($rootScope, $scope, $http, $window, MyConfig) {
+	.controller("ListController", function ($rootScope, $scope, $http, $window) {
 		// 여행기간 레인지 슬라이더 함수
 		$(function() {
 			$("#day-range").slider({
@@ -58,10 +58,10 @@ angular.module("TourPlanApp")
 
 		// 여행일정 리스트 가져오는 메소드
 		// 파라미터 : searchParams{검색어, 표시개수, 등록일자범위, 여행기간최소, 여행기간최대}, {정렬기준, 정렬방법}
-		// TODO : 카운트들 아직 못가져옴
 		$scope.getPlanList = function () {
+			$.isLoading({ text: "Loading" });
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/select/tourPlanList",
+				url: myConfig.serverURL + "/tourPlan/select/tourPlanList",
 				method: "POST",
 				data: $.param($scope.searchParams),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
@@ -69,6 +69,8 @@ angular.module("TourPlanApp")
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
+//				console.log($scope.planList[0].strapline.length);
+				$.isLoading( "hide" );
 			}).error(function (error) {
 				console.log(error);
 			});
@@ -130,10 +132,34 @@ angular.module("TourPlanApp")
 		// 처음에 리스트 가져오기
 		$scope.getPlanList();
 		
-		// TODO 여행일정 삭제하기
-		// 리스트에 버튼달기(자기글만 버튼 보이기)
-		$scope.removeTourPlan = function () {
-			
+		// 여행일정 삭제하기
+		$scope.removeTourPlan = function (recordNo) {
+			// 삭제하시겠습니까
+			swal({
+				title : "일정삭제",
+				text : "해당 일정을삭제하시겠습니까?",
+				type : "warning",
+				showCancelButton : true,
+				confirmButtonColor : "#DD6B55",
+				confirmButtonText : "네",
+				cancelButtonText : "아니오",
+				closeOnConfirm : false,
+				closeOnCancel : false
+			}, function(isConfirm) {
+				if (isConfirm) {
+					$http({
+						url: myConfig.serverURL + "/tourPlan/delete/tourPlan?recordNo=" + recordNo,
+						method: "GET",
+					}).success(function (){
+						swal("삭제완료!", "해당 일정이 삭제되었습니다.", "success");
+						$scope.getPlanList();
+					}).error(function (error){
+						swal("오류발생!", error, "error");
+					})
+				} else {
+					swal("취소됨!", "삭제가 취소되었습니다.", "error");
+				}
+			});
 		};
 
 		// 여행일정 만들기 폼 열기
@@ -179,7 +205,7 @@ angular.module("TourPlanApp")
 			$scope.writeTourPlan.userUid = $rootScope.user.userUid; 
 			console.log($scope.writeTourPlan);
 			$http({
-				url: MyConfig.backEndURL + "/tourPlan/insert/tourPlan",
+				url: myConfig.serverURL + "/tourPlan/insert/tourPlan",
 				method: "POST",
 				data: $.param($scope.writeTourPlan),
 				headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" }
