@@ -99,23 +99,11 @@ $(document).ready(function() {
 //		var user = sessionStorageService.getObject("user");
 		console.log("in notis socketIo");
 		
-<<<<<<< HEAD
-		// 소켓서버에 접속
-		notis_socket = io("http://192.168.0.173:10002");
-		notis_socket.emit("notis", user.userUid);
-		
-		
-		notis_socket.on("notification", function(data) {
-			console.log("in notification");
-//			alert("알림");
-=======
 		if (user) {
 			// 소켓서버에 접속
 //			notis_socket = io("http://192.168.0.173:10002");
 			notis_socket = io(myConfig.nodeNotisServerUrl);
 			notis_socket.emit("notis", user.userUid);
->>>>>>> master
-			
 			notis_socket.on("notification", function(data) {
 				console.log("in notification");
 				alert("알림");
@@ -160,13 +148,6 @@ var hideAllPopovers = function() {
 
 // 알림 클릭 -> 페이지 이동
 function pageMove(e) {
-<<<<<<< HEAD
-//	alert("ee");
-	console.log("페이지 이동 메서드");
-	console.dir(e);
-	
-=======
->>>>>>> master
 	var obj = new Object();
 	
 	$.ajax({
