@@ -212,12 +212,16 @@
 	<script src="../../assets/plugins/html5shiv.js"></script>
 	<script src="../../assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
+	
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 	<!-- 파이어베이스 -->
 	<script type="text/javascript"
 		src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="../../resources/js/firebaseInit.js"></script>
 	<script type="text/javascript" src="../../resources/js/firebaseAuth.js"></script>
+
+
 
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="../../resources/js/menu.js"></script>

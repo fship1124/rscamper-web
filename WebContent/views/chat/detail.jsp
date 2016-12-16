@@ -178,6 +178,7 @@
 	<script src="../../assets/plugins/html5shiv.js"></script>
 	<script src="../../assets/plugins/placeholder-IE-fixes.js"></script>
 	<![endif]-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 	<!-- 파이어베이스 -->
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
@@ -218,7 +219,7 @@
 			console.log("in socketIo");
 			// 소켓서버에 접속
 // 			var socket = io("http://192.168.0.190:10001");
-			var chat_socket = io(myConfig.nodeServerUrl);
+			var chat_socket = io(myConfig.nodeChatServerUrl);
 			
 			chat_socket.on('connection', function(data) {
 				 // socket 연결 완료
@@ -259,7 +260,21 @@
 	         });
 			 
 			 chat_socket.on('message', function(data) {
-				 				
+				 if (data.type == "text") {
+				 	var msgLength = data.message.length;				
+				 	 console.log(msgLength);
+					 if (msgLength <= 5) {
+						msgLength = data.message.length + 3;
+					 }
+					 
+					 var msgMgn = "" + (msgLength * 18) + "px"; 
+				 }
+				 
+				
+				 console.log("in message")
+				 console.dir(data);
+				 
+				 
 				 var html = "";
 				 switch (data.type) {
 			    	case 'text' :
@@ -268,20 +283,21 @@
 					      html += "<div class='direct-chat-info clearfix'>";
 					      html += "<span class='direct-chat-name pull-left'>";
 					      html += data.name + "</span>";
-					      html += "<span class='direct-chat-timestamp pull-right'>:</span>";
 					      html += "</div>";
 					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
-					      html += "<div class='direct-chat-text'>";
+					      html += "<div class='direct-chat-text' style='width: " + msgMgn + "'>";
 					      html += data.message;
+					      html += "</div>";
+					      html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 20px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
 					      html += "</div></div>";
 			    		break;
 			    	case 'image' :
+			    		  console.log("type : image ");
 			    		  html += "<div style='height: 100%'>";
 					      html += "<div class='direct-chat-msg'>";
 					      html += "<div class='direct-chat-info clearfix'>";
 					      html += "<span class='direct-chat-name pull-left'>";
 					      html += data.name + "</span>";
-					      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
 					      html += "</div>";
 					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
 					      html += "<div>";
@@ -299,20 +315,13 @@
 		$("#msg-btn").click(function() {
 			// id가 msg 인 텍스트 창에 입력된 데이터를 소켓서버에 전송
 			console.log("서버로 전송함");
-
 			var s = $("#msg").val();
-			console.log(s.length);
-			
-// 			var msgMgn = 1012 - (20 * s.length); 
-			
-// 			var strMsgMgn = "" + msgMgn + "px";
 			var msgLength = s.length;
 			
 			if (s.length <= 4) {
 				msgLength = s.length + 3;
 			}
 			var msgMgn = "" + (18 * msgLength) + "px"; 
-			
 			
 			var html = "";
 			html += "<div class='direct-chat-messages'>";
@@ -325,12 +334,11 @@
 			html += "<div class='direct-chat-text' style='margin-left: auto; width: " + msgMgn + "'>";
 			html += $("#msg").val();
 			html += "</div>";
-			html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 680px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
+			html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 480px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
 			html += "</div>";
 			html += "</div>";
 
 			$("#msg-content").append(html);
-			// 				$("#msg-content").append($("#msg").val() + "<br>");
 			chat_socket.emit("user", {
 				type : "text",
 				name : user.displayName,
@@ -341,24 +349,11 @@
 			});
 			
 			
-			
 			$("#msg").val("");
 			$("#msg").focus();
-			
-			
-			
-			
 			$("#msg-content").scrollTop($("#msg-content")[0].scrollHeight);
 		});
 
-		
-	
-		
-		
-		
-		
-		
-		
 		
 		$("#out-room").click(function() {
 			console.log("in out");
@@ -391,7 +386,7 @@
 				});
 			});
 			
-			window.location = myConfig.imsiServerUrl + '/chat/home';
+			window.location = myConfig.serverURL + '/chat/home';
 		});
 		
 

@@ -145,7 +145,7 @@
 		console.log(params);
 		
 	    $.ajax({
-	    	url : "http://localhost:8081/tour/api/list",
+	    	url : myConfig.serverUrl + "/tour/api/list",
 	        type: "get",
 	        dataType: "json",
 	        data : params,
@@ -170,8 +170,6 @@
 	function pageing(data) {
 		var body = data.response.body;
 		var totalCount = body.totalCount;
-		console.log("totalCount : " + totalCount);
-		
 		var displayPageNum = 10;
 		var page = body.pageNo;
 		var numOfRows = body.numOfRows;
@@ -186,14 +184,8 @@
 		
 		var prev = startPage == 1? false : true;
 		var next = endPage * numOfRows >= totalCount ? false : true;
-		console.log("displayPageNum : " + displayPageNum);
-		console.log("page : " + page);
-		console.log("endPage : " + endPage);
-		console.log("prev : " + prev);
-		console.log("next : " + next);
-		
-		html = "";
 		var pageination = $(".pagination");
+		html = "";
 		
 		if (prev) {
 			html += "<li class='page-item'>";
@@ -224,7 +216,6 @@
 		
 	// 지역 
 	function getSigunguList(areacode){    
-		console.log(areacode);
 		initFlag = 'N';
 		var langtype = 'KOR';			
 	    var params = {"areacode":areacode,"langtype":langtype};
@@ -325,13 +316,10 @@
 	    });
 	})(jQuery, window, document);
 
+	
 	function listPrint(data) {
-		console.log("in listPrint");
-		console.dir(data);
-		
 		var item = data.response.body.items.item;
 		var list = $("#list");
-		
 		var html = "";
 		for (var i = 0; i < item.length; i++) {
 			var v = item[i];
@@ -387,7 +375,7 @@
 		console.log(e.getAttribute("data-value1"));
 		console.log(e.getAttribute("data-value2"));
 		
-		var url = "http://localhost:80/rscamper-web/views/tour-all/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+		var url = myConfig.webServerUrl + "/rscamper-web/views/tour-all/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 		$(e).attr('href', url);
 	}
 	

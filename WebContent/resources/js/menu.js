@@ -4,7 +4,7 @@ var user;
 function menuCreate() {
 	$.ajax({
 		type : "GET",
-		url : myConfig.homeUrl + "/menu/list",
+		url : myConfig.serverUrl + "/menu/list",
 		dataType : 'json',
 		error : function (err) {
 			alert("에러");
@@ -35,17 +35,6 @@ function menuCreate() {
 			html += "</ul>";
 			html += "</li>";
 				
-				// 검색창 보류
-//				html += "<li><i class='search fa fa-search search-btn'></i>";
-//				html +=	"<div class='search-open'>";
-//				html +=	"	<div class='input-group animated fadeInDown'>";
-//				html +=	"		<input type='text' class='form-control' placeholder='Search'>";
-//				html +=	"		<span class='input-group-btn'>";
-//				html +=	"			<button class='btn-u' type='button'>Go</button>";
-//				html +=	"		</span>";
-//				html +=	"	</div>";
-//				html += "</div></li>";
-				
 			$("#start").html($("#start").html() + html);
 			
 			for (var i = 0; i < result.length; i++) {
@@ -65,11 +54,31 @@ function menuCreate() {
 
 var notis_socket;
 
-
-//////////////////////////////////////
 // 헤더 알림 팝오버
 $(document).ready(function() {
 	user = sessionStorageService.getObject("user");
+	
+	if (user) {
+		console.log("user 확인");
+		var obj = new Object();
+		obj.userUid = user.userUid;
+		$.ajax({
+			type : "GET",
+			url : myConfig.serverUrl + "/notisfication/list",
+			dataType : 'json',
+			data : obj,
+			error : function(err) {
+//				alert("에러");
+			},
+			success : function(result) {
+				$(".noti-count").html(result.length);
+				notisficationList(result);
+			}
+		});
+	} else {
+		console.log("null");
+	}
+	
 	/* 알림 */
 	$('[data-toggle="popover"]').popover({
 		html: true, 
@@ -78,34 +87,6 @@ $(document).ready(function() {
 	    }
 	});
 
-	console.log("user");
-	console.dir(user);
-
-	if (user) {
-		var obj = new Object();
-		obj.userUid = user.userUid;
-		
-		$.ajax({
-			type : "GET",
-			url : myConfig.homeUrl + "/notisfication/list",
-			dataType : 'json',
-			data : obj,
-			error : function(err) {
-				alert("에러");
-			},
-			success : function(result) {
-				console.log("알림 success");
-				console.dir(result);
-				
-				$(".noti-count").html(result.length);
-			}
-		});
-	} else {
-		console.log("null");
-	}
-	
-
-	
 	/* Socket.IO */
 
 	//nodejs 소켓 통신
@@ -113,35 +94,51 @@ $(document).ready(function() {
 //		var user = sessionStorageService.getObject("user");
 		console.log("in notis socketIo");
 		
-		// 소켓서버에 접속
-		notis_socket = io("http://192.168.0.173:10002");
-		notis_socket.emit("notis", user.userUid);
-		
-		
-		notis_socket.on("notification", function(data) {
-			console.log("in notification");
-			alert("알림");
-			
-			console.log(data.message);
-			console.log(data.count);
-			
-			$.toast({
-			    heading: 'Information',
-			    text: data.message,
-			    icon: 'info',
-			    loader: true,        // Change it to false to disable loader
-			    loaderBg: '#9EC600'  // To change the background
-			})
-			
-			$(".noti-count").html(data.count);
-		});
+		if (user) {
+			// 소켓서버에 접속
+			notis_socket = io(myConfig.nodeNotisServerUrl);
+			notis_socket.emit("notis", user.userUid);
+			notis_socket.on("notification", function(data) {
+				
+				$.toast({
+				    heading: 'Information',
+				    text: data.message,
+				    icon: 'info',
+				    loader: true,        // Change it to false to disable loader
+				    loaderBg: '#9EC600'  // To change the background
+				})
+				
+				if (user) {
+					console.log("user 확인");
+					var obj = new Object();
+					obj.userUid = user.userUid;
+					$.ajax({
+						type : "GET",
+						url : myConfig.serverUrl + "/notisfication/list",
+						dataType : 'json',
+						data : obj,
+						error : function(err) {
+			//				alert("에러");
+						},
+						success : function(result) {
+							console.log("알림 success");
+							$(".noti-count").html(result.length);
+							notisficationList(result);
+						}
+					});
+				} else {
+					console.log("null");
+				}
+				
+				
+				$(".noti-count").html(data.count);
+			});
+		}
 	};
 
 	// 소켓 실행
 	notisSocketIo();
 });
-
-
 
 // 알림 닫기 
 $('body').on('click', function (e) {
@@ -161,19 +158,14 @@ var hideAllPopovers = function() {
 
 // 알림 클릭 -> 페이지 이동
 function pageMove(e) {
-	alert("ee");
-	console.log("페이지 이동 메서드");
-	console.dir(e);
-	
 	var obj = new Object();
-	console.log(e.dataset.no);
 	
 	$.ajax({
 		type : "DELETE",
-		url : "http://localhost:8081/notisfication/delete/" + e.dataset.no,
+		url : myConfig.serverUrl + "/notisfication/delete/" + e.dataset.no,
 		dataType : 'json',
 		error : function(err) {
-			alert("에러");
+//			alert("에러");
 		},
 		success : function(result) {
 			console.log("삭제 success");
@@ -182,30 +174,24 @@ function pageMove(e) {
 	});
 }
 // End 헤더 알림 팝오버
-//////////////////////////////////////
-
-
 
 // 알림 클릭
 $('[data-toggle="popover"]').on('click', function() {
 	console.log("알림 클릭");
-	
 	if (user) {
 		console.log("user 확인");
 		var obj = new Object();
 		obj.userUid = user.userUid;
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/notisfication/list",
+			url : myConfig.serverUrl + "/notisfication/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
-				alert("에러");
+//				alert("에러");
 			},
 			success : function(result) {
-				console.log("알림 success");
-				console.dir(result);
-				
+				$(".noti-count").html(result.length);
 				notisficationList(result);
 			}
 		});
@@ -213,6 +199,78 @@ $('[data-toggle="popover"]').on('click', function() {
 		console.log("null");
 	}
 });
+
+//쪽지 날짜
+function timeSince(date, lang) {
+	var langs = {
+		en : {
+			years : " years ago",
+			months : " months ago",
+			days : " days ago",
+			hours : " hours ago",
+			minutes : " minutes ago",
+			seconds : " seconds ago",
+			now : "now"
+		},
+		it : {
+			years : " anni fa",
+			months : " mesi da",
+			days : " giorni fa",
+			hours : " ore fa",
+			minutes : " minuti fa",
+			seconds : " secondi fa",
+			now : "adesso"
+		},
+		kr : {
+			years : "년전",
+			months : "달전",
+			days : "일전",
+			hours : "시간전",
+			minutes : "분전",
+			seconds : "초전",
+			now : "지금"
+		}
+	};
+
+	var selectedLang = langs.en;
+
+	if (lang != null && langs[lang] != null) {
+		selectedLang = langs[lang];
+	}
+
+	if (date == null)
+	return "";
+
+	date = new Date(date);
+
+	var seconds = Math.floor((new Date() - date) / 1000);
+	var interval = Math.floor(seconds / 31536000);
+	if (interval >= 1) {
+		return interval + selectedLang.years;
+	}
+	interval = Math.floor(seconds / 2592000);
+	if (interval >= 1) {
+		return interval + selectedLang.months;
+	}
+	interval = Math.floor(seconds / 86400);
+	if (interval >= 1) {
+		return interval + selectedLang.days;
+	}
+	interval = Math.floor(seconds / 3600);
+	if (interval >= 1) {
+		return interval + selectedLang.hours;
+	}
+	interval = Math.floor(seconds / 60);
+	if (interval >= 1) {
+		return interval + selectedLang.minutes;
+	}
+
+	if (Math.floor(seconds) == 0) {
+		return selectedLang.now;
+	} else
+	return Math.floor(seconds) + selectedLang.seconds;
+}
+
 
 
 // 알림 리스트 만들기
@@ -225,11 +283,11 @@ function notisficationList(data) {
 		html += "onclick=pageMove(this)>";
 		html += "<div></div>";
 		html += "<div class='noti-img-wrap'><img src=" + item.photoUrl + "></div>";
-		html += "<div class='noti-contents'>";
+		html += "<div class='noti-contents' style='margin-left: 10px;'>";
 		html += "<h5><i class='fa comment'></i> <span><span style='color:#ff8000;'>" + item.displayName + "</span>";
 		html += "님이 <span style='color:#ff8000;'>" + item.title +  "</span>" + item.codeName + "</span>";
 		html += "<span class='noti-new'>N</span></h5>";
-		html += "<p class='date'>" + item.date + "</p>";
+		html += "<p class='date'>" + timeSince(item.date, "kr") + "</p>";
 		if (item.message) {
 			html += "<p>" + item.message + "</p>";
 		}

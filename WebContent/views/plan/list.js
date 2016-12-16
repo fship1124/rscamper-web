@@ -59,6 +59,7 @@ angular.module("TourPlanApp")
 		// 여행일정 리스트 가져오는 메소드
 		// 파라미터 : searchParams{검색어, 표시개수, 등록일자범위, 여행기간최소, 여행기간최대}, {정렬기준, 정렬방법}
 		$scope.getPlanList = function () {
+			$.isLoading({ text: "Loading" });
 			$http({
 				url: myConfig.serverURL + "/tourPlan/select/tourPlanList",
 				method: "POST",
@@ -68,8 +69,8 @@ angular.module("TourPlanApp")
 				$scope.planList = result.tourPlanList;
 				$scope.totalPages = result.totalPages;
 				$scope.pageList();
-				
-				console.log($scope.planList[0].strapline.length);
+//				console.log($scope.planList[0].strapline.length);
+				$.isLoading( "hide" );
 			}).error(function (error) {
 				console.log(error);
 			});

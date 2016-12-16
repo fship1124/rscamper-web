@@ -95,7 +95,7 @@
 			</div>
 			
 			<!-- 내용 -->
-			<div id="board-content" class="row" style="position: relative;">
+			<div id="board-content" class="row" style="position: relative; padding-top: 40px;">
 				<div id="board-content-btn" ng-if="board.userUid == user.userUid" style="position: absolute; top:10px; right: 10px;">
 					<a href="javascript:void(0);" ng-click="modifyBoard(board.boardNo);"><i style="color:gray; font-size:24px; margin-right: 10px;" class="fa  fa-pencil-square-o"></i></a>
 					<a href="javascript:void(0);" ng-click="removeBoard(board.boardNo);"><i style="color:gray; font-size:24px;" class="fa  fa-trash-o"></i></a>

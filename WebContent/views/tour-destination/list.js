@@ -1,17 +1,16 @@
-// 버튼으로 바꿔버려서 전역변수로 뺏어요!!
-var typeid = "";	
-
-function typeChange(contenttypeid) {
-	// 버튼 눌린 상태로 보이게 하려고 클래스에 active 추가/삭제
-	$('button[onclick="typeChange(this)"]').removeClass('active');
-	$(contenttypeid).addClass('active');
+	// 버튼으로 바꿔버려서 전역변수로 뺏어요!!
+	var typeid = "";	
 	
-	typeid = $(contenttypeid).val();
-	$("select[name=cat1]:eq(0)").empty();	        	
-	$("select[name=cat1]:eq(0)").append("<option value='"+typeid+"' selected>"+ contenttypeid.innerText +"</option>");
-	getCat2List(contenttypeid);
-}
+	function typeChange(contenttypeid) {
+		// 버튼 눌린 상태로 보이게 하려고 클래스에 active 추가/삭제
+		$('button[onclick="typeChange(this)"]').removeClass('active');
+		$(contenttypeid).addClass('active');
 		
+		typeid = $(contenttypeid).val();
+		$("select[name=cat1]:eq(0)").empty();	        	
+		$("select[name=cat1]:eq(0)").append("<option value='"+typeid+"' selected>"+ contenttypeid.innerText +"</option>");
+		getCat2List(contenttypeid);
+	}
 		
 	function getCat2List(cat1 , initFlag, cat2Value, cat3Value){
 		var index = $("select[name=cat1]").index(cat1);		
@@ -112,11 +111,6 @@ function typeChange(contenttypeid) {
 		var cat2 = $("select[name=cat2]").val();
 		var cat3 = $("select[name=cat3]").val();
 		var pageNo = e;
-		
-		console.log(areaCode);
-		console.log(sigunguCode);
-		
-		
 		var params = new Object();
 		params.contentTypeid = contenttypeid;
 		params.areaCode = areaCode;
@@ -127,7 +121,7 @@ function typeChange(contenttypeid) {
 		params.pageNo = pageNo;
 		
 	    $.ajax({
-	    	url : "http://localhost:8081/tour/api/list",
+	    	url : myConfig.serverUrl + "/tour/api/list",
 	        type: "get",
 	        dataType: "json",
 	        data : params,
@@ -151,8 +145,6 @@ function typeChange(contenttypeid) {
 	function pageing(data) {
 		var body = data.response.body;
 		var totalCount = body.totalCount;
-		console.log("totalCount : " + totalCount);
-		
 		var displayPageNum = 10;
 		var page = body.pageNo;
 		var numOfRows = body.numOfRows;
@@ -167,11 +159,6 @@ function typeChange(contenttypeid) {
 		
 		var prev = startPage == 1? false : true;
 		var next = endPage * numOfRows >= totalCount ? false : true;
-		console.log("displayPageNum : " + displayPageNum);
-		console.log("page : " + page);
-		console.log("endPage : " + endPage);
-		console.log("prev : " + prev);
-		console.log("next : " + next);
 		
 		html = "";
 		var pageination = $(".pagination");
@@ -205,7 +192,6 @@ function typeChange(contenttypeid) {
 	
 	// 지역 
 	function getSigunguList(areacode){    
-		console.log(areacode);
 		initFlag = 'N';
 		var langtype = 'KOR';			
 	    var params = {"areacode":areacode,"langtype":langtype};
@@ -232,7 +218,6 @@ function typeChange(contenttypeid) {
 		    			}	    			
 		    		});
 	        	}
-	        	
 	        },
 			error:function(args){
 				//alert('error' + args);
@@ -255,7 +240,6 @@ function typeChange(contenttypeid) {
 				console.log(i);
 				html += "<div id='grid-container' class='cbp-caption-active cbp-caption-zoom cbp-l-grid-agency cbp-ready'>";
 			}
-			console.log(v.addr1);
 			
 			var sAddr = v.addr1.split(" ");
 			var addr = sAddr[0] + " " + sAddr[1];
@@ -302,6 +286,6 @@ function typeChange(contenttypeid) {
 		console.log(e.getAttribute("data-value1"));
 		console.log(e.getAttribute("data-value2"));
 		
-		var url = "http://localhost:80/rscamper-web/views/tour-destination/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
+		var url = myConfig.webServerUrl + "/rscamper-web/views/tour-destination/detail.jsp?contentid=" + e.getAttribute("data-value1") + "&contenttypeid=" + e.getAttribute("data-value2");
 		$(e).attr('href', url);
 	}

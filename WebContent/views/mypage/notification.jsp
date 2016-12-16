@@ -102,10 +102,9 @@
 							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 16일</span> <span>수요일</span></div>
 							<i class="cbp_tmicon rounded-x hidden-xs"></i>
 							<div class="cbp_tmlabel equal-height-column">
-								<h2>ㅎㅎㅎ</h2>
+								<h2>ㅋㅋㅋ</h2>
 								<div class="row">
 									<div class="col-md-4">
-										<img class="img-responsive" src="${pageContext.request.contextPath}/resources/favicon/trollface/trollface-64-236195.png" alt="">
 										<div class="md-margin-bottom-20"></div>
 									</div>
 									<div class="col-md-8">
@@ -120,7 +119,7 @@
 							<div class="cbp_tmtime equal-height-column"><span>2016년 11월 14일</span> <span>월요일</span></div>
 							<i class="cbp_tmicon rounded-x hidden-xs"></i>
 							<div class="cbp_tmlabel equal-height-column">
-								<h2>First achievements</h2>
+								<h2>알림</h2>
 								<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
 								<div class="row">
 									<div class="col-sm-6">
@@ -198,6 +197,7 @@
 	
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>

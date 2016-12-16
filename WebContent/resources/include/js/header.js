@@ -12,14 +12,13 @@ $(document).ready(function(){
 	console.log("user");
 	console.dir(user);
 
-
 	if (user) {
 		var obj = new Object();
 		obj.userUid = user.userUid;
 		
 		$.ajax({
 			type : "GET",
-			url : "http://localhost:8081/notisfication/list",
+			url : myConfig.serverURL + "/notisfication/list",
 			dataType : 'json',
 			data : obj,
 			error : function(err) {
@@ -35,7 +34,6 @@ $(document).ready(function(){
 	} else {
 		alert("null");
 	}
-
 
 	function notisficationList(data) {
 		
@@ -84,7 +82,7 @@ var hideAllPopovers = function() {
 
 // 알림 클릭 -> 페이지 이동
 function pageMove(e) {
-	alert("ee");
+//	alert("ee");
 	console.dir(e);
 	window.location.href = e.dataset.url;
 }

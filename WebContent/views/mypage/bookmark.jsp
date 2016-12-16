@@ -179,7 +179,7 @@
 												</ul>
 												<h2 ng-if="post.title"><a href="${pageContext.request.contextPath}/views/community/detail.jsp?boardNo={{post.boardNo}}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;" ng-bind="post.title"></a></h2>
 												<h2 ng-if="!post.title"><a href="javascript:void(0);" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;">지워진 게시물입니다.</a></h2>
-												<div style="height:100px; overflow:hidden;" ng-bind="post.introduce"></div>
+												<div style="height:100px; overflow:hidden;" ng-bind-html="post.content"></div>
 												<ul class="post-shares">
 													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-thumbs-o-up"></i><span ng-bind="post.likeCnt"></span></a></li>좋아요
 													<li><a href="javascript:void(0);"><i class="rounded-2x fa fa-bookmark-o"></i><span ng-bind="post.bookmarkCnt"></span></a></li>북마크
@@ -247,6 +247,7 @@
 	
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>

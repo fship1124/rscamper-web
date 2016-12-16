@@ -1,4 +1,3 @@
-console.log(myConfig.imsiServerUrl);
 var user = sessionStorageService.getObject("user");
     
 //쪽지 날짜
@@ -72,8 +71,6 @@ function timeSince(date, lang) {
 	return Math.floor(seconds) + selectedLang.seconds;
 }
 
-
-
 // 페이지 번호
 var page;
 
@@ -98,7 +95,7 @@ function note_list(pageNo) {
 	obj.page = pageNo;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/note/list',
+		url : myConfig.serverURL + '/note/list',
 		method : 'GET',
 		dataType : 'json',
 		data : obj,
@@ -107,15 +104,15 @@ function note_list(pageNo) {
 			console.dir(result);
 			listCreate(result);
 			
-//			$.ajax({
-//				url : myConfig.imsiServerUrl + '/note/sent-list',
-//				method : 'GET',
-//				dataType : 'json',
-//				data : obj,
-//				success : function(result) {
-//					sentListCreate(result);
-//				}
-//			})
+			$.ajax({
+				url : myConfig.serverUrl + '/note/sent-list',
+				method : 'GET',
+				dataType : 'json',
+				data : obj,
+				success : function(result) {
+					sentListCreate(result);
+				}
+			})
 		}
 	})
 }
@@ -291,7 +288,7 @@ $('#uploadNote').on('click', function(){
 	obj.sentUserUid = sendUid;
 	
 	$.ajax({
-		url : myConfig.imsiServerUrl + '/note/send',
+		url : myConfig.serverURL + '/note/send',
 		method : 'POST',
 		data : obj,
 		success : function(result) {
@@ -313,10 +310,9 @@ $('#uploadNote').on('click', function(){
 			
 			console.dir(nObj);
 			
-			
 			$.ajax({
 				type : "POST",
-				url : "http://localhost:8081/notisfication/insert",
+				url : myConfig.serverURL + "/notisfication/insert",
 				dataType : 'json',
 				data : nObj,
 				error : function(err) {
@@ -341,7 +337,7 @@ $('#uploadNote').on('click', function(){
 ////////////////////////////////////////////////////////////////
 var projects = new Array();
 $.ajax({
-	url : myConfig.imsiServerUrl + '/note/user-list',
+	url : myConfig.serverURL + '/note/user-list',
 	method : 'GET',
 	success : function(result) {
 //		console.log("user-list success");

@@ -304,11 +304,11 @@
 							case "trainSaemaeul":
 								console.log("case : trainSaemaeul");
 								if (data.trainSaemaeul > 0) {
-									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -317,11 +317,11 @@
 							case "trainMugunghwa":
 								console.log("case : trainMugunghwa");
 								if (data.trainMugunghwa > 0) {
-									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -330,11 +330,11 @@
 							case "trainTonggeun":
 								console.log("case : trainTonggeun");
 								if (data.trainTonggeun > 0) {
-									html += "<td align='center' style='background: #df598e; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #df598e; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a align='center'></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -343,11 +343,11 @@
 							case "trainNuriro":
 								console.log("case : trainNuriro");
 								if (data.trainNuriro > 0) {
-									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 								}
@@ -356,11 +356,11 @@
 							case "trainItxchungchun":
 								console.log("case : trainItxchungchun");
 								if (data.trainItxchungchun > 0) {
-									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -369,11 +369,11 @@
 							case "trainItxsaemaeul":
 								console.log("case : trainItxsaemaeul");
 								if (data.trainItxsaemaeul > 0) {
-									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</a></td>";
 								} else {
-									html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+									html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 											+ data.stationTitle
 											+ "</p></td>";
 								}
@@ -449,11 +449,11 @@
 								case "trainSaemaeul":
 									console.log("case : trainSaemaeul");
 									if (data.trainSaemaeul > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#1' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#1' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -462,11 +462,11 @@
 								case "trainMugunghwa":
 									console.log("case : trainMugunghwa");
 									if (data.trainMugunghwa > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -475,11 +475,11 @@
 								case "trainTonggeun":
 									console.log("case : trainTonggeun");
 									if (data.trainTonggeun > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -488,11 +488,11 @@
 								case "trainNuriro":
 									console.log("case : trainNuriro");
 									if (data.trainNuriro > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -501,11 +501,11 @@
 								case "trainItxchungchun":
 									console.log("case : trainItxchungchun");
 									if (data.trainItxchungchun > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -514,11 +514,11 @@
 								case "trainItxsaemaeul":
 									console.log("case : trainItxsaemaeul");
 									if (data.trainItxsaemaeul > 0) {
-										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</a></td>";
 									} else {
-										html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+										html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 												+ data.stationTitle
 												+ "</p></td>";
 									}
@@ -615,11 +615,11 @@
 						case "trainSaemaeul":
 							console.log("case : trainSaemaeul");
 							if (data.trainSaemaeul > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -628,11 +628,11 @@
 						case "trainMugunghwa":
 							console.log("case : trainMugunghwa");
 							if (data.trainMugunghwa > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -641,11 +641,11 @@
 						case "trainTonggeun":
 							console.log("case : trainTonggeun");
 							if (data.trainTonggeun > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -654,11 +654,11 @@
 						case "trainNuriro":
 							console.log("case : trainNuriro");
 							if (data.trainNuriro > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 									+ data.stationTitle
 									+ "</p></td>";
 							}
@@ -667,11 +667,11 @@
 						case "trainItxchungchun":
 							console.log("case : trainItxchungchun");
 							if (data.trainItxchungchun > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}
@@ -680,11 +680,11 @@
 						case "trainItxsaemaeul":
 							console.log("case : trainItxsaemaeul");
 							if (data.trainItxsaemaeul > 0) {
-								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='background: #FF4500; width: 105px; font-weight: bold;'><a style='color: white' href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</a></td>";
 							} else {
-								html += "<td align='center' style='width: 105px;'><p href='#' onClick='stationFn(this)'>"
+								html += "<td align='center' style='width: 105px;'><p href='javascript:void(0)' onClick='stationFn(this)'>"
 										+ data.stationTitle
 										+ "</p></td>";
 							}

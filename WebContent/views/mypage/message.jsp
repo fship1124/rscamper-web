@@ -351,7 +351,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/owl-carousel.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/plugins/parallax-slider.js"></script>
 	
-		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!--[if lt IE 9]>
 	<script src="${pageContext.request.contextPath}/assets/plugins/respond.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/plugins/html5shiv.js"></script>
@@ -360,6 +359,8 @@
 	<script src="${pageContext.request.contextPath}/assets/plugins/sky-forms-pro/skyforms/js/sky-forms-ie8.js"></script>
 	<![endif]-->
 
+
+
 	<!-- 파이어베이스 -->
 	<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/firebaseInit.js"></script>
@@ -367,7 +368,7 @@
 	
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/sweetalert/dist/sweetalert.min.js"></script>
-	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 	<!-- 메뉴 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/menu.js"></script>
 	
