@@ -63,17 +63,15 @@ commentList();
 			dataType : "json",
 			type : "GET",
 			success: function(result) {
-				console.log("여기는뭘까");
-				console.log(result); // 다들어왓고
 				for(var i = 0; i < 15; i++) {
 					var data = result[i];
-					console.log(data);
 		//			console.log(i); // 찍히고
 					html4 += "<div class='col-md-4' style='height: 300px; margin-top: 10px; padding: 0 5px;'>";
 					html4 += "<div class='thumbnails thumbnail-style thumbnail-kenburn' style='border: 1px solid #F0F0F0;'>";
 					html4 += "	<div class='thumbnail-img'>";
 					html4 += "		<div class='overflow-hidden'>";
-					html4 += "			<img class='img-responsive' src='http://lorempixel.com/218/180/city/"+(i+1)+"'>";
+//					html4 += "			<img class='img-responsive' src='http://lorempixel.com/218/180/city/"+(i+1)+"'>";
+					html4 += "			<img class='img-responsive' src='"+ data.imageUrl +"'>";
 					html4 += "		</div>";
 					html4 += "			<a class='btn-more hover-effect' href='http://localhost/rscamper-web/views/benefit/detail.jsp?benefitno="+ data.benefitNo +"'>자세히</a>";
 					html4 += "	</div>";
@@ -108,13 +106,11 @@ commentList();
 			dataType : "json",
 			type : "GET",
 			success : function(result) {
-			//	console.log("result :"); 확인완료
-			//	console.log(result);    확인완료
-			//	html += "<h2 class='title-v4'>관광지</h2>";
+				console.log("관광지 왜안들어옴? :", result); 
 				for(var i = 0; i < result.length; i++) {
 					var data = result[i];
-					console.log("관광지");
-					console.log(data);
+				//	console.log("관광지");
+				//	console.log(data);
 					if(data.contenttypeid == 12){
 					//	console.log(data.contenttypeid);
 						if(data.status == 'on'){
@@ -206,8 +202,8 @@ commentList();
 			dataType : "json",
 			type : "GET",
 			success : function(result) {
-				console.log("here~~~~");
-				console.dir(result);
+		//		console.log("here~~~~");
+		//		console.dir(result);
 				for(var i = 0; i < result.length; i++) {
 					var data = result[i];
 					html5 += "<div class='col-md-4' style='height: 300px; margin-top: 10px; padding: 0 5px;'>";

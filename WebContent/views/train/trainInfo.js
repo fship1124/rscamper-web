@@ -181,7 +181,7 @@
 				console.log(err);
 			},
 			success : function(data) {
-				console.log("wwrj",data);
+	//			console.log("wwrj",data);
 				var data = JSON.parse(data);
 				timeList(data);
 
@@ -196,9 +196,9 @@
 		var timeList = $("#timeList");
 		var html = "";
 		
-		html += "<table class='table-responsive'>";
+		html += "<table class='table table-responsive'>";
 		html += "<thead>";
-		html += "	<tr>";
+		html += "	<tr class='active'>";
 		html += "		<td>출발역</td>";
 		html += "		<td>출발시간</td>";
 		html += "		<td>도착역</td>";
@@ -290,7 +290,7 @@
 						var html = "";
 //						html += "<table width='90%' border='1' align='center' cellpadding='5' cellspacing='5' style='box-sizing: border-box; border-collapse: collapse; border-spacing: 0px; max-width: 100%; color: rgb(0, 0, 0); font-family: Arial, 돋움, Dotum, AppleGothic, sans-serif; font-size: 16px; line-height: 32px; border: 1px solid grey;'>";
 						html += "<table class='table table-bordered'>";
-						console.log(result.length);
+//						console.log(result.length);
 						for (var i = 0; i < result.length; i++) {
 							var data = result[i];
 
