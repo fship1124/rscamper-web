@@ -260,7 +260,21 @@
 	         });
 			 
 			 chat_socket.on('message', function(data) {
-				 				
+				 if (data.type == "text") {
+				 	var msgLength = data.message.length;				
+				 	 console.log(msgLength);
+					 if (msgLength <= 5) {
+						msgLength = data.message.length + 3;
+					 }
+					 
+					 var msgMgn = "" + (msgLength * 18) + "px"; 
+				 }
+				 
+				
+				 console.log("in message")
+				 console.dir(data);
+				 
+				 
 				 var html = "";
 				 switch (data.type) {
 			    	case 'text' :
@@ -269,20 +283,21 @@
 					      html += "<div class='direct-chat-info clearfix'>";
 					      html += "<span class='direct-chat-name pull-left'>";
 					      html += data.name + "</span>";
-					      html += "<span class='direct-chat-timestamp pull-right'>:</span>";
 					      html += "</div>";
 					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
-					      html += "<div class='direct-chat-text'>";
+					      html += "<div class='direct-chat-text' style='width: " + msgMgn + "'>";
 					      html += data.message;
+					      html += "</div>";
+					      html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 20px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
 					      html += "</div></div>";
 			    		break;
 			    	case 'image' :
+			    		  console.log("type : image ");
 			    		  html += "<div style='height: 100%'>";
 					      html += "<div class='direct-chat-msg'>";
 					      html += "<div class='direct-chat-info clearfix'>";
 					      html += "<span class='direct-chat-name pull-left'>";
 					      html += data.name + "</span>";
-					      html += "<span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span>";
 					      html += "</div>";
 					      html += "<img class='direct-chat-img' src=" + data.photoUrl + " alt='Message User Image'>";;
 					      html += "<div>";
@@ -319,7 +334,7 @@
 			html += "<div class='direct-chat-text' style='margin-left: auto; width: " + msgMgn + "'>";
 			html += $("#msg").val();
 			html += "</div>";
-			html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 680px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
+			html += "<span class='direct-chat-timestamp pull-left' style='margin-left: 480px;'>" + moment().format('MMMM Do YYYY, h:mm:ss a') + "</span>";
 			html += "</div>";
 			html += "</div>";
 

@@ -103,8 +103,6 @@ function intoRoom(e) {
 		
 // 채팅방 사용자 생성
 function createRoom() {
-	alert("a");
-	
 	var obj = new Object();
 	obj.areacode =  $("select[name=locationid]").val();
 	obj.chatRoomName = $("#inputRoomTitle").val();

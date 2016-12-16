@@ -234,7 +234,7 @@
 								<!-- 검색창 결과물 -->
 								<div id="searchContent">
 									<!-- 결과 카드 반복 -->
-									<div class="tourSpot" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);" on-finish-render="ngRepeatFinished">
+									<div class="tourSpot" ng-repeat="tourSpot in tourSpotList" ng-click="openDetailTourSpot(tourSpot);" on-finish-render="ngRepeatFinished"  ng-if="tourSpot.firstimage2.length > 0">
 										<!-- 전송용 데이터 -->
 										<div id="tourSpotData" ng-hide="true">
 											<b ng-bind="tourSpot.contentid"></b>
@@ -248,14 +248,14 @@
 											<b ng-bind="tourSpot.overview"></b>
 										</div>
 										<div class="tourSpotImageDiv">
-											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}" >
+											<img class="tourSpotImage" draggable="false" src="{{tourSpot.firstimage2}}">
 										</div>
 										<div class="tourSpotContent" >
 											<b ng-bind="tourSpot.contenttypeid | tourSpotCategory"></b>
 											<b ng-bind="tourSpot.areaname" style="float:right; color: #3b3b3b;"></b>
 											<b ng-bind="tourSpot.title" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
 											<b ng-bind="tourSpot.overview" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: block;"></b>
-											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 5px; padding: 0px;"> <i class="fa fa-file-text-o"></i></button>
+											<button class="btn rounded btn-evernote" style="width: 40%; float:right; margin-top: 1px; padding: 0px; height:20px;"> <i class="fa fa-file-text-o" style="font-size:10px;"></i></button>
 										</div>
 									</div>
 								</div>
@@ -314,7 +314,7 @@
 											<b ng-bind="bookmarkTourSpot.overview"></b>
 										</div>
 										<div class="tourSpotImageDiv">
-											<img class="tourSpotImage" draggable="false" src="{{bookmarkTourSpot.firstimage2}}" >
+											<img class="tourSpotImage" draggable="false" src="{{bookmarkTourSpot.firstimage2}}">
 										</div>
 										<div class="tourSpotContent" >
 											<b ng-bind="bookmarkTourSpot.contenttypeid | tourSpotCategory"></b>

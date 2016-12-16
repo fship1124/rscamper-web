@@ -71,8 +71,6 @@ function timeSince(date, lang) {
 	return Math.floor(seconds) + selectedLang.seconds;
 }
 
-
-
 // 페이지 번호
 var page;
 
@@ -106,15 +104,15 @@ function note_list(pageNo) {
 			console.dir(result);
 			listCreate(result);
 			
-//			$.ajax({
-//				url : myConfig.imsiServerUrl + '/note/sent-list',
-//				method : 'GET',
-//				dataType : 'json',
-//				data : obj,
-//				success : function(result) {
-//					sentListCreate(result);
-//				}
-//			})
+			$.ajax({
+				url : myConfig.serverUrl + '/note/sent-list',
+				method : 'GET',
+				dataType : 'json',
+				data : obj,
+				success : function(result) {
+					sentListCreate(result);
+				}
+			})
 		}
 	})
 }

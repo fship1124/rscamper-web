@@ -283,7 +283,7 @@ function notisficationList(data) {
 		html += "onclick=pageMove(this)>";
 		html += "<div></div>";
 		html += "<div class='noti-img-wrap'><img src=" + item.photoUrl + "></div>";
-		html += "<div class='noti-contents'>";
+		html += "<div class='noti-contents' style='margin-left: 10px;'>";
 		html += "<h5><i class='fa comment'></i> <span><span style='color:#ff8000;'>" + item.displayName + "</span>";
 		html += "님이 <span style='color:#ff8000;'>" + item.title +  "</span>" + item.codeName + "</span>";
 		html += "<span class='noti-new'>N</span></h5>";

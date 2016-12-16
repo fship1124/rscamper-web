@@ -32,9 +32,9 @@
 				<!-- 				<li style="margin-right: 20px; cursor: pointer;"><img src="/rscamper-web/resources/img/default/icon-new-bell.png"><span class="noti-count" style="color: #ff8000; line-height: 19px;">0</span></li> -->
 				<li data-placement="bottom" data-toggle="popover"
 					data-container="body" data-placement="left" data-html="true"
-					style="margin-right: 20px; cursor: pointer;"><i
-					class="fa fa-bell"></i> <span class="noti-count"
-					style="color: #ff8000; line-height: 19px;">0</span></li>
+					style="margin-right: 20px; cursor: pointer;">
+					<i class="fa fa-bell" style='color: #72c02c;'></i> 
+					<span class="noti-count" style="color: #ff8000; line-height: 19px;">0</span></li>
 				<li><a href="#"><i class="fa fa-info"></i> HELP</a></li>
 				<li class="topbar-devider"></li>
 				<li id="loginBtn" class="cd-log_reg"><a class="cd-signin"
